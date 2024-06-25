@@ -1,0 +1,19 @@
+{
+  "name": "get-private-key",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "prettier": "^3.2.5",
+    "typescript": "^5.5.3"
+  }
+}

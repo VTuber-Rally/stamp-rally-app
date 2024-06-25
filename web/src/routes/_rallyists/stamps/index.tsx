@@ -1,0 +1,9 @@
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/_rallyists/stamps/")({
+  component: ScannedQRCodeList,
+});
+
+function ScannedQRCodeList() {
+  return "hello";
+}

@@ -1,0 +1,331 @@
+{
+  "projectId": "6675e250001f21185bf5",
+  "projectName": "Stamp rally",
+  "functions": [
+    {
+      "$id": "668315b50900e5b86354",
+      "name": "verify-qrcodes",
+      "runtime": "node-20.0",
+      "execute": ["any"],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "enabled": true,
+      "logging": true,
+      "entrypoint": "src/main.js",
+      "commands": "npm install && npm run build",
+      "ignore": ["node_modules", ".npm"],
+      "path": "functions/verify-qrcodes"
+    },
+    {
+      "$id": "118315b50900e5b86311",
+      "name": "get-private-key",
+      "runtime": "node-20.0",
+      "execute": ["label:staff"],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "enabled": true,
+      "logging": true,
+      "entrypoint": "src/main.js",
+      "commands": "npm install && npm run build",
+      "ignore": ["node_modules", ".npm"],
+      "path": "functions/get-private-key"
+    }
+  ],
+  "databases": [
+    {
+      "$id": "6675f377000709b0db07",
+      "name": "standists",
+      "$createdAt": "2024-06-21T21:41:11.181+00:00",
+      "$updatedAt": "2024-07-05T02:11:35.445+00:00",
+      "enabled": true
+    }
+  ],
+  "collections": [
+    {
+      "$id": "6675f3a2000e52a39b67",
+      "$permissions": ["read(\"any\")"],
+      "databaseId": "6675f377000709b0db07",
+      "name": "standists",
+      "enabled": true,
+      "documentSecurity": true,
+      "attributes": [
+        {
+          "key": "boothNumber",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 16,
+          "default": null
+        },
+        {
+          "key": "hall",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 16,
+          "default": null
+        },
+        {
+          "key": "name",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "publicKey",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 512,
+          "default": null
+        },
+        {
+          "key": "image",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "instagram",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "description",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 512,
+          "default": null
+        },
+        {
+          "key": "twitter",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "twitch",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "userId",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "geometry",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 4096,
+          "default": null
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "6687300000095507a828",
+      "$permissions": [
+        "create(\"label:staff\")",
+        "read(\"label:staff\")",
+        "update(\"label:staff\")",
+        "delete(\"label:staff\")"
+      ],
+      "databaseId": "6675f377000709b0db07",
+      "name": "submissions",
+      "enabled": true,
+      "documentSecurity": true,
+      "attributes": [
+        {
+          "key": "redeemed",
+          "type": "boolean",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "default": false
+        },
+        {
+          "key": "submitted",
+          "type": "datetime",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        },
+        {
+          "key": "stamps",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "6687485a00244abaa5db",
+          "relationType": "oneToMany",
+          "twoWay": true,
+          "twoWayKey": "submissions",
+          "onDelete": "cascade",
+          "side": "parent"
+        },
+        {
+          "key": "userId",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 64,
+          "default": null
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "6687485a00244abaa5db",
+      "$permissions": [
+        "create(\"label:staff\")",
+        "read(\"label:staff\")",
+        "update(\"label:staff\")",
+        "delete(\"label:staff\")"
+      ],
+      "databaseId": "6675f377000709b0db07",
+      "name": "stamps",
+      "enabled": true,
+      "documentSecurity": true,
+      "attributes": [
+        {
+          "key": "generated",
+          "type": "datetime",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        },
+        {
+          "key": "scanned",
+          "type": "datetime",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        },
+        {
+          "key": "standist",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "6675f3a2000e52a39b67",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "stamps",
+          "onDelete": "setNull",
+          "side": "parent"
+        },
+        {
+          "key": "signature",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 512,
+          "default": null
+        },
+        {
+          "key": "submissions",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "6687300000095507a828",
+          "relationType": "oneToMany",
+          "twoWay": true,
+          "twoWayKey": "stamps",
+          "onDelete": "cascade",
+          "side": "child"
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "668dae8c0038a25a95db",
+      "$permissions": ["read(\"label:staff\")", "update(\"label:staff\")"],
+      "databaseId": "6675f377000709b0db07",
+      "name": "prizes",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "name",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 32,
+          "default": null
+        },
+        {
+          "key": "disabled",
+          "type": "boolean",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "default": null
+        }
+      ],
+      "indexes": []
+    }
+  ]
+}

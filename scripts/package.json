@@ -1,0 +1,16 @@
+{
+  "name": "@vtube-stamp-rally/utility-scripts",
+  "version": "1.0.0",
+  "private": "true",
+  "description": "",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "node-appwrite": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9"
+  }
+}
