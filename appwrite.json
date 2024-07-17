@@ -320,8 +320,30 @@
           "type": "boolean",
           "status": "available",
           "error": "",
+          "required": false,
+          "array": false,
+          "default": false
+        },
+        {
+          "key": "order",
+          "type": "integer",
+          "status": "available",
+          "error": "",
           "required": true,
           "array": false,
+          "min": -9223372036854776000,
+          "max": 9223372036854776000,
+          "default": null
+        },
+        {
+          "key": "probability",
+          "type": "double",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "min": -1.7976931348623157e308,
+          "max": 1.7976931348623157e308,
           "default": null
         }
       ],
