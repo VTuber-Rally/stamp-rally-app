@@ -41,7 +41,7 @@ function usePrivateKey(userId: string, key?: JsonWebKey) {
 
 const usePrivateKeyJWK = (userId: string) => {
   return useQuery({
-    queryKey: ["STAFF_GEN_QRCODE", userId],
+    queryKey: [QUERY_KEYS.STAFF_GEN_QRCODE, userId],
     queryFn: async () => {
       const resp = await functions.createExecution(
         getPrivateKeyFunctionId,
@@ -84,5 +84,5 @@ export function useStaffQRCode(userId: string, perpetual: boolean) {
     enabled: !!privateKey && !!userId,
   });
 
-  return { isLoading, error, data, privateKey };
+  return { isLoading, error, data };
 }

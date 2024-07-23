@@ -21,6 +21,7 @@ import { FC } from "react";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { useTranslation } from "react-i18next";
 import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
+import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 
 export const Route = createFileRoute("/staff/submission/$submissionid")({
   component: CheckSubmission,
@@ -47,7 +48,7 @@ function CheckSubmission() {
     );
 
     queryClient.invalidateQueries({
-      queryKey: ["submission", submissionId],
+      queryKey: [QUERY_KEYS.SUBMISSION, submissionId],
     });
 
     await navigate({ to: "/staff/wheel" });
