@@ -1,10 +1,18 @@
 import * as sdk from "node-appwrite";
-import { PROFILE_COLLECTION_ID, PROFILE_DATABASE_ID } from "./consts.js";
+import { getEnv } from "./shared.js";
+
+const {
+  APPWRITE_PROJECT_ID,
+  APPWRITE_ENDPOINT,
+  PROFILE_DATABASE_ID,
+  PROFILE_COLLECTION_ID,
+  APPWRITE_API_KEY,
+} = getEnv();
 
 const client = new sdk.Client()
-  .setEndpoint("https://appwrite.luc.ovh/v1") // Your API Endpoint
-  .setProject("6675e250001f21185bf5") // Your project ID
-  .setKey(process.env["APPWRITE_API_KEY"]);
+  .setEndpoint(APPWRITE_ENDPOINT)
+  .setProject(APPWRITE_PROJECT_ID)
+  .setKey(APPWRITE_API_KEY);
 
 const users = new sdk.Users(client);
 const database = new sdk.Databases(client);

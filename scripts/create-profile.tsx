@@ -1,15 +1,32 @@
+/** This script is used to create profiles from a TSV file exported from Google
+ *  Sheets. The structure of the sheet is probably not same as yours,
+ *  so you will need to adjust the code to match your sheet structure.
+ *  To import artists for real, you will need to set the `NODE_ENV` to `production`
+ *
+ *  Usage: `bun scripts/create-profile.tsx <path-to-tsv-file>`
+ *
+ *  Example: `bun scripts/create-profile.tsx ./data.tsv`
+ *
+ **/
+
 import * as sdk from "node-appwrite";
 import * as fs from "fs";
-import { PROFILE_DATABASE_ID, PROFILE_COLLECTION_ID } from "./consts.js";
+import { getEnv } from "./shared.js";
 
-if (!process.env["APPWRITE_API_KEY"]) {
-  throw new Error("APPWRITE_API_KEY is not set");
-}
+const {
+  APPWRITE_PROJECT_ID,
+  APPWRITE_ENDPOINT,
+  PROFILE_DATABASE_ID,
+  PROFILE_COLLECTION_ID,
+  APPWRITE_API_KEY,
+} = getEnv();
+
+const isProduction = process.env.NODE_ENV === "production";
 
 const client = new sdk.Client()
-  .setEndpoint("https://appwrite.luc.ovh/v1") // Your API Endpoint
-  .setProject("6675e250001f21185bf5") // Your project ID
-  .setKey(process.env["APPWRITE_API_KEY"]);
+  .setEndpoint(APPWRITE_ENDPOINT)
+  .setProject(APPWRITE_PROJECT_ID)
+  .setKey(APPWRITE_API_KEY);
 
 const users = new sdk.Users(client);
 const database = new sdk.Databases(client);
@@ -88,7 +105,10 @@ async function createProfilesAndDocuments() {
       return Promise.resolve(null); // ligne vide
     }
     return (async () => {
-      const emailModified = line.email.replace("@", "+").concat("@luc.ovh");
+      // modify email for testing
+      const emailModified = isProduction
+        ? line.email
+        : line.email.replace("@", "+").concat("@fake.email");
       const password = Array.from(
         { length: 16 },
         () => Math.random().toString(36)[2],
@@ -119,7 +139,10 @@ async function createProfilesAndDocuments() {
         publicKey: JSON.stringify(exportedPublicKey),
       });
 
-      await users.updateLabels(newAccount.$id, ["standist", "test"]);
+      await users.updateLabels(newAccount.$id, [
+        "standist",
+        !isProduction && "test",
+      ]);
       await users.updateEmailVerification(newAccount.$id, true);
 
       console.log(`${emailModified}:${password}`);
