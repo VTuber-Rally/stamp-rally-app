@@ -3,6 +3,7 @@ import { functions } from "../appwrite.ts";
 import { useCollectedStamps } from "./useCollectedStamps.ts";
 import { db } from "@/lib/db.ts";
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
+import { submitFunctionId } from "@/lib/consts.ts";
 
 const useRallySubmit = () => {
   const { data: stamps } = useCollectedStamps();
@@ -11,7 +12,7 @@ const useRallySubmit = () => {
   const { error, isPending, data, isError, isSuccess, mutate } = useMutation({
     mutationFn: () =>
       functions.createExecution(
-        import.meta.env.VITE_SUBMIT_FUNCTION_ID,
+        submitFunctionId,
         JSON.stringify({
           stamps: stamps ?? [],
         }),

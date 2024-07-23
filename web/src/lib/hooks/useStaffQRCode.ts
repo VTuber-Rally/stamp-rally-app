@@ -3,6 +3,7 @@ import { QUERY_KEYS } from "../QueryKeys.ts";
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
 import { signData } from "@/lib/signatures.ts";
 import { functions } from "@/lib/appwrite.ts";
+import { getPrivateKeyFunctionId } from "@/lib/consts.ts";
 
 function usePrivateKey(userId: string, key?: JsonWebKey) {
   const { data: privateKey } = useQuery({
@@ -43,7 +44,7 @@ const usePrivateKeyJWK = (userId: string) => {
     queryKey: ["STAFF_GEN_QRCODE", userId],
     queryFn: async () => {
       const resp = await functions.createExecution(
-        "118315b50900e5b86311",
+        getPrivateKeyFunctionId,
         JSON.stringify({ userId }),
       );
 

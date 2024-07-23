@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { Header } from "@/components/Header.tsx";
 import Intro from "@/components/Intro.tsx";
+import { buildId, commitRef } from "@/lib/consts.ts";
 
 export const Route = createFileRoute("/_rallyists/about")({
   component: About,
@@ -36,8 +37,7 @@ function About() {
       />
 
       <div>
-        Commit {import.meta.env.VITE_COMMIT_REF} – build{" "}
-        {import.meta.env.VITE_BUILD_ID} – {BUILD_TIMESTAMP}
+        Commit {commitRef} – build {buildId} – {BUILD_TIMESTAMP}
       </div>
 
       <hr className={"my-4"} />

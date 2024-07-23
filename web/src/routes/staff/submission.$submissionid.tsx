@@ -20,6 +20,7 @@ import { Header } from "@/components/Header.tsx";
 import { FC } from "react";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { useTranslation } from "react-i18next";
+import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
 
 export const Route = createFileRoute("/staff/submission/$submissionid")({
   component: CheckSubmission,
@@ -37,8 +38,8 @@ function CheckSubmission() {
 
   const markAsRedeemed = async (submissionId: string) => {
     await databases.updateDocument(
-      import.meta.env.VITE_DATABASE_ID,
-      import.meta.env.VITE_SUBMISSIONS_COLLECTION_ID,
+      databaseId,
+      submissionsCollectionId,
       submissionId,
       {
         redeemed: true,

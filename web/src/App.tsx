@@ -10,8 +10,9 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { QRDrawerContextProvider } from "@/context/QRDrawerContextProvider.tsx";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { eventEndDate } from "@/lib/consts.ts";
 
-const LIMIT_DATE = new Date(import.meta.env.VITE_EVENT_END_DATE);
+const LIMIT_DATE = new Date(eventEndDate);
 
 export function App() {
   const { t } = useTranslation();

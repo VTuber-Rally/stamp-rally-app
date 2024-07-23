@@ -3,6 +3,7 @@ import { QUERY_KEYS } from "../QueryKeys.ts";
 import { db } from "@/lib/db.ts";
 import { databases, Query } from "@/lib/appwrite.ts";
 import { useUser } from "@/lib/userContext.tsx";
+import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
 
 export const useRallySubmissions = () => {
   const queryClient = useQueryClient();
@@ -18,8 +19,8 @@ export const useRallySubmissions = () => {
       if (!user) return dbSubmissions;
 
       const { documents } = await databases.listDocuments(
-        import.meta.env.VITE_DATABASE_ID,
-        import.meta.env.VITE_SUBMISSIONS_COLLECTION_ID,
+        databaseId,
+        submissionsCollectionId,
         [Query.equal("userId", user.$id)],
       );
 

@@ -5,12 +5,11 @@ import {
   AppwriteException,
   Functions,
 } from "appwrite";
+import { appwriteProjectId } from "@/lib/consts.ts";
 
 export const client = new Client();
 
-client
-  .setEndpoint("https://appwrite.luc.ovh/v1")
-  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
+client.setEndpoint("https://appwrite.luc.ovh/v1").setProject(appwriteProjectId);
 
 export { ID, Query } from "appwrite";
 

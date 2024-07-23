@@ -1,9 +1,10 @@
 import { StampTuple } from "@/lib/models/Stamp.ts";
+import { publicUrl } from "@/lib/consts.ts";
 
 export function encodeStampToQRCode(stamp: StampTuple) {
   const stringifiedStamp = JSON.stringify(stamp);
 
-  const url = new URL(import.meta.env.VITE_PUBLIC_URL);
+  const url = new URL(publicUrl);
   url.pathname += url.pathname.endsWith("/") ? "code" : "/code";
   url.hash = encodeURIComponent(stringifiedStamp);
   return url.toString();

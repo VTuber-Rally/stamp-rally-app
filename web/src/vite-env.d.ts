@@ -2,6 +2,7 @@
 /// <reference types="vite-plugin-pwa/react" />
 
 interface ImportMetaEnv {
+  VITE_APPWRITE_ENDPOINT: string;
   VITE_APPWRITE_PROJECT_ID: string;
   VITE_PUBLIC_URL: string;
   VITE_COMMIT_REF: string;
@@ -11,6 +12,7 @@ interface ImportMetaEnv {
   VITE_SUBMIT_FUNCTION_ID: string;
   VITE_SUBMISSIONS_COLLECTION_ID: string;
   VITE_WHEEL_COLLECTION_ID: string;
+  VITE_GET_PRIVATE_KEY_FUNCTION_ID: string;
 
   VITE_EVENT_END_DATE: string;
 }

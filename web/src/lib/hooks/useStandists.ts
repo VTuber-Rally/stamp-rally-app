@@ -4,6 +4,7 @@ import { db } from "@/lib/db.ts";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { queryClient } from "@/lib/queryClient.ts";
+import { databaseId, standistsCollectionId } from "@/lib/consts.ts";
 
 function importJWK(jwk: JsonWebKey) {
   return window.crypto.subtle.importKey(
@@ -17,8 +18,8 @@ function importJWK(jwk: JsonWebKey) {
 
 const importStandists = async (): Promise<Standist[]> => {
   const { documents: standists } = await databases.listDocuments(
-    import.meta.env.VITE_DATABASE_ID,
-    import.meta.env.VITE_STANDISTS_COLLECTION_ID,
+    databaseId,
+    standistsCollectionId,
   );
 
   const artists = await Promise.all(

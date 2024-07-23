@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../QueryKeys.ts";
 import { databases } from "@/lib/appwrite.ts";
 import { Standist } from "@/lib/models/Standist.ts";
+import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
 
 type Submission = {
   $id: string;
@@ -22,8 +23,8 @@ export const useRallySubmission = (documentId: string) => {
     queryKey: [QUERY_KEYS.SUBMISSION, documentId],
     queryFn: async () =>
       (await databases.getDocument(
-        import.meta.env.VITE_DATABASE_ID,
-        import.meta.env.VITE_SUBMISSIONS_COLLECTION_ID,
+        databaseId,
+        submissionsCollectionId,
         documentId,
       )) as unknown as Submission,
     networkMode: "online",
