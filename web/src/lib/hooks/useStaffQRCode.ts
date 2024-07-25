@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { skipToken, useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../QueryKeys.ts";
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
 import { signData } from "@/lib/signatures.ts";
@@ -8,32 +8,30 @@ import { getPrivateKeyFunctionId } from "@/lib/consts.ts";
 function usePrivateKey(userId: string, key?: JsonWebKey) {
   const { data: privateKey } = useQuery({
     queryKey: [QUERY_KEYS.PRIVATE_KEY, userId],
-    queryFn: async () => {
-      console.log("key", key);
-      if (!key) return null;
+    queryFn: key
+      ? async () => {
+          console.log("importing key", key, typeof key);
 
-      console.log("importing key", key, typeof key);
+          console.time("importKey");
 
-      console.time("importKey");
+          const keyImported = await window.crypto.subtle.importKey(
+            "jwk",
+            key,
+            {
+              name: "ECDSA",
+              namedCurve: "P-384",
+            },
+            true,
+            ["sign"],
+          );
 
-      const keyImported = await window.crypto.subtle.importKey(
-        "jwk",
-        key,
-        {
-          name: "ECDSA",
-          namedCurve: "P-384",
-        },
-        true,
-        ["sign"],
-      );
+          console.timeEnd("importKey");
 
-      console.timeEnd("importKey");
+          console.log("imported key", keyImported);
 
-      console.log("imported key", keyImported);
-
-      return keyImported;
-    },
-    enabled: !!key,
+          return keyImported;
+        }
+      : skipToken,
   });
 
   return privateKey;
@@ -54,8 +52,22 @@ const usePrivateKeyJWK = (userId: string) => {
 
       return key;
     },
-    enabled: !!userId,
   });
+};
+
+const generateQRCode = async (
+  userId: string,
+  privateKey: CryptoKey,
+  perpetual: boolean,
+) => {
+  const data = [userId, perpetual ? -1 : Date.now()] as const;
+  const signature = await signData(privateKey, data);
+
+  const codeData = encodeStampToQRCode([...data, signature]);
+
+  return {
+    codeData,
+  };
 };
 
 export function useStaffQRCode(userId: string, perpetual: boolean) {
@@ -65,23 +77,11 @@ export function useStaffQRCode(userId: string, perpetual: boolean) {
 
   const { isLoading, error, data } = useQuery({
     queryKey: [QUERY_KEYS.NEW_QR_CODE, userId, perpetual],
-    queryFn: async () => {
-      console.log("privateKey", privateKey);
-      console.log("userId", userId);
-      if (!privateKey || !userId) return undefined;
-
-      const data = [userId, perpetual ? -1 : Date.now()] as const;
-      const signature = await signData(privateKey, data);
-
-      const codeData = encodeStampToQRCode([...data, signature]);
-
-      return {
-        codeData,
-      };
-    },
+    queryFn: privateKey
+      ? () => generateQRCode(userId, privateKey, perpetual)
+      : skipToken,
     refetchInterval: 5 * 1000,
     staleTime: 1000 * 60,
-    enabled: !!privateKey && !!userId,
   });
 
   return { isLoading, error, data };
