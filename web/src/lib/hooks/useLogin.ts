@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { useUser } from "@/lib/userContext.tsx";
 import { useNavigate } from "@tanstack/react-router";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const useLogin = (navigateTo: string) => {
   const { login: loginAuth } = useUser();

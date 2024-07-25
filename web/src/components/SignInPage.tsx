@@ -1,11 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useUser } from "@/lib/userContext.tsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "@/components/InputField.tsx";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLogin } from "@/lib/hooks/useLogin.ts";
 import Loader from "@/components/Loader.tsx";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 type SigninForm = {
   email: string;
@@ -29,7 +29,7 @@ function SignInPage({ navigateTo }: SigninPageProps) {
       }
     };
     redirect();
-  }, [user, navigate]);
+  }, [user, navigate, navigateTo]);
 
   const {
     register,

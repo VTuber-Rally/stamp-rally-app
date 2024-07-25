@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import StandistStaffHomePage from "@/components/StandistStaffHomePage.tsx";
 import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { useUser } from "@/lib/userContext.tsx";
+
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute("/standists/")({
   component: StandistsHome,

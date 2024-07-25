@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import QRCode from "react-qr-code";
 import { useQrCode } from "@/lib/hooks/useQrCode.ts";
-import { useUser } from "@/lib/userContext.tsx";
 import Loader from "@/components/Loader.tsx";
 import { Header } from "@/components/Header.tsx";
 import { useTranslation } from "react-i18next";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 import { RefreshCcw, TicketCheck } from "lucide-react";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute("/standists/qrcode/")({
   component: StandistsQrcode,
