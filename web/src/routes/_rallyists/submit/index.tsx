@@ -5,11 +5,11 @@ import QRCode from "react-qr-code";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useTranslation } from "react-i18next";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import { useUser } from "@/lib/userContext.tsx";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField.tsx";
 import { Checkbox } from "@/components/Checkbox.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute("/_rallyists/submit/")({
   component: Submit,

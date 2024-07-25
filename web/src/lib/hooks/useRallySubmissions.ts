@@ -2,8 +2,8 @@ import { skipToken, useQuery, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../QueryKeys.ts";
 import { db } from "@/lib/db.ts";
 import { databases, Query } from "@/lib/appwrite.ts";
-import { useUser } from "@/lib/userContext.tsx";
 import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const useRallySubmissions = () => {
   const queryClient = useQueryClient();

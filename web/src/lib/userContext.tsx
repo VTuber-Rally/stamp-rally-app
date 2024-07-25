@@ -1,19 +1,13 @@
 import { AppwriteException, Models } from "appwrite";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import {
   account,
   login,
   loginAnonymous,
-  setName,
   logout,
   register,
   setEmail,
+  setName,
   setPref,
 } from "./appwrite";
 import Loader from "@/components/Loader.tsx";
@@ -24,7 +18,7 @@ const notInitialized = async () => {
   throw new Error("UserContext is not initialized");
 };
 
-const UserContext = createContext<UserContextType>({
+export const UserContext = createContext<UserContextType>({
   user: NOT_INITIALIZED,
   login: notInitialized,
   logout: notInitialized,
@@ -42,20 +36,8 @@ type UserContextType = {
   loginAnonymous: () => Promise<void>;
   setName: (name: string) => Promise<void>;
   setEmail: (email: string) => Promise<void>;
-  setPref: (key: string, value: any) => Promise<void>;
+  setPref: (key: string, value: string | number) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
-};
-
-export const useUser = () => {
-  const userCtx = UserContext;
-
-  if (userCtx === null) {
-    throw new Error("UserContext is not initialized");
-  }
-
-  const user = useContext(userCtx);
-
-  return { ...user };
 };
 
 export function UserProvider({
@@ -156,7 +138,7 @@ export function UserProvider({
     }
   };
 
-  const setPrefUser = async (key: string, value: any) => {
+  const setPrefUser = async (key: string, value: string | number) => {
     try {
       const user = await setPref(key, value);
       setUser(user);
