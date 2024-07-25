@@ -4,11 +4,11 @@ import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useTranslation } from "react-i18next";
 import { TicketCheck } from "lucide-react";
 import clsx from "clsx";
-import { STAMPS_TO_COLLECT } from "@/assets/stampRequirements.ts";
 import { Header } from "@/components/Header.tsx";
 import { imagePrefix, images } from "@/lib/images.ts";
 import { useState } from "react";
 import { ArtistDrawer } from "@/components/ArtistDrawer.tsx";
+import { stampsToCollect } from "@/lib/consts.ts";
 
 export const Route = createFileRoute("/_rallyists/artists/")({
   component: ArtistsList,
@@ -33,7 +33,7 @@ function ArtistsList() {
         <p className="text-xl text-center my-4">
           {t("stampsCount", {
             count: data.length,
-            maxCount: STAMPS_TO_COLLECT,
+            maxCount: stampsToCollect,
           })}
         </p>
         {standistsList && (

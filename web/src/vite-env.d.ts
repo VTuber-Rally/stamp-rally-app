@@ -14,6 +14,7 @@ interface ImportMetaEnv {
   VITE_WHEEL_COLLECTION_ID: string;
   VITE_GET_PRIVATE_KEY_FUNCTION_ID: string;
 
+  VITE_STAMPS_TO_COLLECT: string;
   VITE_EVENT_END_DATE: string;
 }
 

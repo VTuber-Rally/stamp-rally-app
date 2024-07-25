@@ -5,11 +5,11 @@ import QRCode from "react-qr-code";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useTranslation } from "react-i18next";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import { STAMPS_TO_COLLECT } from "@/assets/stampRequirements.ts";
 import { useUser } from "@/lib/userContext.tsx";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField.tsx";
 import { Checkbox } from "@/components/Checkbox.tsx";
+import { stampsToCollect } from "@/lib/consts.ts";
 
 export const Route = createFileRoute("/_rallyists/submit/")({
   component: Submit,
@@ -21,7 +21,7 @@ function Submit() {
   const { data: stamps } = useCollectedStamps();
   const { t } = useTranslation();
 
-  const isEligible = (stamps?.length ?? 0) >= STAMPS_TO_COLLECT;
+  const isEligible = (stamps?.length ?? 0) >= stampsToCollect;
 
   const handleSubmit = () => {
     mutate();

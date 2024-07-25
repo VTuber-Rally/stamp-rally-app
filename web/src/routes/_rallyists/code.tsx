@@ -8,12 +8,12 @@ import { StampDetails } from "@/components/StampDetails.tsx";
 import { Header } from "@/components/Header.tsx";
 import { ListChecks, TicketCheck } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { STAMPS_TO_COLLECT } from "@/assets/stampRequirements.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import Intro from "@/components/Intro.tsx";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useConfetti } from "@stevent-team/react-party";
 import { LegacyRef, useEffect } from "react";
+import { stampsToCollect } from "@/lib/consts.ts";
 
 export const Route = createFileRoute("/_rallyists/code")({
   component: Code,
@@ -44,7 +44,7 @@ function Code() {
 
   const { data: stamps } = useCollectedStamps();
 
-  const showSubmitButton = (stamps?.length ?? 1) >= STAMPS_TO_COLLECT;
+  const showSubmitButton = (stamps?.length ?? 1) >= stampsToCollect;
 
   const { data: submissions } = useRallySubmissions();
 
@@ -86,7 +86,7 @@ function Code() {
           <ListChecks size={42} />{" "}
           {t("stampsCount", {
             count: stamps?.length ?? 1,
-            maxCount: STAMPS_TO_COLLECT,
+            maxCount: stampsToCollect,
           })}
         </div>
         {showSubmitButton && (
