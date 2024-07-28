@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Lint
+    name: Lint web
 
     runs-on: ubuntu-latest
 
