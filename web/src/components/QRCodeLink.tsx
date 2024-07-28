@@ -1,6 +1,6 @@
 import { ButtonLink } from "./ButtonLink.tsx";
 import { useTranslation } from "react-i18next";
-import { useQRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import { useQRDrawerContext } from "@/context/useQRDrawerContext";
 
 const QRCodeLink = () => {
   const [, setQRCodeDrawerOpen] = useQRDrawerContext();

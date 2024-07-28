@@ -51,32 +51,6 @@ export function UserProvider({
     Models.User<Models.Preferences> | null | undefined
   >(NOT_INITIALIZED);
 
-  async function init() {
-    console.log("registerAutoAnonymous", registerAutoAnonymous);
-    try {
-      const loggedIn = await account.get();
-      console.log("logged in", loggedIn);
-      setUser(loggedIn);
-    } catch (err) {
-      if (err instanceof AppwriteException) {
-        console.log(err.code, err.type, err.response, err.message);
-
-        // si l'erreur est de type "general_unauthorized_scope" et que registerAutoAnonymous est true
-        // cela signifie qu'on est pas connecté et qu'on doit se connecter en tant qu'utilisateur anonyme
-        if (err.type == "general_unauthorized_scope" && registerAutoAnonymous) {
-          // register anonymous user
-          await loginAnonymous();
-          const user = await account.get();
-          setUser(user);
-          return;
-        }
-      }
-
-      console.error(err);
-      setUser(null);
-    }
-  }
-
   const loginUser = async (email: string, password: string) => {
     try {
       const session = await login(email, password);
@@ -159,8 +133,36 @@ export function UserProvider({
   } satisfies UserContextType;
 
   useEffect(() => {
+    async function init() {
+      try {
+        const loggedIn = await account.get();
+        console.log("logged in", loggedIn);
+        setUser(loggedIn);
+      } catch (err) {
+        if (err instanceof AppwriteException) {
+          console.log(err.code, err.type, err.response, err.message);
+
+          // si l'erreur est de type "general_unauthorized_scope" et que registerAutoAnonymous est true
+          // cela signifie qu'on est pas connecté et qu'on doit se connecter en tant qu'utilisateur anonyme
+          if (
+            err.type == "general_unauthorized_scope" &&
+            registerAutoAnonymous
+          ) {
+            // register anonymous user
+            await loginAnonymous();
+            const user = await account.get();
+            setUser(user);
+            return;
+          }
+        }
+
+        console.error(err);
+        setUser(null);
+      }
+    }
+
     init();
-  }, []);
+  }, [registerAutoAnonymous]);
 
   return (
     <UserContext.Provider value={contextData}>

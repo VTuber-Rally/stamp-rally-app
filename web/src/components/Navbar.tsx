@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { FC, MouseEventHandler, ReactNode } from "react";
 import { Dices, Home, Map, QrCode, QrCodeIcon, UsersRound } from "lucide-react";
-import { useQRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import { useQRDrawerContext } from "@/context/useQRDrawerContext";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
 const Navbar = ({ children }: { children: ReactNode }) => {

@@ -21,7 +21,8 @@ const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
   };
 
   useEffect(() => {
-    if (videoEl?.current && !scanner.current) {
+    const currentVideoEl = videoEl.current;
+    if (currentVideoEl && !scanner.current) {
       scanner.current = new QrScanner(
         videoEl?.current,
         (result) => {
@@ -46,20 +47,16 @@ const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
     }
 
     return () => {
-      if (!videoEl?.current) {
+      if (!currentVideoEl) {
         scanner?.current?.stop();
       }
     };
-  }, []);
+  }, [onScanSuccess]);
 
   // ❌ If "camera" is not allowed in browser permissions, show an alert.
   useEffect(() => {
-    if (!qrOn)
-      alert(
-        "Camera is blocked or not accessible. Please allow camera in your browser permissions and Reload.",
-      );
-    onCameraAccessFail();
-  }, [qrOn]);
+    if (!qrOn) onCameraAccessFail();
+  }, [qrOn, onCameraAccessFail]);
 
   return (
     <div className="h-[450px] w-[450px] max-w-full max-h-[50svh] flex-grow">

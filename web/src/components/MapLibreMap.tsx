@@ -73,6 +73,7 @@ export const MapLibreMap: FC<{ onStandClick: (standId: string) => void }> = ({
       console.log(map);
       return () => map.remove();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onStandClick]);
 
   return (

@@ -10,7 +10,7 @@ import {
 import { retrieveHashFromQRCode } from "@/lib/StampQRCodes.ts";
 import QrReader from "@/components/QrReader.tsx";
 import { useNavigate } from "@tanstack/react-router";
-import { useQRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import { useQRDrawerContext } from "@/context/useQRDrawerContext";
 import { useTranslation } from "react-i18next";
 
 export const QRCodeDrawer = () => {
