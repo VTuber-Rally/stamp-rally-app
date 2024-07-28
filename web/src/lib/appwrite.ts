@@ -72,7 +72,10 @@ export const setEmail = async (email: string) => {
   }
 };
 
-export const setPref = async (key: string, value: string | number) => {
+export const setPref = async (
+  key: string,
+  value: string | number | boolean,
+) => {
   try {
     return account.updatePrefs({ [key]: value });
   } catch (error) {

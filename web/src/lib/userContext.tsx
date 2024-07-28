@@ -36,7 +36,7 @@ type UserContextType = {
   loginAnonymous: () => Promise<void>;
   setName: (name: string) => Promise<void>;
   setEmail: (email: string) => Promise<void>;
-  setPref: (key: string, value: string | number) => Promise<void>;
+  setPref: (key: string, value: string | number | boolean) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
 };
 
@@ -138,7 +138,7 @@ export function UserProvider({
     }
   };
 
-  const setPrefUser = async (key: string, value: string | number) => {
+  const setPrefUser = async (key: string, value: string | number | boolean) => {
     try {
       const user = await setPref(key, value);
       setUser(user);
