@@ -131,7 +131,7 @@ function Submit() {
           <SubmitBlock handleSubmit={handleSubmit} />
         )}
         {!isEligible ? (
-          <p>{t("submitNotAllowed", { stamps: STAMPS_TO_COLLECT })}</p>
+          <p>{t("submitNotAllowed", { stamps: stampsToCollect })}</p>
         ) : null}
       </div>
     </div>

@@ -11,8 +11,10 @@ const {
   VITE_SUBMIT_FUNCTION_ID: submitFunctionId,
   VITE_WHEEL_COLLECTION_ID: wheelCollectionId,
   VITE_GET_PRIVATE_KEY_FUNCTION_ID: getPrivateKeyFunctionId,
-  VITE_STAMPS_TO_COLLECT: stampsToCollect,
+  VITE_STAMPS_TO_COLLECT,
 } = import.meta.env;
+
+const stampsToCollect = parseInt(VITE_STAMPS_TO_COLLECT);
 
 export {
   buildId,
