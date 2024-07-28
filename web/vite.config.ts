@@ -16,42 +16,51 @@ export default defineConfig({
   },
   build: {
     target: ["firefox100", "chrome90", "edge90", "safari15"],
-    sourcemap: true
+    sourcemap: true,
   },
-  plugins: [VitePWA({
-    registerType: "autoUpdate",
-    manifest: {
-      name: "VTuber Stamp Rally",
-      short_name: "Stamp Rally",
-      theme_color: "#9fe0ea",
-      display: "standalone",
-      categories: ["entertainment"],
-      orientation: "portrait",
-      dir: "ltr",
-      icons: [
-        {
-          src: "/icons/favicon-512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "maskable any",
-        },
-        {
-          src: "/icons/favicon-180.png",
-          sizes: "180x180",
-          type: "image/png",
-          purpose: "maskable any",
-        },
-      ],
-    },
-    includeAssets: ["**/*"],
-    workbox: {
-      // https://vite-pwa-org.netlify.app/guide/static-assets#globpatterns
-      globPatterns: ["**/*.{woff2,js,css,html,jpg,svg,png}"],
-    },
-  }), mkcert(), TanStackRouterVite(), react(), sentryVitePlugin({
-    org: "japex-rally",
-    project: "javascript-react"
-  })],
+  plugins: [
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        name: "VTuber Stamp Rally",
+        short_name: "Stamp Rally",
+        theme_color: "#9fe0ea",
+        display: "standalone",
+        categories: ["entertainment"],
+        orientation: "portrait",
+        dir: "ltr",
+        icons: [
+          {
+            src: "/icons/favicon-512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable any",
+          },
+          {
+            src: "/icons/favicon-180.png",
+            sizes: "180x180",
+            type: "image/png",
+            purpose: "maskable any",
+          },
+        ],
+      },
+      includeAssets: ["**/*"],
+      workbox: {
+        // https://vite-pwa-org.netlify.app/guide/static-assets#globpatterns
+        globPatterns: ["**/*.{woff2,js,css,html,jpg,svg,png}"],
+      },
+    }),
+    mkcert(),
+    TanStackRouterVite(),
+    react(),
+    sentryVitePlugin({
+      org: "japex-rally",
+      project: "javascript-react",
+      sourcemaps: {
+        filesToDeleteAfterUpload: ["**/*.js.map"],
+      },
+    }),
+  ],
   define: {
     BUILD_TIMESTAMP: new Date(),
   },
