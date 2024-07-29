@@ -29,7 +29,7 @@ export const UserContext = createContext<UserContextType>({
   register: notInitialized,
 });
 
-type UserContextType = {
+export type UserContextType = {
   user: Models.User<Models.Preferences> | null | undefined; // logged, not logged, not initialized
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -138,6 +138,7 @@ export function UserProvider({
         const loggedIn = await account.get();
         console.log("logged in", loggedIn);
         setUser(loggedIn);
+        console.log("user", loggedIn);
       } catch (err) {
         if (err instanceof AppwriteException) {
           console.log(err.code, err.type, err.response, err.message);

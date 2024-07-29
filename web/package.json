@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@fontsource-variable/comfortaa": "^5.0.20",
@@ -42,6 +44,14 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^8.2.6",
+    "@storybook/addon-interactions": "^8.2.6",
+    "@storybook/addon-links": "^8.2.6",
+    "@storybook/addon-viewport": "^8.2.6",
+    "@storybook/blocks": "^8.2.6",
+    "@storybook/react": "^8.2.6",
+    "@storybook/react-vite": "^8.2.6",
+    "@storybook/test": "^8.2.6",
     "@tanstack/router-plugin": "^1.45.8",
     "@types/geojson": "^7946.0.14",
     "@types/node": "^20.14.12",
@@ -54,7 +64,10 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.9",
+    "eslint-plugin-storybook": "^0.8.0",
+    "msw-storybook-addon": "^2.0.3",
     "postcss": "^8.4.40",
+    "storybook": "^8.2.6",
     "tailwindcss": "^3.4.7",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.5.4",
@@ -62,5 +75,10 @@
     "vite-plugin-mkcert": "^1.17.5",
     "vite-plugin-pwa": "^0.20.1",
     "workbox-window": "^7.1.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
