@@ -1,10 +1,10 @@
 import { FC, ReactNode } from "react";
 import clsx from "clsx";
 
-interface HeaderProps {
+type HeaderProps = {
   className?: string;
   children: ReactNode;
-}
+};
 
 export const Header: FC<HeaderProps> = ({ className, children }) => {
   return (
