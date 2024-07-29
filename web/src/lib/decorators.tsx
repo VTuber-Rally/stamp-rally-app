@@ -39,7 +39,7 @@ export const RouterDecorator: Decorator = (Story, ctx) => {
 
   return (
     <RouterProvider
-      // @ts-ignore TODO: fix this someday
+      // @ts-expect-error je ne pense pas qu'il soit nécessaire de typer correctement le routeur ici
       router={router}
       defaultComponent={() => <Story {...ctx} />}
     />
