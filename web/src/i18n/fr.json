@@ -38,7 +38,7 @@
   "qrcode": "QR Code",
   "rally.1": "12 artistes participent à ce rallye autour des VTubers",
   "rally.2": "Après un achat (minimum 2€) chez un artiste, vous pourrez scanner un QR code",
-  "rally.3": "Une fois 10 tampons obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
+  "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
   "rally.4": "Dès que vous avec une participation validée, participez au concours pour gagner un shikishi de Sedeto !",
   "rally.5": "Vous pouvez rejouer autant de fois que vous le souhaitez !",
   "rally.6": "Vous pouvez étaler votre rally sur plusieurs jours de la convention !",

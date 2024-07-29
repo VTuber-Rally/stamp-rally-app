@@ -7,6 +7,7 @@ import {
   Users,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { stampsToCollect } from "@/lib/consts.ts";
 
 const Intro = () => {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ const Intro = () => {
         </li>
         <li className={"flex items-center"}>
           <TicketCheck size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.3")}</span>
+          <span>{t("rally.3", { minimumStampsCount: stampsToCollect })}</span>
         </li>
         <li className={"flex items-center"}>
           <Dices size={36} className={"mr-2 shrink-0"} />
