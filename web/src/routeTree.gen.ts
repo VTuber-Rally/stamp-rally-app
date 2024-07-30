@@ -22,8 +22,8 @@ import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsSubmitImport } from './routes/_rallyists/submit'
+import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
-import { Route as RallyistsAboutImport } from './routes/_rallyists/about'
 import { Route as StandistsQrcodeIndexImport } from './routes/standists/qrcode/index'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
 import { Route as RallyistsSubmitIndexImport } from './routes/_rallyists/submit/index'
@@ -105,13 +105,13 @@ const RallyistsSubmitRoute = RallyistsSubmitImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
-const RallyistsCodeRoute = RallyistsCodeImport.update({
-  path: '/code',
+const RallyistsRulesRoute = RallyistsRulesImport.update({
+  path: '/rules',
   getParentRoute: () => RallyistsRoute,
 } as any)
 
-const RallyistsAboutRoute = RallyistsAboutImport.update({
-  path: '/about',
+const RallyistsCodeRoute = RallyistsCodeImport.update({
+  path: '/code',
   getParentRoute: () => RallyistsRoute,
 } as any)
 
@@ -181,18 +181,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandistsImport
       parentRoute: typeof rootRoute
     }
-    '/_rallyists/about': {
-      id: '/_rallyists/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof RallyistsAboutImport
-      parentRoute: typeof RallyistsImport
-    }
     '/_rallyists/code': {
       id: '/_rallyists/code'
       path: '/code'
       fullPath: '/code'
       preLoaderRoute: typeof RallyistsCodeImport
+      parentRoute: typeof RallyistsImport
+    }
+    '/_rallyists/rules': {
+      id: '/_rallyists/rules'
+      path: '/rules'
+      fullPath: '/rules'
+      preLoaderRoute: typeof RallyistsRulesImport
       parentRoute: typeof RallyistsImport
     }
     '/_rallyists/submit': {
@@ -321,8 +321,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   RallyistsRoute: RallyistsRoute.addChildren({
-    RallyistsAboutRoute,
     RallyistsCodeRoute,
+    RallyistsRulesRoute,
     RallyistsSubmitRoute: RallyistsSubmitRoute.addChildren({
       RallyistsSubmitIndexRoute,
     }),
@@ -364,8 +364,8 @@ export const routeTree = rootRoute.addChildren({
     "/_rallyists": {
       "filePath": "_rallyists.tsx",
       "children": [
-        "/_rallyists/about",
         "/_rallyists/code",
+        "/_rallyists/rules",
         "/_rallyists/submit",
         "/_rallyists/map",
         "/_rallyists/",
@@ -394,12 +394,12 @@ export const routeTree = rootRoute.addChildren({
         "/standists/qrcode/"
       ]
     },
-    "/_rallyists/about": {
-      "filePath": "_rallyists/about.tsx",
-      "parent": "/_rallyists"
-    },
     "/_rallyists/code": {
       "filePath": "_rallyists/code.tsx",
+      "parent": "/_rallyists"
+    },
+    "/_rallyists/rules": {
+      "filePath": "_rallyists/rules.tsx",
       "parent": "/_rallyists"
     },
     "/_rallyists/submit": {
