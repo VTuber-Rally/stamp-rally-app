@@ -13,8 +13,8 @@ import { I18nextDecorator } from "../src/lib/decorators";
 
 // Viewports
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
-import { http, HttpResponse } from "msw";
-import { StandistsFromAppwrite } from "../src/stubs/Standists";
+import { handlers } from "../src/msw";
+
 const customViewports = {
   phone: {
     name: "Phone",
@@ -41,12 +41,7 @@ const preview: Preview = {
       },
     },
     msw: {
-      handlers: [
-        http.get(
-          "https://cloud.appwrite.io/v1/databases/DB_ID/collections/STANDISTS_COLLECTION_ID/documents",
-          () => HttpResponse.json(StandistsFromAppwrite),
-        ),
-      ],
+      handlers,
     },
   },
   loaders: [mswLoader],
