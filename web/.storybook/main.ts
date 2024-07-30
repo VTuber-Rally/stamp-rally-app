@@ -14,7 +14,7 @@ const config: StorybookConfig = {
   staticDirs: ["./public", "../public"],
   env: (config) => ({
     ...config,
-    VITE_APPWRITE_ENDPOINT: "/v1",
+    VITE_APPWRITE_ENDPOINT: `https://cloud.appwrite.io/v1`,
     VITE_APPWRITE_PROJECT_ID: "PROJECT_ID",
     VITE_DATABASE_ID: "DB_ID",
     VITE_STANDISTS_COLLECTION_ID: "STANDISTS_COLLECTION_ID",

@@ -43,7 +43,7 @@ const preview: Preview = {
     msw: {
       handlers: [
         http.get(
-          "https://appwrite.luc.ovh/v1/databases/6675f377000709b0db07/collections/6675f3a2000e52a39b67/documents",
+          "https://cloud.appwrite.io/v1/databases/DB_ID/collections/STANDISTS_COLLECTION_ID/documents",
           () => HttpResponse.json(StandistsFromAppwrite),
         ),
       ],
