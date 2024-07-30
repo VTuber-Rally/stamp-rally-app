@@ -11,10 +11,10 @@ import {
 import { useTranslation } from "react-i18next";
 import { Standist } from "@/lib/models/Standist.ts";
 
-interface StampDetailsProps {
+type StampDetailsProps = {
   stamp: Stamp;
   standist: Standist;
-}
+};
 
 const StampLine: FC<PropsWithChildren> = ({ children }) => {
   return <li className="flex gap-2">{children}</li>;

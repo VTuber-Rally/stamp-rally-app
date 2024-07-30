@@ -1,4 +1,5 @@
 import { Models } from "appwrite";
+import { Standist } from "@/lib/models/Standist.ts";
 
 export const StandistsFromAppwrite = {
   total: 12,
@@ -268,4 +269,12 @@ export const StandistsFromAppwrite = {
       $collectionId: "6675f3a2000e52a39b67",
     },
   ],
-} satisfies Models.DocumentList<Models.Document>;
+} satisfies Models.DocumentList<
+  Models.Document &
+    Omit<Standist, "publicKey" | "twitch" | "instagram" | "geometry"> & {
+      publicKey: string;
+      twitch: string | null;
+      instagram: string | null;
+      geometry: string;
+    }
+>;
