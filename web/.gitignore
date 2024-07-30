@@ -29,5 +29,6 @@ dev-dist
 
 .env
 *storybook.log
+storybook-static
 
 certs
