@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import Intro from './Intro';
+import Intro from "./Intro";
 
 const meta = {
+  title: "Rallyist/Intro",
   component: Intro,
 } satisfies Meta<typeof Intro>;
 

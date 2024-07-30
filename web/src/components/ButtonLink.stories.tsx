@@ -5,6 +5,7 @@ import { RouterDecorator } from "@/lib/decorators.tsx";
 import { fn } from "@storybook/test";
 
 const meta = {
+  title: "Atom/ButtonLink",
   component: ButtonLink,
   decorators: [RouterDecorator],
   argTypes: {

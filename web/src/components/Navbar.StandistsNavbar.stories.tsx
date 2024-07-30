@@ -4,7 +4,7 @@ import { StandistsNavbar } from "./Navbar";
 import { RouterDecorator } from "@/lib/decorators.tsx";
 
 const meta = {
-  title: "Components/Navbar/StandistsNavbar",
+  title: "Common/Navbar/StandistsNavbar",
   component: StandistsNavbar,
   decorators: [RouterDecorator],
 } satisfies Meta<typeof StandistsNavbar>;

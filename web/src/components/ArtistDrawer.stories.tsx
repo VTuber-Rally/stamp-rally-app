@@ -5,6 +5,7 @@ import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
 import { fn } from "@storybook/test";
 
 const meta = {
+  title: "Rallyist/ArtistDrawer",
   component: ArtistDrawer,
   decorators: [TanStackQueryDecorator, RouterDecorator],
 } satisfies Meta<typeof ArtistDrawer>;

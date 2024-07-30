@@ -4,6 +4,7 @@ import QrCodeLink from "./QRCodeLink";
 import { QRDrawerContextProviderDecorator } from "@/lib/decorators.tsx";
 
 const meta = {
+  title: "Rallyist/QRCodeLink",
   component: QrCodeLink,
   decorators: [QRDrawerContextProviderDecorator],
 } satisfies Meta<typeof QrCodeLink>;

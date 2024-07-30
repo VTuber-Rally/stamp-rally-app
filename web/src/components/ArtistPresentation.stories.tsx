@@ -8,6 +8,7 @@ import {
 } from "@/lib/decorators.tsx";
 
 const meta = {
+  title: "Rallyist/ArtistPresentation",
   component: ArtistPresentation,
   decorators: [TanStackQueryDecorator, RouterDecorator, DialogDecorator],
   args: {

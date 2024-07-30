@@ -4,7 +4,7 @@ import { StaffNavbar } from "./Navbar";
 import { RouterDecorator } from "@/lib/decorators.tsx";
 
 const meta = {
-  title: "Components/Navbar/StaffNavbar",
+  title: "Common/Navbar/StaffNavbar",
   component: StaffNavbar,
   decorators: [RouterDecorator],
 } satisfies Meta<typeof StaffNavbar>;

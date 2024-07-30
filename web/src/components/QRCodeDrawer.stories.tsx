@@ -17,6 +17,7 @@ const Template = () => {
 };
 
 const meta = {
+  title: "Rallyist/QRCodeDrawer",
   component: QRCodeDrawer,
   decorators: [RouterDecorator, QRDrawerContextProviderDecorator],
   render: Template,
