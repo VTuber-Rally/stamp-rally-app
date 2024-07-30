@@ -8,12 +8,23 @@ import {
   createRouter,
   RouterProvider,
 } from "@tanstack/react-router";
-import { Suspense, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { AppwriteException, Models } from "appwrite";
 import { UserContext, UserContextType } from "@/lib/userContext.tsx";
 import { LoggedInUser } from "@/stubs/User.ts";
 import i18n from "@/lib/i18n.ts";
 import { I18nextProvider } from "react-i18next";
+import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
+import { fn } from "@storybook/test";
+import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
 
 export const TanStackQueryDecorator: Decorator = (Story, ctx) => {
   const queryClient = new QueryClient({
@@ -158,5 +169,30 @@ export const I18nextDecorator: Decorator = (Story, context) => {
         <Story />
       </I18nextProvider>
     </Suspense>
+  );
+};
+
+export const DialogDecorator: Decorator = (Story, ctx) => {
+  return (
+    <Drawer open={true} onOpenChange={fn}>
+      <DrawerContent>
+        <Story {...ctx} />
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+export const QRDrawerContextProviderDecorator: Decorator = (Story, ctx) => {
+  const [open, setOpen] = useState(false);
+  const contextValue = useMemo<[boolean, Dispatch<SetStateAction<boolean>>]>(
+    () => [open, setOpen],
+    [open],
+  );
+
+  return (
+    <QRDrawerContext.Provider value={contextValue}>
+      <QRCodeDrawer />
+      <Story {...ctx} />
+    </QRDrawerContext.Provider>
   );
 };
