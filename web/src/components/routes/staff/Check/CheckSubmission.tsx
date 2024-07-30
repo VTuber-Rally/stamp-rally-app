@@ -1,6 +1,15 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRallySubmission } from "@/lib/hooks/useRallySubmission.ts";
+import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+import { databases } from "@/lib/appwrite.ts";
+import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
+import { queryClient } from "@/lib/queryClient.ts";
+import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import Loader from "@/components/Loader.tsx";
+import { formatDistance, formatDuration, intervalToDuration } from "date-fns";
+import { fr } from "date-fns/locale";
+import { Header } from "@/components/Header.tsx";
+import { TriangleAlert } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -9,27 +18,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/Table";
-import { TriangleAlert } from "lucide-react";
+} from "@/components/Table.tsx";
 import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { databases } from "@/lib/appwrite.ts";
-import { queryClient } from "@/lib/queryClient.ts";
-import { formatDistance, formatDuration, intervalToDuration } from "date-fns";
-import { fr } from "date-fns/locale";
-import { Header } from "@/components/Header.tsx";
 import { FC } from "react";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { useTranslation } from "react-i18next";
-import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 
-export const Route = createFileRoute("/staff/submission/$submissionid")({
-  component: CheckSubmission,
-});
-
-function CheckSubmission() {
-  const { submissionid } = Route.useParams();
-  const { data, isLoading } = useRallySubmission(submissionid);
+const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
+  const { data, isLoading } = useRallySubmission(submissionId);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -84,7 +79,7 @@ function CheckSubmission() {
 
   return (
     <>
-      <Header>{t("submission", { id: submissionid })}</Header>
+      <Header>{t("submission", { id: submissionId })}</Header>
       <div className="flex-grow flex flex-col items-center justify-center">
         {data.redeemed && (
           <div className="flex flex-col items-center justify-center bg-red-300 p-4 rounded-xl">
@@ -138,14 +133,14 @@ function CheckSubmission() {
           type={"button"}
           size={"big"}
           disabled={data.redeemed}
-          onClick={() => markAsRedeemed(submissionid)}
+          onClick={() => markAsRedeemed(submissionId)}
         >
           Valider et aller vers la roue de la fortune !
         </ButtonLink>
       </div>
     </>
   );
-}
+};
 
 interface SymbolIndicatorProps {
   date1: string;
@@ -202,3 +197,5 @@ const SymbolIndicator: FC<SymbolIndicatorProps> = ({ date1, date2 }) => {
 
   return diffString;
 };
+
+export default CheckSubmission;

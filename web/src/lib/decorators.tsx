@@ -29,6 +29,7 @@ import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
 import { fn } from "@storybook/test";
 import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
 import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
+import { Toaster } from "@/components/ToastViewport.tsx";
 
 export const TanStackQueryDecorator: Decorator = (Story, ctx) => {
   const queryClient = new QueryClient({
@@ -200,5 +201,14 @@ export const QRDrawerContextProviderDecorator: Decorator = (Story, ctx) => {
       <QRCodeDrawer />
       <Story {...ctx} />
     </QRDrawerContext.Provider>
+  );
+};
+
+export const ToasterDecorator: Decorator = (Story, ctx) => {
+  return (
+    <>
+      <Story {...ctx} />
+      <Toaster />
+    </>
   );
 };

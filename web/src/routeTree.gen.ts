@@ -29,7 +29,7 @@ import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/in
 import { Route as RallyistsSubmitIndexImport } from './routes/_rallyists/submit/index'
 import { Route as RallyistsStampsIndexImport } from './routes/_rallyists/stamps/index'
 import { Route as RallyistsArtistsIndexImport } from './routes/_rallyists/artists/index'
-import { Route as StaffSubmissionSubmissionidImport } from './routes/staff/submission.$submissionid'
+import { Route as StaffSubmissionSubmissionIdImport } from './routes/staff/submission.$submissionId'
 import { Route as StaffGenQrcodeUserIdImport } from './routes/staff/gen-qrcode/$userId'
 import { Route as RallyistsStampsScannerImport } from './routes/_rallyists/stamps/scanner'
 
@@ -140,9 +140,9 @@ const RallyistsArtistsIndexRoute = RallyistsArtistsIndexImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
-const StaffSubmissionSubmissionidRoute =
-  StaffSubmissionSubmissionidImport.update({
-    path: '/submission/$submissionid',
+const StaffSubmissionSubmissionIdRoute =
+  StaffSubmissionSubmissionIdImport.update({
+    path: '/submission/$submissionId',
     getParentRoute: () => StaffRoute,
   } as any)
 
@@ -279,11 +279,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeUserIdImport
       parentRoute: typeof StaffImport
     }
-    '/staff/submission/$submissionid': {
-      id: '/staff/submission/$submissionid'
-      path: '/submission/$submissionid'
-      fullPath: '/staff/submission/$submissionid'
-      preLoaderRoute: typeof StaffSubmissionSubmissionidImport
+    '/staff/submission/$submissionId': {
+      id: '/staff/submission/$submissionId'
+      path: '/submission/$submissionId'
+      fullPath: '/staff/submission/$submissionId'
+      preLoaderRoute: typeof StaffSubmissionSubmissionIdImport
       parentRoute: typeof StaffImport
     }
     '/_rallyists/artists/': {
@@ -338,7 +338,7 @@ export const routeTree = rootRoute.addChildren({
     StaffSigninLazyRoute,
     StaffIndexRoute,
     StaffGenQrcodeUserIdRoute,
-    StaffSubmissionSubmissionidRoute,
+    StaffSubmissionSubmissionIdRoute,
     StaffGenQrcodeIndexRoute,
   }),
   StandistsRoute: StandistsRoute.addChildren({
@@ -382,7 +382,7 @@ export const routeTree = rootRoute.addChildren({
         "/staff/signin",
         "/staff/",
         "/staff/gen-qrcode/$userId",
-        "/staff/submission/$submissionid",
+        "/staff/submission/$submissionId",
         "/staff/gen-qrcode/"
       ]
     },
@@ -453,8 +453,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "staff/gen-qrcode/$userId.tsx",
       "parent": "/staff"
     },
-    "/staff/submission/$submissionid": {
-      "filePath": "staff/submission.$submissionid.tsx",
+    "/staff/submission/$submissionId": {
+      "filePath": "staff/submission.$submissionId.tsx",
       "parent": "/staff"
     },
     "/_rallyists/artists/": {
