@@ -19,12 +19,12 @@ import { Route as RallyistsImport } from './routes/_rallyists'
 import { Route as StandistsIndexImport } from './routes/standists/index'
 import { Route as StaffIndexImport } from './routes/staff/index'
 import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
+import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsSubmitImport } from './routes/_rallyists/submit'
 import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
-import { Route as StandistsQrcodeIndexImport } from './routes/standists/qrcode/index'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
 import { Route as RallyistsSubmitIndexImport } from './routes/_rallyists/submit/index'
 import { Route as RallyistsStampsIndexImport } from './routes/_rallyists/stamps/index'
@@ -90,6 +90,11 @@ const RallyistsMapLazyRoute = RallyistsMapLazyImport.update({
   import('./routes/_rallyists/map.lazy').then((d) => d.Route),
 )
 
+const StandistsQrcodeRoute = StandistsQrcodeImport.update({
+  path: '/qrcode',
+  getParentRoute: () => StandistsRoute,
+} as any)
+
 const StaffWheelRoute = StaffWheelImport.update({
   path: '/wheel',
   getParentRoute: () => StaffRoute,
@@ -113,11 +118,6 @@ const RallyistsRulesRoute = RallyistsRulesImport.update({
 const RallyistsCodeRoute = RallyistsCodeImport.update({
   path: '/code',
   getParentRoute: () => RallyistsRoute,
-} as any)
-
-const StandistsQrcodeIndexRoute = StandistsQrcodeIndexImport.update({
-  path: '/qrcode/',
-  getParentRoute: () => StandistsRoute,
 } as any)
 
 const StaffGenQrcodeIndexRoute = StaffGenQrcodeIndexImport.update({
@@ -216,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffWheelImport
       parentRoute: typeof StaffImport
     }
+    '/standists/qrcode': {
+      id: '/standists/qrcode'
+      path: '/qrcode'
+      fullPath: '/standists/qrcode'
+      preLoaderRoute: typeof StandistsQrcodeImport
+      parentRoute: typeof StandistsImport
+    }
     '/_rallyists/map': {
       id: '/_rallyists/map'
       path: '/map'
@@ -307,13 +314,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeIndexImport
       parentRoute: typeof StaffImport
     }
-    '/standists/qrcode/': {
-      id: '/standists/qrcode/'
-      path: '/qrcode'
-      fullPath: '/standists/qrcode'
-      preLoaderRoute: typeof StandistsQrcodeIndexImport
-      parentRoute: typeof StandistsImport
-    }
   }
 }
 
@@ -342,9 +342,9 @@ export const routeTree = rootRoute.addChildren({
     StaffGenQrcodeIndexRoute,
   }),
   StandistsRoute: StandistsRoute.addChildren({
+    StandistsQrcodeRoute,
     StandistsSigninLazyRoute,
     StandistsIndexRoute,
-    StandistsQrcodeIndexRoute,
   }),
 })
 
@@ -389,9 +389,9 @@ export const routeTree = rootRoute.addChildren({
     "/standists": {
       "filePath": "standists.tsx",
       "children": [
+        "/standists/qrcode",
         "/standists/signin",
-        "/standists/",
-        "/standists/qrcode/"
+        "/standists/"
       ]
     },
     "/_rallyists/code": {
@@ -416,6 +416,10 @@ export const routeTree = rootRoute.addChildren({
     "/staff/wheel": {
       "filePath": "staff/wheel.tsx",
       "parent": "/staff"
+    },
+    "/standists/qrcode": {
+      "filePath": "standists/qrcode.tsx",
+      "parent": "/standists"
     },
     "/_rallyists/map": {
       "filePath": "_rallyists/map.lazy.tsx",
@@ -468,10 +472,6 @@ export const routeTree = rootRoute.addChildren({
     "/staff/gen-qrcode/": {
       "filePath": "staff/gen-qrcode/index.tsx",
       "parent": "/staff"
-    },
-    "/standists/qrcode/": {
-      "filePath": "standists/qrcode/index.tsx",
-      "parent": "/standists"
     }
   }
 }

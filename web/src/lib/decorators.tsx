@@ -18,7 +18,11 @@ import {
 } from "react";
 import { AppwriteException, Models } from "appwrite";
 import { UserContext, UserContextType } from "@/lib/userContext.tsx";
-import { LoggedInUser } from "@/stubs/User.ts";
+import {
+  LoggedInUser,
+  LoggedInUserStaff,
+  LoggedInUserStandist,
+} from "@/stubs/User.ts";
 import i18n from "@/lib/i18n.ts";
 import { I18nextProvider } from "react-i18next";
 import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
@@ -58,16 +62,18 @@ export const RouterDecorator: Decorator = (Story, ctx) => {
 };
 
 export const AuthDecorator: Decorator = (Story, ctx) => {
+  const { parameters } = ctx;
+
   const [user, setUser] = useState<Models.User<Models.Preferences> | null>(
-    null,
+    parameters?.auth?.user ?? null,
   );
 
   const loginUser = async (email: string, password: string) => {
     console.log("loginUser", email, password);
     if (email === "staff@user.com" && password === "password") {
-      setUser(LoggedInUser);
+      setUser(LoggedInUserStaff);
     } else if (email === "standist@user.com" && password === "password") {
-      setUser(LoggedInUser);
+      setUser(LoggedInUserStandist);
     } else {
       throw new AppwriteException("Wrong email or password", 401);
     }

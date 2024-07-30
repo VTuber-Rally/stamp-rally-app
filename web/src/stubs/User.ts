@@ -31,6 +31,7 @@ export const LoggedInUserStaff = {
 
 export const LoggedInUserStandist = {
   ...LoggedInUser,
+  $id: "66873ba100357c59f3bf",
   labels: ["standist"],
   name: "Standist User",
   email: "standist@user.com",
