@@ -50,7 +50,7 @@ export default defineConfig({
         globPatterns: ["**/*.{woff2,js,css,html,jpg,svg,png}"],
       },
     }),
-    mkcert(),
+    mkcert({ savePath: "./certs" }),
     TanStackRouterVite(),
     react(),
     sentryVitePlugin({

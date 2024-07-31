@@ -28,3 +28,7 @@ dev-dist
 .env.sentry-build-plugin
 
 .env
+*storybook.log
+storybook-static
+
+certs

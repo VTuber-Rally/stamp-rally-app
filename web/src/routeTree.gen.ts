@@ -19,17 +19,17 @@ import { Route as RallyistsImport } from './routes/_rallyists'
 import { Route as StandistsIndexImport } from './routes/standists/index'
 import { Route as StaffIndexImport } from './routes/staff/index'
 import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
+import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsSubmitImport } from './routes/_rallyists/submit'
+import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
-import { Route as RallyistsAboutImport } from './routes/_rallyists/about'
-import { Route as StandistsQrcodeIndexImport } from './routes/standists/qrcode/index'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
 import { Route as RallyistsSubmitIndexImport } from './routes/_rallyists/submit/index'
 import { Route as RallyistsStampsIndexImport } from './routes/_rallyists/stamps/index'
 import { Route as RallyistsArtistsIndexImport } from './routes/_rallyists/artists/index'
-import { Route as StaffSubmissionSubmissionidImport } from './routes/staff/submission.$submissionid'
+import { Route as StaffSubmissionSubmissionIdImport } from './routes/staff/submission.$submissionId'
 import { Route as StaffGenQrcodeUserIdImport } from './routes/staff/gen-qrcode/$userId'
 import { Route as RallyistsStampsScannerImport } from './routes/_rallyists/stamps/scanner'
 
@@ -90,6 +90,11 @@ const RallyistsMapLazyRoute = RallyistsMapLazyImport.update({
   import('./routes/_rallyists/map.lazy').then((d) => d.Route),
 )
 
+const StandistsQrcodeRoute = StandistsQrcodeImport.update({
+  path: '/qrcode',
+  getParentRoute: () => StandistsRoute,
+} as any)
+
 const StaffWheelRoute = StaffWheelImport.update({
   path: '/wheel',
   getParentRoute: () => StaffRoute,
@@ -105,19 +110,14 @@ const RallyistsSubmitRoute = RallyistsSubmitImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
+const RallyistsRulesRoute = RallyistsRulesImport.update({
+  path: '/rules',
+  getParentRoute: () => RallyistsRoute,
+} as any)
+
 const RallyistsCodeRoute = RallyistsCodeImport.update({
   path: '/code',
   getParentRoute: () => RallyistsRoute,
-} as any)
-
-const RallyistsAboutRoute = RallyistsAboutImport.update({
-  path: '/about',
-  getParentRoute: () => RallyistsRoute,
-} as any)
-
-const StandistsQrcodeIndexRoute = StandistsQrcodeIndexImport.update({
-  path: '/qrcode/',
-  getParentRoute: () => StandistsRoute,
 } as any)
 
 const StaffGenQrcodeIndexRoute = StaffGenQrcodeIndexImport.update({
@@ -140,9 +140,9 @@ const RallyistsArtistsIndexRoute = RallyistsArtistsIndexImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
-const StaffSubmissionSubmissionidRoute =
-  StaffSubmissionSubmissionidImport.update({
-    path: '/submission/$submissionid',
+const StaffSubmissionSubmissionIdRoute =
+  StaffSubmissionSubmissionIdImport.update({
+    path: '/submission/$submissionId',
     getParentRoute: () => StaffRoute,
   } as any)
 
@@ -181,18 +181,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandistsImport
       parentRoute: typeof rootRoute
     }
-    '/_rallyists/about': {
-      id: '/_rallyists/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof RallyistsAboutImport
-      parentRoute: typeof RallyistsImport
-    }
     '/_rallyists/code': {
       id: '/_rallyists/code'
       path: '/code'
       fullPath: '/code'
       preLoaderRoute: typeof RallyistsCodeImport
+      parentRoute: typeof RallyistsImport
+    }
+    '/_rallyists/rules': {
+      id: '/_rallyists/rules'
+      path: '/rules'
+      fullPath: '/rules'
+      preLoaderRoute: typeof RallyistsRulesImport
       parentRoute: typeof RallyistsImport
     }
     '/_rallyists/submit': {
@@ -215,6 +215,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/staff/wheel'
       preLoaderRoute: typeof StaffWheelImport
       parentRoute: typeof StaffImport
+    }
+    '/standists/qrcode': {
+      id: '/standists/qrcode'
+      path: '/qrcode'
+      fullPath: '/standists/qrcode'
+      preLoaderRoute: typeof StandistsQrcodeImport
+      parentRoute: typeof StandistsImport
     }
     '/_rallyists/map': {
       id: '/_rallyists/map'
@@ -272,11 +279,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeUserIdImport
       parentRoute: typeof StaffImport
     }
-    '/staff/submission/$submissionid': {
-      id: '/staff/submission/$submissionid'
-      path: '/submission/$submissionid'
-      fullPath: '/staff/submission/$submissionid'
-      preLoaderRoute: typeof StaffSubmissionSubmissionidImport
+    '/staff/submission/$submissionId': {
+      id: '/staff/submission/$submissionId'
+      path: '/submission/$submissionId'
+      fullPath: '/staff/submission/$submissionId'
+      preLoaderRoute: typeof StaffSubmissionSubmissionIdImport
       parentRoute: typeof StaffImport
     }
     '/_rallyists/artists/': {
@@ -307,13 +314,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeIndexImport
       parentRoute: typeof StaffImport
     }
-    '/standists/qrcode/': {
-      id: '/standists/qrcode/'
-      path: '/qrcode'
-      fullPath: '/standists/qrcode'
-      preLoaderRoute: typeof StandistsQrcodeIndexImport
-      parentRoute: typeof StandistsImport
-    }
   }
 }
 
@@ -321,8 +321,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   RallyistsRoute: RallyistsRoute.addChildren({
-    RallyistsAboutRoute,
     RallyistsCodeRoute,
+    RallyistsRulesRoute,
     RallyistsSubmitRoute: RallyistsSubmitRoute.addChildren({
       RallyistsSubmitIndexRoute,
     }),
@@ -338,13 +338,13 @@ export const routeTree = rootRoute.addChildren({
     StaffSigninLazyRoute,
     StaffIndexRoute,
     StaffGenQrcodeUserIdRoute,
-    StaffSubmissionSubmissionidRoute,
+    StaffSubmissionSubmissionIdRoute,
     StaffGenQrcodeIndexRoute,
   }),
   StandistsRoute: StandistsRoute.addChildren({
+    StandistsQrcodeRoute,
     StandistsSigninLazyRoute,
     StandistsIndexRoute,
-    StandistsQrcodeIndexRoute,
   }),
 })
 
@@ -364,8 +364,8 @@ export const routeTree = rootRoute.addChildren({
     "/_rallyists": {
       "filePath": "_rallyists.tsx",
       "children": [
-        "/_rallyists/about",
         "/_rallyists/code",
+        "/_rallyists/rules",
         "/_rallyists/submit",
         "/_rallyists/map",
         "/_rallyists/",
@@ -382,24 +382,24 @@ export const routeTree = rootRoute.addChildren({
         "/staff/signin",
         "/staff/",
         "/staff/gen-qrcode/$userId",
-        "/staff/submission/$submissionid",
+        "/staff/submission/$submissionId",
         "/staff/gen-qrcode/"
       ]
     },
     "/standists": {
       "filePath": "standists.tsx",
       "children": [
+        "/standists/qrcode",
         "/standists/signin",
-        "/standists/",
-        "/standists/qrcode/"
+        "/standists/"
       ]
-    },
-    "/_rallyists/about": {
-      "filePath": "_rallyists/about.tsx",
-      "parent": "/_rallyists"
     },
     "/_rallyists/code": {
       "filePath": "_rallyists/code.tsx",
+      "parent": "/_rallyists"
+    },
+    "/_rallyists/rules": {
+      "filePath": "_rallyists/rules.tsx",
       "parent": "/_rallyists"
     },
     "/_rallyists/submit": {
@@ -416,6 +416,10 @@ export const routeTree = rootRoute.addChildren({
     "/staff/wheel": {
       "filePath": "staff/wheel.tsx",
       "parent": "/staff"
+    },
+    "/standists/qrcode": {
+      "filePath": "standists/qrcode.tsx",
+      "parent": "/standists"
     },
     "/_rallyists/map": {
       "filePath": "_rallyists/map.lazy.tsx",
@@ -449,8 +453,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "staff/gen-qrcode/$userId.tsx",
       "parent": "/staff"
     },
-    "/staff/submission/$submissionid": {
-      "filePath": "staff/submission.$submissionid.tsx",
+    "/staff/submission/$submissionId": {
+      "filePath": "staff/submission.$submissionId.tsx",
       "parent": "/staff"
     },
     "/_rallyists/artists/": {
@@ -468,10 +472,6 @@ export const routeTree = rootRoute.addChildren({
     "/staff/gen-qrcode/": {
       "filePath": "staff/gen-qrcode/index.tsx",
       "parent": "/staff"
-    },
-    "/standists/qrcode/": {
-      "filePath": "standists/qrcode/index.tsx",
-      "parent": "/standists"
     }
   }
 }
