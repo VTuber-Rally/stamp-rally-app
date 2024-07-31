@@ -1,5 +1,5 @@
  # Japan Expo 2024 VTuber Stamp Rally
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0ca7b7bc-c703-4bce-b845-1e5670cc3c01/deploy-status)](https://app.netlify.com/sites/stamp-rally-devel/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0ca7b7bc-c703-4bce-b845-1e5670cc3c01/deploy-status)](https://app.netlify.com/sites/stamp-rally-devel/deploys) [Demo](https://stamp-rally-devel.netlify.app/) | [Storybook](http://rally-storybook.luc.ovh/)
 
 ![Logo](/web/src/assets/logo.png)
 
