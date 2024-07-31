@@ -27,6 +27,8 @@ export const Route = createFileRoute("/_rallyists/code")({
 
     const parsed = JSON.parse(decodedHash);
 
+    console.log("parsed", decodedHash, parsed);
+
     const serialized = StampTupleSerializer.safeParse(parsed);
     if (!serialized.success)
       throw new TypeError("Stamp cannot be deserialized");
