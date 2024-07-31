@@ -1,12 +1,18 @@
 name: Storybook
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   test:
-    name: Build
+    name: Build and deploy Storybook
 
     runs-on: ubuntu-latest
 
@@ -19,12 +25,10 @@ jobs:
           version: 9
           run_install: true
 
-      - name: 'web: pnpm build-storybook'
-        run: pnpm --filter web build-storybook
-
-      # upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: build-publish
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
         with:
-          name: storybook-static
-          path: web/storybook-static/
+          checkout: false
+          install_command: pnpm --filter web install
+          build_command: pnpm --filter web build-storybook
+          path: web/storybook-static
