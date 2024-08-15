@@ -9,7 +9,7 @@ import {
 const meta = {
   title: "Common/Navbar/RallyistNavbar",
   component: RallyistNavbar,
-  decorators: [RouterDecorator, QRDrawerContextProviderDecorator],
+  decorators: [QRDrawerContextProviderDecorator, RouterDecorator],
 } satisfies Meta<typeof RallyistNavbar>;
 
 export default meta;
