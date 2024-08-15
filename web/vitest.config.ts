@@ -5,7 +5,21 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   ...viteConfig,
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: "crypto-polyfill",
+      config(config) {
+        if (!config.test?.browser?.enabled) {
+          return {
+            test: {
+              setupFiles: ["./vitest.setup.crypto.ts"],
+            },
+          };
+        }
+      },
+    },
+  ],
   test: {
     environment: "jsdom",
   },
