@@ -38,9 +38,7 @@ export const QRCodeDrawer = () => {
           onCameraAccessFail={() => console.log("oh no, no camera :(")}
         />
         <DrawerFooter>
-          <DrawerClose>
-            <button>{t("close")}</button>
-          </DrawerClose>
+          <DrawerClose>{t("close")}</DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
