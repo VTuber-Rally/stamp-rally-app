@@ -154,7 +154,7 @@ importers:
         version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))
       '@storybook/addon-interactions':
         specifier: ^8.2.6
-        version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))
+        version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))
       '@storybook/addon-links':
         specifier: ^8.2.6
         version: 8.2.6(react@18.3.1)(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))
@@ -172,7 +172,7 @@ importers:
         version: 8.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@2.79.1)(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(typescript@5.5.4)(vite@5.3.5(@types/node@20.14.12)(terser@5.31.3))
       '@storybook/test':
         specifier: ^8.2.6
-        version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))
+        version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))
       '@tanstack/router-plugin':
         specifier: ^1.45.8
         version: 1.45.8(vite@5.3.5(@types/node@20.14.12)(terser@5.31.3))
@@ -200,6 +200,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.3.1
         version: 4.3.1(vite@5.3.5(@types/node@20.14.12)(terser@5.31.3))
+      '@vitest/ui':
+        specifier: ^2.0.5
+        version: 2.0.5(vitest@2.0.5)
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.40)
@@ -250,7 +253,7 @@ importers:
         version: 0.20.1(vite@5.3.5(@types/node@20.14.12)(terser@5.31.3))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
       vitest:
         specifier: ^2.0.5
-        version: 2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3)
+        version: 2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3)
       workbox-window:
         specifier: ^7.1.0
         version: 7.1.0
@@ -1343,6 +1346,9 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@polka/url@1.0.0-next.25':
+    resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
+
   '@radix-ui/primitive@1.1.0':
     resolution: {integrity: sha512-4Z8dn6Upk0qk4P74xBhZ6Hd/w0mPEzOOLxy4xiPXOXqjF7jZS0VAKk7/x/H6FyY2zCkYJqePf1G5KmkmNJ4RBA==}
 
@@ -2395,6 +2401,11 @@ packages:
   '@vitest/spy@2.0.5':
     resolution: {integrity: sha512-c/jdthAhvJdpfVuaexSrnawxZz6pywlTPe84LUB2m/4t3rl2fTo9NFGBG4oWgaD+FTgDDV8hJ/nibT7IfH3JfA==}
 
+  '@vitest/ui@2.0.5':
+    resolution: {integrity: sha512-m+ZpVt/PVi/nbeRKEjdiYeoh0aOfI9zr3Ria9LO7V2PlMETtAXJS3uETEZkc8Be2oOl8mhd7Ew+5SRBXRYncNw==}
+    peerDependencies:
+      vitest: 2.0.5
+
   '@vitest/utils@1.6.0':
     resolution: {integrity: sha512-21cPiuGMoMZwiOHa2i4LXkMkMkCGzA+MVFV70jRwHo95dL4x/ts5GZhML1QWuy7yfp3WzK3lRvZi3JnXTYqrBw==}
 
@@ -3179,6 +3190,9 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
 
   file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
@@ -4004,6 +4018,10 @@ packages:
   mlly@1.7.1:
     resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==}
 
+  mrmime@2.0.0:
+    resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
+    engines: {node: '>=10'}
+
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
 
@@ -4732,6 +4750,10 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
+  sirv@2.0.4:
+    resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
+    engines: {node: '>= 10'}
+
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
@@ -4989,6 +5011,10 @@ packages:
   toidentifier@1.0.1:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
+
+  totalist@3.0.1:
+    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
+    engines: {node: '>=6'}
 
   tough-cookie@4.1.4:
     resolution: {integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag==}
@@ -6830,6 +6856,8 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@polka/url@1.0.0-next.25': {}
+
   '@radix-ui/primitive@1.1.0': {}
 
   '@radix-ui/react-checkbox@1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
@@ -7341,11 +7369,11 @@ snapshots:
       '@storybook/global': 5.0.0
       storybook: 8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9))
 
-  '@storybook/addon-interactions@8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))':
+  '@storybook/addon-interactions@8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))':
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/instrumenter': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))
-      '@storybook/test': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))
+      '@storybook/test': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))
       polished: 4.3.1
       storybook: 8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9))
       ts-dedent: 2.2.0
@@ -7559,12 +7587,12 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.4
 
-  '@storybook/test@8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))':
+  '@storybook/test@8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))':
     dependencies:
       '@storybook/csf': 0.1.11
       '@storybook/instrumenter': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.8(@babel/core@7.24.9)))
       '@testing-library/dom': 10.1.0
-      '@testing-library/jest-dom': 6.4.5(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))
+      '@testing-library/jest-dom': 6.4.5(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))
       '@testing-library/user-event': 14.5.2(@testing-library/dom@10.1.0)
       '@vitest/expect': 1.6.0
       '@vitest/spy': 1.6.0
@@ -7663,7 +7691,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.4.5(vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3))':
+  '@testing-library/jest-dom@6.4.5(vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3))':
     dependencies:
       '@adobe/css-tools': 4.4.0
       '@babel/runtime': 7.24.8
@@ -7674,7 +7702,7 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
     optionalDependencies:
-      vitest: 2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3)
+      vitest: 2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3)
 
   '@testing-library/jest-dom@6.4.8':
     dependencies:
@@ -8055,6 +8083,17 @@ snapshots:
   '@vitest/spy@2.0.5':
     dependencies:
       tinyspy: 3.0.0
+
+  '@vitest/ui@2.0.5(vitest@2.0.5)':
+    dependencies:
+      '@vitest/utils': 2.0.5
+      fast-glob: 3.3.2
+      fflate: 0.8.2
+      flatted: 3.3.1
+      pathe: 1.1.2
+      sirv: 2.0.4
+      tinyrainbow: 1.2.0
+      vitest: 2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3)
 
   '@vitest/utils@1.6.0':
     dependencies:
@@ -8996,6 +9035,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.2
 
+  fflate@0.8.2: {}
+
   file-entry-cache@6.0.1:
     dependencies:
       flat-cache: 3.2.0
@@ -9827,6 +9868,8 @@ snapshots:
       pkg-types: 1.1.3
       ufo: 1.5.4
 
+  mrmime@2.0.0: {}
+
   ms@2.0.0: {}
 
   ms@2.1.2: {}
@@ -10561,6 +10604,12 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
+  sirv@2.0.4:
+    dependencies:
+      '@polka/url': 1.0.0-next.25
+      mrmime: 2.0.0
+      totalist: 3.0.1
+
   sisteransi@1.0.5: {}
 
   slash@3.0.0: {}
@@ -10871,6 +10920,8 @@ snapshots:
 
   toidentifier@1.0.1: {}
 
+  totalist@3.0.1: {}
+
   tough-cookie@4.1.4:
     dependencies:
       psl: 1.9.0
@@ -11165,7 +11216,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.31.3
 
-  vitest@2.0.5(@types/node@20.14.12)(jsdom@24.1.1)(terser@5.31.3):
+  vitest@2.0.5(@types/node@20.14.12)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.31.3):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -11188,6 +11239,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.14.12
+      '@vitest/ui': 2.0.5(vitest@2.0.5)
       jsdom: 24.1.1
     transitivePeerDependencies:
       - less
