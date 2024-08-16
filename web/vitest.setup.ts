@@ -34,3 +34,5 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
+
+import "@/lib/i18n.ts";
