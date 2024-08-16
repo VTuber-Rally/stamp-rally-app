@@ -36,3 +36,5 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 import "@/lib/i18n.ts";
+
+process.env.TZ = "UTC";

@@ -17,7 +17,7 @@ describe("StampDetails", () => {
     expect(details).toHaveProperty("open", false);
 
     const generationMessage = await container.findByText(
-      "Digital stamp generated on July 30, 2024 at 2:23:16 PM",
+      "Digital stamp generated on July 30, 2024 at 1:23:16 PM",
     );
 
     expect(generationMessage).not.be.null;
