@@ -31,7 +31,8 @@ export async function verifyData(
   return window.crypto.subtle.verify(
     signAlgorithm,
     verificationKey,
-    signatureBuffer,
+    // we have to convert the ArrayBuffer to a Uint8Array because of a bug in JSDOM (somehow)
+    new Uint8Array(signatureBuffer),
     textEncoder.encode([standistId, timestamp].join(":")),
   );
 }

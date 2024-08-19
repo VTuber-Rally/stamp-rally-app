@@ -56,6 +56,7 @@ export default defineConfig({
     sentryVitePlugin({
       org: "japex-rally",
       project: "javascript-react",
+      telemetry: false,
       sourcemaps: {
         filesToDeleteAfterUpload: ["**/*.js.map"],
       },

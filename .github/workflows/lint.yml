@@ -6,7 +6,7 @@ on:
   - workflow_dispatch
 
 jobs:
-  test:
+  lint:
     name: Lint web
 
     runs-on: ubuntu-latest
@@ -23,6 +23,23 @@ jobs:
       - name: 'web: pnpm lint'
         run: cd web && pnpm lint
 
+  test:
+    name: Test web
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+        with:
+          version: 9
+          run_install: true
+
+      - name: 'web: pnpm test'
+        run: pnpm --filter web test
+
   build:
     name: Build web
 
@@ -38,7 +55,7 @@ jobs:
           run_install: true
 
       - name: 'web: pnpm build'
-        run: cd web && pnpm build
+        run: pnpm --filter web build
 
     # upload artifacts
       - name: Upload artifacts

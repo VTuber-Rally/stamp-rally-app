@@ -24,7 +24,10 @@ export const StampDetails: FC<StampDetailsProps> = ({ stamp, standist }) => {
   const { t } = useTranslation();
 
   return (
-    <details className="border-dashed border-4 border-secondaryLight p-2 group">
+    <details
+      className="border-dashed border-4 border-secondaryLight p-2 group"
+      data-testid="stamps-details"
+    >
       <summary className="flex justify-center items-center gap-1 group-open:pb-2 select-none">
         <TicketPlus className="group-open:hidden" />
         <TicketMinus className="hidden group-open:block" />
