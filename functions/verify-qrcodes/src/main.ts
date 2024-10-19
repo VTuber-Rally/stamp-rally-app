@@ -73,9 +73,9 @@ function importJWK(jwk: JsonWebKey) {
 
 export default async ({ req, res, log, error }: Context) => {
   const client = new Client()
-    .setEndpoint('https://appwrite.luc.ovh/v1')
+    .setEndpoint(process.env['APPWRITE_FUNCTION_API_ENDPOINT'])
     .setProject(process.env['APPWRITE_FUNCTION_PROJECT_ID'])
-    .setKey(process.env.APPWRITE_API_KEY);
+    .setKey(req.headers['x-appwrite-key']);
 
   const userId = req.headers['x-appwrite-user-id'];
 
