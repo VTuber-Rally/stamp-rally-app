@@ -53,14 +53,15 @@ export default defineConfig({
     mkcert({ savePath: "./certs" }),
     TanStackRouterVite(),
     react(),
-    sentryVitePlugin({
-      org: "japex-rally",
-      project: "javascript-react",
-      telemetry: false,
-      sourcemaps: {
-        filesToDeleteAfterUpload: ["**/*.js.map"],
-      },
-    }),
+    process.env.NODE_ENV === "production" &&
+      sentryVitePlugin({
+        org: "japex-rally",
+        project: "javascript-react",
+        telemetry: false,
+        sourcemaps: {
+          filesToDeleteAfterUpload: ["**/*.js.map"],
+        },
+      }),
   ],
   define: {
     BUILD_TIMESTAMP: new Date(),
