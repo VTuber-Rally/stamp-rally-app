@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
+    "test": "LANG=C vitest",
+    "test:ui": "LANG=C vitest --ui",
     "storybook": "storybook dev -p 6006 --https --ssl-cert ./certs/cert.pem --ssl-key ./certs/dev.pem",
     "build-storybook": "storybook build"
   },
