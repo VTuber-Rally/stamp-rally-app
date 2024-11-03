@@ -84,6 +84,15 @@
   "submitTerms": "Ce code ne périme pas, vous pouvez récupérer votre récompense n'importe quel jour de la convention pour récupérer des cartes qui ne sont plus en stock pour la journée.",
   "submittedAgo": "Soumis {{time}}",
   "submitting": "Soumission en cours…",
+  "settings": {
+    "title": "Paramètres"
+  },
+  "name": "Nom",
+  "optionalName": "Nom (optionnel)",
+  "language": {
+    "title": "Langue",
+    "description": "Changez la langue de l'application."
+  },
   "updateTheApp": {
     "a11yDescription": "Vous pouvez fermer la page et l'ouvrir à nouveau pour appliquer les changements.",
     "action": "Rafraîchir la page"

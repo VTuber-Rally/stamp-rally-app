@@ -84,6 +84,15 @@
   "submitTerms": "This code is valid for the entire duration of the convention, you may get your reward at any day of the convention, if you want to try to get cards that are out-of-stock for the day.",
   "submittedAgo": "Submitted {{time}}",
   "submitting": "Submitting…",
+  "settings": {
+    "title": "Settings"
+  },
+  "name": "Name",
+  "optionalName": "Name (optional)",
+  "language": {
+    "title": "Language",
+    "description": "Change the application language."
+  },
   "updateTheApp": {
     "a11yDescription": "You can close the page and open it again to apply changes.",
     "action": "Refresh page",

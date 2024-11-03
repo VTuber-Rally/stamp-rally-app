@@ -22,16 +22,17 @@ import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
 import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffCodeImport } from './routes/staff/code'
-import { Route as RallyistsSubmitImport } from './routes/_rallyists/submit'
 import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
+import { Route as RallyistsWithUserProviderImport } from './routes/_rallyists/_withUserProvider'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
-import { Route as RallyistsSubmitIndexImport } from './routes/_rallyists/submit/index'
 import { Route as RallyistsStampsIndexImport } from './routes/_rallyists/stamps/index'
 import { Route as RallyistsArtistsIndexImport } from './routes/_rallyists/artists/index'
 import { Route as StaffSubmissionSubmissionIdImport } from './routes/staff/submission.$submissionId'
 import { Route as StaffGenQrcodeUserIdImport } from './routes/staff/gen-qrcode/$userId'
 import { Route as RallyistsStampsScannerImport } from './routes/_rallyists/stamps/scanner'
+import { Route as RallyistsWithUserProviderSubmitImport } from './routes/_rallyists/_withUserProvider/submit'
+import { Route as RallyistsWithUserProviderSettingsImport } from './routes/_rallyists/_withUserProvider/settings'
 
 // Create Virtual Routes
 
@@ -105,11 +106,6 @@ const StaffCodeRoute = StaffCodeImport.update({
   getParentRoute: () => StaffRoute,
 } as any)
 
-const RallyistsSubmitRoute = RallyistsSubmitImport.update({
-  path: '/submit',
-  getParentRoute: () => RallyistsRoute,
-} as any)
-
 const RallyistsRulesRoute = RallyistsRulesImport.update({
   path: '/rules',
   getParentRoute: () => RallyistsRoute,
@@ -120,14 +116,14 @@ const RallyistsCodeRoute = RallyistsCodeImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
+const RallyistsWithUserProviderRoute = RallyistsWithUserProviderImport.update({
+  id: '/_withUserProvider',
+  getParentRoute: () => RallyistsRoute,
+} as any)
+
 const StaffGenQrcodeIndexRoute = StaffGenQrcodeIndexImport.update({
   path: '/gen-qrcode/',
   getParentRoute: () => StaffRoute,
-} as any)
-
-const RallyistsSubmitIndexRoute = RallyistsSubmitIndexImport.update({
-  path: '/',
-  getParentRoute: () => RallyistsSubmitRoute,
 } as any)
 
 const RallyistsStampsIndexRoute = RallyistsStampsIndexImport.update({
@@ -156,6 +152,18 @@ const RallyistsStampsScannerRoute = RallyistsStampsScannerImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
+const RallyistsWithUserProviderSubmitRoute =
+  RallyistsWithUserProviderSubmitImport.update({
+    path: '/submit',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
+  } as any)
+
+const RallyistsWithUserProviderSettingsRoute =
+  RallyistsWithUserProviderSettingsImport.update({
+    path: '/settings',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -181,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandistsImport
       parentRoute: typeof rootRoute
     }
+    '/_rallyists/_withUserProvider': {
+      id: '/_rallyists/_withUserProvider'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof RallyistsWithUserProviderImport
+      parentRoute: typeof RallyistsImport
+    }
     '/_rallyists/code': {
       id: '/_rallyists/code'
       path: '/code'
@@ -193,13 +208,6 @@ declare module '@tanstack/react-router' {
       path: '/rules'
       fullPath: '/rules'
       preLoaderRoute: typeof RallyistsRulesImport
-      parentRoute: typeof RallyistsImport
-    }
-    '/_rallyists/submit': {
-      id: '/_rallyists/submit'
-      path: '/submit'
-      fullPath: '/submit'
-      preLoaderRoute: typeof RallyistsSubmitImport
       parentRoute: typeof RallyistsImport
     }
     '/staff/code': {
@@ -265,6 +273,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandistsIndexImport
       parentRoute: typeof StandistsImport
     }
+    '/_rallyists/_withUserProvider/settings': {
+      id: '/_rallyists/_withUserProvider/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof RallyistsWithUserProviderSettingsImport
+      parentRoute: typeof RallyistsWithUserProviderImport
+    }
+    '/_rallyists/_withUserProvider/submit': {
+      id: '/_rallyists/_withUserProvider/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof RallyistsWithUserProviderSubmitImport
+      parentRoute: typeof RallyistsWithUserProviderImport
+    }
     '/_rallyists/stamps/scanner': {
       id: '/_rallyists/stamps/scanner'
       path: '/stamps/scanner'
@@ -300,13 +322,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RallyistsStampsIndexImport
       parentRoute: typeof RallyistsImport
     }
-    '/_rallyists/submit/': {
-      id: '/_rallyists/submit/'
-      path: '/'
-      fullPath: '/submit/'
-      preLoaderRoute: typeof RallyistsSubmitIndexImport
-      parentRoute: typeof RallyistsSubmitImport
-    }
     '/staff/gen-qrcode/': {
       id: '/staff/gen-qrcode/'
       path: '/gen-qrcode'
@@ -321,11 +336,12 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   RallyistsRoute: RallyistsRoute.addChildren({
+    RallyistsWithUserProviderRoute: RallyistsWithUserProviderRoute.addChildren({
+      RallyistsWithUserProviderSettingsRoute,
+      RallyistsWithUserProviderSubmitRoute,
+    }),
     RallyistsCodeRoute,
     RallyistsRulesRoute,
-    RallyistsSubmitRoute: RallyistsSubmitRoute.addChildren({
-      RallyistsSubmitIndexRoute,
-    }),
     RallyistsMapLazyRoute,
     RallyistsIndexRoute,
     RallyistsStampsScannerRoute,
@@ -364,9 +380,9 @@ export const routeTree = rootRoute.addChildren({
     "/_rallyists": {
       "filePath": "_rallyists.tsx",
       "children": [
+        "/_rallyists/_withUserProvider",
         "/_rallyists/code",
         "/_rallyists/rules",
-        "/_rallyists/submit",
         "/_rallyists/map",
         "/_rallyists/",
         "/_rallyists/stamps/scanner",
@@ -394,6 +410,14 @@ export const routeTree = rootRoute.addChildren({
         "/standists/"
       ]
     },
+    "/_rallyists/_withUserProvider": {
+      "filePath": "_rallyists/_withUserProvider.tsx",
+      "parent": "/_rallyists",
+      "children": [
+        "/_rallyists/_withUserProvider/settings",
+        "/_rallyists/_withUserProvider/submit"
+      ]
+    },
     "/_rallyists/code": {
       "filePath": "_rallyists/code.tsx",
       "parent": "/_rallyists"
@@ -401,13 +425,6 @@ export const routeTree = rootRoute.addChildren({
     "/_rallyists/rules": {
       "filePath": "_rallyists/rules.tsx",
       "parent": "/_rallyists"
-    },
-    "/_rallyists/submit": {
-      "filePath": "_rallyists/submit.tsx",
-      "parent": "/_rallyists",
-      "children": [
-        "/_rallyists/submit/"
-      ]
     },
     "/staff/code": {
       "filePath": "staff/code.tsx",
@@ -445,6 +462,14 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "standists/index.tsx",
       "parent": "/standists"
     },
+    "/_rallyists/_withUserProvider/settings": {
+      "filePath": "_rallyists/_withUserProvider/settings.tsx",
+      "parent": "/_rallyists/_withUserProvider"
+    },
+    "/_rallyists/_withUserProvider/submit": {
+      "filePath": "_rallyists/_withUserProvider/submit.tsx",
+      "parent": "/_rallyists/_withUserProvider"
+    },
     "/_rallyists/stamps/scanner": {
       "filePath": "_rallyists/stamps/scanner.tsx",
       "parent": "/_rallyists"
@@ -464,10 +489,6 @@ export const routeTree = rootRoute.addChildren({
     "/_rallyists/stamps/": {
       "filePath": "_rallyists/stamps/index.tsx",
       "parent": "/_rallyists"
-    },
-    "/_rallyists/submit/": {
-      "filePath": "_rallyists/submit/index.tsx",
-      "parent": "/_rallyists/submit"
     },
     "/staff/gen-qrcode/": {
       "filePath": "staff/gen-qrcode/index.tsx",
