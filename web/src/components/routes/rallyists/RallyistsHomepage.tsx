@@ -37,7 +37,7 @@ const RallyistsHomepage = ({
         </ButtonLink>
       )}
       <ButtonLink href="/artists">{t("artistList")}</ButtonLink>
-      <ButtonLink href="/about">{t("rules")}</ButtonLink>
+      <ButtonLink href="/rules">{t("rules")}</ButtonLink>
       <ButtonLink href="/map">{t("map")}</ButtonLink>
       <QRCodeLink />
     </div>
