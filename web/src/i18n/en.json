@@ -6,7 +6,10 @@
   },
   "QRRenewNotice": "This QR renews itself automatically.",
   "aboutText": "Built with ❤️ by <1>Leon</1> and <2>Lucie</2>",
+  "alreadyHaveAccount": "Already have an account?",
   "alreadySubmitted": "Submitted on {{date}}",
+  "anonymousLogoutButton": "Log out (warning, you will lose your submission history!)",
+  "anonymousLogoutWarning": "You are logged in as an <1>anonymous user</1>. You will lose your previous submissions if you log out.",
   "appIsReady": {
     "description": "You can now scan QR codes even if you have no service. <em>An Internet connection will still be required to validate the rally at the end.</em>",
     "title": "The app is ready!"
@@ -17,6 +20,8 @@
   "close": "Close",
   "consentToSaveEmail": "I want to be informed about the next rallies!",
   "email": "Email",
+  "error": "An error occurred",
+  "errorCreatingAccount": "Error creating account. Is the email already in use?",
   "eventIsFinished": {
     "description": "Thank you for participating!",
     "title": "🎉 The event is over"
@@ -25,15 +30,34 @@
   "hi_username": "Hi {{name}}!",
   "home": "Home",
   "ignore": "Ignore",
+  "language": {
+    "description": "Change the application language.",
+    "title": "Language"
+  },
   "loading": "Loading…",
   "loadingQRData": "Reading QR Code data...",
+  "loggedLogoutButton": "Log out",
+  "loggedLogoutWarning": "You are logged in as <1>{{name}} ({{email}}</1>).",
+  "loggingIn": "Logging in…",
   "login": "Login",
+  "loginMagicLinkToast": {
+    "description": "The login link has been sent to your email address. It is valid for one hour.",
+    "title": "Magic link sent successfully"
+  },
+  "loginThere": "Log in",
   "logout": "Logout",
+  "logoutBelow": "You can log out by clicking the button below.",
+  "logoutToast": {
+    "description": "You are now logged out.",
+    "title": "Logout successful"
+  },
   "map": "Map",
   "mapWillSoonBeAvailable": "The map will soon be available!",
+  "name": "Name",
   "notLoggedIn": "You're not logged in",
   "notRedeemed": "Soumissions non validée",
   "notRedeemedDescription": "This submission has not been redeemed yet.",
+  "optionalName": "Name (optional)",
   "password": "Password",
   "qrcode": "QR Code",
   "rally.1": "12 artists take part in this Rally around VTubers",
@@ -62,6 +86,9 @@
     "title": "Scan a QR Code"
   },
   "scanThisQR": "Scan this QR code to get the stamp!",
+  "settings": {
+    "title": "Settings"
+  },
   "showThisQRCodeToSubmit": "Show this QR Code to Sedeto's staff (in Hall 6, Q652) to get your reward!",
   "staffSpace": "Staff space",
   "stampDetails": {
@@ -84,15 +111,6 @@
   "submitTerms": "This code is valid for the entire duration of the convention, you may get your reward at any day of the convention, if you want to try to get cards that are out-of-stock for the day.",
   "submittedAgo": "Submitted {{time}}",
   "submitting": "Submitting…",
-  "settings": {
-    "title": "Settings"
-  },
-  "name": "Name",
-  "optionalName": "Name (optional)",
-  "language": {
-    "title": "Language",
-    "description": "Change the application language."
-  },
   "updateTheApp": {
     "a11yDescription": "You can close the page and open it again to apply changes.",
     "action": "Refresh page",

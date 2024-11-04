@@ -6,12 +6,14 @@ import fr from "../i18n/fr.json";
 
 import LanguageDetector from "i18next-browser-languagedetector";
 
+import { isDev } from "@/lib/consts.ts";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: "en",
-    debug: import.meta.env.DEV,
+    debug: isDev,
 
     resources: {
       en: {

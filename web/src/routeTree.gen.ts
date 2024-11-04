@@ -24,6 +24,7 @@ import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
+import { Route as RallyistsWithUserProviderNoAutoAnonymousImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous'
 import { Route as RallyistsWithUserProviderImport } from './routes/_rallyists/_withUserProvider'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
 import { Route as RallyistsStampsIndexImport } from './routes/_rallyists/stamps/index'
@@ -31,8 +32,10 @@ import { Route as RallyistsArtistsIndexImport } from './routes/_rallyists/artist
 import { Route as StaffSubmissionSubmissionIdImport } from './routes/staff/submission.$submissionId'
 import { Route as StaffGenQrcodeUserIdImport } from './routes/staff/gen-qrcode/$userId'
 import { Route as RallyistsStampsScannerImport } from './routes/_rallyists/stamps/scanner'
+import { Route as RallyistsWithUserProviderNoAutoAnonymousSettingsImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/settings'
+import { Route as RallyistsWithUserProviderNoAutoAnonymousLoginImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/login'
+import { Route as RallyistsWithUserProviderNoAutoAnonymousHandleLoginImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
 import { Route as RallyistsWithUserProviderSubmitImport } from './routes/_rallyists/_withUserProvider/submit'
-import { Route as RallyistsWithUserProviderSettingsImport } from './routes/_rallyists/_withUserProvider/settings'
 
 // Create Virtual Routes
 
@@ -129,6 +132,12 @@ const RallyistsCodeRoute = RallyistsCodeImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
+const RallyistsWithUserProviderNoAutoAnonymousRoute =
+  RallyistsWithUserProviderNoAutoAnonymousImport.update({
+    id: '/_withUserProviderNoAutoAnonymous',
+    getParentRoute: () => RallyistsRoute,
+  } as any)
+
 const RallyistsWithUserProviderRoute = RallyistsWithUserProviderImport.update({
   id: '/_withUserProvider',
   getParentRoute: () => RallyistsRoute,
@@ -171,17 +180,31 @@ const RallyistsStampsScannerRoute = RallyistsStampsScannerImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
+const RallyistsWithUserProviderNoAutoAnonymousSettingsRoute =
+  RallyistsWithUserProviderNoAutoAnonymousSettingsImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => RallyistsWithUserProviderNoAutoAnonymousRoute,
+  } as any)
+
+const RallyistsWithUserProviderNoAutoAnonymousLoginRoute =
+  RallyistsWithUserProviderNoAutoAnonymousLoginImport.update({
+    id: '/login',
+    path: '/login',
+    getParentRoute: () => RallyistsWithUserProviderNoAutoAnonymousRoute,
+  } as any)
+
+const RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute =
+  RallyistsWithUserProviderNoAutoAnonymousHandleLoginImport.update({
+    id: '/handleLogin',
+    path: '/handleLogin',
+    getParentRoute: () => RallyistsWithUserProviderNoAutoAnonymousRoute,
+  } as any)
+
 const RallyistsWithUserProviderSubmitRoute =
   RallyistsWithUserProviderSubmitImport.update({
     id: '/submit',
     path: '/submit',
-    getParentRoute: () => RallyistsWithUserProviderRoute,
-  } as any)
-
-const RallyistsWithUserProviderSettingsRoute =
-  RallyistsWithUserProviderSettingsImport.update({
-    id: '/settings',
-    path: '/settings',
     getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
@@ -215,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof RallyistsWithUserProviderImport
+      parentRoute: typeof RallyistsImport
+    }
+    '/_rallyists/_withUserProviderNoAutoAnonymous': {
+      id: '/_rallyists/_withUserProviderNoAutoAnonymous'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousImport
       parentRoute: typeof RallyistsImport
     }
     '/_rallyists/code': {
@@ -294,19 +324,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandistsIndexImport
       parentRoute: typeof StandistsImport
     }
-    '/_rallyists/_withUserProvider/settings': {
-      id: '/_rallyists/_withUserProvider/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof RallyistsWithUserProviderSettingsImport
-      parentRoute: typeof RallyistsWithUserProviderImport
-    }
     '/_rallyists/_withUserProvider/submit': {
       id: '/_rallyists/_withUserProvider/submit'
       path: '/submit'
       fullPath: '/submit'
       preLoaderRoute: typeof RallyistsWithUserProviderSubmitImport
       parentRoute: typeof RallyistsWithUserProviderImport
+    }
+    '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin': {
+      id: '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
+      path: '/handleLogin'
+      fullPath: '/handleLogin'
+      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginImport
+      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousImport
+    }
+    '/_rallyists/_withUserProviderNoAutoAnonymous/login': {
+      id: '/_rallyists/_withUserProviderNoAutoAnonymous/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousLoginImport
+      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousImport
+    }
+    '/_rallyists/_withUserProviderNoAutoAnonymous/settings': {
+      id: '/_rallyists/_withUserProviderNoAutoAnonymous/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousSettingsImport
+      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousImport
     }
     '/_rallyists/stamps/scanner': {
       id: '/_rallyists/stamps/scanner'
@@ -356,14 +400,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface RallyistsWithUserProviderRouteChildren {
-  RallyistsWithUserProviderSettingsRoute: typeof RallyistsWithUserProviderSettingsRoute
   RallyistsWithUserProviderSubmitRoute: typeof RallyistsWithUserProviderSubmitRoute
 }
 
 const RallyistsWithUserProviderRouteChildren: RallyistsWithUserProviderRouteChildren =
   {
-    RallyistsWithUserProviderSettingsRoute:
-      RallyistsWithUserProviderSettingsRoute,
     RallyistsWithUserProviderSubmitRoute: RallyistsWithUserProviderSubmitRoute,
   }
 
@@ -372,8 +413,30 @@ const RallyistsWithUserProviderRouteWithChildren =
     RallyistsWithUserProviderRouteChildren,
   )
 
+interface RallyistsWithUserProviderNoAutoAnonymousRouteChildren {
+  RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute: typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
+  RallyistsWithUserProviderNoAutoAnonymousLoginRoute: typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
+  RallyistsWithUserProviderNoAutoAnonymousSettingsRoute: typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
+}
+
+const RallyistsWithUserProviderNoAutoAnonymousRouteChildren: RallyistsWithUserProviderNoAutoAnonymousRouteChildren =
+  {
+    RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute:
+      RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute,
+    RallyistsWithUserProviderNoAutoAnonymousLoginRoute:
+      RallyistsWithUserProviderNoAutoAnonymousLoginRoute,
+    RallyistsWithUserProviderNoAutoAnonymousSettingsRoute:
+      RallyistsWithUserProviderNoAutoAnonymousSettingsRoute,
+  }
+
+const RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren =
+  RallyistsWithUserProviderNoAutoAnonymousRoute._addFileChildren(
+    RallyistsWithUserProviderNoAutoAnonymousRouteChildren,
+  )
+
 interface RallyistsRouteChildren {
   RallyistsWithUserProviderRoute: typeof RallyistsWithUserProviderRouteWithChildren
+  RallyistsWithUserProviderNoAutoAnonymousRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren
   RallyistsCodeRoute: typeof RallyistsCodeRoute
   RallyistsRulesRoute: typeof RallyistsRulesRoute
   RallyistsMapLazyRoute: typeof RallyistsMapLazyRoute
@@ -385,6 +448,8 @@ interface RallyistsRouteChildren {
 
 const RallyistsRouteChildren: RallyistsRouteChildren = {
   RallyistsWithUserProviderRoute: RallyistsWithUserProviderRouteWithChildren,
+  RallyistsWithUserProviderNoAutoAnonymousRoute:
+    RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren,
   RallyistsCodeRoute: RallyistsCodeRoute,
   RallyistsRulesRoute: RallyistsRulesRoute,
   RallyistsMapLazyRoute: RallyistsMapLazyRoute,
@@ -437,7 +502,7 @@ const StandistsRouteWithChildren = StandistsRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
-  '': typeof RallyistsWithUserProviderRouteWithChildren
+  '': typeof RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren
   '/staff': typeof StaffRouteWithChildren
   '/standists': typeof StandistsRouteWithChildren
   '/code': typeof RallyistsCodeRoute
@@ -451,8 +516,10 @@ export interface FileRoutesByFullPath {
   '/': typeof RallyistsIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/standists/': typeof StandistsIndexRoute
-  '/settings': typeof RallyistsWithUserProviderSettingsRoute
   '/submit': typeof RallyistsWithUserProviderSubmitRoute
+  '/handleLogin': typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
+  '/login': typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
+  '/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
   '/stamps/scanner': typeof RallyistsStampsScannerRoute
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
@@ -462,7 +529,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '': typeof RallyistsWithUserProviderRouteWithChildren
+  '': typeof RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren
   '/code': typeof RallyistsCodeRoute
   '/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
@@ -474,8 +541,10 @@ export interface FileRoutesByTo {
   '/': typeof RallyistsIndexRoute
   '/staff': typeof StaffIndexRoute
   '/standists': typeof StandistsIndexRoute
-  '/settings': typeof RallyistsWithUserProviderSettingsRoute
   '/submit': typeof RallyistsWithUserProviderSubmitRoute
+  '/handleLogin': typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
+  '/login': typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
+  '/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
   '/stamps/scanner': typeof RallyistsStampsScannerRoute
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
@@ -490,6 +559,7 @@ export interface FileRoutesById {
   '/staff': typeof StaffRouteWithChildren
   '/standists': typeof StandistsRouteWithChildren
   '/_rallyists/_withUserProvider': typeof RallyistsWithUserProviderRouteWithChildren
+  '/_rallyists/_withUserProviderNoAutoAnonymous': typeof RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren
   '/_rallyists/code': typeof RallyistsCodeRoute
   '/_rallyists/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
@@ -501,8 +571,10 @@ export interface FileRoutesById {
   '/_rallyists/': typeof RallyistsIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/standists/': typeof StandistsIndexRoute
-  '/_rallyists/_withUserProvider/settings': typeof RallyistsWithUserProviderSettingsRoute
   '/_rallyists/_withUserProvider/submit': typeof RallyistsWithUserProviderSubmitRoute
+  '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin': typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
+  '/_rallyists/_withUserProviderNoAutoAnonymous/login': typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
+  '/_rallyists/_withUserProviderNoAutoAnonymous/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
   '/_rallyists/stamps/scanner': typeof RallyistsStampsScannerRoute
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
@@ -528,8 +600,10 @@ export interface FileRouteTypes {
     | '/'
     | '/staff/'
     | '/standists/'
-    | '/settings'
     | '/submit'
+    | '/handleLogin'
+    | '/login'
+    | '/settings'
     | '/stamps/scanner'
     | '/staff/gen-qrcode/$userId'
     | '/staff/submission/$submissionId'
@@ -550,8 +624,10 @@ export interface FileRouteTypes {
     | '/'
     | '/staff'
     | '/standists'
-    | '/settings'
     | '/submit'
+    | '/handleLogin'
+    | '/login'
+    | '/settings'
     | '/stamps/scanner'
     | '/staff/gen-qrcode/$userId'
     | '/staff/submission/$submissionId'
@@ -564,6 +640,7 @@ export interface FileRouteTypes {
     | '/staff'
     | '/standists'
     | '/_rallyists/_withUserProvider'
+    | '/_rallyists/_withUserProviderNoAutoAnonymous'
     | '/_rallyists/code'
     | '/_rallyists/rules'
     | '/staff/code'
@@ -575,8 +652,10 @@ export interface FileRouteTypes {
     | '/_rallyists/'
     | '/staff/'
     | '/standists/'
-    | '/_rallyists/_withUserProvider/settings'
     | '/_rallyists/_withUserProvider/submit'
+    | '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
+    | '/_rallyists/_withUserProviderNoAutoAnonymous/login'
+    | '/_rallyists/_withUserProviderNoAutoAnonymous/settings'
     | '/_rallyists/stamps/scanner'
     | '/staff/gen-qrcode/$userId'
     | '/staff/submission/$submissionId'
@@ -617,6 +696,7 @@ export const routeTree = rootRoute
       "filePath": "_rallyists.tsx",
       "children": [
         "/_rallyists/_withUserProvider",
+        "/_rallyists/_withUserProviderNoAutoAnonymous",
         "/_rallyists/code",
         "/_rallyists/rules",
         "/_rallyists/map",
@@ -650,8 +730,16 @@ export const routeTree = rootRoute
       "filePath": "_rallyists/_withUserProvider.tsx",
       "parent": "/_rallyists",
       "children": [
-        "/_rallyists/_withUserProvider/settings",
         "/_rallyists/_withUserProvider/submit"
+      ]
+    },
+    "/_rallyists/_withUserProviderNoAutoAnonymous": {
+      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous.tsx",
+      "parent": "/_rallyists",
+      "children": [
+        "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin",
+        "/_rallyists/_withUserProviderNoAutoAnonymous/login",
+        "/_rallyists/_withUserProviderNoAutoAnonymous/settings"
       ]
     },
     "/_rallyists/code": {
@@ -698,13 +786,21 @@ export const routeTree = rootRoute
       "filePath": "standists/index.tsx",
       "parent": "/standists"
     },
-    "/_rallyists/_withUserProvider/settings": {
-      "filePath": "_rallyists/_withUserProvider/settings.tsx",
-      "parent": "/_rallyists/_withUserProvider"
-    },
     "/_rallyists/_withUserProvider/submit": {
       "filePath": "_rallyists/_withUserProvider/submit.tsx",
       "parent": "/_rallyists/_withUserProvider"
+    },
+    "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin": {
+      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/handleLogin.tsx",
+      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous"
+    },
+    "/_rallyists/_withUserProviderNoAutoAnonymous/login": {
+      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/login.tsx",
+      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous"
+    },
+    "/_rallyists/_withUserProviderNoAutoAnonymous/settings": {
+      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/settings.tsx",
+      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous"
     },
     "/_rallyists/stamps/scanner": {
       "filePath": "_rallyists/stamps/scanner.tsx",

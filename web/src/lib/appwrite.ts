@@ -4,6 +4,7 @@ import {
   Account,
   AppwriteException,
   Functions,
+  ID,
 } from "appwrite";
 import { appwriteEndpoint, appwriteProjectId } from "@/lib/consts.ts";
 
@@ -77,7 +78,17 @@ export const setPref = async (
   value: string | number | boolean,
 ) => {
   try {
-    return account.updatePrefs({ [key]: value });
+    const currentPrefs = await getPrefs();
+    return account.updatePrefs({ ...currentPrefs, [key]: value });
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot set name", { cause: appwriteError });
+  }
+};
+
+export const getPrefs = async () => {
+  try {
+    return account.getPrefs();
   } catch (error) {
     const appwriteError = error as AppwriteException;
     throw new Error("Cannot set name", { cause: appwriteError });
@@ -104,5 +115,29 @@ export const register = async (
   } catch (error) {
     const appwriteError = error as AppwriteException;
     throw new Error("Cannot register", { cause: appwriteError });
+  }
+};
+
+export const sendMagicLink = async (email: string) => {
+  try {
+    console.log("sending magic link to", email);
+    return account.createMagicURLToken(
+      ID.unique(),
+      email,
+      window.location.origin + "/handleLogin",
+    );
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    console.log("error", appwriteError);
+    throw new Error("Cannot login with magic link", { cause: appwriteError });
+  }
+};
+
+export const loginUserIdSecret = async (userId: string, secret: string) => {
+  try {
+    return account.createSession(userId, secret);
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot login with magic link", { cause: appwriteError });
   }
 };
