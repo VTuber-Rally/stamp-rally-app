@@ -6,7 +6,10 @@
   },
   "QRRenewNotice": "Ce QR se renouvelle automatiquement.",
   "aboutText": "Développé avec le ❤️ par <1>Leon</1> et <2>Lucie</2>",
+  "alreadyHaveAccount": "Vous avez déjà créé compte ?",
   "alreadySubmitted": "Soumis le {{date}}",
+  "anonymousLogoutButton": "Se déconnecter (attention, vous perdrez votre historique de soumissions !)",
+  "anonymousLogoutWarning": "Vous êtes connecté·e en tant qu'<1>utilisateur anonyme</1>. Vous perdrez vos anciennes soumissions si vous vous déconnectez.",
   "appIsReady": {
     "description": "Vous pouvez désormais scanner les QR même en cas de panne Internet. <em>Une connexion à Internet sera requise pour valider votre parcours auprès des équipes du rally.</em>",
     "title": "Application prête !"
@@ -17,6 +20,8 @@
   "close": "Fermer",
   "consentToSaveEmail": "Je veux être au courant des prochains rallys !",
   "email": "Email",
+  "error": "Une erreur est survenue",
+  "errorCreatingAccount": "Erreur lors de la création du compte. Est-ce que l'email est déjà utilisé ?",
   "eventIsFinished": {
     "description": "Merci d'avoir participé !",
     "title": "🎉 L'événement est terminé"
@@ -25,15 +30,34 @@
   "hi_username": "Salut {{name}} !",
   "home": "Accueil",
   "ignore": "Ignorer",
+  "language": {
+    "description": "Changez la langue de l'application.",
+    "title": "Langue"
+  },
   "loading": "Chargement…",
   "loadingQRData": "Lecture des données du QR...",
+  "loggedLogoutButton": "Se déconnecter",
+  "loggedLogoutWarning": "Vous êtes connecté·e en tant que <1>{{name}} ({{email}}</1>).",
+  "loggingIn": "Connexion en cours…",
   "login": "Connexion",
+  "loginMagicLinkToast": {
+    "description": "Le lien de connexion a été envoyé à votre adresse email. Il est valide une heure.",
+    "title": "Lien de connexion envoyé avec succès"
+  },
+  "loginThere": "Connectez-vous",
   "logout": "Déconnexion",
+  "logoutBelow": "Vous pouvez vous déconnecter en cliquant sur le bouton ci-dessous.",
+  "logoutToast": {
+    "description": "Vous êtes maintenant déconnecté·e.",
+    "title": "Déconnexion réussie"
+  },
   "map": "Carte",
   "mapWillSoonBeAvailable": "La carte sera bientôt disponible !",
+  "name": "Nom",
   "notLoggedIn": "Vous n'êtes pas connecté·e",
   "notRedeemed": "Soumissions non validée",
   "notRedeemedDescription": "Cette soumission n'a pas encore été validée.",
+  "optionalName": "Nom (optionnel)",
   "password": "Mot de passe",
   "qrcode": "QR Code",
   "rally.1": "12 artistes participent à ce rallye autour des VTubers",
@@ -62,6 +86,9 @@
     "title": "Scannez un QR Code"
   },
   "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
+  "settings": {
+    "title": "Paramètres"
+  },
   "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, Q652) pour pouvoir récupérer votre récompense !",
   "staffSpace": "Espace staff",
   "stampDetails": {
@@ -84,15 +111,6 @@
   "submitTerms": "Ce code ne périme pas, vous pouvez récupérer votre récompense n'importe quel jour de la convention pour récupérer des cartes qui ne sont plus en stock pour la journée.",
   "submittedAgo": "Soumis {{time}}",
   "submitting": "Soumission en cours…",
-  "settings": {
-    "title": "Paramètres"
-  },
-  "name": "Nom",
-  "optionalName": "Nom (optionnel)",
-  "language": {
-    "title": "Langue",
-    "description": "Changez la langue de l'application."
-  },
   "updateTheApp": {
     "a11yDescription": "Vous pouvez fermer la page et l'ouvrir à nouveau pour appliquer les changements.",
     "action": "Rafraîchir la page",

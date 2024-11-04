@@ -3,6 +3,7 @@ import { useUser } from "@/lib/hooks/useUser.ts";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField.tsx";
 import { Checkbox } from "@/components/Checkbox.tsx";
+import { useToast } from "@/lib/hooks/useToast.ts";
 
 type EmailNameFormType = {
   name: string;
@@ -12,7 +13,8 @@ type EmailNameFormType = {
 
 export const CreateAccountForm = () => {
   const { t } = useTranslation();
-  const { user, setName, setEmail, setPref } = useUser();
+  const { user, setName, setEmail, setPref, loginAnonymous } = useUser();
+  const { toast } = useToast();
 
   const {
     register,
@@ -21,16 +23,27 @@ export const CreateAccountForm = () => {
   } = useForm<EmailNameFormType>();
 
   const onSubmit = async (data: EmailNameFormType) => {
-    console.log(data);
-    if (data.name) {
-      await setName(data.name);
+    if (!user) {
+      // create anonymous user
+      await loginAnonymous();
     }
-
-    if (data.email) {
-      await setEmail(data.email);
-      if (data.consent) {
-        await setPref("consent", true);
+    try {
+      if (data.email) {
+        await setEmail(data.email);
+        if (data.consent) {
+          await setPref("consent", true);
+        }
       }
+
+      console.log(data);
+      if (data.name) {
+        await setName(data.name);
+      }
+    } catch {
+      toast({
+        title: t("error"),
+        description: t("errorCreatingAccount"),
+      });
     }
   };
 

@@ -148,6 +148,12 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
     login: loginUser,
     logout: logoutUser,
     loginAnonymous: loginAnonymousUser,
+    createMagicLink: async (email: string) => {
+      console.log("createMagicLink", email);
+    },
+    registerMagicLink: async (userId: string, secret: string) => {
+      console.log("registerMagicLink", userId, secret);
+    },
     setName: setUserName,
     setEmail: setUserEmail,
     setPref: setPrefUser,
