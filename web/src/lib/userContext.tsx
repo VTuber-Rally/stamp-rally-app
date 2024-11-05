@@ -18,6 +18,7 @@ const notInitialized = async () => {
   throw new Error("UserContext is not initialized");
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext<UserContextType>({
   user: NOT_INITIALIZED,
   login: notInitialized,

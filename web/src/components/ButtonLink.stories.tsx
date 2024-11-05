@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { ButtonLink } from "./ButtonLink";
 import { RouterDecorator } from "@/lib/decorators.tsx";
-import { fn } from "@storybook/test";
 
 const meta = {
   title: "Atom/ButtonLink",
@@ -29,7 +28,7 @@ const meta = {
     children: "Button",
     type: "button",
     size: "big",
-    onClick: fn(),
+    onClick: () => {},
     bg: undefined,
   },
 } satisfies Meta<typeof ButtonLink>;
