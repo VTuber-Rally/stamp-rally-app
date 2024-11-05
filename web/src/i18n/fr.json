@@ -95,7 +95,9 @@
   },
   "updateTheApp": {
     "a11yDescription": "Vous pouvez fermer la page et l'ouvrir à nouveau pour appliquer les changements.",
-    "action": "Rafraîchir la page"
+    "action": "Rafraîchir la page",
+    "description": "Une mise à jour a été téléchargée. Veuillez rafraichir la page pour l'appliquer.",
+    "title": "Une mise à jour est disponible"
   },
   "wheelOfFortune": "Roue de la fortune"
 }
