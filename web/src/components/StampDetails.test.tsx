@@ -20,6 +20,7 @@ describe("StampDetails", () => {
       "Digital stamp generated on July 30, 2024 at 1:23:16 PM",
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(generationMessage).not.be.null;
   });
 
@@ -28,6 +29,7 @@ describe("StampDetails", () => {
 
     const generationMessage = await container.findByText("Paper stamp");
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(generationMessage).not.be.null;
   });
 });
