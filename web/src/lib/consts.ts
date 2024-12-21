@@ -17,6 +17,7 @@ const {
 const stampsToCollect = parseInt(VITE_STAMPS_TO_COLLECT);
 
 const isDev = import.meta.env.DEV;
+const isProd = import.meta.env.PROD;
 
 export {
   buildId,
@@ -33,4 +34,5 @@ export {
   getPrivateKeyFunctionId,
   stampsToCollect,
   isDev,
+  isProd,
 };
