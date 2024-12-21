@@ -2,6 +2,11 @@ name: Storybook
 
 on:
   push:
+    paths:
+      - web/src/**
+      - web/.storybook/**
+      - web/package.json
+      - web/pnpm-lock.yaml
     branches:
       - main
 
