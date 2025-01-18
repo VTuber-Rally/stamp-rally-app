@@ -11,7 +11,7 @@ export type QrReaderProps = {
 
 const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
   // QR States
-  const scanner = useRef<QrScanner>(null);
+  const scanner = useRef<QrScanner | null>(null);
   const videoEl = useRef<HTMLVideoElement>(null);
   const qrBoxEl = useRef<HTMLDivElement>(null);
   const [qrOn, setQrOn] = useState<boolean>(true);

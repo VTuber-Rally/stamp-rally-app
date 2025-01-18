@@ -21,7 +21,10 @@ function QRCodeGenArtistsList() {
                 {images[
                   `${imagePrefix}${doc.image}` as keyof typeof images
                 ] && (
-                  <Link to={`/staff/gen-qrcode/${doc.userId}`}>
+                  <Link
+                    to="/staff/gen-qrcode/$userId"
+                    params={{ userId: doc.userId }}
+                  >
                     <img
                       src={images[`${imagePrefix}${doc.image}`]}
                       alt={doc.name}

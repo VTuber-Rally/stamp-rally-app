@@ -24,7 +24,9 @@ export const MapLibreMap: FC<{ onStandClick: (standId: string) => void }> = ({
     if (container.current) {
       const map = new MapLibre({
         container: container.current,
-        antialias: true,
+        canvasContextAttributes: {
+          antialias: true,
+        },
         maxBounds: [
           [2.5, 48.95],
           [2.54, 48.98],
