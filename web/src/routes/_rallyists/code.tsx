@@ -14,6 +14,7 @@ import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useConfetti } from "@stevent-team/react-party";
 import { LegacyRef, useEffect } from "react";
 import { stampsToCollect } from "@/lib/consts.ts";
+import { usePostHog } from "posthog-js/react";
 
 export const Route = createFileRoute("/_rallyists/code")({
   component: Code,
@@ -38,17 +39,16 @@ export const Route = createFileRoute("/_rallyists/code")({
 });
 
 function Code() {
+  const posthog = usePostHog();
   const data = Route.useLoaderData();
 
   const { t } = useTranslation();
 
   const standist = useStandist(data.standistId);
-
   const { data: stamps } = useCollectedStamps();
+  const { data: submissions } = useRallySubmissions();
 
   const showSubmitButton = (stamps?.length ?? 1) >= stampsToCollect;
-
-  const { data: submissions } = useRallySubmissions();
 
   const { createConfetti, canvasProps } = useConfetti({
     count: 700,
@@ -62,6 +62,15 @@ function Code() {
       }, 1000);
     }
   }, [showSubmitButton, createConfetti]);
+
+  useEffect(() => {
+    if (posthog) {
+      posthog.capture("stamp_scanned", {
+        standist: data.standistId,
+        updated: data.updated,
+      });
+    }
+  }, [data, posthog]);
 
   const showIntro =
     stamps?.length === 1 && (!submissions || submissions.length === 0);

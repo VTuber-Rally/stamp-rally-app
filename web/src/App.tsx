@@ -7,7 +7,7 @@ import { useToast } from "@/lib/hooks/useToast.ts";
 import { useRegisterSW } from "virtual:pwa-register/react";
 import { ToastAction } from "@/components/Toast.tsx";
 import { Trans, useTranslation } from "react-i18next";
-
+import { PostHogProvider } from "posthog-js/react";
 import { QRDrawerContextProvider } from "@/context/QRDrawerContextProvider.tsx";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { eventEndDate } from "@/lib/consts.ts";
@@ -81,18 +81,27 @@ export function App() {
 
   return (
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <QRDrawerContextProvider>
-          <div className="min-h-dvh md:max-w-md md:mx-auto">
-            {isEventFinished ? (
-              ExpiredBlock
-            ) : (
-              <RouterProvider router={router} />
-            )}
-          </div>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QRDrawerContextProvider>
-      </QueryClientProvider>
+      <PostHogProvider
+        apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
+        options={{
+          api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+          ui_host: 'https://eu.posthog.com',
+          person_profiles: 'identified_only'
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <QRDrawerContextProvider>
+            <div className="min-h-dvh md:max-w-md md:mx-auto">
+              {isEventFinished ? (
+                ExpiredBlock
+              ) : (
+                <RouterProvider router={router} />
+              )}
+            </div>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QRDrawerContextProvider>
+        </QueryClientProvider>
+      </PostHogProvider>
     </StrictMode>
   );
 }

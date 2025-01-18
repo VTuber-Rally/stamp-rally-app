@@ -41,7 +41,7 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
     alreadyExistingStampRecord &&
     alreadyExistingStampRecord.timestamp === stampRecord.timestamp
   ) {
-    return { ...stampRecord, updated: false };
+    return { ...stampRecord, updated: true };
   }
 
   // si timestamp de -1, alors on saute la vérification de l'âge
@@ -58,5 +58,5 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
   }
   invalidateStamps();
 
-  return { ...stampRecord, updated: alreadyExistingStampRecord };
+  return { ...stampRecord, updated: !!alreadyExistingStampRecord };
 }
