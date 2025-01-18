@@ -11,7 +11,7 @@ export type QrReaderProps = {
 
 const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
   // QR States
-  const scanner = useRef<QrScanner>();
+  const scanner = useRef<QrScanner>(null);
   const videoEl = useRef<HTMLVideoElement>(null);
   const qrBoxEl = useRef<HTMLDivElement>(null);
   const [qrOn, setQrOn] = useState<boolean>(true);
@@ -21,8 +21,7 @@ const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
   };
 
   useEffect(() => {
-    const currentVideoEl = videoEl.current;
-    if (currentVideoEl && !scanner.current) {
+    if (videoEl.current && !scanner.current) {
       scanner.current = new QrScanner(
         videoEl?.current,
         (result) => {
@@ -47,9 +46,8 @@ const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
     }
 
     return () => {
-      if (!currentVideoEl) {
-        scanner?.current?.stop();
-      }
+      scanner?.current?.stop();
+      scanner.current = null;
     };
   }, [onScanSuccess]);
 

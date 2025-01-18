@@ -18,4 +18,8 @@ interface ImportMetaEnv {
   VITE_EVENT_END_DATE: string;
 }
 
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
+
 declare const BUILD_TIMESTAMP: string;
