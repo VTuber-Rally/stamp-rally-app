@@ -1,3 +1,4 @@
+/* eslint-disable */
 // from https://stackoverflow.com/questions/41144151/firebaseerror-we-are-unable-to-register-the-default-service-worker
 
 import {
