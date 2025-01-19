@@ -6,6 +6,7 @@ import { ButtonLink } from "@/components/ButtonLink.tsx";
 import QRCodeLink from "@/components/QRCodeLink.tsx";
 import { StampWithId } from "@/lib/models/Stamp.ts";
 import { SubmissionWithId } from "@/lib/models/Submission.ts";
+import RequestNotification from "@/components/RequestNotification.tsx";
 
 type RallyistsHomepageProps = {
   stamps?: StampWithId[];
@@ -30,6 +31,8 @@ const RallyistsHomepage = ({
       <img src={Logo} alt="logo" className={"w-96"} />
 
       {showIntro && <Intro />}
+
+      <RequestNotification />
 
       {showSubmitButton && (
         <ButtonLink bg={"successOrange"} href="/submit">
