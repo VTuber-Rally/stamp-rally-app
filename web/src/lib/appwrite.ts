@@ -141,3 +141,26 @@ export const loginUserIdSecret = async (userId: string, secret: string) => {
     throw new Error("Cannot login with magic link", { cause: appwriteError });
   }
 };
+
+export const createPushTarget = async (token: string) => {
+  try {
+    const user = await account.get();
+
+    if (user.targets) {
+      if (user.targets.some((target) => target.providerType === "push")) {
+        console.log("web target already exists");
+        return;
+      }
+    }
+
+    const target = await account.createPushTarget(
+      `web-${ID.unique()}`,
+      token,
+      "678c301700225b06caeb",
+    );
+    console.log("target", target);
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot store push token", { cause: appwriteError });
+  }
+};

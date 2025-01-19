@@ -20,7 +20,14 @@ export default defineConfig({
   },
   plugins: [
     VitePWA({
+      strategies: "injectManifest",
+      injectRegister: null,
       registerType: "autoUpdate",
+      devOptions: {
+        enabled: true,
+        type: "module",
+        navigateFallback: "index.html",
+      },
       manifest: {
         name: "VTuber Stamp Rally",
         short_name: "Stamp Rally",

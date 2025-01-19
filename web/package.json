@@ -32,6 +32,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dexie": "^4.0.9",
+    "firebase": "^11.2.0",
     "i18next": "^23.16.4",
     "i18next-browser-languagedetector": "^8.0.0",
     "lucide-react": "^0.416.0",
@@ -44,6 +45,9 @@
     "react-i18next": "^15.1.0",
     "react-qr-code": "^2.0.15",
     "vaul": "^0.9.9",
+    "workbox-core": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
+    "workbox-routing": "^7.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
