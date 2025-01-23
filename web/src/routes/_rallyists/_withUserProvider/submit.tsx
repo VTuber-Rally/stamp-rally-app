@@ -61,7 +61,7 @@ function Submit() {
             <h1 className={"text-2xl pb-2"}>{t("submissions")}</h1>
           </>
         )}
-        <div className="divide-y">
+        <div className="divide-y divide-gray-300">
           {submissions
             .filter((e) => !e.redeemed)
             .map((submission) => (
