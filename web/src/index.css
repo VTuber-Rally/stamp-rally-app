@@ -1,6 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@theme {
+  --height-navbar: calc(4rem + env(safe-area-inset-bottom, 20px));
+
+  --color-primary: var(--color-stone-600);
+
+  --color-secondary: #9fe0ea;
+  --color-secondary-light: #b6e6ee;
+  --color-tertiary: #ffa7c1;
+  --color-success-orange: #fd9308;
+  --color-background-black: rgba(0, 0, 0, 0.95);
+}
 
 :root {
   font-family: "Comfortaa Variable", system-ui, sans-serif;

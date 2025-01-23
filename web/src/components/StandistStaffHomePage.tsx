@@ -20,9 +20,9 @@ const StandistsHome: FC<StandistsHomeProps> = ({
   const navigate = useNavigate();
 
   return (
-    <div className="flex-grow flex flex-col">
+    <div className="grow flex flex-col">
       <Header>{t(headerKey)}</Header>
-      <div className={"flex flex-col flex-grow items-center justify-center"}>
+      <div className={"flex flex-col grow items-center justify-center"}>
         {user ? (
           <div className={"flex flex-col space-y-4"}>
             <h1 className={"text-xl"}>

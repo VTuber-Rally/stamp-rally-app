@@ -61,12 +61,12 @@ function Submit() {
             <h1 className={"text-2xl pb-2"}>{t("submissions")}</h1>
           </>
         )}
-        <div className="divide-y">
+        <div className="divide-y divide-gray-300">
           {submissions
             .filter((e) => !e.redeemed)
             .map((submission) => (
               <div
-                className="flex flex-col flex-grow items-center justify-center gap-4 py-2"
+                className="flex flex-col grow items-center justify-center gap-4 py-2"
                 key={submission.submissionId}
               >
                 <div>
@@ -117,7 +117,7 @@ function Submit() {
   }
 
   return (
-    <div className={"flex flex-col flex-grow items-center"}>
+    <div className={"flex flex-col grow items-center"}>
       <Header>{t("submit")}</Header>
 
       {showUserInfos && (
@@ -149,7 +149,7 @@ const SubmitBlock = ({ handleSubmit }: { handleSubmit: VoidFunction }) => {
       <p className={"text-xl"}>{t("submitStamps")}</p>
       <button
         className={
-          "text-center text-black w-full flex justify-center items-center rounded-xl font-bold h-12 text-2xl mt-1 bg-secondaryLight"
+          "text-center text-black w-full flex justify-center items-center rounded-xl font-bold h-12 text-2xl mt-1 bg-secondary-light"
         }
         onClick={handleSubmit}
       >

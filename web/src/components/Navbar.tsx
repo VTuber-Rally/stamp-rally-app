@@ -9,7 +9,7 @@ import { useUser } from "@/lib/hooks/useUser.ts";
 const Navbar = ({ children }: { children: ReactNode }) => {
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full h-navbar mb-0 bg-white border-t border-gray-300">
-      <div className="flex h-full max-w-lg mx-auto divide-x font-medium">
+      <div className="flex h-full max-w-lg mx-auto divide-x divide-gray-200 font-medium">
         {children}
       </div>
     </div>
@@ -33,7 +33,7 @@ const NavbarButton: FC<NavbarButtonProps> = ({
     <button
       onClick={onClick}
       className={clsx(
-        "inline-flex flex-col items-center justify-center group flex-grow w-4",
+        "inline-flex flex-col items-center justify-center group grow w-4",
         disabled && "opacity-50 cursor-not-allowed",
       )}
     >
@@ -67,11 +67,11 @@ const NavbarElement: FC<NavBarElementProps> = ({
     <Link
       to={to}
       type="button"
-      activeProps={{ className: "bg-secondaryLight hover:bg-secondary" }}
+      activeProps={{ className: "bg-secondary-light hover:bg-secondary" }}
       inactiveProps={{ className: "hover:bg-gray-50" }}
       activeOptions={{ exact: true }}
       className={clsx(
-        "inline-flex flex-col items-center justify-center group flex-grow w-4",
+        "inline-flex flex-col items-center justify-center group grow w-4",
         disabled && "opacity-50 cursor-not-allowed",
       )}
       disabled={disabled}

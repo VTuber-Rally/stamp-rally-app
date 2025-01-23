@@ -53,7 +53,7 @@ const QRCodeGenPage = ({ userId }: { userId: string }) => {
             {tEN("QRRenewNotice")}
           </p>
         </div>
-        <details className="border-dashed border-4 border-secondaryLight p-2 group">
+        <details className="border-dashed border-4 border-secondary-light p-2 group">
           <summary className="flex justify-center items-center gap-1 group-open:pb-2 select-none">
             <Cog /> QR Settings
           </summary>

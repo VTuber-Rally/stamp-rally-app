@@ -80,7 +80,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
   return (
     <>
       <Header>{t("submission", { id: submissionId })}</Header>
-      <div className="flex-grow flex flex-col items-center justify-center">
+      <div className="grow flex flex-col items-center justify-center">
         {data.redeemed && (
           <div className="flex flex-col items-center justify-center bg-red-300 p-4 rounded-xl">
             <h1 className={"text-2xl font-bold flex"}>

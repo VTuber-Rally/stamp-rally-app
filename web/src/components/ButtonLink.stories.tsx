@@ -17,7 +17,7 @@ const meta = {
       control: { type: "radio" },
     },
     bg: {
-      options: [undefined, "tertiary", "successOrange"],
+      options: [undefined, "tertiary", "success-orange"],
       control: { type: "select" },
     },
     disabled: {

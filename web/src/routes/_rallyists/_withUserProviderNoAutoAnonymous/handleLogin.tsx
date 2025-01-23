@@ -91,7 +91,7 @@ function HandleLogin() {
   }, []);
 
   return (
-    <div className="flex-grow flex flex-col items-center justify-center">
+    <div className="grow flex flex-col items-center justify-center">
       <div className="flex flex-col justify-center items-center gap-2">
         <Loader size={5} />
         <h1>{t("loggingIn")}</h1>

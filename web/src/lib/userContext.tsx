@@ -205,7 +205,7 @@ const LoaderPage = () => {
   const { t } = useTranslation();
   return (
     <div className={"h-dvh flex flex-col pb-16"}>
-      <div className="flex-grow flex items-center justify-center">
+      <div className="grow flex items-center justify-center">
         <div className={"flex flex-col items-center"}>
           <Loader size={4} />
           <h1>{t("loading")}</h1>

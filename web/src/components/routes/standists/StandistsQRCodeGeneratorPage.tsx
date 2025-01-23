@@ -16,7 +16,7 @@ const StandistsQRCodeGeneratorPage = () => {
 
   if (isLoading || !user)
     return (
-      <div className="flex-grow flex items-center justify-center">
+      <div className="grow flex items-center justify-center">
         <div className={"flex flex-col space-y-2 items-center"}>
           <Loader size={4} />
           <span>{tFR("loading")}</span>
@@ -26,14 +26,14 @@ const StandistsQRCodeGeneratorPage = () => {
 
   if (error)
     return (
-      <div className="flex-grow flex items-center justify-center">
+      <div className="grow flex items-center justify-center">
         {error.message}
       </div>
     );
 
   if (!stand)
     return (
-      <div className="flex-grow flex flex-col items-center justify-center">
+      <div className="grow flex flex-col items-center justify-center">
         <span>Stand not found?</span>
         <span className={"italic"}>Are you sure you are a standist?</span>
       </div>

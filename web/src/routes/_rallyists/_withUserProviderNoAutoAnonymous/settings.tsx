@@ -54,7 +54,7 @@ function SettingsPage() {
   const isStandist = user?.labels.includes("standist");
 
   return (
-    <div className={"flex flex-col flex-grow items-center"}>
+    <div className={"flex flex-col grow items-center"}>
       <Header>{t("settings.title")}</Header>
       {isUserLoggedIn ? (
         <div>
@@ -119,14 +119,14 @@ function SettingsPage() {
             <img
               src={enFlag}
               alt={"english flag"}
-              className={"w-16 h-10 rounded"}
+              className={"w-16 h-10 rounded-sm"}
             />
           </button>
           <button onClick={() => changeLanguage("fr")}>
             <img
               src={frFlag}
               alt={"french flag"}
-              className={"w-16 h-10 rounded"}
+              className={"w-16 h-10 rounded-sm"}
             />
           </button>
         </div>
