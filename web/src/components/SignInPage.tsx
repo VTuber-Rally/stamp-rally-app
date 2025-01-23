@@ -61,7 +61,7 @@ function SignInPage({ navigateTo }: SigninPageProps) {
   }, [isError, error, setError]);
 
   return (
-    <div className={"flex flex-col flex-grow justify-center"}>
+    <div className={"flex flex-col grow justify-center"}>
       <h1 className={"mb-4 text-3xl"}>{t("login")}</h1>
       <form
         className={"flex flex-col"}

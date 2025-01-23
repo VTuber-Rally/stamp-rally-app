@@ -93,7 +93,7 @@ function Code() {
         </div>
         {showSubmitButton && (
           <ButtonLink
-            bg={"successOrange"}
+            bg={"success-orange"}
             href="/web/src/routes/_rallyists/_withUserProvider"
           >
             {t("requestYourReward")}

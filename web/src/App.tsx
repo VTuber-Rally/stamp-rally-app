@@ -62,7 +62,7 @@ export function App() {
 
   const ExpiredBlock = (
     <div className={"h-dvh flex flex-col pb-16"}>
-      <div className="flex-grow flex items-center justify-center">
+      <div className="grow flex items-center justify-center">
         <div className={"flex flex-col items-center"}>
           <h1 className="text-2xl font-bold">{t("eventIsFinished.title")}</h1>
           <p className="mt-4">{t("eventIsFinished.description")}</p>

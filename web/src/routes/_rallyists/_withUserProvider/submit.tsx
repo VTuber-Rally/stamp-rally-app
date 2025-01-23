@@ -66,7 +66,7 @@ function Submit() {
             .filter((e) => !e.redeemed)
             .map((submission) => (
               <div
-                className="flex flex-col flex-grow items-center justify-center gap-4 py-2"
+                className="flex flex-col grow items-center justify-center gap-4 py-2"
                 key={submission.submissionId}
               >
                 <div>
@@ -117,7 +117,7 @@ function Submit() {
   }
 
   return (
-    <div className={"flex flex-col flex-grow items-center"}>
+    <div className={"flex flex-col grow items-center"}>
       <Header>{t("submit")}</Header>
 
       {showUserInfos && (

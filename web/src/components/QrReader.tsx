@@ -57,9 +57,9 @@ const QrReader = ({ onScanSuccess, onCameraAccessFail }: QrReaderProps) => {
   }, [qrOn, onCameraAccessFail]);
 
   return (
-    <div className="h-[450px] w-[450px] max-w-full max-h-[50svh] flex-grow">
+    <div className="h-[450px] w-[450px] max-w-full max-h-[50svh] grow">
       <video ref={videoEl} className="w-full h-full object-cover"></video>
-      <div ref={qrBoxEl} className="!w-full !left-0">
+      <div ref={qrBoxEl} className="w-full! left-0!">
         <img
           src={QrFrame}
           alt="QR code Frame"

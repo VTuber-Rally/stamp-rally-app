@@ -33,7 +33,7 @@ const NavbarButton: FC<NavbarButtonProps> = ({
     <button
       onClick={onClick}
       className={clsx(
-        "inline-flex flex-col items-center justify-center group flex-grow w-4",
+        "inline-flex flex-col items-center justify-center group grow w-4",
         disabled && "opacity-50 cursor-not-allowed",
       )}
     >
@@ -71,7 +71,7 @@ const NavbarElement: FC<NavBarElementProps> = ({
       inactiveProps={{ className: "hover:bg-gray-50" }}
       activeOptions={{ exact: true }}
       className={clsx(
-        "inline-flex flex-col items-center justify-center group flex-grow w-4",
+        "inline-flex flex-col items-center justify-center group grow w-4",
         disabled && "opacity-50 cursor-not-allowed",
       )}
       disabled={disabled}

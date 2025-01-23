@@ -102,7 +102,7 @@ function Wheel() {
                 onClick={() => setWinner(null)}
               >
                 <div className="text-white animate-in rounded-xl flex items-center text-xl p-4 w-full bg-backgroundBlack">
-                  <div className="p-2 rounded mx-auto">
+                  <div className="p-2 rounded-sm mx-auto">
                     <p>🎉 {winner} !</p>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ function Wheel() {
                 onClick={determineWinnerAndStartSpinning}
               >
                 <div className="text-white animate-in rounded-xl flex items-center text-xl p-4 w-[50%] cursor-pointer bg-backgroundBlack">
-                  <div className="p-2 rounded mx-auto">
+                  <div className="p-2 rounded-sm mx-auto">
                     <p>Spin !</p>
                   </div>
                 </div>
