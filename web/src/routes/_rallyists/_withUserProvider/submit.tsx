@@ -149,7 +149,7 @@ const SubmitBlock = ({ handleSubmit }: { handleSubmit: VoidFunction }) => {
       <p className={"text-xl"}>{t("submitStamps")}</p>
       <button
         className={
-          "text-center text-black w-full flex justify-center items-center rounded-xl font-bold h-12 text-2xl mt-1 bg-secondaryLight"
+          "text-center text-black w-full flex justify-center items-center rounded-xl font-bold h-12 text-2xl mt-1 bg-secondary-light"
         }
         onClick={handleSubmit}
       >

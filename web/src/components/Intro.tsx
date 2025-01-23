@@ -12,7 +12,7 @@ import { stampsToCollect } from "@/lib/consts.ts";
 const Intro = () => {
   const { t } = useTranslation();
   return (
-    <div className={"bg-secondaryLight bg-opacity-10 p-2 rounded-xl"}>
+    <div className={"bg-secondary-light/10 p-2 rounded-xl"}>
       <ul className={"py-2 space-y-2"}>
         <li className={"flex items-center"}>
           <Users size={36} className={"mr-2 shrink-0"} />

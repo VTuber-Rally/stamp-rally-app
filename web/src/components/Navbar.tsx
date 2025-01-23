@@ -67,7 +67,7 @@ const NavbarElement: FC<NavBarElementProps> = ({
     <Link
       to={to}
       type="button"
-      activeProps={{ className: "bg-secondaryLight hover:bg-secondary" }}
+      activeProps={{ className: "bg-secondary-light hover:bg-secondary" }}
       inactiveProps={{ className: "hover:bg-gray-50" }}
       activeOptions={{ exact: true }}
       className={clsx(

@@ -25,7 +25,7 @@ const InputField = ({
       type={type}
       placeholder={placeholder}
       className={clsx(
-        "mb-2 bg-secondary text-primary p-2 rounded-xl border-[1px] border-black bg-opacity-50",
+        "mb-2 bg-secondary/50 text-primary p-2 rounded-xl border-[1px] border-black",
         errors ? "border-2 border-red-500" : "",
       )}
       {...register(name, { required })}
