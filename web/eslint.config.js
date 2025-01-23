@@ -4,6 +4,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 
 import js from "@eslint/js";
 import typescript from "typescript-eslint";
+import pluginRouter from '@tanstack/eslint-plugin-router'
 
 const compat = new FlatCompat();
 
@@ -22,6 +23,7 @@ export default [
   ...typescript.configs.recommended,
   ...storybook.configs["flat/recommended"],
   ...compat.extends("plugin:react-hooks/recommended"),
+  ...pluginRouter.configs['flat/recommended'],
   {
     rules: {
       "react-refresh/only-export-components": [

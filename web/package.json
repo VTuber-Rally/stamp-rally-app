@@ -59,6 +59,7 @@
     "@storybook/react": "^8.5.0",
     "@storybook/react-vite": "^8.5.0",
     "@storybook/test": "^8.5.0",
+    "@tanstack/eslint-plugin-router": "^1.97.8",
     "@tanstack/router-plugin": "^1.97.3",
     "@testing-library/react": "^16.2.0",
     "@types/geojson": "^7946.0.15",
