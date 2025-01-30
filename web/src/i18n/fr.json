@@ -19,9 +19,13 @@
   "checkSubmit": "Vérifier un rally",
   "close": "Fermer",
   "consentToSaveEmail": "Je veux être au courant des prochains rallys !",
+  "description": "Description",
   "email": "Email",
   "error": "Une erreur est survenue",
   "errorCreatingAccount": "Erreur lors de la création du compte. Est-ce que l'email est déjà utilisé ?",
+  "errors": {
+    "notAStandist": "Vous ne semblez pas être standiste. Si vous l'êtes, cela signifie qu'il y a une erreur quelque part. Contactez le staff si c'est le cas !"
+  },
   "eventIsFinished": {
     "description": "Merci d'avoir participé !",
     "title": "🎉 L'événement est terminé"
@@ -30,6 +34,7 @@
   "hi_username": "Salut {{name}} !",
   "home": "Accueil",
   "ignore": "Ignorer",
+  "instagram": "Instagram",
   "language": {
     "description": "Changez la langue de l'application.",
     "title": "Langue"
@@ -59,6 +64,15 @@
   "notRedeemedDescription": "Cette soumission n'a pas encore été validée.",
   "optionalName": "Nom (optionnel)",
   "password": "Mot de passe",
+  "profile": {
+    "label": "Profil",
+    "profileUpdated": "Votre profil a bien été mis à jour !",
+    "socialNetworks": {
+      "label": "Réseaux sociaux",
+      "subtext": "Vous pouvez vider les champs que vous ne souhaitez pas afficher sur votre profil."
+    },
+    "title": "Mon profil"
+  },
   "qrcode": "QR Code",
   "rally.1": "12 artistes participent à ce rallye autour des VTubers",
   "rally.2": "Après un achat (minimum 2€) chez un artiste, vous pourrez scanner un QR code",
@@ -111,6 +125,8 @@
   "submitTerms": "Ce code ne périme pas, vous pouvez récupérer votre récompense n'importe quel jour de la convention pour récupérer des cartes qui ne sont plus en stock pour la journée.",
   "submittedAgo": "Soumis {{time}}",
   "submitting": "Soumission en cours…",
+  "twitch": "Twitch",
+  "twitter": "Twitter",
   "updateTheApp": {
     "a11yDescription": "Vous pouvez fermer la page et l'ouvrir à nouveau pour appliquer les changements.",
     "action": "Rafraîchir la page",

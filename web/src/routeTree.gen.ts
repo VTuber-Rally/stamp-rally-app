@@ -20,6 +20,7 @@ import { Route as StandistsIndexImport } from './routes/standists/index'
 import { Route as StaffIndexImport } from './routes/staff/index'
 import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
 import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
+import { Route as StandistsProfileImport } from './routes/standists/profile'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
@@ -105,6 +106,12 @@ const RallyistsMapLazyRoute = RallyistsMapLazyImport.update({
 const StandistsQrcodeRoute = StandistsQrcodeImport.update({
   id: '/qrcode',
   path: '/qrcode',
+  getParentRoute: () => StandistsRoute,
+} as any)
+
+const StandistsProfileRoute = StandistsProfileImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => StandistsRoute,
 } as any)
 
@@ -274,6 +281,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/staff/wheel'
       preLoaderRoute: typeof StaffWheelImport
       parentRoute: typeof StaffImport
+    }
+    '/standists/profile': {
+      id: '/standists/profile'
+      path: '/profile'
+      fullPath: '/standists/profile'
+      preLoaderRoute: typeof StandistsProfileImport
+      parentRoute: typeof StandistsImport
     }
     '/standists/qrcode': {
       id: '/standists/qrcode'
@@ -486,12 +500,14 @@ const StaffRouteChildren: StaffRouteChildren = {
 const StaffRouteWithChildren = StaffRoute._addFileChildren(StaffRouteChildren)
 
 interface StandistsRouteChildren {
+  StandistsProfileRoute: typeof StandistsProfileRoute
   StandistsQrcodeRoute: typeof StandistsQrcodeRoute
   StandistsSigninLazyRoute: typeof StandistsSigninLazyRoute
   StandistsIndexRoute: typeof StandistsIndexRoute
 }
 
 const StandistsRouteChildren: StandistsRouteChildren = {
+  StandistsProfileRoute: StandistsProfileRoute,
   StandistsQrcodeRoute: StandistsQrcodeRoute,
   StandistsSigninLazyRoute: StandistsSigninLazyRoute,
   StandistsIndexRoute: StandistsIndexRoute,
@@ -509,6 +525,7 @@ export interface FileRoutesByFullPath {
   '/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
   '/staff/wheel': typeof StaffWheelRoute
+  '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
   '/map': typeof RallyistsMapLazyRoute
   '/staff/signin': typeof StaffSigninLazyRoute
@@ -534,6 +551,7 @@ export interface FileRoutesByTo {
   '/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
   '/staff/wheel': typeof StaffWheelRoute
+  '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
   '/map': typeof RallyistsMapLazyRoute
   '/staff/signin': typeof StaffSigninLazyRoute
@@ -564,6 +582,7 @@ export interface FileRoutesById {
   '/_rallyists/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
   '/staff/wheel': typeof StaffWheelRoute
+  '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
   '/_rallyists/map': typeof RallyistsMapLazyRoute
   '/staff/signin': typeof StaffSigninLazyRoute
@@ -593,6 +612,7 @@ export interface FileRouteTypes {
     | '/rules'
     | '/staff/code'
     | '/staff/wheel'
+    | '/standists/profile'
     | '/standists/qrcode'
     | '/map'
     | '/staff/signin'
@@ -617,6 +637,7 @@ export interface FileRouteTypes {
     | '/rules'
     | '/staff/code'
     | '/staff/wheel'
+    | '/standists/profile'
     | '/standists/qrcode'
     | '/map'
     | '/staff/signin'
@@ -645,6 +666,7 @@ export interface FileRouteTypes {
     | '/_rallyists/rules'
     | '/staff/code'
     | '/staff/wheel'
+    | '/standists/profile'
     | '/standists/qrcode'
     | '/_rallyists/map'
     | '/staff/signin'
@@ -721,6 +743,7 @@ export const routeTree = rootRoute
     "/standists": {
       "filePath": "standists.tsx",
       "children": [
+        "/standists/profile",
         "/standists/qrcode",
         "/standists/signin",
         "/standists/"
@@ -757,6 +780,10 @@ export const routeTree = rootRoute
     "/staff/wheel": {
       "filePath": "staff/wheel.tsx",
       "parent": "/staff"
+    },
+    "/standists/profile": {
+      "filePath": "standists/profile.tsx",
+      "parent": "/standists"
     },
     "/standists/qrcode": {
       "filePath": "standists/qrcode.tsx",

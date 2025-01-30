@@ -19,9 +19,13 @@
   "checkSubmit": "Verify a submission",
   "close": "Close",
   "consentToSaveEmail": "I want to be informed about the next rallies!",
+  "description": "Description",
   "email": "Email",
   "error": "An error occurred",
   "errorCreatingAccount": "Error creating account. Is the email already in use?",
+  "errors": {
+    "notAStandist": "You don't seem to be a standist. If you are, that means there is an error somewhere. Please contact the staff if that is the case!"
+  },
   "eventIsFinished": {
     "description": "Thank you for participating!",
     "title": "🎉 The event is over"
@@ -30,6 +34,7 @@
   "hi_username": "Hi {{name}}!",
   "home": "Home",
   "ignore": "Ignore",
+  "instagram": "Instagram",
   "language": {
     "description": "Change the application language.",
     "title": "Language"
@@ -59,6 +64,15 @@
   "notRedeemedDescription": "This submission has not been redeemed yet.",
   "optionalName": "Name (optional)",
   "password": "Password",
+  "profile": {
+    "label": "Profile",
+    "profileUpdated": "Your profile has been successfully updated!",
+    "socialNetworks": {
+      "label": "Social networks",
+      "subtext": "You can empty the fields you don't want displayed on your profile."
+    },
+    "title": "My profile"
+  },
   "qrcode": "QR Code",
   "rally.1": "12 artists take part in this Rally around VTubers",
   "rally.2": "After making a purchase (minimum 2€) from an artist, you can scan a QR code",
@@ -111,6 +125,8 @@
   "submitTerms": "This code is valid for the entire duration of the convention, you may get your reward at any day of the convention, if you want to try to get cards that are out-of-stock for the day.",
   "submittedAgo": "Submitted {{time}}",
   "submitting": "Submitting…",
+  "twitch": "Twitch",
+  "twitter": "Twitter",
   "updateTheApp": {
     "a11yDescription": "You can close the page and open it again to apply changes.",
     "action": "Refresh page",

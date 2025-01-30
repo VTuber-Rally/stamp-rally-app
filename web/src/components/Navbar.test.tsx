@@ -24,10 +24,10 @@ describe("staff navbar", () => {
 describe("standists navbar", () => {
   const container = render(<StandistsNavBar />);
 
-  test("should have 2 elements", async () => {
+  test("should have 3 elements", async () => {
     const links = container.container.querySelectorAll(".inline-flex");
 
-    expect(links.length).toBe(2);
+    expect(links.length).toBe(3);
   });
 });
 

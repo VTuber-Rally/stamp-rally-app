@@ -12,6 +12,7 @@
 import * as sdk from "node-appwrite";
 import * as fs from "fs";
 import { getEnv } from "./shared.js";
+import { Permission, Role } from "node-appwrite";
 
 const {
   APPWRITE_PROJECT_ID,
@@ -145,7 +146,7 @@ async function createProfilesAndDocuments() {
       ]);
       await users.updateEmailVerification(newAccount.$id, true);
 
-      console.log(`${emailModified}:${password}`);
+      console.log(`\`${emailModified}\`:\`${password}\``);
 
       return {
         userId: newAccount.$id,
@@ -171,6 +172,10 @@ async function createProfilesAndDocuments() {
         PROFILE_COLLECTION_ID,
         sdk.ID.unique(),
         profile,
+        [
+          Permission.read(Role.user(profile.userId)),
+          Permission.update(Role.user(profile.userId)),
+        ],
       );
     });
 
