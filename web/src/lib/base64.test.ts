@@ -25,6 +25,8 @@ describe("dataUrlToBytes", () => {
 
   test("should throw an error if the data URL is malformed", async () => {
     const malformedDataUrl = "data:application/octet-stream;base";
-    expect(dataUrlToBytes(malformedDataUrl)).rejects.toThrow("fetch failed");
+    await expect(dataUrlToBytes(malformedDataUrl)).rejects.toThrow(
+      "fetch failed",
+    );
   });
 });
