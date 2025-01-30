@@ -2,7 +2,15 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { FC, MouseEventHandler, ReactNode } from "react";
-import { Dices, Home, Map, QrCode, QrCodeIcon, UsersRound } from "lucide-react";
+import {
+  Dices,
+  Home,
+  Map,
+  QrCode,
+  QrCodeIcon,
+  UserPen,
+  UsersRound,
+} from "lucide-react";
 import { useQRDrawerContext } from "@/context/useQRDrawerContext";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
@@ -131,6 +139,13 @@ export const StandistsNavbar = () => {
         disabled={disabled}
       >
         <QrCode className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+      </NavbarElement>
+      <NavbarElement
+        to={"/standists/profile"}
+        label={t("profile.label")}
+        disabled={disabled}
+      >
+        <UserPen className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
     </Navbar>
   );

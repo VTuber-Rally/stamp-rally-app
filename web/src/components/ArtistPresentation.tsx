@@ -36,15 +36,17 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
         />
       </div>
 
-      <Link
-        to={"/map"}
-        search={{
-          center: centroid(polygon(artist.geometry!)).geometry.coordinates,
-        }}
-        className="flex items-center gap-2 text-2xl bg-secondary p-2 rounded-xl"
-      >
-        H{artist.hall} {artist.boothNumber} <MapPinned />
-      </Link>
+      {artist.geometry && (
+        <Link
+          to={"/map"}
+          search={{
+            center: centroid(polygon(artist.geometry)).geometry.coordinates,
+          }}
+          className="flex items-center gap-2 text-2xl bg-secondary p-2 rounded-xl"
+        >
+          H{artist.hall} {artist.boothNumber} <MapPinned />
+        </Link>
+      )}
 
       <p className="whitespace-pre-line bg-gray-100 p-2 rounded-xl mx-2 max-w-prose">
         {artist.description}

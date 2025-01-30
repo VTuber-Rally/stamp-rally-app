@@ -8,6 +8,7 @@ import QRCode from "react-qr-code";
 import { RefreshCcw, TicketCheck } from "lucide-react";
 
 const StandistsQRCodeGeneratorPage = () => {
+  const { t } = useTranslation();
   const { t: tFR } = useTranslation("", { lng: "fr" });
   const { t: tEN } = useTranslation("", { lng: "en" });
   const { user } = useUser();
@@ -33,10 +34,10 @@ const StandistsQRCodeGeneratorPage = () => {
 
   if (!stand)
     return (
-      <div className="grow flex flex-col items-center justify-center">
-        <span>Stand not found?</span>
-        <span className={"italic"}>Are you sure you are a standist?</span>
-      </div>
+      <>
+        <Header>{t("stand", { name: "...?" })}</Header>
+        <p>{t("errors.notAStandist")}</p>
+      </>
     );
 
   return (

@@ -1,6 +1,7 @@
 import type { Models } from "appwrite";
 import {
   databaseId,
+  standistsCollectionId,
   submissionsCollectionId,
   wheelCollectionId,
 } from "@/lib/consts.ts";
@@ -10,6 +11,7 @@ import { db } from "@/lib/db.ts";
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { useQueryClient } from "@tanstack/react-query";
 import { Submission as SubmissionIndexedDB } from "@/lib/models/Submission.ts";
+import { StandistsEditProfileForm } from "@/components/routes/standists/StandistsProfilePage.tsx";
 
 type WithDocument<T> = T & Models.Document;
 
@@ -107,9 +109,34 @@ export const useDatabase = () => {
     }));
   };
 
+  const findAndUpdateProfile = async (
+    userId: string,
+    profileData: StandistsEditProfileForm,
+  ) => {
+    const userDocument = await databases.listDocuments(
+      databaseId,
+      standistsCollectionId,
+      [Query.equal("userId", userId)],
+    );
+
+    if (userDocument.documents.length === 0) {
+      throw new Error("User not found");
+    }
+
+    const documentToUpdateId = userDocument.documents[0].$id;
+
+    return await databases.updateDocument(
+      databaseId,
+      standistsCollectionId,
+      documentToUpdateId,
+      profileData,
+    );
+  };
+
   return {
     getSubmission,
     getOwnSubmissions,
     getWheelEntries,
+    findAndUpdateProfile,
   };
 };
