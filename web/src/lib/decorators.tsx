@@ -21,7 +21,7 @@ import { I18nextProvider } from "react-i18next";
 
 import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
 import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
-import { Toaster } from "@/components/ToastViewport.tsx";
+import { Toaster } from "@/components/Toaster.tsx";
 import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
 import i18n from "@/lib/i18n.ts";
 import { UserContext, UserContextType } from "@/lib/userContext.tsx";

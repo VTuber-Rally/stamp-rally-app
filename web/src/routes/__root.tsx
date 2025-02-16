@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-router";
 
 import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
-import { Toaster } from "@/components/ToastViewport.tsx";
+import { Toaster } from "@/components/Toaster.tsx";
 
 export const Route = createRootRoute({
   component: Root,
