@@ -12,10 +12,6 @@ function usePrivateKey(userId: string, key?: JsonWebKey) {
     queryKey: [QUERY_KEYS.PRIVATE_KEY, userId],
     queryFn: key
       ? async () => {
-          console.log("importing key", key, typeof key);
-
-          console.time("importKey");
-
           const keyImported = await window.crypto.subtle.importKey(
             "jwk",
             key,
@@ -26,10 +22,6 @@ function usePrivateKey(userId: string, key?: JsonWebKey) {
             true,
             ["sign"],
           );
-
-          console.timeEnd("importKey");
-
-          console.log("imported key", keyImported);
 
           return keyImported;
         }
@@ -49,8 +41,6 @@ const usePrivateKeyJWK = (userId: string) => {
       );
 
       const key = JSON.parse(resp.responseBody) as JsonWebKey;
-
-      console.log("key: ", key, typeof key);
 
       return key;
     },

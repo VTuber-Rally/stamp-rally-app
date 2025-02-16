@@ -21,7 +21,6 @@ const useRallySubmit = () => {
       ),
     networkMode: "online",
     onSuccess: (data) => {
-      console.log(data);
       if (data.responseStatusCode !== 200) {
         throw new Error(data.responseBody);
       }
