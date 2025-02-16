@@ -133,5 +133,10 @@
     "description": "Une mise à jour a été téléchargée. Veuillez rafraichir la page pour l'appliquer.",
     "title": "Une mise à jour est disponible"
   },
-  "wheelOfFortune": "Roue de la fortune"
+  "wheelOfFortune": "Roue de la fortune",
+  "analyticsOptOut": {
+    "title": "Analytiques",
+    "description": "Nous utilisons Plausible pour collecter des statistiques anonymes (nombre de visiteurs, nombre de tampons scannés, etc.). Vous pouvez vous y opposer ici.",
+    "optOut": "Ne pas utiliser mes données pour des statistiques."
+  }
 }

@@ -57,6 +57,11 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
     await db.stamps.add(stampRecord);
   }
   invalidateStamps();
+  window.plausible("Stamp Scanned", {
+    props: {
+      stand: standist.name,
+    },
+  });
 
   return { ...stampRecord, updated: !!alreadyExistingStampRecord };
 }

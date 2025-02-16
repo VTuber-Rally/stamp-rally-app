@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { CreateAccountForm } from "@/components/forms/CreateAccountForm.tsx";
 import { Checkbox } from "@/components/inputs/Checkbox.tsx";
 import { Header } from "@/components/layout/Header.tsx";
+import { AnalyticsOptOut } from "@/components/routes/AnalyticsOptOut.tsx";
 import { getPrefs, setPref } from "@/lib/appwrite.ts";
 import { useLogout } from "@/lib/hooks/useLogout.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
@@ -128,6 +129,16 @@ function SettingsPage() {
             />
           </button>
         </div>
+      </div>
+
+      <hr className={"my-2 w-full"} />
+
+      <div>
+        <h1 className={"text-center text-2xl"}>{t("analyticsOptOut.title")}</h1>
+        <p className={"py-2 text-sm text-gray-700"}>
+          {t("analyticsOptOut.description")}
+        </p>
+        <AnalyticsOptOut />
       </div>
     </div>
   );

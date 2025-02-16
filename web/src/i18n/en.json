@@ -133,5 +133,10 @@
     "description": "An update was downloaded, please refresh the page to apply it.",
     "title": "Update available"
   },
-  "wheelOfFortune": "Wheel of fortune"
+  "wheelOfFortune": "Wheel of fortune",
+  "analyticsOptOut": {
+    "title": "Analytics",
+    "description": "We're using Plausible to collect anonymous statistics (visitors count, scanned stamps, etc.). You can opt-out here.",
+    "optOut": "Do not use my data for statistics."
+  }
 }

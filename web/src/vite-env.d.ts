@@ -22,4 +22,17 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
+interface Window {
+  plausible: {
+    (
+      eventName: string,
+      arguments?: {
+        callback?: () => unknown;
+        props?: Record<string, string>;
+      },
+    ): void;
+    q?: unknown[];
+  };
+}
+
 declare const BUILD_TIMESTAMP: string;
