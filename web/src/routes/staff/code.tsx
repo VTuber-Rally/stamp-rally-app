@@ -10,7 +10,7 @@ function CheckCode() {
   const navigate = useNavigate();
 
   return (
-    <div className="grow flex flex-col items-center justify-center">
+    <div className="flex grow flex-col items-center justify-center">
       <QrReader
         onScanSuccess={(result) => {
           const submissionId = result.data;

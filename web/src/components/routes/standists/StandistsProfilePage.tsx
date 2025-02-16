@@ -132,7 +132,7 @@ const StandistsProfilePage = () => {
         {isPending ? (
           <button
             disabled={true}
-            className="text-center bg-secondary/90 text-black px-2 w-full flex justify-center items-center rounded-2xl font-bold h-10 text-xl mt-2 cursor-wait"
+            className="mt-2 flex h-10 w-full cursor-wait items-center justify-center rounded-2xl bg-secondary/90 px-2 text-center text-xl font-bold text-black"
           >
             <div className={"flex items-center"}>
               <Loader size={1.5} className={"mr-2"} />
@@ -142,7 +142,7 @@ const StandistsProfilePage = () => {
         ) : (
           <button
             type="submit"
-            className="text-center bg-secondary text-black px-2 w-full flex justify-center items-center rounded-2xl font-bold h-10 text-xl mt-2 hover:bg-secondary-light cursor-pointer"
+            className="mt-2 flex h-10 w-full cursor-pointer items-center justify-center rounded-2xl bg-secondary px-2 text-center text-xl font-bold text-black hover:bg-secondary-light"
           >
             {t("save")}
           </button>

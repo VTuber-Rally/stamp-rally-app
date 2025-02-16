@@ -76,7 +76,7 @@ function SignUpPage() {
         />
 
         <button
-          className="p-2 bg-tertiary text-black rounded-xl"
+          className="rounded-xl bg-tertiary p-2 text-black"
           onClick={handleSubmit(onSubmitRegister)}
           type="button"
         >

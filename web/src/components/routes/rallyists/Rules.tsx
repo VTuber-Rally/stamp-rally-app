@@ -16,7 +16,7 @@ const Rules = () => {
 
       <Header>{t("rules")}</Header>
 
-      <ol className={"list-decimal px-4 space-y-2"}>
+      <ol className={"list-decimal space-y-2 px-4"}>
         {Array.from({ length: 9 }, (_, i) => i + 1).map((i) => (
           <li key={i}>{t(`rules.${i}`)}</li>
         ))}

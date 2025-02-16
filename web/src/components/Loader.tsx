@@ -7,7 +7,7 @@ const Loader = ({ size = 2, className = "" }) => {
       <svg
         aria-hidden="true"
         style={{ width: `${size}em` }}
-        className={`text-gray-200 animate-spin fill-blue-600`}
+        className={`animate-spin fill-blue-600 text-gray-200`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

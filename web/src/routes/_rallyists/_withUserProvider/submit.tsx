@@ -44,7 +44,7 @@ function Submit() {
 
         {isEligible && (
           <>
-            <hr className={"w-full mb-2"} />
+            <hr className={"mb-2 w-full"} />
 
             <div className={"flex flex-col justify-center gap-4"}>
               {isPending && <p>{t("submitting")}</p>}
@@ -58,8 +58,8 @@ function Submit() {
 
         {submissions.filter((e) => !e.redeemed).length !== 0 && (
           <>
-            <hr className={"w-full my-2"} />
-            <h1 className={"text-2xl pb-2"}>{t("submissions")}</h1>
+            <hr className={"my-2 w-full"} />
+            <h1 className={"pb-2 text-2xl"}>{t("submissions")}</h1>
           </>
         )}
         <div className="divide-y divide-gray-300">
@@ -67,7 +67,7 @@ function Submit() {
             .filter((e) => !e.redeemed)
             .map((submission) => (
               <div
-                className="flex flex-col grow items-center justify-center gap-4 py-2"
+                className="flex grow flex-col items-center justify-center gap-4 py-2"
                 key={submission.submissionId}
               >
                 <div>
@@ -77,7 +77,7 @@ function Submit() {
                 </div>
 
                 <QRCode
-                  className="border-4 rounded-lg border-tertiary p-2 dark:bg-white"
+                  className="rounded-lg border-4 border-tertiary p-2 dark:bg-white"
                   value={submission.submissionId}
                 />
 
@@ -93,9 +93,9 @@ function Submit() {
 
         {submissions.filter((e) => e.redeemed).length > 0 && (
           <>
-            <hr className={"w-full my-2"} />
+            <hr className={"my-2 w-full"} />
             <h1 className={"text-2xl"}>{t("redeemedSubmissions")}</h1>
-            <ol className={"flex flex-col items-center list-disc"}>
+            <ol className={"flex list-disc flex-col items-center"}>
               {submissions
                 .filter((e) => e.redeemed)
                 .map((submission) => (
@@ -109,7 +109,7 @@ function Submit() {
 
         {!user?.email && (
           <>
-            <hr className={"w-full my-2"} />
+            <hr className={"my-2 w-full"} />
             <CreateAccountForm />
           </>
         )}
@@ -118,7 +118,7 @@ function Submit() {
   }
 
   return (
-    <div className={"flex flex-col grow items-center"}>
+    <div className={"flex grow flex-col items-center"}>
       <Header>{t("submit")}</Header>
 
       {showUserInfos && (
@@ -150,7 +150,7 @@ const SubmitBlock = ({ handleSubmit }: { handleSubmit: VoidFunction }) => {
       <p className={"text-xl"}>{t("submitStamps")}</p>
       <button
         className={
-          "text-center text-black w-full flex justify-center items-center rounded-xl font-bold h-12 text-2xl mt-1 bg-secondary-light"
+          "mt-1 flex h-12 w-full items-center justify-center rounded-xl bg-secondary-light text-center text-2xl font-bold text-black"
         }
         onClick={handleSubmit}
       >

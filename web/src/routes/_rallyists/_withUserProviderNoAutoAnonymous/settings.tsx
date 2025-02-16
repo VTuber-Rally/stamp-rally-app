@@ -52,7 +52,7 @@ function SettingsPage() {
   const isStandist = user?.labels.includes("standist");
 
   return (
-    <div className={"flex flex-col grow items-center"}>
+    <div className={"flex grow flex-col items-center"}>
       <Header>{t("settings.title")}</Header>
       {isUserLoggedIn ? (
         <div>
@@ -99,7 +99,7 @@ function SettingsPage() {
       ) : (
         <>
           <CreateAccountForm />
-          <hr className={"w-full my-2"} />
+          <hr className={"my-2 w-full"} />
 
           <p>{t("alreadyHaveAccount")}</p>
           <ButtonLink size={"small"} href="/login">
@@ -107,24 +107,24 @@ function SettingsPage() {
           </ButtonLink>
         </>
       )}
-      <hr className={"w-full my-2"} />
+      <hr className={"my-2 w-full"} />
 
       <div className={"flex flex-col items-center"}>
         <h1 className={"text-2xl"}>{t("language.title")}</h1>
         <h1 className={"text-xl"}>{t("language.description")}</h1>
-        <div className={"pt-2 flex flex-row gap-2"}>
+        <div className={"flex flex-row gap-2 pt-2"}>
           <button onClick={() => changeLanguage("en")}>
             <img
               src={enFlag}
               alt={"english flag"}
-              className={"w-16 h-10 rounded-sm"}
+              className={"h-10 w-16 rounded-sm"}
             />
           </button>
           <button onClick={() => changeLanguage("fr")}>
             <img
               src={frFlag}
               alt={"french flag"}
-              className={"w-16 h-10 rounded-sm"}
+              className={"h-10 w-16 rounded-sm"}
             />
           </button>
         </div>

@@ -19,7 +19,7 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
   return (
     <div
       className={
-        "flex flex-col items-center space-y-4 mt-2 p-2 pt-0 h-[70dvh] overflow-y-auto"
+        "mt-2 flex h-[70dvh] flex-col items-center space-y-4 overflow-y-auto p-2 pt-0"
       }
     >
       <DrawerTitle className="sr-only">{artist.name}</DrawerTitle>
@@ -33,7 +33,7 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
         <img
           src={images[`${imagePrefix}${artist.image}`]}
           alt={artist.name}
-          className="rounded-full w-48 border-8 border-secondary"
+          className="w-48 rounded-full border-8 border-secondary"
         />
       </div>
 
@@ -43,13 +43,13 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
           search={{
             center: centroid(polygon(artist.geometry)).geometry.coordinates,
           }}
-          className="flex items-center gap-2 text-2xl bg-secondary p-2 rounded-xl"
+          className="flex items-center gap-2 rounded-xl bg-secondary p-2 text-2xl"
         >
           H{artist.hall} {artist.boothNumber} <MapPinned />
         </Link>
       )}
 
-      <p className="whitespace-pre-line bg-gray-100 p-2 rounded-xl mx-2 max-w-prose">
+      <p className="mx-2 max-w-prose rounded-xl bg-gray-100 p-2 whitespace-pre-line">
         {artist.description}
       </p>
 

@@ -88,7 +88,7 @@ export const CreateAccountForm = () => {
 
           <button
             className={
-              "text-center bg-secondary text-black px-2 w-full flex justify-center items-center rounded-2xl font-bold h-10 text-xl mt-2"
+              "mt-2 flex h-10 w-full items-center justify-center rounded-2xl bg-secondary px-2 text-center text-xl font-bold text-black"
             }
             type={"submit"}
           >

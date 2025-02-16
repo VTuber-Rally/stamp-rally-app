@@ -206,8 +206,8 @@ export function UserProvider({
 const LoaderPage = () => {
   const { t } = useTranslation();
   return (
-    <div className={"h-dvh flex flex-col pb-16"}>
-      <div className="grow flex items-center justify-center">
+    <div className={"flex h-dvh flex-col pb-16"}>
+      <div className="flex grow items-center justify-center">
         <div className={"flex flex-col items-center"}>
           <Loader size={4} />
           <h1>{t("loading")}</h1>
