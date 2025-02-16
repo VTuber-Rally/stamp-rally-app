@@ -1,11 +1,12 @@
-import { useTranslation } from "react-i18next";
-import { useStandists } from "@/lib/hooks/useStandists.ts";
-import { useState } from "react";
-import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
-import { Header } from "@/components/Header.tsx";
-import QRCode from "react-qr-code";
 import { Cog, RefreshCcw, TicketCheck } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import QRCode from "react-qr-code";
+
+import { Header } from "@/components/Header.tsx";
 import { Switch } from "@/components/Switch.tsx";
+import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
+import { useStandists } from "@/lib/hooks/useStandists.ts";
 
 const QRCodeGenPage = ({ userId }: { userId: string }) => {
   const { t } = useTranslation();

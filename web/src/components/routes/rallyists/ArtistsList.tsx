@@ -1,12 +1,13 @@
-import { useTranslation } from "react-i18next";
-import { useStandists } from "@/lib/hooks/useStandists.ts";
+import clsx from "clsx";
+import { TicketCheck } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { ArtistDrawer } from "@/components/ArtistDrawer.tsx";
 import { Header } from "@/components/Header.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
-import clsx from "clsx";
+import { useStandists } from "@/lib/hooks/useStandists.ts";
 import { imagePrefix, images } from "@/lib/images.ts";
-import { TicketCheck } from "lucide-react";
 import { StampWithId } from "@/lib/models/Stamp.ts";
 
 type ArtistsListProps = {

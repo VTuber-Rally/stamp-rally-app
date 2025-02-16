@@ -1,5 +1,4 @@
 import { bytesToBase64DataUrl, dataUrlToBytes } from "@/lib/base64.ts";
-
 import { StampTuple } from "@/lib/models/Stamp.ts";
 
 const signAlgorithm = {

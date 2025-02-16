@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { HttpResponse, http } from "msw";
 
-import CheckSubmission from "./CheckSubmission";
 import { TanStackQueryDecorator, ToasterDecorator } from "@/lib/decorators.tsx";
-import { http, HttpResponse } from "msw";
 import {
   NotRedeemedSubmission,
   RedeemedSubmission,
 } from "@/stubs/Submission.ts";
+
+import CheckSubmission from "./CheckSubmission";
 
 const meta = {
   title: "routes/staff/Check/CheckSubmission",

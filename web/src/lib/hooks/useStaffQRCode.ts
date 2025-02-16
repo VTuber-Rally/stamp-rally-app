@@ -1,9 +1,11 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../QueryKeys.ts";
+
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
-import { signData } from "@/lib/signatures.ts";
 import { functions } from "@/lib/appwrite.ts";
 import { getPrivateKeyFunctionId } from "@/lib/consts.ts";
+import { signData } from "@/lib/signatures.ts";
+
+import { QUERY_KEYS } from "../QueryKeys.ts";
 
 function usePrivateKey(userId: string, key?: JsonWebKey) {
   const { data: privateKey } = useQuery({

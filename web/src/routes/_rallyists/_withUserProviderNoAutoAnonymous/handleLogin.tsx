@@ -1,14 +1,11 @@
-import {
-  createFileRoute,
-  redirect,
-  useNavigate,
-} from "@tanstack/react-router";
-import { appwriteProjectId } from "@/lib/consts.ts";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import Loader from "@/components/Loader.tsx";
-import { useUser } from "@/lib/hooks/useUser.ts";
-import { useToast } from "@/lib/hooks/useToast.ts";
 import { useTranslation } from "react-i18next";
+
+import Loader from "@/components/Loader.tsx";
+import { appwriteProjectId } from "@/lib/consts.ts";
+import { useToast } from "@/lib/hooks/useToast.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute(
   "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin",

@@ -1,15 +1,13 @@
-import { useRallySubmission } from "@/lib/hooks/useRallySubmission.ts";
 import { useNavigate } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
-import { databases } from "@/lib/appwrite.ts";
-import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
-import { queryClient } from "@/lib/queryClient.ts";
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import Loader from "@/components/Loader.tsx";
 import { formatDistance, formatDuration, intervalToDuration } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Header } from "@/components/Header.tsx";
 import { TriangleAlert } from "lucide-react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+
+import { ButtonLink } from "@/components/ButtonLink.tsx";
+import { Header } from "@/components/Header.tsx";
+import Loader from "@/components/Loader.tsx";
 import {
   Table,
   TableBody,
@@ -19,9 +17,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/Table.tsx";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { FC } from "react";
+import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
+import { databases } from "@/lib/appwrite.ts";
+import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
+import { useRallySubmission } from "@/lib/hooks/useRallySubmission.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
+import { queryClient } from "@/lib/queryClient.ts";
 
 const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
   const { data, isLoading } = useRallySubmission(submissionId);

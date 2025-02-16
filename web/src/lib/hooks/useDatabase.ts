@@ -1,17 +1,18 @@
+import { useQueryClient } from "@tanstack/react-query";
 import type { Models } from "appwrite";
+
+import { StandistsEditProfileForm } from "@/components/routes/standists/StandistsProfilePage.tsx";
+import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
+import { Query, databases } from "@/lib/appwrite.ts";
 import {
   databaseId,
   standistsCollectionId,
   submissionsCollectionId,
   wheelCollectionId,
 } from "@/lib/consts.ts";
-import { databases, Query } from "@/lib/appwrite.ts";
-import { Standist } from "@/lib/models/Standist.ts";
 import { db } from "@/lib/db.ts";
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { useQueryClient } from "@tanstack/react-query";
+import { Standist } from "@/lib/models/Standist.ts";
 import { Submission as SubmissionIndexedDB } from "@/lib/models/Submission.ts";
-import { StandistsEditProfileForm } from "@/components/routes/standists/StandistsProfilePage.tsx";
 
 type WithDocument<T> = T & Models.Document;
 

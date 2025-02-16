@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { RallyistNavbar } from "./Navbar";
 import {
   QRDrawerContextProviderDecorator,
   RouterDecorator,
 } from "@/lib/decorators.tsx";
+
+import { RallyistNavbar } from "./Navbar";
 
 const meta = {
   title: "Common/Navbar/RallyistNavbar",

@@ -1,10 +1,11 @@
-import { databases } from "@/lib/appwrite.ts";
-import { Standist } from "@/lib/models/Standist.ts";
-import { db } from "@/lib/db.ts";
 import { useQuery } from "@tanstack/react-query";
+
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { queryClient } from "@/lib/queryClient.ts";
+import { databases } from "@/lib/appwrite.ts";
 import { databaseId, standistsCollectionId } from "@/lib/consts.ts";
+import { db } from "@/lib/db.ts";
+import { Standist } from "@/lib/models/Standist.ts";
+import { queryClient } from "@/lib/queryClient.ts";
 
 function importJWK(jwk: JsonWebKey) {
   return window.crypto.subtle.importKey(

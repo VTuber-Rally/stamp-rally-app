@@ -1,9 +1,10 @@
 import Dexie, { type EntityTable } from "dexie";
-import { stampIndexes, StampWithId } from "@/lib/models/Stamp.ts";
+
+import { StampWithId, stampIndexes } from "@/lib/models/Stamp.ts";
 import { Standist, standistIndexes } from "@/lib/models/Standist.ts";
 import {
-  submissionIndexes,
   SubmissionWithId,
+  submissionIndexes,
 } from "@/lib/models/Submission.ts";
 
 export const db = new Dexie("StampRally") as Dexie & {

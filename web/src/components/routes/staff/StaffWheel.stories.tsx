@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { HttpResponse, http } from "msw";
+
+import { TanStackQueryDecorator } from "@/lib/decorators.tsx";
+import { WheelEntries } from "@/stubs/WheelEntries.ts";
 
 import StaffWheel from "./StaffWheel";
-import { TanStackQueryDecorator } from "@/lib/decorators.tsx";
-import { http, HttpResponse } from "msw";
-import { WheelEntries } from "@/stubs/WheelEntries.ts";
 
 const meta = {
   title: "Routes/Staff/Wheel",

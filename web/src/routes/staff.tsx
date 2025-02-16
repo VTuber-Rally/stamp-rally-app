@@ -1,6 +1,7 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { UserProvider } from "@/lib/userContext.tsx";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
+
 import { StaffNavbar } from "@/components/Navbar.tsx";
+import { UserProvider } from "@/lib/userContext.tsx";
 
 export const Route = createFileRoute("/staff")({
   component: () => (

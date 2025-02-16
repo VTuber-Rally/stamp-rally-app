@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import StandistStaffHomePage from "./StandistStaffHomePage";
 import { I18nextDecorator, RouterDecorator } from "@/lib/decorators.tsx";
+
+import StandistStaffHomePage from "./StandistStaffHomePage";
 
 const meta = {
   title: "Common/StandistStaffHomePage",

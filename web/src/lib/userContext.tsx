@@ -1,19 +1,21 @@
 import { AppwriteException, Models } from "appwrite";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import Loader from "@/components/Loader.tsx";
+
 import {
   account,
   login,
   loginAnonymous,
-  sendMagicLink,
+  loginUserIdSecret,
   logout,
   register,
+  sendMagicLink,
   setEmail,
   setName,
   setPref,
-  loginUserIdSecret,
 } from "./appwrite";
-import Loader from "@/components/Loader.tsx";
-import { useTranslation } from "react-i18next";
 
 const NOT_INITIALIZED = undefined;
 

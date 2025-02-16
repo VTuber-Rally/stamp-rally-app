@@ -7,6 +7,7 @@ import {
   Users,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
 import { stampsToCollect } from "@/lib/consts.ts";
 
 const Intro = () => {

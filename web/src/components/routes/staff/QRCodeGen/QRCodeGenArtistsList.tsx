@@ -1,8 +1,9 @@
-import { useStandists } from "@/lib/hooks/useStandists.ts";
-import { Header } from "@/components/Header.tsx";
-import clsx from "clsx";
-import { imagePrefix, images } from "@/lib/images.ts";
 import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
+
+import { Header } from "@/components/Header.tsx";
+import { useStandists } from "@/lib/hooks/useStandists.ts";
+import { imagePrefix, images } from "@/lib/images.ts";
 
 function QRCodeGenArtistsList() {
   const { data: standistsList } = useStandists();

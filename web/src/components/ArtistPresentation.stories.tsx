@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ArtistPresentation } from "./ArtistPresentation";
 import {
   DialogDecorator,
   RouterDecorator,
   TanStackQueryDecorator,
 } from "@/lib/decorators.tsx";
+
+import { ArtistPresentation } from "./ArtistPresentation";
 
 const meta = {
   title: "Rallyist/ArtistPresentation",

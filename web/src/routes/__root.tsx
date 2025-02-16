@@ -1,10 +1,11 @@
 import {
-  createRootRoute,
   Outlet,
   ScrollRestoration,
+  createRootRoute,
 } from "@tanstack/react-router";
-import { Toaster } from "@/components/ToastViewport.tsx";
+
 import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
+import { Toaster } from "@/components/ToastViewport.tsx";
 
 export const Route = createRootRoute({
   component: Root,

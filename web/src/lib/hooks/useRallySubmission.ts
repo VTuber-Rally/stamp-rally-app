@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../QueryKeys.ts";
+
 import { useDatabase } from "@/lib/hooks/useDatabase.ts";
+
+import { QUERY_KEYS } from "../QueryKeys.ts";
 
 export const useRallySubmission = (documentId: string) => {
   const { getSubmission } = useDatabase();

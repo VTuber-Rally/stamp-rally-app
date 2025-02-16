@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+
 import QrReader from "@/components/QrReader.tsx";
 
 export const Route = createFileRoute("/staff/code")({

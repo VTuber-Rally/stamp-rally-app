@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { QRCodeDrawer } from "./QRCodeDrawer";
+import { useQRDrawerContext } from "@/context/useQRDrawerContext.ts";
 import {
   QRDrawerContextProviderDecorator,
   RouterDecorator,
 } from "@/lib/decorators.tsx";
-import { useQRDrawerContext } from "@/context/useQRDrawerContext.ts";
+
+import { QRCodeDrawer } from "./QRCodeDrawer";
 
 const Template = () => {
   const [open, setOpen] = useQRDrawerContext();

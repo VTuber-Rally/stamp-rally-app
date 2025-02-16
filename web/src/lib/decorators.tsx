@@ -1,13 +1,14 @@
 import { Decorator } from "@storybook/react";
-
+import { fn } from "@storybook/test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
+  RouterProvider,
   createMemoryHistory,
   createRootRoute,
   createRoute,
   createRouter,
-  RouterProvider,
 } from "@tanstack/react-router";
+import { AppwriteException, Models } from "appwrite";
 import {
   Dispatch,
   SetStateAction,
@@ -16,20 +17,19 @@ import {
   useMemo,
   useState,
 } from "react";
-import { AppwriteException, Models } from "appwrite";
+import { I18nextProvider } from "react-i18next";
+
+import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
+import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
+import { Toaster } from "@/components/ToastViewport.tsx";
+import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import i18n from "@/lib/i18n.ts";
 import { UserContext, UserContextType } from "@/lib/userContext.tsx";
 import {
   LoggedInUser,
   LoggedInUserStaff,
   LoggedInUserStandist,
 } from "@/stubs/User.ts";
-import i18n from "@/lib/i18n.ts";
-import { I18nextProvider } from "react-i18next";
-import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
-import { fn } from "@storybook/test";
-import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
-import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
-import { Toaster } from "@/components/ToastViewport.tsx";
 
 export const TanStackQueryDecorator: Decorator = (Story, ctx) => {
   const queryClient = new QueryClient({

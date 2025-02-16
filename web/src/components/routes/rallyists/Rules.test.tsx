@@ -1,8 +1,8 @@
-import { describe, expect, test } from "vitest";
 import { composeStories } from "@storybook/react";
+import { render } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 
 import * as stories from "./Rules.stories";
-import { render } from "@testing-library/react";
 
 const { Default } = composeStories(stories);
 

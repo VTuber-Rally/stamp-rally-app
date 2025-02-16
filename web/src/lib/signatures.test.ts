@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { signData, verifyData } from "@/lib/signatures.ts";
+
 import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
+import { signData, verifyData } from "@/lib/signatures.ts";
 
 const keyAlgorithm = {
   name: "ECDSA",

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { MapLibreMap } from "./MapLibreMap";
 import { RouterDecorator } from "@/lib/decorators.tsx";
+
+import { MapLibreMap } from "./MapLibreMap";
 
 const meta = {
   title: "Rallyist/MapLibreMap",

@@ -1,17 +1,16 @@
 import "@fontsource-variable/comfortaa";
-import "./index.css";
-
-import "@/lib/i18n.ts";
-
-import { App } from "@/App.tsx";
+import * as Sentry from "@sentry/react";
 import { createRoot } from "react-dom/client";
 
+import { App } from "@/App.tsx";
+import { isProd } from "@/lib/consts.ts";
 // prefetch les standists
 import { prefetchStandists } from "@/lib/hooks/useStandists.ts";
-prefetchStandists();
+import "@/lib/i18n.ts";
 
-import * as Sentry from "@sentry/react";
-import { isProd } from "@/lib/consts.ts";
+import "./index.css";
+
+prefetchStandists();
 
 if (isProd) {
   Sentry.init({

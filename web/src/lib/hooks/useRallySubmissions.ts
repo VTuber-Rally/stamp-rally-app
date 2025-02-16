@@ -1,7 +1,9 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../QueryKeys.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
+
 import { useDatabase } from "@/lib/hooks/useDatabase.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
+
+import { QUERY_KEYS } from "../QueryKeys.ts";
 
 export const useRallySubmissions = () => {
   const { user } = useUser();

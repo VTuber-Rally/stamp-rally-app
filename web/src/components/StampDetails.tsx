@@ -1,5 +1,3 @@
-import { Stamp } from "@/lib/models/Stamp.ts";
-import { FC, PropsWithChildren } from "react";
 import {
   CalendarCogIcon,
   Printer,
@@ -8,7 +6,10 @@ import {
   TicketMinus,
   TicketPlus,
 } from "lucide-react";
+import { FC, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
+
+import { Stamp } from "@/lib/models/Stamp.ts";
 import { Standist } from "@/lib/models/Standist.ts";
 
 type StampDetailsProps = {

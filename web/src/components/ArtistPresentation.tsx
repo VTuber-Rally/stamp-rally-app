@@ -1,14 +1,15 @@
-import { useStandist } from "@/lib/hooks/useStandist.ts";
-import { Header } from "@/components/Header.tsx";
-import { imagePrefix, images } from "@/lib/images.ts";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import QRCodeLink from "@/components/QRCodeLink.tsx";
-import type { FC, ReactNode } from "react";
-import { ArrowUpRightFromSquare, MapPinned } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import centroid from "@turf/centroid";
 import { polygon } from "@turf/helpers";
+import { ArrowUpRightFromSquare, MapPinned } from "lucide-react";
+import type { FC, ReactNode } from "react";
+
+import { ButtonLink } from "@/components/ButtonLink.tsx";
 import { DrawerDescription, DrawerTitle } from "@/components/Drawer.tsx";
+import { Header } from "@/components/Header.tsx";
+import QRCodeLink from "@/components/QRCodeLink.tsx";
+import { useStandist } from "@/lib/hooks/useStandist.ts";
+import { imagePrefix, images } from "@/lib/images.ts";
 
 export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
   const artist = useStandist(artistId);

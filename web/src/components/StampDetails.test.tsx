@@ -1,7 +1,6 @@
 import { composeStories } from "@storybook/react";
-
-import { expect, test, describe } from "vitest";
 import { render } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 
 import * as stories from "./StampDetails.stories";
 

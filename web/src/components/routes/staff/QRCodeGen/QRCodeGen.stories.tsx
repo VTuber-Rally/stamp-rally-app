@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { HttpResponse, http } from "msw";
+
+import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
+import { handlers } from "@/msw.ts";
+import { GetPrivateKeyExecutionReturn } from "@/stubs/User.ts";
 
 import QrCodeGen from "./QRCodeGen";
-import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
-import { http, HttpResponse } from "msw";
-import { GetPrivateKeyExecutionReturn } from "@/stubs/User.ts";
-import { handlers } from "@/msw.ts";
 
 const meta = {
   title: "routes/staff/QRCodeGen/QRCodeGen",

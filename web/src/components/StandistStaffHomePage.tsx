@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Header } from "@/components/Header.tsx";
 import { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Header } from "@/components/Header.tsx";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
 type StandistsHomeProps = {

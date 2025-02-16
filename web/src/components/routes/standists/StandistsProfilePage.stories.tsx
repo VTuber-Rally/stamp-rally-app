@@ -1,14 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { HttpResponse, http } from "msw";
 
-import StandistsProfilePage from "./StandistsProfilePage";
 import {
   AuthDecorator,
   TanStackQueryDecorator,
   ToasterDecorator,
 } from "@/lib/decorators.tsx";
-import { LoggedInUserStaff, LoggedInUserStandist } from "@/stubs/User.ts";
-import { http, HttpResponse } from "msw";
 import { handlers } from "@/msw.ts";
+import { LoggedInUserStaff, LoggedInUserStandist } from "@/stubs/User.ts";
+
+import StandistsProfilePage from "./StandistsProfilePage";
 
 const meta = {
   title: "Routes/Standists/Profile",

@@ -1,9 +1,10 @@
 import { useNavigate } from "@tanstack/react-router";
-import { SubmitHandler, useForm } from "react-hook-form";
-import InputField from "@/components/InputField.tsx";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
 import { AppwriteException } from "appwrite";
 import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import { ButtonLink } from "@/components/ButtonLink.tsx";
+import InputField from "@/components/InputField.tsx";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
 type SignupForm = {

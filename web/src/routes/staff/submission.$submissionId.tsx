@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import CheckSubmission from "@/components/routes/staff/Check/CheckSubmission.tsx";
 
 export const Route = createFileRoute("/staff/submission/$submissionId")({
