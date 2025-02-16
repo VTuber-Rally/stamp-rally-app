@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { RouterDecorator } from "@/lib/decorators.tsx";
 
-import { StandistsNavbar } from "./Navbar";
+import { StandistsNavbar } from "../components/Navbar.tsx";
 
 const meta = {
   title: "Common/Navbar/StandistsNavbar",

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { RouterDecorator } from "@/lib/decorators.tsx";
 
-import { ButtonLink } from "./ButtonLink";
+import { ButtonLink } from "../components/ButtonLink.tsx";
 
 const meta = {
   title: "Atom/ButtonLink",

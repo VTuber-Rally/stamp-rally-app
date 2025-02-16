@@ -3,7 +3,7 @@ import { fn } from "@storybook/test";
 
 import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
 
-import { ArtistDrawer } from "./ArtistDrawer";
+import { ArtistDrawer } from "../components/ArtistDrawer.tsx";
 
 const meta = {
   title: "Rallyist/ArtistDrawer",

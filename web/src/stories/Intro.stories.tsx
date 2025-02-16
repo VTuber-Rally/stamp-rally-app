@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Intro from "./Intro";
+import Intro from "../components/Intro.tsx";
 
 const meta = {
   title: "Rallyist/Intro",
