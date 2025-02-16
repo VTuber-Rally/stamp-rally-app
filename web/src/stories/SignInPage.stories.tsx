@@ -6,7 +6,7 @@ import {
   TanStackQueryDecorator,
 } from "@/lib/decorators.tsx";
 
-import SignInPage from "./SignInPage";
+import SignInPage from "../components/SignInPage.tsx";
 
 const meta = {
   title: "Common/SignInPage",

@@ -7,7 +7,7 @@ import {
   RedeemedSubmission,
 } from "@/stubs/Submission.ts";
 
-import CheckSubmission from "./CheckSubmission";
+import CheckSubmission from "../components/routes/staff/Check/CheckSubmission.tsx";
 
 const meta = {
   title: "routes/staff/Check/CheckSubmission",

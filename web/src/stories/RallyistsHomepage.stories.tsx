@@ -7,7 +7,7 @@ import {
 } from "@/lib/decorators.tsx";
 import { EnoughStampsWithId, NotSubmittedStampWithId } from "@/stubs/Stamp.ts";
 
-import RallyistsHomepage from "./RallyistsHomepage";
+import RallyistsHomepage from "../components/routes/rallyists/RallyistsHomepage.tsx";
 
 const meta = {
   title: "Routes/Rallyists/Homepage",

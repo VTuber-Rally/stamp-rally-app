@@ -6,7 +6,7 @@ import {
   RouterDecorator,
 } from "@/lib/decorators.tsx";
 
-import { QRCodeDrawer } from "./QRCodeDrawer";
+import { QRCodeDrawer } from "../components/QRCodeDrawer.tsx";
 
 const Template = () => {
   const [open, setOpen] = useQRDrawerContext();

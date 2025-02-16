@@ -2,7 +2,7 @@ import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 
-import * as stories from "./Rules.stories";
+import * as stories from "../../../stories/Rules.stories.tsx";
 
 const { Default } = composeStories(stories);
 
