@@ -1,4 +1,4 @@
-import { createFileRoute, useLoaderData } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header.tsx";
 import { useTranslation } from "react-i18next";
 import { useUser } from "@/lib/hooks/useUser.ts";
@@ -32,9 +32,7 @@ function SettingsPage() {
   const { mutate } = useLogout();
   const { t } = useTranslation();
 
-  const { consent } = useLoaderData({
-    from: "/_rallyists/_withUserProviderNoAutoAnonymous/settings",
-  });
+  const { consent } = Route.useLoaderData();
 
   const [consentChecked, setConsentChecked] = useState(consent);
 

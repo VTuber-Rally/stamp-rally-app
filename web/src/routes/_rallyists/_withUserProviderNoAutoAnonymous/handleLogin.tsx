@@ -1,7 +1,6 @@
 import {
   createFileRoute,
   redirect,
-  useLoaderData,
   useNavigate,
 } from "@tanstack/react-router";
 import { appwriteProjectId } from "@/lib/consts.ts";
@@ -54,9 +53,7 @@ const hasQueryParams = (
 };
 
 function HandleLogin() {
-  const { secret, userId } = useLoaderData({
-    from: "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin",
-  });
+  const { secret, userId } = Route.useLoaderData();
   const { user, registerMagicLink } = useUser();
   const { toast } = useToast();
   const { t } = useTranslation();
