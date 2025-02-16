@@ -71,13 +71,13 @@ function Wheel() {
     <>
       <Header>
         <div className={"flex flex-col"}>
-          <span className="break-words w-full">{tFR("wheelOfFortune")}</span>
-          <hr className="w-full border-black/30 my-2" />
-          <span className="break-words w-full">{tEN("wheelOfFortune")}</span>
+          <span className="w-full break-words">{tFR("wheelOfFortune")}</span>
+          <hr className="my-2 w-full border-black/30" />
+          <span className="w-full break-words">{tEN("wheelOfFortune")}</span>
         </div>
       </Header>
 
-      <div className="relative flex flex-col justify-center items-center">
+      <div className="relative flex flex-col items-center justify-center">
         {isLoading && (
           <div className={"flex flex-col items-center"}>
             <Loader size={4} />
@@ -99,11 +99,11 @@ function Wheel() {
             />
             {winner && (
               <div
-                className="absolute flex justify-center items-center w-full h-full z-10"
+                className="absolute z-10 flex h-full w-full items-center justify-center"
                 onClick={() => setWinner(null)}
               >
-                <div className="text-white animate-in rounded-xl flex items-center text-xl p-4 w-full bg-background-black">
-                  <div className="p-2 rounded-sm mx-auto">
+                <div className="flex w-full items-center rounded-xl bg-background-black p-4 text-xl text-white animate-in">
+                  <div className="mx-auto rounded-sm p-2">
                     <p>🎉 {winner} !</p>
                   </div>
                 </div>
@@ -111,11 +111,11 @@ function Wheel() {
             )}
             {shouldShowSpinButton && (
               <div
-                className="absolute flex justify-center items-center w-full h-full z-10"
+                className="absolute z-10 flex h-full w-full items-center justify-center"
                 onClick={determineWinnerAndStartSpinning}
               >
-                <div className="text-white animate-in rounded-xl flex items-center text-xl p-4 w-[50%] cursor-pointer bg-background-black">
-                  <div className="p-2 rounded-sm mx-auto">
+                <div className="flex w-[50%] cursor-pointer items-center rounded-xl bg-background-black p-4 text-xl text-white animate-in">
+                  <div className="mx-auto rounded-sm p-2">
                     <p>Spin !</p>
                   </div>
                 </div>

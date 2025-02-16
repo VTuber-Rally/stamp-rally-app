@@ -17,8 +17,8 @@ import { useUser } from "@/lib/hooks/useUser.ts";
 
 const Navbar = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="fixed bottom-0 left-0 z-50 w-full h-navbar mb-0 bg-white border-t border-gray-300">
-      <div className="flex h-full max-w-lg mx-auto divide-x divide-gray-200 font-medium">
+    <div className="fixed bottom-0 left-0 z-50 mb-0 h-navbar w-full border-t border-gray-300 bg-white">
+      <div className="mx-auto flex h-full max-w-lg divide-x divide-gray-200 font-medium">
         {children}
       </div>
     </div>
@@ -42,12 +42,12 @@ const NavbarButton: FC<NavbarButtonProps> = ({
     <button
       onClick={onClick}
       className={clsx(
-        "inline-flex flex-col items-center justify-center group grow w-4",
-        disabled && "opacity-50 cursor-not-allowed",
+        "group inline-flex w-4 grow flex-col items-center justify-center",
+        disabled && "cursor-not-allowed opacity-50",
       )}
     >
       {children}
-      <span className="text-sm group-hover:text-blue-600 text-gray-500">
+      <span className="text-sm text-gray-500 group-hover:text-blue-600">
         {label}
       </span>
     </button>
@@ -80,16 +80,16 @@ const NavbarElement: FC<NavBarElementProps> = ({
       inactiveProps={{ className: "hover:bg-gray-50" }}
       activeOptions={{ exact: true }}
       className={clsx(
-        "inline-flex flex-col items-center justify-center group grow w-4",
-        disabled && "opacity-50 cursor-not-allowed",
+        "group inline-flex w-4 grow flex-col items-center justify-center",
+        disabled && "cursor-not-allowed opacity-50",
       )}
       disabled={disabled}
     >
       {children}
       <span
         className={clsx(
-          "text-sm  group-hover:text-blue-600 text-center",
-          isActive ? "text-black font-bold" : "text-gray-500",
+          "text-center text-sm group-hover:text-blue-600",
+          isActive ? "font-bold text-black" : "text-gray-500",
         )}
       >
         {label}
@@ -105,16 +105,16 @@ export const RallyistNavbar = () => {
   return (
     <Navbar>
       <NavbarElement to={"/"} label={t("home")}>
-        <Home className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <Home className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement to={"/artists"} label={t("artists")}>
-        <UsersRound className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <UsersRound className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement to={"/map"} label={t("map")}>
-        <Map className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <Map className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarButton onClick={() => setQRCodeDrawer(true)} label={t("qrcode")}>
-        <QrCodeIcon className="w-5 h-5 mb-2 text-gray-500  group-hover:text-blue-600" />
+        <QrCodeIcon className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarButton>
     </Navbar>
   );
@@ -132,21 +132,21 @@ export const StandistsNavbar = () => {
   return (
     <Navbar>
       <NavbarElement to={"/standists"} label={t("home")}>
-        <Home className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <Home className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement
         to={"/standists/qrcode"}
         label={t("qrcode")}
         disabled={disabled}
       >
-        <QrCode className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <QrCode className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement
         to={"/standists/profile"}
         label={t("profile.label")}
         disabled={disabled}
       >
-        <UserPen className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <UserPen className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
     </Navbar>
   );
@@ -164,24 +164,24 @@ export const StaffNavbar = () => {
   return (
     <Navbar>
       <NavbarElement to={"/staff"} label={t("home")}>
-        <Home className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <Home className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement
         to={"/staff/code"}
         label={t("checkSubmit")}
         disabled={disabled}
       >
-        <QrCode className="w-5 h-5 sm:mb-2 text-gray-500 group-hover:text-blue-600" />
+        <QrCode className="h-5 w-5 text-gray-500 group-hover:text-blue-600 sm:mb-2" />
       </NavbarElement>
       <NavbarElement to={"/staff/wheel"} label={"Wheel"} disabled={disabled}>
-        <Dices className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <Dices className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement
         to={"/staff/gen-qrcode"}
         label={"Gen QR Code"}
         disabled={disabled}
       >
-        <QrCode className="w-5 h-5 mb-2 text-gray-500 group-hover:text-blue-600" />
+        <QrCode className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
     </Navbar>
   );

@@ -67,7 +67,7 @@ function LoginPage() {
     return (
       <>
         <Header>{t("login")}</Header>
-        <div className={"flex flex-col grow justify-center"}>
+        <div className={"flex grow flex-col justify-center"}>
           <p>
             <span>
               <Trans
@@ -98,7 +98,7 @@ function LoginPage() {
   return (
     <>
       <Header>{t("login")}</Header>
-      <div className={"flex flex-col grow justify-center"}>
+      <div className={"flex grow flex-col justify-center"}>
         <h1 className={"mb-4 text-3xl"}>{t("login")}</h1>
         <form
           className={"flex flex-col"}
@@ -116,7 +116,7 @@ function LoginPage() {
             <button
               disabled={true}
               className={
-                "p-2 bg-tertiary text-black rounded-xl flex items-center justify-center"
+                "flex items-center justify-center rounded-xl bg-tertiary p-2 text-black"
               }
             >
               <div className={"flex items-center"}>
@@ -126,7 +126,7 @@ function LoginPage() {
             </button>
           ) : (
             <button
-              className="p-2 bg-tertiary text-black rounded-xl"
+              className="rounded-xl bg-tertiary p-2 text-black"
               type="submit"
             >
               {t("login")}

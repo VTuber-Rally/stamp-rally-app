@@ -21,9 +21,9 @@ const StandistsHome: FC<StandistsHomeProps> = ({
   const navigate = useNavigate();
 
   return (
-    <div className="grow flex flex-col">
+    <div className="flex grow flex-col">
       <Header>{t(headerKey)}</Header>
-      <div className={"flex flex-col grow items-center justify-center"}>
+      <div className={"flex grow flex-col items-center justify-center"}>
         {user ? (
           <div className={"flex flex-col space-y-4"}>
             <h1 className={"text-xl"}>
@@ -33,7 +33,7 @@ const StandistsHome: FC<StandistsHomeProps> = ({
             {children}
 
             <button
-              className="p-2 bg-secondary text-black rounded-xl"
+              className="rounded-xl bg-secondary p-2 text-black"
               type="button"
               onClick={() => logout()}
             >
@@ -44,7 +44,7 @@ const StandistsHome: FC<StandistsHomeProps> = ({
           <div className={"flex flex-col items-center"}>
             <h2 className={"text-2xl"}>{t("notLoggedIn")}</h2>
             <button
-              className="p-3 bg-tertiary text-black rounded-xl mt-2 text-2xl"
+              className="mt-2 rounded-xl bg-tertiary p-3 text-2xl text-black"
               type="button"
               onClick={() =>
                 navigate({

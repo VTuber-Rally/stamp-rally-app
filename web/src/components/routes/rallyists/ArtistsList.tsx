@@ -29,7 +29,7 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
       />
       <div className={"mb-4"}>
         <Header>{t("artistList")}</Header>
-        <p className="text-xl text-center my-4">
+        <p className="my-4 text-center text-xl">
           {t("stampsCount", {
             count: stamps.length,
             maxCount: stampsToCollect,
@@ -60,17 +60,17 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
                     <img
                       src={images[`${imagePrefix}${doc.image}`]}
                       alt={doc.name}
-                      className={"rounded-full w-32 border-8 border-secondary"}
+                      className={"w-32 rounded-full border-8 border-secondary"}
                     />
                   )}
 
-                  <div className="text-center relative bg-secondary w-40 py-1 rounded-xl">
+                  <div className="relative w-40 rounded-xl bg-secondary py-1 text-center">
                     <div>{doc.name}</div>
                     <div>
                       H{doc.hall} {doc.boothNumber}
                     </div>
                     {isStamped ? (
-                      <div className="absolute -right-1 -top-1 rotate-12 drop-shadow-sm">
+                      <div className="absolute -top-1 -right-1 rotate-12 drop-shadow-sm">
                         <TicketCheck size={30} />
                       </div>
                     ) : null}

@@ -81,10 +81,10 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
   return (
     <>
       <Header>{t("submission", { id: submissionId })}</Header>
-      <div className="grow flex flex-col items-center justify-center">
+      <div className="flex grow flex-col items-center justify-center">
         {data.redeemed && (
-          <div className="flex flex-col items-center justify-center bg-red-300 p-4 rounded-xl">
-            <h1 className={"text-2xl font-bold flex"}>
+          <div className="flex flex-col items-center justify-center rounded-xl bg-red-300 p-4">
+            <h1 className={"flex text-2xl font-bold"}>
               <TriangleAlert size={32} className={"mr-2"} />
               Attention: déjà récupéré !
             </h1>
@@ -179,7 +179,7 @@ const SymbolIndicator: FC<SymbolIndicatorProps> = ({ date1, date2 }) => {
   // 2 minutes
   if (diff < 120000) {
     return (
-      <div className={"bg-red-200 flex p-2 rounded-xl"} onClick={showTime}>
+      <div className={"flex rounded-xl bg-red-200 p-2"} onClick={showTime}>
         <TriangleAlert size={20} className={"mr-1"} />
         {diffString}
       </div>
@@ -189,7 +189,7 @@ const SymbolIndicator: FC<SymbolIndicatorProps> = ({ date1, date2 }) => {
   // 5 minutes
   if (diff < 300000) {
     return (
-      <div className={"bg-orange-300 flex p-2 rounded-xl"} onClick={showTime}>
+      <div className={"flex rounded-xl bg-orange-300 p-2"} onClick={showTime}>
         <TriangleAlert size={20} className={"mr-1"} />
         {diffString}
       </div>

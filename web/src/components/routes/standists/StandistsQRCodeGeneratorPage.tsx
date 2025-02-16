@@ -18,8 +18,8 @@ const StandistsQRCodeGeneratorPage = () => {
 
   if (isLoading || !user)
     return (
-      <div className="grow flex items-center justify-center">
-        <div className={"flex flex-col space-y-2 items-center"}>
+      <div className="flex grow items-center justify-center">
+        <div className={"flex flex-col items-center space-y-2"}>
           <Loader size={4} />
           <span>{tFR("loading")}</span>
         </div>
@@ -28,7 +28,7 @@ const StandistsQRCodeGeneratorPage = () => {
 
   if (error)
     return (
-      <div className="grow flex items-center justify-center">
+      <div className="flex grow items-center justify-center">
         {error.message}
       </div>
     );
@@ -44,18 +44,18 @@ const StandistsQRCodeGeneratorPage = () => {
   return (
     <>
       <Header className="flex flex-col items-center gap-2">
-        <span className="break-words w-full">
+        <span className="w-full break-words">
           {tFR("stand", { name: stand?.name })}
         </span>
         <hr className="w-1/2 border-black/30" />
-        <span className="break-words w-full">
+        <span className="w-full break-words">
           {tEN("stand", { name: stand?.name })}
         </span>
       </Header>
       <div className="flex flex-col items-center justify-center gap-2">
         {qrValue?.codeData && (
           <QRCode
-            className="border-4 rounded-lg border-tertiary p-2"
+            className="rounded-lg border-4 border-tertiary p-2"
             value={qrValue.codeData}
           />
         )}

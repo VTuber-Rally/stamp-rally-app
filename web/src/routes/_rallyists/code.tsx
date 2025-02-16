@@ -74,18 +74,18 @@ function Code() {
       <Header>{t("stand", { name: standist.name })}</Header>
       <canvas
         ref={canvasProps.ref as LegacyRef<HTMLCanvasElement> | null}
-        className={"block absolute pointer-events-none inset-0 w-full h-full"}
+        className={"pointer-events-none absolute inset-0 block h-full w-full"}
       />
-      <div className={"flex flex-col py-4 items-center gap-4"}>
+      <div className={"flex flex-col items-center gap-4 py-4"}>
         <img
           src={images[`${imagePrefix}${standist.image}`]}
           alt={standist.name}
-          className={"rounded-full w-48 border-8 border-secondary"}
+          className={"w-48 rounded-full border-8 border-secondary"}
         />
-        <div className="flex gap-2 text-green-700 text-xl font-bold items-center">
+        <div className="flex items-center gap-2 text-xl font-bold text-green-700">
           <TicketCheck size={42} className="-rotate-12" /> {t("stampValidated")}
         </div>
-        <div className="flex gap-2 text-green-700 text-xl font-bold items-center">
+        <div className="flex items-center gap-2 text-xl font-bold text-green-700">
           <ListChecks size={42} />{" "}
           {t("stampsCount", {
             count: stamps?.length ?? 1,

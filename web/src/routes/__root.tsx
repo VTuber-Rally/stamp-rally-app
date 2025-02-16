@@ -17,7 +17,7 @@ function Root() {
       <ScrollRestoration />
       <div
         className={
-          "flex flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom,20px))] min-h-dvh overflow-x-auto p-4"
+          "flex min-h-dvh flex-col overflow-x-auto p-4 pb-[calc(4.5rem+env(safe-area-inset-bottom,20px))]"
         }
       >
         <Outlet />

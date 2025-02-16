@@ -29,12 +29,12 @@ function QRCodeGenArtistsList() {
                     <img
                       src={images[`${imagePrefix}${doc.image}`]}
                       alt={doc.name}
-                      className={"rounded-full w-32 border-8 border-secondary"}
+                      className={"w-32 rounded-full border-8 border-secondary"}
                     />
                   </Link>
                 )}
 
-                <div className="text-center relative bg-secondary w-40 py-1 rounded-xl">
+                <div className="relative w-40 rounded-xl bg-secondary py-1 text-center">
                   <p>{doc.name}</p>
                   <p>
                     H{doc.hall} {doc.boothNumber}

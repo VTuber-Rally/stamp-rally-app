@@ -22,18 +22,18 @@ const QRCodeGenPage = ({ userId }: { userId: string }) => {
   return (
     <div className={"flex flex-col items-center"}>
       <Header className="flex flex-col items-center gap-2">
-        <span className="break-words w-full">
+        <span className="w-full break-words">
           {tFR("stand", { name: standist?.name })}
         </span>
         <hr className="w-1/2 border-black/30" />
-        <span className="break-words w-full">
+        <span className="w-full break-words">
           {tEN("stand", { name: standist?.name })}
         </span>
       </Header>
       <div className="flex flex-col items-center justify-center gap-2">
         {qrValue?.codeData && (
           <QRCode
-            className="border-4 rounded-lg border-tertiary p-2"
+            className="rounded-lg border-4 border-tertiary p-2"
             value={qrValue.codeData}
           />
         )}
@@ -54,12 +54,12 @@ const QRCodeGenPage = ({ userId }: { userId: string }) => {
             {tEN("QRRenewNotice")}
           </p>
         </div>
-        <details className="border-dashed border-4 border-secondary-light p-2 group">
-          <summary className="flex justify-center items-center gap-1 group-open:pb-2 select-none">
+        <details className="group border-4 border-dashed border-secondary-light p-2">
+          <summary className="flex items-center justify-center gap-1 select-none group-open:pb-2">
             <Cog /> QR Settings
           </summary>
           {perpetual ? "Perpetual QR code" : "One-time QR code"}
-          <div className="flex items-center space-x-2 mt-2">
+          <div className="mt-2 flex items-center space-x-2">
             <Switch
               id="perpetual-qrcode"
               checked={perpetual}
