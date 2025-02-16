@@ -98,11 +98,8 @@ export const useDatabase = () => {
 
     // sort using the order field
     docs.documents.sort((a, b) => {
-      console.log(a.order, b.order);
       return a.order - b.order;
     });
-
-    console.log(docs.documents.map((doc) => doc.name));
 
     return docs.documents.map((doc) => ({
       option: doc.name,
