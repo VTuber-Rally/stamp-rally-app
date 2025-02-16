@@ -28,7 +28,6 @@ import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
 import { Route as RallyistsWithUserProviderNoAutoAnonymousImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous'
 import { Route as RallyistsWithUserProviderImport } from './routes/_rallyists/_withUserProvider'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
-import { Route as RallyistsStampsIndexImport } from './routes/_rallyists/stamps/index'
 import { Route as RallyistsArtistsIndexImport } from './routes/_rallyists/artists/index'
 import { Route as StaffSubmissionSubmissionIdImport } from './routes/staff/submission.$submissionId'
 import { Route as StaffGenQrcodeUserIdImport } from './routes/staff/gen-qrcode/$userId'
@@ -154,12 +153,6 @@ const StaffGenQrcodeIndexRoute = StaffGenQrcodeIndexImport.update({
   id: '/gen-qrcode/',
   path: '/gen-qrcode/',
   getParentRoute: () => StaffRoute,
-} as any)
-
-const RallyistsStampsIndexRoute = RallyistsStampsIndexImport.update({
-  id: '/stamps/',
-  path: '/stamps/',
-  getParentRoute: () => RallyistsRoute,
 } as any)
 
 const RallyistsArtistsIndexRoute = RallyistsArtistsIndexImport.update({
@@ -394,13 +387,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RallyistsArtistsIndexImport
       parentRoute: typeof RallyistsImport
     }
-    '/_rallyists/stamps/': {
-      id: '/_rallyists/stamps/'
-      path: '/stamps'
-      fullPath: '/stamps'
-      preLoaderRoute: typeof RallyistsStampsIndexImport
-      parentRoute: typeof RallyistsImport
-    }
     '/staff/gen-qrcode/': {
       id: '/staff/gen-qrcode/'
       path: '/gen-qrcode'
@@ -457,7 +443,6 @@ interface RallyistsRouteChildren {
   RallyistsIndexRoute: typeof RallyistsIndexRoute
   RallyistsStampsScannerRoute: typeof RallyistsStampsScannerRoute
   RallyistsArtistsIndexRoute: typeof RallyistsArtistsIndexRoute
-  RallyistsStampsIndexRoute: typeof RallyistsStampsIndexRoute
 }
 
 const RallyistsRouteChildren: RallyistsRouteChildren = {
@@ -470,7 +455,6 @@ const RallyistsRouteChildren: RallyistsRouteChildren = {
   RallyistsIndexRoute: RallyistsIndexRoute,
   RallyistsStampsScannerRoute: RallyistsStampsScannerRoute,
   RallyistsArtistsIndexRoute: RallyistsArtistsIndexRoute,
-  RallyistsStampsIndexRoute: RallyistsStampsIndexRoute,
 }
 
 const RallyistsRouteWithChildren = RallyistsRoute._addFileChildren(
@@ -541,7 +525,6 @@ export interface FileRoutesByFullPath {
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
-  '/stamps': typeof RallyistsStampsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
 }
 
@@ -567,7 +550,6 @@ export interface FileRoutesByTo {
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
-  '/stamps': typeof RallyistsStampsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
 }
 
@@ -598,7 +580,6 @@ export interface FileRoutesById {
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/_rallyists/artists/': typeof RallyistsArtistsIndexRoute
-  '/_rallyists/stamps/': typeof RallyistsStampsIndexRoute
   '/staff/gen-qrcode/': typeof StaffGenQrcodeIndexRoute
 }
 
@@ -628,7 +609,6 @@ export interface FileRouteTypes {
     | '/staff/gen-qrcode/$userId'
     | '/staff/submission/$submissionId'
     | '/artists'
-    | '/stamps'
     | '/staff/gen-qrcode'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -653,7 +633,6 @@ export interface FileRouteTypes {
     | '/staff/gen-qrcode/$userId'
     | '/staff/submission/$submissionId'
     | '/artists'
-    | '/stamps'
     | '/staff/gen-qrcode'
   id:
     | '__root__'
@@ -682,7 +661,6 @@ export interface FileRouteTypes {
     | '/staff/gen-qrcode/$userId'
     | '/staff/submission/$submissionId'
     | '/_rallyists/artists/'
-    | '/_rallyists/stamps/'
     | '/staff/gen-qrcode/'
   fileRoutesById: FileRoutesById
 }
@@ -724,8 +702,7 @@ export const routeTree = rootRoute
         "/_rallyists/map",
         "/_rallyists/",
         "/_rallyists/stamps/scanner",
-        "/_rallyists/artists/",
-        "/_rallyists/stamps/"
+        "/_rallyists/artists/"
       ]
     },
     "/staff": {
@@ -843,10 +820,6 @@ export const routeTree = rootRoute
     },
     "/_rallyists/artists/": {
       "filePath": "_rallyists/artists/index.tsx",
-      "parent": "/_rallyists"
-    },
-    "/_rallyists/stamps/": {
-      "filePath": "_rallyists/stamps/index.tsx",
       "parent": "/_rallyists"
     },
     "/staff/gen-qrcode/": {
