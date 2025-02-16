@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../QueryKeys.ts";
+
 import { db } from "@/lib/db.ts";
+
+import { QUERY_KEYS } from "../QueryKeys.ts";
 
 export const useCollectedStamps = () => {
   const { isLoading, error, data } = useQuery({

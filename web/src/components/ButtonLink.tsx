@@ -1,6 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import type { FC, MouseEventHandler, ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
 
 export type ButtonLinkProps = {
   children: ReactNode;

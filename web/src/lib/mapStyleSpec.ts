@@ -1,7 +1,8 @@
-import { RasterLayerSpecification, StyleSpecification } from "maplibre-gl";
 import { polygon } from "@turf/helpers";
-import { getStandists } from "@/lib/hooks/useStandists.ts";
 import { FeatureCollection } from "geojson";
+import { RasterLayerSpecification, StyleSpecification } from "maplibre-gl";
+
+import { getStandists } from "@/lib/hooks/useStandists.ts";
 
 const tiles = [
   {

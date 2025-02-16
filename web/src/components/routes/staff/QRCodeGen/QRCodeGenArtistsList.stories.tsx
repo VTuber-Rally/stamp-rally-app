@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import QrCodeGenArtistsList from "./QRCodeGenArtistsList";
 import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
+
+import QrCodeGenArtistsList from "./QRCodeGenArtistsList";
 
 const meta = {
   title: "routes/staff/QRCodeGen/QRCodeGenArtistsList",

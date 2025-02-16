@@ -1,6 +1,7 @@
-import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
-import { ArtistPresentation } from "@/components/ArtistPresentation.tsx";
 import type { Dispatch, FC, SetStateAction } from "react";
+
+import { ArtistPresentation } from "@/components/ArtistPresentation.tsx";
+import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
 
 export const ArtistDrawer: FC<{
   open: boolean;

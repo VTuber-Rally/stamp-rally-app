@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { functions } from "../appwrite.ts";
-import { useCollectedStamps } from "./useCollectedStamps.ts";
-import { db } from "@/lib/db.ts";
+
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { submitFunctionId } from "@/lib/consts.ts";
+import { db } from "@/lib/db.ts";
+
+import { functions } from "../appwrite.ts";
+import { useCollectedStamps } from "./useCollectedStamps.ts";
 
 const useRallySubmit = () => {
   const { data: stamps } = useCollectedStamps();

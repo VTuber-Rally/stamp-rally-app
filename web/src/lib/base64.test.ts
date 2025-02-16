@@ -1,5 +1,5 @@
-import { test, expect, describe } from "vitest";
 // test bytesToBase64DataUrl
+import { describe, expect, test } from "vitest";
 
 import { bytesToBase64DataUrl, dataUrlToBytes } from "./base64";
 

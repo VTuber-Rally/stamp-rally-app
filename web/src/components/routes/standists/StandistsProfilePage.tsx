@@ -1,13 +1,14 @@
-import { useUser } from "@/lib/hooks/useUser.ts";
-import { useStandist } from "@/lib/hooks/useStandist.ts";
-import { Header } from "@/components/Header.tsx";
-import InputField from "@/components/InputField.tsx";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Standist } from "@/lib/models/Standist.ts";
+
+import { Header } from "@/components/Header.tsx";
+import InputField from "@/components/InputField.tsx";
+import Loader from "@/components/Loader.tsx";
+import { useStandist } from "@/lib/hooks/useStandist.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { useUpdateStandistProfile } from "@/lib/hooks/useUpdateStandistProfile.ts";
-import Loader from "@/components/Loader.tsx";
+import { useUser } from "@/lib/hooks/useUser.ts";
+import { Standist } from "@/lib/models/Standist.ts";
 
 export type StandistsEditProfileForm = Pick<
   Standist,

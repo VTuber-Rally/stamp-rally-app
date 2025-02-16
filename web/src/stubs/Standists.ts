@@ -1,4 +1,5 @@
 import { Models } from "appwrite";
+
 import { Standist } from "@/lib/models/Standist.ts";
 
 export const StandistsFromAppwrite = {

@@ -1,11 +1,12 @@
 import {
-  Client,
-  Databases,
   Account,
   AppwriteException,
+  Client,
+  Databases,
   Functions,
   ID,
 } from "appwrite";
+
 import { appwriteEndpoint, appwriteProjectId } from "@/lib/consts.ts";
 
 export const client = new Client();

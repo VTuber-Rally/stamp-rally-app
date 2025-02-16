@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ButtonLink } from "./ButtonLink";
 import { RouterDecorator } from "@/lib/decorators.tsx";
+
+import { ButtonLink } from "./ButtonLink";
 
 const meta = {
   title: "Atom/ButtonLink",

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+
+import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
 
 import { ArtistDrawer } from "./ArtistDrawer";
-import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
-import { fn } from "@storybook/test";
 
 const meta = {
   title: "Rallyist/ArtistDrawer",

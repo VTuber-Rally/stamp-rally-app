@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Rules from "./Rules.tsx";
 import { RouterDecorator } from "@/lib/decorators.tsx";
+
+import Rules from "./Rules.tsx";
 
 const meta = {
   title: "Routes/Rallyists/Rules",

@@ -1,3 +1,6 @@
+import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
 import {
   Drawer,
   DrawerClose,
@@ -7,11 +10,9 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/Drawer.tsx";
-import { retrieveHashFromQRCode } from "@/lib/StampQRCodes.ts";
 import QrReader from "@/components/QrReader.tsx";
-import { useNavigate } from "@tanstack/react-router";
 import { useQRDrawerContext } from "@/context/useQRDrawerContext";
-import { useTranslation } from "react-i18next";
+import { retrieveHashFromQRCode } from "@/lib/StampQRCodes.ts";
 
 export const QRCodeDrawer = () => {
   const [open, setOpen] = useQRDrawerContext();

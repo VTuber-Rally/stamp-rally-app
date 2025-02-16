@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import ArtistsList from "./ArtistsList";
 import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
 import { EnoughStampsWithId, NotSubmittedStampWithId } from "@/stubs/Stamp.ts";
+
+import ArtistsList from "./ArtistsList";
 
 const meta = {
   title: "Routes/Rallyists/ArtistsList",

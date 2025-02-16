@@ -1,16 +1,17 @@
-import { FC, useEffect, useRef } from "react";
-import "maplibre-gl/dist/maplibre-gl.css";
+import { useSearch } from "@tanstack/react-router";
 import {
   GeoJSONSource,
   GeolocateControl,
-  Map as MapLibre,
   MapGeoJSONFeature,
+  Map as MapLibre,
 } from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { FC, useEffect, useRef } from "react";
+
 import {
   generateStyleSpec,
   getStandistsFeatureCollection,
 } from "@/lib/mapStyleSpec.ts";
-import { useSearch } from "@tanstack/react-router";
 
 export const MapLibreMap: FC<{ onStandClick: (standId: string) => void }> = ({
   onStandClick,

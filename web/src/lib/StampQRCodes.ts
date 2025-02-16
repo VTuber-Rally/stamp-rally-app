@@ -1,5 +1,5 @@
-import { StampTuple } from "@/lib/models/Stamp.ts";
 import { publicUrl } from "@/lib/consts.ts";
+import { StampTuple } from "@/lib/models/Stamp.ts";
 
 export function encodeStampToQRCode(stamp: StampTuple) {
   const stringifiedStamp = JSON.stringify(stamp);

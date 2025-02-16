@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/components/Header.tsx";
-import { useSendLoginMagicLink } from "@/lib/hooks/useSendLoginMagicLink.ts";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Trans, useTranslation } from "react-i18next";
+
+import { ButtonLink } from "@/components/ButtonLink.tsx";
+import { Header } from "@/components/Header.tsx";
 import InputField from "@/components/InputField.tsx";
 import Loader from "@/components/Loader.tsx";
-import { Trans, useTranslation } from "react-i18next";
-import { useUser } from "@/lib/hooks/useUser.ts";
 import { useLogout } from "@/lib/hooks/useLogout.ts";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
+import { useSendLoginMagicLink } from "@/lib/hooks/useSendLoginMagicLink.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute(
   "/_rallyists/_withUserProviderNoAutoAnonymous/login",

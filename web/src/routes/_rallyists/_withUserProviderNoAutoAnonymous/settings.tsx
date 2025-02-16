@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/components/Header.tsx";
-import { useTranslation } from "react-i18next";
-import { useUser } from "@/lib/hooks/useUser.ts";
-import { CreateAccountForm } from "@/components/createAccountForm.tsx";
 import i18n from "i18next";
-
-import frFlag from "@/assets/languages/fr.svg";
-import enFlag from "@/assets/languages/en.svg";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { useLogout } from "@/lib/hooks/useLogout.ts";
-import { getPrefs, setPref } from "@/lib/appwrite.ts";
-import { Checkbox } from "@/components/Checkbox.tsx";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import enFlag from "@/assets/languages/en.svg";
+import frFlag from "@/assets/languages/fr.svg";
+import { ButtonLink } from "@/components/ButtonLink.tsx";
+import { Checkbox } from "@/components/Checkbox.tsx";
+import { Header } from "@/components/Header.tsx";
+import { CreateAccountForm } from "@/components/createAccountForm.tsx";
+import { getPrefs, setPref } from "@/lib/appwrite.ts";
+import { useLogout } from "@/lib/hooks/useLogout.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute(
   "/_rallyists/_withUserProviderNoAutoAnonymous/settings",

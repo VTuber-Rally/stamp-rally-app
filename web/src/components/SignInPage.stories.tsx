@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import SignInPage from "./SignInPage";
 import {
   AuthDecorator,
   RouterDecorator,
   TanStackQueryDecorator,
 } from "@/lib/decorators.tsx";
+
+import SignInPage from "./SignInPage";
 
 const meta = {
   title: "Common/SignInPage",

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, createContext } from "react";
 
 export const QRDrawerContext = createContext<
   [boolean, Dispatch<SetStateAction<boolean>>]

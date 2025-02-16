@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import RallyistsHomepage from "./RallyistsHomepage";
 import {
   QRDrawerContextProviderDecorator,
   RouterDecorator,
   TanStackQueryDecorator,
 } from "@/lib/decorators.tsx";
 import { EnoughStampsWithId, NotSubmittedStampWithId } from "@/stubs/Stamp.ts";
+
+import RallyistsHomepage from "./RallyistsHomepage";
 
 const meta = {
   title: "Routes/Rallyists/Homepage",

@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { StampDetails } from "./StampDetails";
+import { Standist } from "@/lib/models/Standist.ts";
 import { NotSubmittedStamp, OtherStamps } from "@/stubs/Stamp.ts";
 import { StandistsFromAppwrite } from "@/stubs/Standists.ts";
-import { Standist } from "@/lib/models/Standist.ts";
+
+import { StampDetails } from "./StampDetails";
 
 const meta = {
   title: "Rallyist/StampDetails",

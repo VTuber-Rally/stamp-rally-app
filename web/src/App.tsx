@@ -1,16 +1,16 @@
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode, useState } from "react";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { Trans, useTranslation } from "react-i18next";
+import { useRegisterSW } from "virtual:pwa-register/react";
+
+import { ToastAction } from "@/components/Toast.tsx";
+import { QRDrawerContextProvider } from "@/context/QRDrawerContextProvider.tsx";
+import { eventEndDate } from "@/lib/consts.ts";
+import { useToast } from "@/lib/hooks/useToast.ts";
 import { queryClient } from "@/lib/queryClient.ts";
 import { router } from "@/router.tsx";
-import { useToast } from "@/lib/hooks/useToast.ts";
-import { useRegisterSW } from "virtual:pwa-register/react";
-import { ToastAction } from "@/components/Toast.tsx";
-import { Trans, useTranslation } from "react-i18next";
-
-import { QRDrawerContextProvider } from "@/context/QRDrawerContextProvider.tsx";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { eventEndDate } from "@/lib/consts.ts";
 
 const LIMIT_DATE = new Date(eventEndDate);
 

@@ -16,6 +16,7 @@ export default [
       "storybook-static/",
       "!.storybook",
       "**/.eslintrc.cjs",
+      "src/routeTree.gen.ts"
     ],
   },
   js.configs.recommended,

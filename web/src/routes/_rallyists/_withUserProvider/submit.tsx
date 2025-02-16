@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/components/Header.tsx";
-import { useRallySubmit } from "@/lib/hooks/useRallySubmit.ts";
-import QRCode from "react-qr-code";
-import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useTranslation } from "react-i18next";
-import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import { stampsToCollect } from "@/lib/consts.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
+import QRCode from "react-qr-code";
+
+import { Header } from "@/components/Header.tsx";
 import { CreateAccountForm } from "@/components/createAccountForm.tsx";
+import { stampsToCollect } from "@/lib/consts.ts";
+import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
+import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import { useRallySubmit } from "@/lib/hooks/useRallySubmit.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute("/_rallyists/_withUserProvider/submit")({
   component: Submit,

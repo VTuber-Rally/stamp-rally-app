@@ -1,11 +1,11 @@
+import * as ToastPrimitives from "@radix-ui/react-toast";
+import { X } from "lucide-react";
 import {
   ComponentPropsWithoutRef,
   ElementRef,
-  forwardRef,
   ReactElement,
+  forwardRef,
 } from "react";
-import * as ToastPrimitives from "@radix-ui/react-toast";
-import { X } from "lucide-react";
 
 const ToastProvider = ToastPrimitives.Provider;
 

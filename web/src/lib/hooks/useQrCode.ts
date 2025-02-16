@@ -1,8 +1,10 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../QueryKeys.ts";
+
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
-import { signData } from "@/lib/signatures.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
+import { signData } from "@/lib/signatures.ts";
+
+import { QUERY_KEYS } from "../QueryKeys.ts";
 
 function usePrivateKey() {
   const { user } = useUser();

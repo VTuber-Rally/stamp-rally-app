@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { useUser } from "@/lib/hooks/useUser.ts";
-import { useToast } from "@/lib/hooks/useToast.ts";
 import { useTranslation } from "react-i18next";
+
+import { useToast } from "@/lib/hooks/useToast.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const useLogout = () => {
   const { logout } = useUser();

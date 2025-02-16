@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-
 // Qr Scanner
 import QrScanner from "qr-scanner";
+import { useEffect, useRef, useState } from "react";
+
 import QrFrame from "@/assets/qr-frame.svg";
 
 export type QrReaderProps = {

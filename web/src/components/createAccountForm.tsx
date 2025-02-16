@@ -1,9 +1,10 @@
-import { useTranslation } from "react-i18next";
-import { useUser } from "@/lib/hooks/useUser.ts";
 import { useForm } from "react-hook-form";
-import InputField from "@/components/InputField.tsx";
+import { useTranslation } from "react-i18next";
+
 import { Checkbox } from "@/components/Checkbox.tsx";
+import InputField from "@/components/InputField.tsx";
 import { useToast } from "@/lib/hooks/useToast.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
 type EmailNameFormType = {
   name: string;

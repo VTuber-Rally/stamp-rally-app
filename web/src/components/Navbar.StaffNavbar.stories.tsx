@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { StaffNavbar } from "./Navbar";
 import { RouterDecorator } from "@/lib/decorators.tsx";
+
+import { StaffNavbar } from "./Navbar";
 
 const meta = {
   title: "Common/Navbar/StaffNavbar",

@@ -19,7 +19,7 @@ interface ImportMetaEnv {
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv
+  readonly env: ImportMetaEnv;
 }
 
 declare const BUILD_TIMESTAMP: string;

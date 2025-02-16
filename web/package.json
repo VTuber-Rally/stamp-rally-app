@@ -62,6 +62,7 @@
     "@tanstack/eslint-plugin-router": "^1.97.8",
     "@tanstack/router-plugin": "^1.97.3",
     "@testing-library/react": "^16.2.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/geojson": "^7946.0.15",
     "@types/node": "^20.17.6",
     "@types/react": "^18.3.18",

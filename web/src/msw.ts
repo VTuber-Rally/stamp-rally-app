@@ -1,6 +1,8 @@
-import { http, HttpResponse } from "msw";
-import { StandistsFromAppwrite } from "./stubs/Standists.ts";
+import { HttpResponse, http } from "msw";
+
 import { Standist } from "@/lib/models/Standist.ts";
+
+import { StandistsFromAppwrite } from "./stubs/Standists.ts";
 
 export const handlers = [
   http.get(

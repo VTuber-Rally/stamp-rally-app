@@ -1,19 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
-import { imagePrefix, images } from "@/lib/images.ts";
-import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp.ts";
-import { useStandist } from "@/lib/hooks/useStandist.ts";
-import { useTranslation } from "react-i18next";
-import { StampDetails } from "@/components/StampDetails.tsx";
-import { Header } from "@/components/Header.tsx";
-import { ListChecks, TicketCheck } from "lucide-react";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import Intro from "@/components/Intro.tsx";
-import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useConfetti } from "@stevent-team/react-party";
+import { createFileRoute } from "@tanstack/react-router";
+import { ListChecks, TicketCheck } from "lucide-react";
 import { LegacyRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
+import { ButtonLink } from "@/components/ButtonLink.tsx";
+import { Header } from "@/components/Header.tsx";
+import Intro from "@/components/Intro.tsx";
+import { StampDetails } from "@/components/StampDetails.tsx";
+import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp.ts";
 import { stampsToCollect } from "@/lib/consts.ts";
+import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
+import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import { useStandist } from "@/lib/hooks/useStandist.ts";
+import { imagePrefix, images } from "@/lib/images.ts";
+import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
 
 export const Route = createFileRoute("/_rallyists/code")({
   component: Code,
