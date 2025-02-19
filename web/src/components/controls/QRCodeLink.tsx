@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { useQRDrawerContext } from "@/context/useQRDrawerContext";
+import { useQRDrawerContext } from "@/contexts/useQRDrawerContext.ts";
 
 import { ButtonLink } from "./ButtonLink.tsx";
 

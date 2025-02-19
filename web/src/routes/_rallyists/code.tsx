@@ -4,10 +4,10 @@ import { ListChecks, TicketCheck } from "lucide-react";
 import { LegacyRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { Header } from "@/components/Header.tsx";
 import Intro from "@/components/Intro.tsx";
-import { StampDetails } from "@/components/StampDetails.tsx";
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import { Header } from "@/components/layout/Header.tsx";
+import { StampDetails } from "@/components/scan/StampDetails.tsx";
 import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp.ts";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";

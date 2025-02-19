@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import { QRDrawerContext } from "@/contexts/QRDrawerContext.tsx";
 
 export const QRDrawerContextProvider: FC<PropsWithChildren> = ({
   children,

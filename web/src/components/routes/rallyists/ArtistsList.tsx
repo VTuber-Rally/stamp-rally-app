@@ -3,8 +3,8 @@ import { TicketCheck } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ArtistDrawer } from "@/components/ArtistDrawer.tsx";
-import { Header } from "@/components/Header.tsx";
+import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
 import { imagePrefix, images } from "@/lib/images.ts";

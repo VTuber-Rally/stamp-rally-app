@@ -12,7 +12,7 @@ import {
 import { FC, MouseEventHandler, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useQRDrawerContext } from "@/context/useQRDrawerContext";
+import { useQRDrawerContext } from "@/contexts/useQRDrawerContext.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
 const Navbar = ({ children }: { children: ReactNode }) => {

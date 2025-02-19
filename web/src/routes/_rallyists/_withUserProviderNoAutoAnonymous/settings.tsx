@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 
 import enFlag from "@/assets/languages/en.svg";
 import frFlag from "@/assets/languages/fr.svg";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { Checkbox } from "@/components/Checkbox.tsx";
-import { CreateAccountForm } from "@/components/CreateAccountForm.tsx";
-import { Header } from "@/components/Header.tsx";
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import { CreateAccountForm } from "@/components/forms/CreateAccountForm.tsx";
+import { Checkbox } from "@/components/inputs/Checkbox.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { getPrefs, setPref } from "@/lib/appwrite.ts";
 import { useLogout } from "@/lib/hooks/useLogout.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";

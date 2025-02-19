@@ -5,8 +5,8 @@ import { StrictMode, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
-import { ToastAction } from "@/components/Toast.tsx";
-import { QRDrawerContextProvider } from "@/context/QRDrawerContextProvider.tsx";
+import { ToastAction } from "@/components/toasts/Toast.tsx";
+import { QRDrawerContextProvider } from "@/contexts/QRDrawerContextProvider.tsx";
 import { eventEndDate } from "@/lib/consts.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { queryClient } from "@/lib/queryClient.ts";

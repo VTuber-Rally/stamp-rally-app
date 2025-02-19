@@ -2,10 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { Header } from "@/components/Header.tsx";
-import InputField from "@/components/InputField.tsx";
 import Loader from "@/components/Loader.tsx";
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import InputField from "@/components/inputs/InputField.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useLogout } from "@/lib/hooks/useLogout.ts";
 import { useSendLoginMagicLink } from "@/lib/hooks/useSendLoginMagicLink.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";

@@ -5,9 +5,9 @@ import { TriangleAlert } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { Header } from "@/components/Header.tsx";
 import Loader from "@/components/Loader.tsx";
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import {
   Table,
   TableBody,
@@ -16,7 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/Table.tsx";
+} from "@/components/layout/Table.tsx";
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { databases } from "@/lib/appwrite.ts";
 import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";

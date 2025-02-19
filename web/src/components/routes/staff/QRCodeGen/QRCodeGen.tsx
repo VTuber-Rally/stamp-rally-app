@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
-import { Header } from "@/components/Header.tsx";
-import { Switch } from "@/components/Switch.tsx";
+import { Switch } from "@/components/inputs/Switch.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
 
