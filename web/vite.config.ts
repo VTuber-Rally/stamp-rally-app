@@ -1,11 +1,11 @@
 import { sentryVitePlugin } from "@sentry/vite-plugin";
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import mkcert from "vite-plugin-mkcert";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-import { VitePWA } from "vite-plugin-pwa";
 import tailwindcss from "@tailwindcss/vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import react from "@vitejs/plugin-react";
 import path from "path";
+import { defineConfig } from "vite";
+import mkcert from "vite-plugin-mkcert";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,6 +20,7 @@ export default defineConfig({
     sourcemap: true,
   },
   plugins: [
+    // This plugin is disabled in Storybook builds in .storybook/main.ts
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
