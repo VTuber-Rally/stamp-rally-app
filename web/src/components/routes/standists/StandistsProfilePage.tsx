@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { Header } from "@/components/Header.tsx";
-import InputField from "@/components/InputField.tsx";
 import Loader from "@/components/Loader.tsx";
+import InputField from "@/components/inputs/InputField.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { useUpdateStandistProfile } from "@/lib/hooks/useUpdateStandistProfile.ts";

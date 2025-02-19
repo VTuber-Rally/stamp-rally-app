@@ -5,7 +5,7 @@ import {
   RouterDecorator,
 } from "@/lib/decorators.tsx";
 
-import { RallyistNavbar } from "./Navbar";
+import { RallyistNavbar } from "./Navbar.tsx";
 
 const meta = {
   title: "Common/Navbar/RallyistNavbar",

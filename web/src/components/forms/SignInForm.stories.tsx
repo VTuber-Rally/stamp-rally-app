@@ -6,13 +6,13 @@ import {
   TanStackQueryDecorator,
 } from "@/lib/decorators.tsx";
 
-import SignInPage from "./SignInPage";
+import SignInForm from "./SignInForm.tsx";
 
 const meta = {
-  title: "Common/SignInPage",
-  component: SignInPage,
+  title: "Common/SignInForm",
+  component: SignInForm,
   decorators: [TanStackQueryDecorator, AuthDecorator, RouterDecorator],
-} satisfies Meta<typeof SignInPage>;
+} satisfies Meta<typeof SignInForm>;
 
 export default meta;
 

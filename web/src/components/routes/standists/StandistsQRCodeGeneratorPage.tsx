@@ -2,8 +2,8 @@ import { RefreshCcw, TicketCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
-import { Header } from "@/components/Header.tsx";
 import Loader from "@/components/Loader.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useQrCode } from "@/lib/hooks/useQrCode.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";

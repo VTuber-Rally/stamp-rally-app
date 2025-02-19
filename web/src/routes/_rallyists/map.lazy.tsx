@@ -1,8 +1,8 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
 
-import { ArtistDrawer } from "@/components/ArtistDrawer.tsx";
 import { MapLibreMap } from "@/components/MapLibreMap.tsx";
+import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 
 export const Route = createLazyFileRoute("/_rallyists/map")({
   component: StandMap,

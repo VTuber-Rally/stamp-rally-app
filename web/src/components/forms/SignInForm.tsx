@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import InputField from "@/components/InputField.tsx";
 import Loader from "@/components/Loader.tsx";
+import InputField from "@/components/inputs/InputField.tsx";
 import { useLogin } from "@/lib/hooks/useLogin.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
@@ -17,7 +17,7 @@ type SigninPageProps = {
   navigateTo: string;
 };
 
-function SignInPage({ navigateTo }: SigninPageProps) {
+function SignInForm({ navigateTo }: SigninPageProps) {
   const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -109,4 +109,4 @@ function SignInPage({ navigateTo }: SigninPageProps) {
   );
 }
 
-export default SignInPage;
+export default SignInForm;

@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 
 import Logo from "@/assets/logo.png";
-import { ButtonLink } from "@/components/ButtonLink.tsx";
 import Intro from "@/components/Intro.tsx";
-import QRCodeLink from "@/components/QRCodeLink.tsx";
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { StampWithId } from "@/lib/models/Stamp.ts";
 import { SubmissionWithId } from "@/lib/models/Submission.ts";

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Wheel as WheelComponent } from "react-custom-roulette";
 import { useTranslation } from "react-i18next";
 
-import { Header } from "@/components/Header.tsx";
 import Loader from "@/components/Loader.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useWheelEntries } from "@/lib/hooks/useWheelEntries.ts";
 
 function Wheel() {

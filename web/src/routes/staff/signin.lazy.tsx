@@ -1,11 +1,11 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 
-import SignInPage from "@/components/SignInPage.tsx";
+import SignInForm from "@/components/forms/SignInForm.tsx";
 
 export const Route = createLazyFileRoute("/staff/signin")({
   component: StaffSignin,
 });
 
 function StaffSignin() {
-  return <SignInPage navigateTo="/staff" />;
+  return <SignInForm navigateTo="/staff" />;
 }

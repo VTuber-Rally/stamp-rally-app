@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import QrReader from "@/components/QrReader.tsx";
+import QrReader from "@/components/scan/QrReader.tsx";
 import { retrieveHashFromQRCode } from "@/lib/StampQRCodes.ts";
 
 export const Route = createFileRoute("/_rallyists/stamps/scanner")({

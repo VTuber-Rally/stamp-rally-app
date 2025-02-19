@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Header } from "@/components/Header.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
 type StandistsHomeProps = {

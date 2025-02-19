@@ -19,10 +19,10 @@ import {
 } from "react";
 import { I18nextProvider } from "react-i18next";
 
-import { Drawer, DrawerContent } from "@/components/Drawer.tsx";
-import { QRCodeDrawer } from "@/components/QRCodeDrawer.tsx";
-import { Toaster } from "@/components/Toaster.tsx";
-import { QRDrawerContext } from "@/context/QRDrawerContext.tsx";
+import { Drawer, DrawerContent } from "@/components/layout/Drawer.tsx";
+import { QRCodeDrawer } from "@/components/scan/QRCodeDrawer.tsx";
+import { Toaster } from "@/components/toasts/Toaster.tsx";
+import { QRDrawerContext } from "@/contexts/QRDrawerContext.tsx";
 import i18n from "@/lib/i18n.ts";
 import { UserContext, UserContextType } from "@/lib/userContext.tsx";
 import {

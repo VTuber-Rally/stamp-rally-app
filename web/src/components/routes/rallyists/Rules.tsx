@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Header } from "@/components/Header.tsx";
 import Intro from "@/components/Intro.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { buildId, commitRef } from "@/lib/consts.ts";
 
 const Rules = () => {

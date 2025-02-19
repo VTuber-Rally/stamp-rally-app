@@ -4,10 +4,10 @@ import { polygon } from "@turf/helpers";
 import { ArrowUpRightFromSquare, MapPinned } from "lucide-react";
 import type { FC, ReactNode } from "react";
 
-import { ButtonLink } from "@/components/ButtonLink.tsx";
-import { DrawerDescription, DrawerTitle } from "@/components/Drawer.tsx";
-import { Header } from "@/components/Header.tsx";
-import QRCodeLink from "@/components/QRCodeLink.tsx";
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
+import { DrawerDescription, DrawerTitle } from "@/components/layout/Drawer.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 import { imagePrefix, images } from "@/lib/images.ts";
 

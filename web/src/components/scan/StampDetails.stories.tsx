@@ -4,7 +4,7 @@ import { Standist } from "@/lib/models/Standist.ts";
 import { NotSubmittedStamp, OtherStamps } from "@/stubs/Stamp.ts";
 import { StandistsFromAppwrite } from "@/stubs/Standists.ts";
 
-import { StampDetails } from "./StampDetails";
+import { StampDetails } from "./StampDetails.tsx";
 
 const meta = {
   title: "Rallyist/StampDetails",

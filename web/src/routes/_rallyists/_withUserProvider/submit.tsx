@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
-import { CreateAccountForm } from "@/components/CreateAccountForm.tsx";
-import { Header } from "@/components/Header.tsx";
+import { CreateAccountForm } from "@/components/forms/CreateAccountForm.tsx";
+import { Header } from "@/components/layout/Header.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";

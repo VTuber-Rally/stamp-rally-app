@@ -9,9 +9,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/Drawer.tsx";
-import QrReader from "@/components/QrReader.tsx";
-import { useQRDrawerContext } from "@/context/useQRDrawerContext";
+} from "@/components/layout/Drawer.tsx";
+import QrReader from "@/components/scan/QrReader.tsx";
+import { useQRDrawerContext } from "@/contexts/useQRDrawerContext.ts";
 import { retrieveHashFromQRCode } from "@/lib/StampQRCodes.ts";
 
 export const QRCodeDrawer = () => {
