@@ -9,7 +9,7 @@ import {
 import { handlers } from "@/msw.ts";
 import { LoggedInUserStaff, LoggedInUserStandist } from "@/stubs/User.ts";
 
-import StandistsProfilePage from "../components/routes/standists/StandistsProfilePage.tsx";
+import StandistsProfilePage from "./StandistsProfilePage";
 
 const meta = {
   title: "Routes/Standists/Profile",

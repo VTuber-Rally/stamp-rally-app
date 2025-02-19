@@ -6,7 +6,7 @@ import {
   TanStackQueryDecorator,
 } from "@/lib/decorators.tsx";
 
-import { ArtistPresentation } from "../components/ArtistPresentation.tsx";
+import { ArtistPresentation } from "./ArtistPresentation";
 
 const meta = {
   title: "Rallyist/ArtistPresentation",

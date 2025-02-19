@@ -2,13 +2,19 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { RouterDecorator } from "@/lib/decorators.tsx";
 
-import Rules from "../components/routes/rallyists/Rules.tsx";
+import { MapLibreMap } from "./MapLibreMap";
 
 const meta = {
-  title: "Routes/Rallyists/Rules",
-  component: Rules,
+  title: "Rallyist/MapLibreMap",
+  component: MapLibreMap,
   decorators: [RouterDecorator],
-} satisfies Meta<typeof Rules>;
+  argTypes: {
+    onStandClick: { action: "standClick" },
+  },
+  args: {
+    onStandClick: () => {},
+  },
+} satisfies Meta<typeof MapLibreMap>;
 
 export default meta;
 

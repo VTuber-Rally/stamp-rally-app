@@ -5,7 +5,7 @@ import { RouterDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
 import { handlers } from "@/msw.ts";
 import { GetPrivateKeyExecutionReturn } from "@/stubs/User.ts";
 
-import QrCodeGen from "../components/routes/staff/QRCodeGen/QRCodeGen.tsx";
+import QrCodeGen from "./QRCodeGen";
 
 const meta = {
   title: "routes/staff/QRCodeGen/QRCodeGen",

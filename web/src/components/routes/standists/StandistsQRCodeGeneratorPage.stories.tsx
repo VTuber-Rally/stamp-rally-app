@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { AuthDecorator, TanStackQueryDecorator } from "@/lib/decorators.tsx";
 import { LoggedInUserStaff, LoggedInUserStandist } from "@/stubs/User.ts";
 
-import StandistsQRCodeGeneratorPage from "../components/routes/standists/StandistsQRCodeGeneratorPage.tsx";
+import StandistsQRCodeGeneratorPage from "./StandistsQRCodeGeneratorPage";
 
 const meta = {
   title: "Routes/Standists/QRCodeGenerator",

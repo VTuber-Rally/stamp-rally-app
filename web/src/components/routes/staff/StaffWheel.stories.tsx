@@ -4,7 +4,7 @@ import { HttpResponse, http } from "msw";
 import { TanStackQueryDecorator } from "@/lib/decorators.tsx";
 import { WheelEntries } from "@/stubs/WheelEntries.ts";
 
-import StaffWheel from "../components/routes/staff/StaffWheel.tsx";
+import StaffWheel from "./StaffWheel";
 
 const meta = {
   title: "Routes/Staff/Wheel",

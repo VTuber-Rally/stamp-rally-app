@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { QRDrawerContextProviderDecorator } from "@/lib/decorators.tsx";
 
-import QrCodeLink from "../components/QRCodeLink.tsx";
+import QrCodeLink from "./QRCodeLink";
 
 const meta = {
   title: "Rallyist/QRCodeLink",

@@ -2,7 +2,7 @@ import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 
-import * as stories from "../stories/StampDetails.stories.tsx";
+import * as stories from "./StampDetails.stories";
 
 const { PaperStamp, DigitalStamp } = composeStories(stories);
 

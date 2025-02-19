@@ -2,9 +2,9 @@ import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { afterAll, beforeAll, describe, expect, test, vi } from "vitest";
 
-import * as RallyistsNavbarStories from "../stories/Navbar.RallyistNavbar.stories.tsx";
-import * as StaffNavbarStories from "../stories/Navbar.StaffNavbar.stories.tsx";
-import * as StandistsNavbarStories from "../stories/Navbar.StandistsNavbar.stories.tsx";
+import * as RallyistsNavbarStories from "./Navbar.RallyistNavbar.stories";
+import * as StaffNavbarStories from "./Navbar.StaffNavbar.stories";
+import * as StandistsNavbarStories from "./Navbar.StandistsNavbar.stories";
 
 const { Default: StaffNavBar } = composeStories(StaffNavbarStories);
 const { Default: StandistsNavBar } = composeStories(StandistsNavbarStories);
