@@ -60,6 +60,7 @@ function Code() {
     if (showSubmitButton) {
       setTimeout(() => {
         createConfetti();
+        window.plausible("Rally Completed");
       }, 1000);
     }
   }, [showSubmitButton, createConfetti]);

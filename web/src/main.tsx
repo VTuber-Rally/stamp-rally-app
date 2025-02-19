@@ -27,4 +27,9 @@ if (isProd) {
   });
 }
 
+// Create Plausible fallback function
+window.plausible ||= (...args) => {
+  window.plausible.q?.push(args);
+};
+
 createRoot(document.getElementById("root")!).render(<App />);

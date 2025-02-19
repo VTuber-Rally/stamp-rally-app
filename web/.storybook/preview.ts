@@ -1,19 +1,18 @@
+import "@fontsource-variable/comfortaa";
+// Viewports
+import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 import type { Preview } from "@storybook/react";
 import { initialize, mswLoader } from "msw-storybook-addon";
 
-import "@fontsource-variable/comfortaa";
+// i18n
+import "@/lib/i18n.ts";
+
 import "../src/index.css";
+import { I18nextDecorator } from "../src/lib/decorators";
+import { handlers } from "../src/msw";
 
 // Initialize MSW
 initialize();
-
-// i18n
-import "@/lib/i18n.ts";
-import { I18nextDecorator } from "../src/lib/decorators";
-
-// Viewports
-import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
-import { handlers } from "../src/msw";
 
 const customViewports = {
   phone: {

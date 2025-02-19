@@ -1,5 +1,7 @@
 import { vi } from "vitest";
 
+import "@/lib/i18n.ts";
+
 vi.mock("appwrite", () => {
   const Client = vi.fn();
   Client.prototype.setEndpoint = vi.fn().mockReturnThis();
@@ -34,7 +36,5 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
-
-import "@/lib/i18n.ts";
 
 process.env.TZ = "UTC";
