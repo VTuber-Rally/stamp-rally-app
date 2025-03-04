@@ -97,7 +97,8 @@
   "scanQRCode": "Scanner un QR code",
   "scanQRDrawer": {
     "description": "Ajoutez un tampon dans votre collection en scannant le code fourni par l'artiste !",
-    "title": "Scannez un QR Code"
+    "title": "Scannez un QR Code",
+    "nativeCameraHint": "En cas de difficultés, vous pouvez utiliser l'application Caméra de votre appareil pour tenter de scanner le QR code."
   },
   "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {

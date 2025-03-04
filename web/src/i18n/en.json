@@ -97,7 +97,8 @@
   "scanQRCode": "Scan a QR code",
   "scanQRDrawer": {
     "description": "Add a stamp in your collection by scanning the QR code showed to you by the artist!",
-    "title": "Scan a QR Code"
+    "title": "Scan a QR Code",
+    "nativeCameraHint": "If you're experiencing issues, please try using your device's Camera app to scan the QR code."
   },
   "scanThisQR": "Scan this QR code to get the stamp!",
   "settings": {

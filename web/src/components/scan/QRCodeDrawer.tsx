@@ -38,6 +38,9 @@ export const QRCodeDrawer = () => {
           }}
           onCameraAccessFail={() => console.log("oh no, no camera :(")}
         />
+        <p className="px-4 py-2 text-center text-xs text-gray-600">
+          {t("scanQRDrawer.nativeCameraHint")}
+        </p>
         <DrawerFooter>
           <DrawerClose>{t("close")}</DrawerClose>
         </DrawerFooter>
