@@ -1,17 +1,38 @@
 import clsx from "clsx";
 import { TicketCheck } from "lucide-react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
 
 import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
+import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";
+import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
-import { imagePrefix, images } from "@/lib/images.ts";
 import { StampWithId } from "@/lib/models/Stamp.ts";
+import { queryClient } from "@/lib/queryClient";
 
 type ArtistsListProps = {
   stamps: StampWithId[];
+};
+
+export const ImageErrorFallback = ({
+  resetErrorBoundary,
+}: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) => {
+  return (
+    <div
+      onClick={resetErrorBoundary}
+      className="flex h-32 w-32 cursor-pointer items-center justify-center rounded-full border-8 border-secondary bg-gray-100"
+    >
+      <div className="text-center text-sm text-gray-500">
+        Cliquez pour réessayer
+      </div>
+    </div>
+  );
 };
 
 const ArtistsList = ({ stamps }: ArtistsListProps) => {
@@ -54,15 +75,23 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
                     setActiveStandistId(doc.userId);
                   }}
                 >
-                  {images[
-                    `${imagePrefix}${doc.image}` as keyof typeof images
-                  ] && (
-                    <img
-                      src={images[`${imagePrefix}${doc.image}`]}
-                      alt={doc.name}
-                      className={"w-32 rounded-full border-8 border-secondary"}
-                    />
-                  )}
+                  {/* au cas où les images plantes pour x raison */}
+                  <ErrorBoundary
+                    FallbackComponent={ImageErrorFallback}
+                    onReset={() => {
+                      queryClient.invalidateQueries({
+                        queryKey: [QUERY_KEYS.ARTIST_IMAGE, doc.userId],
+                      });
+                    }}
+                  >
+                    <Suspense
+                      fallback={
+                        <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
+                      }
+                    >
+                      <ArtistImage userId={doc.userId} name={doc.name} />
+                    </Suspense>
+                  </ErrorBoundary>
 
                   <div className="relative w-40 rounded-xl bg-secondary py-1 text-center">
                     <div>{doc.name}</div>

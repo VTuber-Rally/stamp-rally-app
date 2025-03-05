@@ -20,7 +20,11 @@ vi.mock("appwrite", () => {
   const Functions = vi.fn();
   Functions.prototype.createExecution = vi.fn();
 
-  return { Client, Account, Functions, Databases };
+  const Storage = vi.fn();
+  Storage.prototype.getFileDownload = vi.fn();
+  Storage.prototype.listFiles = vi.fn();
+
+  return { Client, Account, Functions, Databases, Storage };
 });
 
 Object.defineProperty(window, "matchMedia", {

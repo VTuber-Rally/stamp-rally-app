@@ -5,9 +5,14 @@ import {
   Databases,
   Functions,
   ID,
+  Storage,
 } from "appwrite";
 
-import { appwriteEndpoint, appwriteProjectId } from "@/lib/consts.ts";
+import {
+  appwriteEndpoint,
+  appwriteProjectId,
+  assetsBucketId,
+} from "@/lib/consts.ts";
 
 export const client = new Client();
 
@@ -18,7 +23,7 @@ export { ID, Query } from "appwrite";
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const functions = new Functions(client);
-
+export const storage = new Storage(client);
 export const getUserData = async () => {
   try {
     return account.get();
@@ -140,5 +145,14 @@ export const loginUserIdSecret = async (userId: string, secret: string) => {
   } catch (error) {
     const appwriteError = error as AppwriteException;
     throw new Error("Cannot login with magic link", { cause: appwriteError });
+  }
+};
+
+export const getAssetsFilesList = async () => {
+  try {
+    return storage.listFiles(assetsBucketId);
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot get files list", { cause: appwriteError });
   }
 };

@@ -1,20 +1,24 @@
 import { useConfetti } from "@stevent-team/react-party";
 import { createFileRoute } from "@tanstack/react-router";
 import { ListChecks, TicketCheck } from "lucide-react";
-import { LegacyRef, useEffect } from "react";
+import { LegacyRef, Suspense, useEffect } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
 
 import Intro from "@/components/Intro.tsx";
+import { ArtistImage } from "@/components/artists/ArtistImage";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { Header } from "@/components/layout/Header.tsx";
+import { ImageErrorFallback } from "@/components/routes/rallyists/ArtistsList";
 import { StampDetails } from "@/components/scan/StampDetails.tsx";
+import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp.ts";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
-import { imagePrefix, images } from "@/lib/images.ts";
 import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
+import { queryClient } from "@/lib/queryClient";
 
 export const Route = createFileRoute("/_rallyists/code")({
   component: Code,
@@ -78,11 +82,23 @@ function Code() {
         className={"pointer-events-none absolute inset-0 block h-full w-full"}
       />
       <div className={"flex flex-col items-center gap-4 py-4"}>
-        <img
-          src={images[`${imagePrefix}${standist.image}`]}
-          alt={standist.name}
-          className={"w-48 rounded-full border-8 border-secondary"}
-        />
+        {/* au cas où les images plantes pour x raison */}
+        <ErrorBoundary
+          FallbackComponent={ImageErrorFallback}
+          onReset={() => {
+            queryClient.invalidateQueries({
+              queryKey: [QUERY_KEYS.ARTIST_IMAGE, standist.userId],
+            });
+          }}
+        >
+          <Suspense
+            fallback={
+              <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
+            }
+          >
+            <ArtistImage userId={standist.userId} name={standist.name} />
+          </Suspense>
+        </ErrorBoundary>
         <div className="flex items-center gap-2 text-xl font-bold text-green-700">
           <TicketCheck size={42} className="-rotate-12" /> {t("stampValidated")}
         </div>
