@@ -7,6 +7,7 @@ export const getEnv = () => {
     APPWRITE_ENDPOINT,
     PROFILE_DATABASE_ID,
     PROFILE_COLLECTION_ID,
+    BUCKET_ID
   } = process.env;
 
   if (!APPWRITE_ENDPOINT) {
@@ -25,11 +26,16 @@ export const getEnv = () => {
     throw new Error("PROFILE_DATABASE_ID or PROFILE_COLLECTION_ID is not set");
   }
 
+  if (!BUCKET_ID) {
+    throw new Error("BUCKET_ID is not set");
+  }
+
   return {
     APPWRITE_API_KEY,
     APPWRITE_PROJECT_ID,
     APPWRITE_ENDPOINT,
     PROFILE_DATABASE_ID,
     PROFILE_COLLECTION_ID,
+    BUCKET_ID,
   };
 };
