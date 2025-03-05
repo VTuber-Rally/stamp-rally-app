@@ -7,7 +7,7 @@ export const getEnv = () => {
     APPWRITE_ENDPOINT,
     PROFILE_DATABASE_ID,
     PROFILE_COLLECTION_ID,
-    BUCKET_ID
+    BUCKET_ID,
   } = process.env;
 
   if (!APPWRITE_ENDPOINT) {

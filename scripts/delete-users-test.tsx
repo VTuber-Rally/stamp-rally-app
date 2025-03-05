@@ -1,5 +1,6 @@
 import * as sdk from "node-appwrite";
 import { getEnv } from "./shared.js";
+import { deleteUserMedia } from "./upload-user-medias.js";
 
 const {
   APPWRITE_PROJECT_ID,
@@ -30,15 +31,18 @@ const promises = usersExisting.users.map((user) => {
     ])
     .then((documents) => {
       const documentDeletionPromises = documents.documents.map((document) => {
-        return database.deleteDocument(
-          PROFILE_DATABASE_ID,
-          PROFILE_COLLECTION_ID,
-          document.$id,
-        );
+        return Promise.all([
+          database.deleteDocument(
+            PROFILE_DATABASE_ID,
+            PROFILE_COLLECTION_ID,
+            document.$id,
+          ),
+          deleteUserMedia(document.image),
+        ]);
       });
       return Promise.all(documentDeletionPromises);
     })
-    .then(() => users.delete(user.$id));
+    .then(() => users.delete(user.$id))
 });
 
 await Promise.all(promises);

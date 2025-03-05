@@ -13,6 +13,8 @@ import * as sdk from "node-appwrite";
 import * as fs from "fs";
 import { getEnv } from "./shared.js";
 import { Permission, Role } from "node-appwrite";
+import path from "path";
+import { deleteUserMedia, uploadUserMedia } from "./upload-user-medias.js";
 
 const {
   APPWRITE_PROJECT_ID,
@@ -33,13 +35,19 @@ const users = new sdk.Users(client);
 const database = new sdk.Databases(client);
 
 // check if arg is set
-if (process.argv.length < 3) {
+if (process.argv.length < 4) {
   throw new Error(
-    "File path is not set. Please provide a TSV file path (exported from the Google Sheets)",
+    "File path is not set. Please provide a TSV file path (exported from the Google Sheets) and the path to the folder containing the user medias",
   );
 }
 
 const filePath = process.argv[2];
+const userMediasPath = process.argv[3];
+
+if (!fs.existsSync(userMediasPath)) {
+  throw new Error(`User medias path not found: ${userMediasPath}`);
+}
+
 let content = fs.readFileSync(filePath, "utf8");
 
 const lines = content
@@ -148,6 +156,16 @@ async function createProfilesAndDocuments() {
 
       console.log(`\`${emailModified}\`:\`${password}\``);
 
+      let imageId = "fallback";
+      if (line.image) {
+        const imagePath = path.join(userMediasPath, line.image);
+        if (!fs.existsSync(imagePath)) {
+          throw new Error(`Image file not found: ${imagePath}`);
+        }
+        console.log(`Uploading image: ${imagePath}`);
+        imageId = await uploadUserMedia(imagePath);
+      }
+
       return {
         userId: newAccount.$id,
         boothNumber: line.boothNumber,
@@ -155,7 +173,7 @@ async function createProfilesAndDocuments() {
         hall: line.hall,
         description: line.description,
         publicKey: JSON.stringify(exportedPublicKey),
-        image: line.image,
+        image: imageId,
         twitter: line.twitter,
         instagram: line.insta,
         twitch: line.streamingPlatformUrl,
