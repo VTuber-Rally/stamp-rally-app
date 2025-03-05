@@ -24,24 +24,6 @@ const config: StorybookConfig = {
     VITE_SUBMIT_FUNCTION_ID: "SUBMIT_FUNCTION_ID",
     VITE_GET_PRIVATE_KEY_FUNCTION_ID: "GET_PRIVATE_KEY_FUNCTION_ID",
   }),
-  async viteFinal(config) {
-    const vitePWAPluginIndex = config.plugins.findIndex(
-      (pluginDefinition) =>
-        Array.isArray(pluginDefinition) &&
-        typeof pluginDefinition[0] === "object" &&
-        "name" in pluginDefinition[0] &&
-        pluginDefinition[0].name === "vite-plugin-pwa",
-    );
-
-    if (vitePWAPluginIndex === -1) {
-      throw new Error("VitePWA plugin does not exist");
-    }
-
-    const newPlugins = config.plugins.slice();
-    newPlugins.splice(vitePWAPluginIndex, 1);
-
-    return { ...config, plugins: newPlugins };
-  },
 };
 
 export default config;
