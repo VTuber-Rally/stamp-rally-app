@@ -17,6 +17,7 @@ const LIMIT_DATE = new Date(eventEndDate);
 export function App() {
   const { t } = useTranslation();
   const { toast } = useToast();
+
   const { updateServiceWorker } = useRegisterSW({
     onOfflineReady() {
       toast({

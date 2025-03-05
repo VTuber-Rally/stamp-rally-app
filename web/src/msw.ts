@@ -1,6 +1,7 @@
 import { HttpResponse, http } from "msw";
 
 import { Standist } from "@/lib/models/Standist.ts";
+import avatar from "@/stubs/avatar.png";
 
 import { StandistsFromAppwrite } from "./stubs/Standists.ts";
 
@@ -27,6 +28,17 @@ export const handlers = [
       }
 
       return HttpResponse.json(StandistsFromAppwrite);
+    },
+  ),
+  http.get(
+    "https://cloud.appwrite.io/v1/storage/buckets/rally2025-assets/files/*/download",
+    async () => {
+      const arrayBuffer = await fetch(avatar).then((res) => res.arrayBuffer());
+      return HttpResponse.arrayBuffer(arrayBuffer, {
+        headers: {
+          "Content-Type": "image/png",
+        },
+      });
     },
   ),
 ];
