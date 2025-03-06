@@ -187,6 +187,12 @@
     "title": "Déconnexion réussie"
   },
   "map": "Carte",
+  "mapLegend": {
+    "title": "Légende",
+    "green": "Les stands tamponnés sont affichés avec un contour <1>vert</1>.",
+    "blue": "Les stands encore à visiter sont affichés avec un contour <1>bleu</1>.",
+    "yellow": "Le stand où les récompenses sont obtenables est affiché avec un nom <1>jaune</1>."
+  },
   "mapWillSoonBeAvailable": "La carte sera bientôt disponible !",
   "name": "Nom",
   "no": "Non",
