@@ -37,7 +37,7 @@ const database = new sdk.Databases(client);
 // check if arg is set
 if (process.argv.length < 4) {
   throw new Error(
-    "File path is not set. Please provide a TSV file path (exported from the Google Sheets) and the path to the folder containing the user medias",
+    "File path is not set. Please provide a TSV file path (exported from the Google Sheets) and the path to the folder containing the user medias"
   );
 }
 
@@ -55,51 +55,44 @@ const lines = content
   .map((line) => line.split("\t"))
   .map((line) => {
     return {
-      horodateur: line[0].trim(),
-      set: line[1].trim(),
-      paiement: line[2].trim(),
-      email: line[3].trim(),
-      artistName: line[4].trim(),
-      boothName: line[5].trim(),
-      shikishi: line[6].trim(),
-      print: line[7].trim(),
-      favVtubers: line[8].trim(),
-      boothNumber: line[9].trim(),
-      hall: line[10].trim(),
-      description: line[11].trim(),
-      vtuber: line[12].trim(),
-      streamingPlatform: line[13].trim(),
-      streamingPlatformUrl: line[14].trim(),
-      printFees: line[15].trim(),
-      contribution: line[16].trim(),
-      twitter: line[17].trim(),
-      insta: line[18].trim(),
-      image: line[19].trim(),
+      boothName: line[0].trim(),
+      boothNumber: line[1].trim(),
+      hall: line[2].trim(),
+      personalSetOrder: line[3].trim(),
+      cost: line[4].trim(),
+      artistIn2024Edition: line[5].trim(),
+      status: line[6].trim(),
+      rewardCard: line[7].trim(),
+      comments: line[8].trim(),
+      email: line[9].trim(),
+      artistName: line[10].trim(),
+      goodsDescription: line[11].trim(),
+      promotionalLink: line[12].trim(),
+      topVTubers: line[13].trim(),
+      timestamp: line[14].trim(),
+      filename: line[15].trim(),
     } satisfies Line;
   }) as Line[];
 
-//   Horodateur	set	paiement	Adresse e-mail	Your artist name	Your booth name	Shikishi réalisé	PRINT	Your fav 3 vtubers you wanna draw for the shikishi postcard, by priority order (number 1, number 2, number 3)(please try to prioritize by popularity in order to motivate people for the rally!)	Booth number	Hall	Description	You're a vtuber yourself (preferably active, around 1 stream/month-ish)	If yes, link your streaming platform URL (youtube, twitch)	Please give one link	Do you want to participate to print fees instead of make a shikishi illustration?	Contribution	Twitter	Insta
+//   Your booth name	Booth number	Hall	Personal set order	Cost	Artist in the 2024 edition	Status	Reward card	Comments	Adresse e-mail	Your artist name	Please describe your Vtuber-related goods available on your booth (kind of goods and characters/agency...).	Please give one link for your promotional purposes	The top 3 Vtubers you wanna draw for the postcard, by priority order (top 1, top 2, top 3)	Horodateur	Profile picture filename
+
 type Line = {
-  horodateur: string;
-  set: string;
-  paiement: string;
-  email: string;
-  artistName: string;
   boothName: string;
-  shikishi: string;
-  print: string;
-  favVtubers: string;
   boothNumber: string;
   hall: string;
-  description: string;
-  vtuber: string;
-  streamingPlatform: string;
-  streamingPlatformUrl: string;
-  printFees: string;
-  contribution: string;
-  twitter: string;
-  insta: string;
-  image: string;
+  personalSetOrder: string;
+  cost: string;
+  artistIn2024Edition: string;
+  status: string;
+  rewardCard: string;
+  comments: string;
+  email: string;
+  artistName: string;
+  goodsDescription: string;
+  promotionalLink: string;
+  topVTubers: string;
+  timestamp: string;
+  filename: string;
 };
 
 console.log(`Found ${lines.length} profiles`);
@@ -120,7 +113,7 @@ async function createProfilesAndDocuments() {
         : line.email.replace("@", "+").concat("@fake.email");
       const password = Array.from(
         { length: 16 },
-        () => Math.random().toString(36)[2],
+        () => Math.random().toString(36)[2]
       ).join("");
 
       const newAccount = await users.create(
@@ -128,18 +121,18 @@ async function createProfilesAndDocuments() {
         emailModified,
         undefined,
         password,
-        line.boothName,
+        line.boothName
       );
 
       const { privateKey, publicKey } = await crypto.subtle.generateKey(
         { name: "ECDSA", namedCurve: "P-384" },
         true,
-        ["sign", "verify"],
+        ["sign", "verify"]
       );
 
       const exportedPrivateKey = await crypto.subtle.exportKey(
         "jwk",
-        privateKey,
+        privateKey
       );
       const exportedPublicKey = await crypto.subtle.exportKey("jwk", publicKey);
 
@@ -157,8 +150,8 @@ async function createProfilesAndDocuments() {
       console.log(`\`${emailModified}\`:\`${password}\``);
 
       let imageId = "fallback";
-      if (line.image) {
-        const imagePath = path.join(userMediasPath, line.image);
+      if (line.filename) {
+        const imagePath = path.join(userMediasPath, line.filename);
         if (!fs.existsSync(imagePath)) {
           throw new Error(`Image file not found: ${imagePath}`);
         }
@@ -171,12 +164,12 @@ async function createProfilesAndDocuments() {
         boothNumber: line.boothNumber,
         name: line.boothName,
         hall: line.hall,
-        description: line.description,
+        description: line.goodsDescription,
         publicKey: JSON.stringify(exportedPublicKey),
         image: imageId,
-        twitter: line.twitter,
-        instagram: line.insta,
-        twitch: line.streamingPlatformUrl,
+        // twitter: line.promotionalLink,
+        // instagram: line.promotionalLink,
+        twitch: line.promotionalLink,
       };
     })();
   });
@@ -193,7 +186,7 @@ async function createProfilesAndDocuments() {
         [
           Permission.read(Role.user(profile.userId)),
           Permission.update(Role.user(profile.userId)),
-        ],
+        ]
       );
     });
 
