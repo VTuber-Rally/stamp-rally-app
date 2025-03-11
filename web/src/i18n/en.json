@@ -137,7 +137,42 @@
   "wheelOfFortune": "Wheel of fortune",
   "analyticsOptOut": {
     "title": "Analytics",
-    "description": "We're using Plausible to collect anonymous statistics (visitors count, scanned stamps, etc.). You can opt-out here.",
+    "description": "We use Plausible to collect anonymous statistics (number of visitors, number of stamps scanned, etc.). You can opt out here.",
     "optOut": "Do not use my data for statistics."
+  },
+  "contest": {
+    "staff": {
+      "title": "Contest Management",
+      "qrCode": {
+        "title": "Registration QR Code",
+        "clickToEnlarge": "Click to enlarge",
+        "notAvailable": "No QR Code available",
+        "scanInstructions": "Scan the QR Code to register for the contest. You must have completed the rally to register."
+      },
+      "participants": {
+        "title": "Participants",
+        "loading": "Loading participants...",
+        "loadingError": "Error loading participants",
+        "noneFound": "No participants found",
+        "showRecent": "Show only recent participants"
+      },
+      "actions": {
+        "drawWinner": "Draw winner",
+        "sendNotification": "Send notification",
+        "resetDraw": "Reset draw",
+        "validateWinner": "Validate winner"
+      },
+      "winner": {
+        "title": "Contest Winner"
+      },
+      "drawing": {
+        "inProgress": "Drawing in progress...",
+        "drumRoll": "Drum roll..."
+      },
+      "winners": {
+        "title": "Winners History",
+        "noneFound": "No winners found"
+      }
+    }
   }
 }

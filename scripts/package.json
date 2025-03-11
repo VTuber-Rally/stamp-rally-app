@@ -7,8 +7,9 @@
   "keywords": [],
   "author": "",
   "dependencies": {
+    "@faker-js/faker": "^9.6.0",
     "dotenv": "^16.4.5",
-    "node-appwrite": "^13.0.0"
+    "node-appwrite": "^15.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
