@@ -20,6 +20,7 @@ export const getEnv = () => {
     STANDISTS_COLLECTION_ID,
     KV_COLLECTION_ID,
     BUCKET_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
   } = process.env;
 
   const env = envSchema.parse({
@@ -30,6 +31,7 @@ export const getEnv = () => {
     STANDISTS_COLLECTION_ID,
     KV_COLLECTION_ID,
     BUCKET_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
   });
 
   return env;

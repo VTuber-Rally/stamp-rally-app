@@ -388,6 +388,61 @@
                     ]
                 }
             ]
+        },
+        {
+            "$id": "67d0429b003758d966ce",
+            "$permissions": [
+                "create(\"label:staff\")",
+                "read(\"label:staff\")",
+                "update(\"label:staff\")",
+                "delete(\"label:staff\")"
+            ],
+            "databaseId": "6675f377000709b0db07",
+            "name": "contest-participants",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 64,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 128,
+                    "default": null
+                },
+                {
+                    "key": "registeredAt",
+                    "type": "datetime",
+                    "required": true,
+                    "array": false,
+                    "format": "",
+                    "default": null
+                },
+                {
+                    "key": "isWinner",
+                    "type": "boolean",
+                    "required": false,
+                    "array": false,
+                    "default": false
+                },
+                {
+                    "key": "drawnDate",
+                    "type": "datetime",
+                    "required": false,
+                    "array": false,
+                    "format": "",
+                    "default": null
+                }
+            ],
+            "indexes": []
         }
     ],
     "buckets": [
