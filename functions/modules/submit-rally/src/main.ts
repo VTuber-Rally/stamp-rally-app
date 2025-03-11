@@ -33,9 +33,9 @@ interface Stamp {
   id: number;
 }
 
-const SUBMISSION_DATABASE_ID = '6675f377000709b0db07';
-const SUBMISSION_COLLECTION_ID = '6687300000095507a828';
-const PROFILE_COLLECTION_ID = '6675f3a2000e52a39b67';
+const SUBMISSION_DATABASE_ID = process.env['DATABASE_ID'];
+const SUBMISSION_COLLECTION_ID = process.env['SUBMISSIONS_COLLECTION_ID'];
+const PROFILE_COLLECTION_ID = process.env['STANDISTS_COLLECTION_ID'];
 
 const signAlgorithm = {
   name: 'ECDSA',
@@ -72,6 +72,19 @@ function importJWK(jwk: JsonWebKey) {
 }
 
 export default async ({ req, res, log, error }: Context) => {
+  const missingVars = [];
+  if (!SUBMISSION_DATABASE_ID) missingVars.push('DATABASE_ID');
+  if (!SUBMISSION_COLLECTION_ID) missingVars.push('SUBMISSIONS_COLLECTION_ID');
+  if (!PROFILE_COLLECTION_ID) missingVars.push('STANDISTS_COLLECTION_ID');
+
+  if (missingVars.length > 0) {
+    log(`Missing environment variables: ${missingVars.join(', ')}`);
+    log(
+      `Available environment variables: ${Object.keys(process.env).join(', ')}`
+    );
+    throw new Error(`Missing environment variables: ${missingVars.join(', ')}`);
+  }
+
   const client = new Client()
     .setEndpoint(process.env['APPWRITE_FUNCTION_API_ENDPOINT'])
     .setProject(process.env['APPWRITE_FUNCTION_PROJECT_ID'])

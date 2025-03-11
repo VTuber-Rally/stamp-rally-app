@@ -13,10 +13,10 @@ const { Default: RallyistsNavBar } = composeStories(RallyistsNavbarStories);
 describe("staff navbar", () => {
   const container = render(<StaffNavBar />);
 
-  test("should have 4 elements", async () => {
+  test("should have 5 elements", async () => {
     const links = container.container.querySelectorAll(".inline-flex");
 
-    expect(links.length).toBe(4);
+    expect(links.length).toBe(5);
   });
 });
 

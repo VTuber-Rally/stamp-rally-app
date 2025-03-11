@@ -3,9 +3,9 @@ import clsx from "clsx";
 import {
   Dices,
   Home,
-  Map,
   QrCode,
   QrCodeIcon,
+  Trophy,
   UserPen,
   UsersRound,
 } from "lucide-react";
@@ -110,8 +110,8 @@ export const RallyistNavbar = () => {
       <NavbarElement to={"/artists"} label={t("artists")}>
         <UsersRound className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
-      <NavbarElement to={"/map"} label={t("map")}>
-        <Map className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
+      <NavbarElement to={"/reward"} label={t("reward.title")}>
+        <Trophy className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarButton onClick={() => setQRCodeDrawer(true)} label={t("qrcode")}>
         <QrCodeIcon className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
@@ -182,6 +182,13 @@ export const StaffNavbar = () => {
         disabled={disabled}
       >
         <QrCode className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
+      </NavbarElement>
+      <NavbarElement
+        to={"/staff/contest"}
+        label={"Concours"}
+        disabled={disabled}
+      >
+        <Trophy className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
     </Navbar>
   );

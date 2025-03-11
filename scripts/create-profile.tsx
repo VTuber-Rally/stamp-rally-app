@@ -143,7 +143,7 @@ async function createProfilesAndDocuments() {
 
       await users.updateLabels(newAccount.$id, [
         "standist",
-        !isProduction && "test",
+        ...(isProduction ? [] : ["test"]),
       ]);
       await users.updateEmailVerification(newAccount.$id, true);
 

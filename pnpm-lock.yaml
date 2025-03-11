@@ -25,6 +25,22 @@ importers:
         specifier: ^5.5.3
         version: 5.7.3
 
+  functions/modules/register-contest-participant:
+    dependencies:
+      node-appwrite:
+        specifier: ^14.1.0
+        version: 14.1.0
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.9
+        version: 20.17.14
+      prettier:
+        specifier: ^3.2.5
+        version: 3.4.2
+      typescript:
+        specifier: ^5.5.3
+        version: 5.7.3
+
   functions/modules/submit-rally:
     dependencies:
       node-appwrite:
@@ -43,6 +59,9 @@ importers:
 
   scripts:
     dependencies:
+      '@faker-js/faker':
+        specifier: ^9.6.0
+        version: 9.6.0
       dotenv:
         specifier: ^16.4.5
         version: 16.4.7
@@ -1229,6 +1248,10 @@ packages:
   '@eslint/plugin-kit@0.2.5':
     resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@faker-js/faker@9.6.0':
+    resolution: {integrity: sha512-3vm4by+B5lvsFPSyep3ELWmZfE3kicDtmemVpuwl1yH7tqtnHdsA6hG8fbXedMVdkzgtvzWoRgjSB4Q+FHnZiw==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
   '@fontsource-variable/comfortaa@5.1.1':
     resolution: {integrity: sha512-ZuwxmA5ccVvTwl1bByhVHyxbROtg0Lk/cCB+f41LgKB/9dUAPj8wFFxN+oCWy702tsnzORtL86aSX6VVMYt12g==}
@@ -5983,6 +6006,8 @@ snapshots:
     dependencies:
       '@eslint/core': 0.10.0
       levn: 0.4.1
+
+  '@faker-js/faker@9.6.0': {}
 
   '@fontsource-variable/comfortaa@5.1.1': {}
 

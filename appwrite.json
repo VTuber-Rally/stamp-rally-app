@@ -33,6 +33,27 @@
       "commands": "npm install && npm run build",
       "ignore": ["node_modules", ".npm"],
       "path": "functions/get-private-key"
+    },
+    {
+      "$id": "67d7f57300140a6901bd",
+      "name": "register-contest-participant",
+      "runtime": "node-20.0",
+      "execute": [
+        "users"
+      ],
+      "events": [],
+      "scopes": [
+        "users.read",
+        "documents.read",
+        "documents.write"
+      ],
+      "schedule": "",
+      "timeout": 15,
+      "enabled": true,
+      "logging": true,
+      "entrypoint": "src/main.js",
+      "commands": "npm install && npm run build",
+      "path": "functions/modules/register-contest-participant"
     }
   ],
   "databases": [
@@ -362,6 +383,61 @@
           "orders": ["ASC"]
         }
       ]
+    },
+    {
+      "$id": "67d0429b003758d966ce",
+      "$permissions": [
+        "create(\"label:staff\")",
+        "read(\"label:staff\")",
+        "update(\"label:staff\")",
+        "delete(\"label:staff\")"
+      ],
+      "databaseId": "6675f377000709b0db07",
+      "name": "contest-participants",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "userId",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "size": 64,
+          "default": null
+        },
+        {
+          "key": "name",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "size": 128,
+          "default": null
+        },
+        {
+          "key": "registeredAt",
+          "type": "datetime",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        },
+        {
+          "key": "isWinner",
+          "type": "boolean",
+          "required": false,
+          "array": false,
+          "default": false
+        },
+        {
+          "key": "drawnDate",
+          "type": "datetime",
+          "required": false,
+          "array": false,
+          "format": "",
+          "default": null
+        }
+      ],
+      "indexes": []
     }
   ],
   "buckets": [
