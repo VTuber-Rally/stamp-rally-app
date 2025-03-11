@@ -79,7 +79,6 @@ export function App() {
           },
           60 * 10 * 1000,
         );
-        // preload all images
         preloadAllImages();
       }
     },
