@@ -52,6 +52,9 @@ importers:
       '@types/node':
         specifier: ^20.14.9
         version: 20.17.14
+      prettier:
+        specifier: ^3.2.5
+        version: 3.4.2
 
   web:
     dependencies:
