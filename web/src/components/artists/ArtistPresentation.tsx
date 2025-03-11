@@ -4,16 +4,12 @@ import { polygon } from "@turf/helpers";
 import { ArrowUpRightFromSquare, MapPinned } from "lucide-react";
 import type { FC, ReactNode } from "react";
 import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
 import { DrawerDescription, DrawerTitle } from "@/components/layout/Drawer.tsx";
 import { Header } from "@/components/layout/Header.tsx";
-import { ImageErrorFallback } from "@/components/routes/rallyists/ArtistsList.tsx";
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
-import { queryClient } from "@/lib/queryClient.ts";
 
 import { ArtistImage } from "./ArtistImage";
 
@@ -36,23 +32,13 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
       <Header>{artist.name}</Header>
 
       <div className={"flex flex-col items-center"}>
-        {/* au cas où les images plantes pour x raison */}
-        <ErrorBoundary
-          FallbackComponent={ImageErrorFallback}
-          onReset={() => {
-            queryClient.invalidateQueries({
-              queryKey: [QUERY_KEYS.ARTIST_IMAGE, artist.userId],
-            });
-          }}
+        <Suspense
+          fallback={
+            <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
+          }
         >
-          <Suspense
-            fallback={
-              <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
-            }
-          >
-            <ArtistImage userId={artist.userId} name={artist.name} />
-          </Suspense>
-        </ErrorBoundary>
+          <ArtistImage userId={artist.userId} name={artist.name} />
+        </Suspense>
       </div>
 
       {artist.geometry && (
