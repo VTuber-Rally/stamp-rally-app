@@ -8,6 +8,7 @@ const envSchema = z.object({
   DATABASE_ID: z.string(),
   STANDISTS_COLLECTION_ID: z.string(),
   KV_COLLECTION_ID: z.string(),
+  CONTEST_PARTICIPANTS_COLLECTION_ID: z.string(),
   BUCKET_ID: z.string(),
 });
 
@@ -19,6 +20,7 @@ export const getEnv = () => {
     DATABASE_ID,
     STANDISTS_COLLECTION_ID,
     KV_COLLECTION_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
     BUCKET_ID,
   } = process.env;
 
@@ -29,6 +31,7 @@ export const getEnv = () => {
     DATABASE_ID,
     STANDISTS_COLLECTION_ID,
     KV_COLLECTION_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
     BUCKET_ID,
   });
 
