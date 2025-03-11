@@ -90,6 +90,7 @@ jobs:
           VITE_GET_PRIVATE_KEY_FUNCTION_ID: example
           VITE_KV_COLLECTION_ID: example
           VITE_ASSETS_BUCKET_ID: example
+          VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: example
         run: pnpm --filter web build
 
     # upload artifacts
