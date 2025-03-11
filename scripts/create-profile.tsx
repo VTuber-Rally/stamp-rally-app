@@ -8,13 +8,16 @@
  *  Example: `bun scripts/create-profile.tsx ./data.tsv`
  *
  **/
-
-import * as sdk from "node-appwrite";
 import * as fs from "fs";
-import { getEnv } from "./shared.js";
+import * as sdk from "node-appwrite";
 import { Permission, Role } from "node-appwrite";
+import { randomBytes } from "node:crypto";
 import path from "path";
-import { deleteUserMedia, uploadUserMedia } from "./upload-user-medias.js";
+
+import { getEnv } from "./shared.js";
+import { uploadUserMedia } from "./upload-user-medias.js";
+
+const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
 
 const {
   APPWRITE_PROJECT_ID,
@@ -37,7 +40,7 @@ const database = new sdk.Databases(client);
 // check if arg is set
 if (process.argv.length < 4) {
   throw new Error(
-    "File path is not set. Please provide a TSV file path (exported from the Google Sheets) and the path to the folder containing the user medias"
+    "File path is not set. Please provide a TSV file path (exported from the Google Sheets) and the path to the folder containing the user medias",
   );
 }
 
@@ -111,28 +114,25 @@ async function createProfilesAndDocuments() {
       const emailModified = isProduction
         ? line.email
         : line.email.replace("@", "+").concat("@fake.email");
-      const password = Array.from(
-        { length: 16 },
-        () => Math.random().toString(36)[2]
-      ).join("");
+      const password = generatePassword();
 
       const newAccount = await users.create(
         sdk.ID.unique(),
         emailModified,
         undefined,
         password,
-        line.boothName
+        line.boothName,
       );
 
       const { privateKey, publicKey } = await crypto.subtle.generateKey(
         { name: "ECDSA", namedCurve: "P-384" },
         true,
-        ["sign", "verify"]
+        ["sign", "verify"],
       );
 
       const exportedPrivateKey = await crypto.subtle.exportKey(
         "jwk",
-        privateKey
+        privateKey,
       );
       const exportedPublicKey = await crypto.subtle.exportKey("jwk", publicKey);
 
@@ -167,8 +167,6 @@ async function createProfilesAndDocuments() {
         description: line.goodsDescription,
         publicKey: JSON.stringify(exportedPublicKey),
         image: imageId,
-        // twitter: line.promotionalLink,
-        // instagram: line.promotionalLink,
         twitch: line.promotionalLink,
       };
     })();
@@ -186,7 +184,7 @@ async function createProfilesAndDocuments() {
         [
           Permission.read(Role.user(profile.userId)),
           Permission.update(Role.user(profile.userId)),
-        ]
+        ],
       );
     });
 

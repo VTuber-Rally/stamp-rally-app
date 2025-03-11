@@ -1,4 +1,5 @@
 import * as sdk from "node-appwrite";
+
 import { getEnv } from "./shared.js";
 import { deleteUserMedia } from "./upload-user-medias.js";
 
@@ -42,7 +43,7 @@ const promises = usersExisting.users.map((user) => {
       });
       return Promise.all(documentDeletionPromises);
     })
-    .then(() => users.delete(user.$id))
+    .then(() => users.delete(user.$id));
 });
 
 await Promise.all(promises);

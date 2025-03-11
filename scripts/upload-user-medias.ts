@@ -1,15 +1,11 @@
-import * as sdk from "node-appwrite";
-import { getEnv } from "./shared.js";
-import * as path from "path";
 import * as fs from "fs";
-const {
-  APPWRITE_PROJECT_ID,
-  APPWRITE_ENDPOINT,
-  PROFILE_DATABASE_ID,
-  PROFILE_COLLECTION_ID,
-  APPWRITE_API_KEY,
-  BUCKET_ID,
-} = getEnv();
+import * as sdk from "node-appwrite";
+import * as path from "path";
+
+import { getEnv } from "./shared.js";
+
+const { APPWRITE_PROJECT_ID, APPWRITE_ENDPOINT, APPWRITE_API_KEY, BUCKET_ID } =
+  getEnv();
 
 const client = new sdk.Client()
   .setEndpoint(APPWRITE_ENDPOINT)
@@ -30,7 +26,7 @@ export const deleteUserMedia = async (fileId: string) => {
   }
 };
 
-export const uploadUserMedia = async (filePath: string): Promise<string> => {
+export const uploadUserMedia = async (filePath: string) => {
   const fileContent = fs.readFileSync(filePath);
   const fileName = path.basename(filePath);
   const fileType = fileName.split(".").pop();
@@ -39,7 +35,7 @@ export const uploadUserMedia = async (filePath: string): Promise<string> => {
   const file = await storage.createFile(
     BUCKET_ID,
     sdk.ID.unique(),
-    new File([fileContent], fileName, { type: `image/${fileType}` })
+    new File([fileContent], fileName, { type: `image/${fileType}` }),
   );
 
   return file.$id;
