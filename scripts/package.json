@@ -8,7 +8,7 @@
   "author": "",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "node-appwrite": "^16.1.0"
+    "node-appwrite": "^15.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
