@@ -18,11 +18,11 @@ export function useContestParticipants() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    // S'abonner aux changements de la collection
     const unsubscribe = client.subscribe(
       `databases.${databaseId}.collections.${contestParticipantsCollectionId}.documents`,
       (response) => {
-        // Mettre à jour le cache React Query quand un document est créé, modifié ou supprimé
+        // on s'abonne aux événements de création (normal), de mise à jour (c'est surprenant) et de suppression (sait-on jamais, ça peut arriver !)
+        // comme ça on invalide pour forcer le refresh de la liste des participants
         if (
           response.events.includes(
             "databases.*.collections.*.documents.*.create",
@@ -49,8 +49,8 @@ export function useContestParticipants() {
 
   return useQuery({
     queryKey: [QUERY_KEYS.CONTEST_PARTICIPANTS],
-    queryFn: fetchContestParticipants,
-    // Rafraîchir toutes les 30 secondes en plus du temps réel
+    queryFn: () => fetchContestParticipants(),
+    // au cas où, juste in case, voilà
     refetchInterval: 30000,
   });
 }

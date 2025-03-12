@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 
@@ -101,9 +102,10 @@ function ParticipantCount({ count }: { count: number }) {
 
   return (
     <span
-      className={`transition-colors duration-300 ${
-        isAnimating ? "text-success-orange" : ""
-      }`}
+      className={clsx(
+        "transition-colors duration-300",
+        isAnimating && "text-success-orange",
+      )}
     >
       {count}
     </span>
