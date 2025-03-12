@@ -6,7 +6,7 @@ on:
       - web/src/**
       - web/.storybook/**
       - web/package.json
-      - web/pnpm-lock.yaml
+      - pnpm-lock.yaml
     branches:
       - main
 

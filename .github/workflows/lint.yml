@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'web/**'
+      - 'pnpm-lock.yaml'
   workflow_dispatch:
   
 
