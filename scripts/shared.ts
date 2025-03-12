@@ -8,7 +8,7 @@ export const getEnv = () => {
     PROFILE_DATABASE_ID,
     PROFILE_COLLECTION_ID,
     BUCKET_ID,
-    SHIKISHI_PARTICIPANTS_COLLECTION_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
   } = process.env;
 
   if (!APPWRITE_ENDPOINT) {
@@ -31,8 +31,8 @@ export const getEnv = () => {
     throw new Error("BUCKET_ID is not set");
   }
 
-  if (!SHIKISHI_PARTICIPANTS_COLLECTION_ID) {
-    throw new Error("SHIKISHI_PARTICIPANTS_COLLECTION_ID is not set");
+  if (!CONTEST_PARTICIPANTS_COLLECTION_ID) {
+    throw new Error("CONTEST_PARTICIPANTS_COLLECTION_ID is not set");
   }
 
   return {
@@ -42,6 +42,6 @@ export const getEnv = () => {
     PROFILE_DATABASE_ID,
     PROFILE_COLLECTION_ID,
     BUCKET_ID,
-    SHIKISHI_PARTICIPANTS_COLLECTION_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
   };
 };

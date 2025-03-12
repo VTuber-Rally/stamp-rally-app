@@ -1,5 +1,4 @@
-import dotenv from "dotenv";
-import { Client, Databases, ID } from "node-appwrite";
+import { Databases, ID } from "node-appwrite";
 import * as sdk from "node-appwrite";
 
 import { getEnv } from "./shared";
@@ -8,12 +7,9 @@ const {
   APPWRITE_PROJECT_ID,
   APPWRITE_ENDPOINT,
   PROFILE_DATABASE_ID,
-  PROFILE_COLLECTION_ID,
   APPWRITE_API_KEY,
-  SHIKISHI_PARTICIPANTS_COLLECTION_ID,
+  CONTEST_PARTICIPANTS_COLLECTION_ID,
 } = getEnv();
-
-const isProduction = process.env.NODE_ENV === "production";
 
 const client = new sdk.Client()
   .setEndpoint(APPWRITE_ENDPOINT)
@@ -35,7 +31,7 @@ const generateParticipants = async (count: number) => {
       try {
         await databases.createDocument(
           PROFILE_DATABASE_ID,
-          SHIKISHI_PARTICIPANTS_COLLECTION_ID,
+          CONTEST_PARTICIPANTS_COLLECTION_ID,
           ID.unique(),
           participant,
         );
@@ -53,22 +49,21 @@ const generateParticipants = async (count: number) => {
 const deleteParticipants = async () => {
   const participants = await databases.listDocuments(
     PROFILE_DATABASE_ID,
-    SHIKISHI_PARTICIPANTS_COLLECTION_ID,
+    CONTEST_PARTICIPANTS_COLLECTION_ID,
   );
   console.log(`Suppression de ${participants.total} participants...`);
   await Promise.all(
     participants.documents.map(async (participant) => {
       await databases.deleteDocument(
         PROFILE_DATABASE_ID,
-        SHIKISHI_PARTICIPANTS_COLLECTION_ID,
+        CONTEST_PARTICIPANTS_COLLECTION_ID,
         participant.$id,
       );
     }),
   );
 };
 
-// Nombre de participants à générer
-const participantCount = parseInt(process.argv[2]) || 10;
+const participantCount = 10;
 
 if (process.argv[2] === "--rm") {
   deleteParticipants();
