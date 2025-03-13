@@ -72,8 +72,7 @@ export default defineConfig({
           globPatterns: ["**/*.{woff2,js,css,html,jpg,svg,png}"],
           runtimeCaching: [
             {
-              urlPattern:
-                /^https:\/\/appwrite\.luc\.ovh\/v1\/storage\/buckets.+$/,
+              urlPattern: /v1\/storage\/buckets.+$/,
               handler: "StaleWhileRevalidate",
               options: {
                 cacheName: "rally-assets",
