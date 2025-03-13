@@ -1,5 +1,7 @@
 import clsx from "clsx";
+import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import { useContestParticipants } from "@/lib/hooks/useContestParticipants";
@@ -9,6 +11,7 @@ export default function Contest() {
   const { data: participants, isLoading, error } = useContestParticipants();
   const { data: qrCode, isLoading: isQRCodeLoading } = useContestQRCode();
   const [isQRFullscreen, setIsQRFullscreen] = useState(false);
+  const { t } = useTranslation();
 
   const handleDrawWinner = async () => {
     // TODO
@@ -20,8 +23,11 @@ export default function Contest() {
 
   if (isLoading || isQRCodeLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-lg">Chargement...</div>
+      <div className="flex grow items-center justify-center">
+        <div className={"flex flex-col items-center space-y-2"}>
+          <Loader size={4} />
+          <span>{t("loading")}</span>
+        </div>
       </div>
     );
   }
