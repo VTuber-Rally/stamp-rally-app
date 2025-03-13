@@ -12,6 +12,8 @@ export default function Contest() {
   const { data: qrCode, isLoading: isQRCodeLoading } = useContestQRCode();
   const [isQRFullscreen, setIsQRFullscreen] = useState(false);
   const { t } = useTranslation();
+  const { t: tFR } = useTranslation("", { lng: "fr" });
+  const { t: tEN } = useTranslation("", { lng: "en" });
 
   const handleDrawWinner = async () => {
     // TODO
@@ -36,7 +38,7 @@ export default function Contest() {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="text-lg text-red-600">
-          Erreur lors du chargement des participants
+          {t("contest.staff.participants.loadingError")}
         </div>
       </div>
     );
@@ -45,7 +47,9 @@ export default function Contest() {
   if (!participants) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="text-lg">Aucun participant trouvé</div>
+        <div className="text-lg">
+          {t("contest.staff.participants.noneFound")}
+        </div>
       </div>
     );
   }
@@ -66,25 +70,30 @@ export default function Contest() {
             ) : (
               <div className="flex h-96 w-96 items-center justify-center rounded-lg border-4 border-tertiary p-2">
                 <div className="text-center text-lg text-gray-700">
-                  Pas de QR Code disponible
+                  {t("contest.staff.qrCode.notAvailable")}
                 </div>
               </div>
             )}
-            <p className="text-center text-lg text-gray-700">
-              Scannez le QR Code pour vous inscrire au concours.
-              <br />
-              Il est nécessaire d'avoir déjà terminé le rally pour vous
-              inscrire.
-            </p>
+            <div className="flex flex-col items-center gap-2 text-center text-lg text-gray-700">
+              <span className="w-full break-words">
+                {tFR("contest.staff.qrCode.scanInstructions")}
+              </span>
+              <hr className="w-1/2 border-black/30" />
+              <span className="w-full break-words">
+                {tEN("contest.staff.qrCode.scanInstructions")}
+              </span>
+            </div>
           </div>
         </div>
       )}
       <div className="space-y-6 p-6">
-        <h1 className="text-2xl font-bold">Gestion du concours</h1>
+        <h1 className="text-2xl font-bold">{t("contest.staff.title")}</h1>
 
         <div className="rounded-lg bg-white p-6 shadow">
           <div className="flex flex-col items-center space-y-4">
-            <h2 className="text-xl font-semibold">QR Code d'inscription</h2>
+            <h2 className="text-xl font-semibold">
+              {t("contest.staff.qrCode.title")}
+            </h2>
             {qrCode && (
               <div
                 onClick={() => setIsQRFullscreen(true)}
@@ -95,7 +104,7 @@ export default function Contest() {
                   value={qrCode}
                 />
                 <p className="text-center text-sm text-gray-500">
-                  Cliquer pour agrandir
+                  {t("contest.staff.qrCode.clickToEnlarge")}
                 </p>
               </div>
             )}
@@ -105,7 +114,8 @@ export default function Contest() {
         <div className="rounded-lg bg-white p-6 shadow">
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">
-              Participants (<ParticipantCount count={participants.length} />)
+              {t("contest.staff.participants.title")} (
+              <ParticipantCount count={participants.length} />)
             </h2>
             <ul className="max-h-96 space-y-0.5 overflow-y-auto">
               {participants.map((participant) => (
@@ -123,15 +133,15 @@ export default function Contest() {
         <div className="flex justify-center space-x-4">
           <button
             onClick={handleDrawWinner}
-            className="rounded-lg bg-success-orange px-4 py-2 text-white transition-colors hover:bg-success-orange/80"
+            className="rounded-lg bg-success-orange px-4 py-2 text-black transition-colors hover:bg-success-orange/80"
           >
-            Lancer le tirage au sort
+            {t("contest.staff.actions.drawWinner")}
           </button>
           <button
             onClick={sendNotification}
             className="rounded-lg bg-secondary px-4 py-2 text-black transition-colors hover:bg-secondary/80"
           >
-            Envoyer une notification
+            {t("contest.staff.actions.sendNotification")}
           </button>
         </div>
       </div>
