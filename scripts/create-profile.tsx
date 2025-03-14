@@ -8,11 +8,16 @@
  *  Example: `bun scripts/create-profile.tsx ./data.tsv`
  *
  **/
-
-import * as sdk from "node-appwrite";
 import * as fs from "fs";
-import { getEnv } from "./shared.js";
+import * as sdk from "node-appwrite";
 import { Permission, Role } from "node-appwrite";
+import { randomBytes } from "node:crypto";
+import path from "path";
+
+import { getEnv } from "./shared.js";
+import { uploadUserMedia } from "./upload-user-medias.js";
+
+const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
 
 const {
   APPWRITE_PROJECT_ID,
@@ -33,13 +38,19 @@ const users = new sdk.Users(client);
 const database = new sdk.Databases(client);
 
 // check if arg is set
-if (process.argv.length < 3) {
+if (process.argv.length < 4) {
   throw new Error(
-    "File path is not set. Please provide a TSV file path (exported from the Google Sheets)",
+    "File path is not set. Please provide a TSV file path (exported from the Google Sheets) and the path to the folder containing the user medias",
   );
 }
 
 const filePath = process.argv[2];
+const userMediasPath = process.argv[3];
+
+if (!fs.existsSync(userMediasPath)) {
+  throw new Error(`User medias path not found: ${userMediasPath}`);
+}
+
 let content = fs.readFileSync(filePath, "utf8");
 
 const lines = content
@@ -47,51 +58,44 @@ const lines = content
   .map((line) => line.split("\t"))
   .map((line) => {
     return {
-      horodateur: line[0].trim(),
-      set: line[1].trim(),
-      paiement: line[2].trim(),
-      email: line[3].trim(),
-      artistName: line[4].trim(),
-      boothName: line[5].trim(),
-      shikishi: line[6].trim(),
-      print: line[7].trim(),
-      favVtubers: line[8].trim(),
-      boothNumber: line[9].trim(),
-      hall: line[10].trim(),
-      description: line[11].trim(),
-      vtuber: line[12].trim(),
-      streamingPlatform: line[13].trim(),
-      streamingPlatformUrl: line[14].trim(),
-      printFees: line[15].trim(),
-      contribution: line[16].trim(),
-      twitter: line[17].trim(),
-      insta: line[18].trim(),
-      image: line[19].trim(),
+      boothName: line[0].trim(),
+      boothNumber: line[1].trim(),
+      hall: line[2].trim(),
+      personalSetOrder: line[3].trim(),
+      cost: line[4].trim(),
+      artistIn2024Edition: line[5].trim(),
+      status: line[6].trim(),
+      rewardCard: line[7].trim(),
+      comments: line[8].trim(),
+      email: line[9].trim(),
+      artistName: line[10].trim(),
+      goodsDescription: line[11].trim(),
+      promotionalLink: line[12].trim(),
+      topVTubers: line[13].trim(),
+      timestamp: line[14].trim(),
+      filename: line[15].trim(),
     } satisfies Line;
   }) as Line[];
 
-//   Horodateur	set	paiement	Adresse e-mail	Your artist name	Your booth name	Shikishi réalisé	PRINT	Your fav 3 vtubers you wanna draw for the shikishi postcard, by priority order (number 1, number 2, number 3)(please try to prioritize by popularity in order to motivate people for the rally!)	Booth number	Hall	Description	You're a vtuber yourself (preferably active, around 1 stream/month-ish)	If yes, link your streaming platform URL (youtube, twitch)	Please give one link	Do you want to participate to print fees instead of make a shikishi illustration?	Contribution	Twitter	Insta
+//   Your booth name	Booth number	Hall	Personal set order	Cost	Artist in the 2024 edition	Status	Reward card	Comments	Adresse e-mail	Your artist name	Please describe your Vtuber-related goods available on your booth (kind of goods and characters/agency...).	Please give one link for your promotional purposes	The top 3 Vtubers you wanna draw for the postcard, by priority order (top 1, top 2, top 3)	Horodateur	Profile picture filename
+
 type Line = {
-  horodateur: string;
-  set: string;
-  paiement: string;
-  email: string;
-  artistName: string;
   boothName: string;
-  shikishi: string;
-  print: string;
-  favVtubers: string;
   boothNumber: string;
   hall: string;
-  description: string;
-  vtuber: string;
-  streamingPlatform: string;
-  streamingPlatformUrl: string;
-  printFees: string;
-  contribution: string;
-  twitter: string;
-  insta: string;
-  image: string;
+  personalSetOrder: string;
+  cost: string;
+  artistIn2024Edition: string;
+  status: string;
+  rewardCard: string;
+  comments: string;
+  email: string;
+  artistName: string;
+  goodsDescription: string;
+  promotionalLink: string;
+  topVTubers: string;
+  timestamp: string;
+  filename: string;
 };
 
 console.log(`Found ${lines.length} profiles`);
@@ -110,10 +114,7 @@ async function createProfilesAndDocuments() {
       const emailModified = isProduction
         ? line.email
         : line.email.replace("@", "+").concat("@fake.email");
-      const password = Array.from(
-        { length: 16 },
-        () => Math.random().toString(36)[2],
-      ).join("");
+      const password = generatePassword();
 
       const newAccount = await users.create(
         sdk.ID.unique(),
@@ -148,17 +149,25 @@ async function createProfilesAndDocuments() {
 
       console.log(`\`${emailModified}\`:\`${password}\``);
 
+      let imageId = "fallback";
+      if (line.filename) {
+        const imagePath = path.join(userMediasPath, line.filename);
+        if (!fs.existsSync(imagePath)) {
+          throw new Error(`Image file not found: ${imagePath}`);
+        }
+        console.log(`Uploading image: ${imagePath}`);
+        imageId = await uploadUserMedia(imagePath);
+      }
+
       return {
         userId: newAccount.$id,
         boothNumber: line.boothNumber,
         name: line.boothName,
         hall: line.hall,
-        description: line.description,
+        description: line.goodsDescription,
         publicKey: JSON.stringify(exportedPublicKey),
-        image: line.image,
-        twitter: line.twitter,
-        instagram: line.insta,
-        twitch: line.streamingPlatformUrl,
+        image: imageId,
+        twitch: line.promotionalLink,
       };
     })();
   });
