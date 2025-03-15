@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/inputs/Checkbox";
 import { useContestDrawWinner } from "@/lib/hooks/contest/useContestDrawWinner";
 import { useContestParticipants } from "@/lib/hooks/contest/useContestParticipants";
 import { useContestQRCode } from "@/lib/hooks/contest/useContestQRCode";
+import { useContestWinners } from "@/lib/hooks/contest/useContestWinners";
 
 export default function Contest() {
   const [filterRecentParticipants, setFilterRecentParticipants] =
@@ -29,6 +30,7 @@ export default function Contest() {
     winner,
   } = useContestDrawWinner(participants);
   const { data: qrCode, isLoading: isQRCodeLoading } = useContestQRCode();
+  const { data: winners, isLoading: areWinnersLoading } = useContestWinners();
   const [isQRFullscreen, setIsQRFullscreen] = useState(false);
   const { t } = useTranslation();
   const { t: tFR } = useTranslation("", { lng: "fr" });
@@ -191,7 +193,7 @@ export default function Contest() {
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">
               {t("contest.staff.participants.title")} (
-              {participants?.length ?? 0})
+              <ParticipantCount count={participants?.length ?? 0} />)
             </h2>
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -204,30 +206,32 @@ export default function Contest() {
                 {t("contest.staff.participants.showRecent")}
               </label>
             </div>
-            <ul className="max-h-96 space-y-0.5 overflow-y-auto">
-              {areParticipantsLoading && (
-                <li className="rounded text-gray-700 hover:bg-gray-50">
-                  {t("contest.staff.participants.loading")}
-                </li>
-              )}
-              {participants && (
-                <>
-                  {participants.length == 0 && (
-                    <li className="rounded text-gray-700 hover:bg-gray-50">
-                      {t("contest.staff.participants.noneFound")}
-                    </li>
-                  )}
-                  {participants.map((participant) => (
-                    <li
-                      key={participant.$id}
-                      className="rounded text-gray-700 hover:bg-gray-50"
-                    >
-                      {participant.name}
-                    </li>
-                  ))}
-                </>
-              )}
-            </ul>
+            {participants && (
+              <>
+                {participants.length == 0 && (
+                  <p className="text-center text-gray-500">
+                    {t("contest.staff.participants.noneFound")}
+                  </p>
+                )}
+                {areParticipantsLoading && (
+                  <div className="flex items-center justify-center py-4">
+                    <Loader className="h-6 w-6 animate-spin text-gray-400" />
+                  </div>
+                )}
+                <ul className="max-h-96 space-y-0.5 overflow-y-auto">
+                  <>
+                    {participants.map((participant) => (
+                      <li
+                        key={participant.$id}
+                        className="rounded text-gray-700 hover:bg-gray-50"
+                      >
+                        {participant.name}
+                      </li>
+                    ))}
+                  </>
+                </ul>
+              </>
+            )}
           </div>
         </div>
 
@@ -246,6 +250,37 @@ export default function Contest() {
           >
             {t("contest.staff.actions.sendNotification")}
           </button>
+        </div>
+
+        <div className="rounded-lg bg-white p-6 shadow">
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold">
+              {t("contest.staff.winners.title")} ({winners?.length ?? 0})
+            </h2>
+            {areWinnersLoading ? (
+              <div className="flex items-center justify-center py-4">
+                <Loader className="h-6 w-6 animate-spin text-gray-400" />
+              </div>
+            ) : winners && winners.length > 0 ? (
+              <ul className="space-y-2">
+                {winners.map((winner) => (
+                  <li
+                    key={winner.$id}
+                    className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
+                  >
+                    <span className="font-medium">{winner.name}</span>
+                    <span className="text-sm text-gray-500">
+                      {new Date(winner.drawnDate).toLocaleDateString()}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-center text-gray-500">
+                {t("contest.staff.winners.noneFound")}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </>

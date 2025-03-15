@@ -69,20 +69,28 @@ export function useContestDrawWinner(
         },
       );
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.CONTEST_WINNERS],
+      });
+    },
   });
 
   const { mutate: updateDayDrawn } = useMutation({
     mutationFn: async () => {
-      participants?.forEach(async (participant) => {
-        await databases.updateDocument(
-          databaseId,
-          contestParticipantsCollectionId,
-          participant.$id,
-          {
-            drawnDate: new Date().toISOString(),
-          },
-        );
-      });
+      participants
+        ?.filter((participant) => participant.$id !== winner?.$id)
+        .filter((participant) => participant.drawnDate === null)
+        .forEach(async (participant) => {
+          await databases.updateDocument(
+            databaseId,
+            contestParticipantsCollectionId,
+            participant.$id,
+            {
+              drawnDate: new Date().toISOString(),
+            },
+          );
+        });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

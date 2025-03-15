@@ -168,6 +168,10 @@
       "drawing": {
         "inProgress": "Tirage au sort en cours...",
         "drumRoll": "Roulement de tambour..."
+      },
+      "winners": {
+        "title": "Historique des gagnants",
+        "noneFound": "Aucun gagnant trouvé"
       }
     }
   }

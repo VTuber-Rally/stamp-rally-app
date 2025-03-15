@@ -168,6 +168,10 @@
       "drawing": {
         "inProgress": "Drawing in progress...",
         "drumRoll": "Drum roll..."
+      },
+      "winners": {
+        "title": "Winners History",
+        "noneFound": "No winners found"
       }
     }
   }
