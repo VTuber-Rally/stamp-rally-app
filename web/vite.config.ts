@@ -37,6 +37,7 @@ export default defineConfig({
           VITE_WHEEL_COLLECTION_ID: Schema.string(),
           VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: Schema.string(),
           VITE_GET_PRIVATE_KEY_FUNCTION_ID: Schema.string(),
+          VITE_KV_COLLECTION_ID: Schema.string(),
           VITE_ASSETS_BUCKET_ID: Schema.string(),
         },
       }),
