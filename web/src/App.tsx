@@ -7,16 +7,20 @@ import { useRegisterSW } from "virtual:pwa-register/react";
 
 import { ToastAction } from "@/components/toasts/Toast.tsx";
 import { QRDrawerContextProvider } from "@/contexts/QRDrawerContextProvider.tsx";
-import { eventEndDate } from "@/lib/consts.ts";
+import { KEY_VALUES } from "@/lib/KeyValues.ts";
+import { useKeyValue } from "@/lib/hooks/useKeyValue";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { queryClient } from "@/lib/queryClient.ts";
 import { router } from "@/router.tsx";
 
-const LIMIT_DATE = new Date(eventEndDate);
-
-export function App() {
+const AppWrapped = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const { value: eventEndDate } = useKeyValue(KEY_VALUES.eventEndDate);
+
+  const [isEventFinishedScreenClosed, setIsEventFinishedScreenClosed] =
+    useState(false);
+  const isEventFinished = !!eventEndDate && new Date() > eventEndDate;
 
   const { updateServiceWorker } = useRegisterSW({
     onOfflineReady() {
@@ -57,10 +61,6 @@ export function App() {
     },
   });
 
-  const [isEventFinished, setIsEventFinished] = useState(
-    new Date() > LIMIT_DATE,
-  );
-
   const ExpiredBlock = (
     <div className={"flex h-dvh flex-col pb-16"}>
       <div className="flex grow items-center justify-center">
@@ -70,7 +70,9 @@ export function App() {
 
           <hr className={"my-4 w-1/2"} />
           <button
-            onClick={() => setIsEventFinished(false)}
+            onClick={() => {
+              setIsEventFinishedScreenClosed(true);
+            }}
             className="text-gray-800 opacity-40"
           >
             {t("ignore")}
@@ -81,16 +83,22 @@ export function App() {
   );
 
   return (
+    <div className="min-h-dvh md:mx-auto md:max-w-md">
+      {isEventFinished && !isEventFinishedScreenClosed ? (
+        ExpiredBlock
+      ) : (
+        <RouterProvider router={router} />
+      )}
+    </div>
+  );
+};
+
+export function App() {
+  return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <QRDrawerContextProvider>
-          <div className="min-h-dvh md:mx-auto md:max-w-md">
-            {isEventFinished ? (
-              ExpiredBlock
-            ) : (
-              <RouterProvider router={router} />
-            )}
-          </div>
+          <AppWrapped />
           <ReactQueryDevtools initialIsOpen={false} />
         </QRDrawerContextProvider>
       </QueryClientProvider>

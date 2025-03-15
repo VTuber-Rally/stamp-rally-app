@@ -46,8 +46,11 @@ importers:
         specifier: ^16.4.5
         version: 16.4.7
       node-appwrite:
-        specifier: ^13.0.0
-        version: 13.0.0
+        specifier: ^15.0.1
+        version: 15.0.1
+      zod:
+        specifier: ^3.24.1
+        version: 3.24.1
     devDependencies:
       '@types/node':
         specifier: ^20.14.9
@@ -3784,11 +3787,11 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  node-appwrite@13.0.0:
-    resolution: {integrity: sha512-O1g1RWcRYcvnVvR0Dykjoe/4UcL6ELVvZosb4B8/hhNvleuWfN2fOFxzeCaU8amGW6UtVtZqvNaUT3IF1mPBdA==}
-
   node-appwrite@14.1.0:
     resolution: {integrity: sha512-kuKAZrdaAcGYOMUXtxNb1j+uIy+FIMiiU1dFkgwTXLsMLeLvC6HJ8/FH/kN9JyrWR2a2zcGN7gWfyQgWYoLMTA==}
+
+  node-appwrite@15.0.1:
+    resolution: {integrity: sha512-vewchNVfgxJ1wHmdN2BRSHwoO+trfqKZf5Uq5wXfCHpnVtAtoO2amh8o5mwIfquP6qbZ+DMV25ZXp8MZYxPO7A==}
 
   node-fetch-native-with-agent@1.7.2:
     resolution: {integrity: sha512-5MaOOCuJEvcckoz7/tjdx1M6OusOY6Xc5f459IaruGStWnKzlI1qpNgaAwmn4LmFYcsSlj+jBMk84wmmRxfk5g==}
@@ -8722,11 +8725,11 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  node-appwrite@13.0.0:
+  node-appwrite@14.1.0:
     dependencies:
       node-fetch-native-with-agent: 1.7.2
 
-  node-appwrite@14.1.0:
+  node-appwrite@15.0.1:
     dependencies:
       node-fetch-native-with-agent: 1.7.2
 
