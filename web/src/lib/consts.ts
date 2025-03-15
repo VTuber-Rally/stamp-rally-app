@@ -16,6 +16,7 @@ const {
   VITE_GET_PRIVATE_KEY_FUNCTION_ID: getPrivateKeyFunctionId,
   VITE_ASSETS_BUCKET_ID: assetsBucketId,
   VITE_STAMPS_TO_COLLECT,
+  VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: contestParticipantsCollectionId,
 } = import.meta.env;
 
 const stampsToCollect = parseInt(VITE_STAMPS_TO_COLLECT);
@@ -44,4 +45,5 @@ export {
   stampsToCollect,
   isDev,
   isProd,
+  contestParticipantsCollectionId,
 };

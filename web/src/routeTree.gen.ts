@@ -22,6 +22,7 @@ import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
 import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
 import { Route as StandistsProfileImport } from './routes/standists/profile'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
+import { Route as StaffContestImport } from './routes/staff/contest'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsCodeImport } from './routes/_rallyists/code'
@@ -117,6 +118,12 @@ const StandistsProfileRoute = StandistsProfileImport.update({
 const StaffWheelRoute = StaffWheelImport.update({
   id: '/wheel',
   path: '/wheel',
+  getParentRoute: () => StaffRoute,
+} as any)
+
+const StaffContestRoute = StaffContestImport.update({
+  id: '/contest',
+  path: '/contest',
   getParentRoute: () => StaffRoute,
 } as any)
 
@@ -266,6 +273,13 @@ declare module '@tanstack/react-router' {
       path: '/code'
       fullPath: '/staff/code'
       preLoaderRoute: typeof StaffCodeImport
+      parentRoute: typeof StaffImport
+    }
+    '/staff/contest': {
+      id: '/staff/contest'
+      path: '/contest'
+      fullPath: '/staff/contest'
+      preLoaderRoute: typeof StaffContestImport
       parentRoute: typeof StaffImport
     }
     '/staff/wheel': {
@@ -463,6 +477,7 @@ const RallyistsRouteWithChildren = RallyistsRoute._addFileChildren(
 
 interface StaffRouteChildren {
   StaffCodeRoute: typeof StaffCodeRoute
+  StaffContestRoute: typeof StaffContestRoute
   StaffWheelRoute: typeof StaffWheelRoute
   StaffSigninLazyRoute: typeof StaffSigninLazyRoute
   StaffIndexRoute: typeof StaffIndexRoute
@@ -473,6 +488,7 @@ interface StaffRouteChildren {
 
 const StaffRouteChildren: StaffRouteChildren = {
   StaffCodeRoute: StaffCodeRoute,
+  StaffContestRoute: StaffContestRoute,
   StaffWheelRoute: StaffWheelRoute,
   StaffSigninLazyRoute: StaffSigninLazyRoute,
   StaffIndexRoute: StaffIndexRoute,
@@ -508,6 +524,7 @@ export interface FileRoutesByFullPath {
   '/code': typeof RallyistsCodeRoute
   '/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
+  '/staff/contest': typeof StaffContestRoute
   '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
@@ -533,6 +550,7 @@ export interface FileRoutesByTo {
   '/code': typeof RallyistsCodeRoute
   '/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
+  '/staff/contest': typeof StaffContestRoute
   '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
@@ -563,6 +581,7 @@ export interface FileRoutesById {
   '/_rallyists/code': typeof RallyistsCodeRoute
   '/_rallyists/rules': typeof RallyistsRulesRoute
   '/staff/code': typeof StaffCodeRoute
+  '/staff/contest': typeof StaffContestRoute
   '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
@@ -592,6 +611,7 @@ export interface FileRouteTypes {
     | '/code'
     | '/rules'
     | '/staff/code'
+    | '/staff/contest'
     | '/staff/wheel'
     | '/standists/profile'
     | '/standists/qrcode'
@@ -616,6 +636,7 @@ export interface FileRouteTypes {
     | '/code'
     | '/rules'
     | '/staff/code'
+    | '/staff/contest'
     | '/staff/wheel'
     | '/standists/profile'
     | '/standists/qrcode'
@@ -644,6 +665,7 @@ export interface FileRouteTypes {
     | '/_rallyists/code'
     | '/_rallyists/rules'
     | '/staff/code'
+    | '/staff/contest'
     | '/staff/wheel'
     | '/standists/profile'
     | '/standists/qrcode'
@@ -709,6 +731,7 @@ export const routeTree = rootRoute
       "filePath": "staff.tsx",
       "children": [
         "/staff/code",
+        "/staff/contest",
         "/staff/wheel",
         "/staff/signin",
         "/staff/",
@@ -752,6 +775,10 @@ export const routeTree = rootRoute
     },
     "/staff/code": {
       "filePath": "staff/code.tsx",
+      "parent": "/staff"
+    },
+    "/staff/contest": {
+      "filePath": "staff/contest.tsx",
       "parent": "/staff"
     },
     "/staff/wheel": {

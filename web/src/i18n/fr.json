@@ -139,5 +139,40 @@
     "title": "Analytiques",
     "description": "Nous utilisons Plausible pour collecter des statistiques anonymes (nombre de visiteurs, nombre de tampons scannés, etc.). Vous pouvez vous y opposer ici.",
     "optOut": "Ne pas utiliser mes données pour des statistiques."
+  },
+  "contest": {
+    "staff": {
+      "title": "Gestion du concours",
+      "qrCode": {
+        "title": "QR Code d'inscription",
+        "clickToEnlarge": "Cliquer pour agrandir",
+        "notAvailable": "Pas de QR Code disponible",
+        "scanInstructions": "Scannez le QR Code pour vous inscrire au concours. Il est nécessaire d'avoir déjà terminé le rally pour vous inscrire."
+      },
+      "participants": {
+        "title": "Participants",
+        "loading": "Chargement des participants...",
+        "loadingError": "Erreur lors du chargement des participants",
+        "noneFound": "Aucun participant trouvé",
+        "showRecent": "Participants récents seulement"
+      },
+      "actions": {
+        "drawWinner": "Lancer le tirage au sort",
+        "sendNotification": "Envoyer une notification",
+        "resetDraw": "Réinitialiser le tirage",
+        "validateWinner": "Valider le gagnant"
+      },
+      "winner": {
+        "title": "Gagnant du tirage au sort"
+      },
+      "drawing": {
+        "inProgress": "Tirage au sort en cours...",
+        "drumRoll": "Roulement de tambour..."
+      },
+      "winners": {
+        "title": "Historique des gagnants",
+        "noneFound": "Aucun gagnant trouvé"
+      }
+    }
   }
 }
