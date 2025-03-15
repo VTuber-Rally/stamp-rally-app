@@ -151,12 +151,23 @@
       },
       "participants": {
         "title": "Participants",
+        "loading": "Loading participants...",
         "loadingError": "Error loading participants",
-        "noneFound": "No participants found"
+        "noneFound": "No participants found",
+        "showRecent": "Show only recent participants"
       },
       "actions": {
         "drawWinner": "Draw winner",
-        "sendNotification": "Send notification"
+        "sendNotification": "Send notification",
+        "resetDraw": "Reset draw",
+        "validateWinner": "Validate winner"
+      },
+      "winner": {
+        "title": "Contest Winner"
+      },
+      "drawing": {
+        "inProgress": "Drawing in progress...",
+        "drumRoll": "Drum roll..."
       }
     }
   }

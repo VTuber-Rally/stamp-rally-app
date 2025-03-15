@@ -151,12 +151,23 @@
       },
       "participants": {
         "title": "Participants",
+        "loading": "Chargement des participants...",
         "loadingError": "Erreur lors du chargement des participants",
-        "noneFound": "Aucun participant trouvé"
+        "noneFound": "Aucun participant trouvé",
+        "showRecent": "Participants récents seulement"
       },
       "actions": {
         "drawWinner": "Lancer le tirage au sort",
-        "sendNotification": "Envoyer une notification"
+        "sendNotification": "Envoyer une notification",
+        "resetDraw": "Réinitialiser le tirage",
+        "validateWinner": "Valider le gagnant"
+      },
+      "winner": {
+        "title": "Gagnant du tirage au sort"
+      },
+      "drawing": {
+        "inProgress": "Tirage au sort en cours...",
+        "drumRoll": "Roulement de tambour..."
       }
     }
   }

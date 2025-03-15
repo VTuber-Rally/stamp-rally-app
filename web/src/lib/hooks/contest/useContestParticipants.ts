@@ -6,16 +6,36 @@ import { Query, client, databases } from "@/lib/appwrite";
 import { contestParticipantsCollectionId, databaseId } from "@/lib/consts";
 import type { ContestParticipant } from "@/lib/models/ContestParticipant";
 
-async function fetchContestParticipants() {
+async function fetchContestParticipants(filterRecentParticipants: boolean) {
+  const now = new Date();
+  const yesterday = new Date(now); // all my troubles seemed so far away
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  // on filtre les participants entre 16h hier et 16h aujourd'hui
+  // c'est à dire entre le dernier tirage et le prochain (en théorie)
+  const startDate = new Date(yesterday);
+  startDate.setHours(16, 0, 0, 0);
+  const endDate = new Date(now);
+  endDate.setHours(16, 0, 0, 0);
+
   const response = await databases.listDocuments<ContestParticipant>(
     databaseId,
     contestParticipantsCollectionId,
-    [Query.orderAsc("registeredAt")],
+    [
+      Query.isNull("drawnDate"),
+      Query.orderAsc("registeredAt"),
+      ...(filterRecentParticipants
+        ? [
+            Query.greaterThanEqual("registeredAt", startDate.toISOString()),
+            Query.lessThanEqual("registeredAt", endDate.toISOString()),
+          ]
+        : []),
+    ],
   );
   return response.documents;
 }
 
-export function useContestParticipants() {
+export function useContestParticipants(filterRecentParticipants: boolean) {
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -49,8 +69,8 @@ export function useContestParticipants() {
   }, [queryClient]);
 
   return useQuery({
-    queryKey: [QUERY_KEYS.CONTEST_PARTICIPANTS],
-    queryFn: () => fetchContestParticipants(),
+    queryKey: [QUERY_KEYS.CONTEST_PARTICIPANTS, filterRecentParticipants],
+    queryFn: () => fetchContestParticipants(filterRecentParticipants),
     // au cas où, juste in case, voilà
     refetchInterval: 30000,
   });

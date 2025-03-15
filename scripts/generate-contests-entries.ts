@@ -1,7 +1,8 @@
+import { faker } from "@faker-js/faker";
 import { Databases, ID } from "node-appwrite";
 import * as sdk from "node-appwrite";
 
-import { getEnv } from "./shared";
+import { getEnv } from "./shared.js";
 
 const {
   APPWRITE_PROJECT_ID,
@@ -22,7 +23,7 @@ const generateParticipants = async (count: number) => {
   console.log(`Génération de ${count} participants...`);
   const participants = Array.from({ length: count }, (_, i) => ({
     userId: ID.unique(),
-    name: `Jean Dupont ${i + 1}`,
+    name: faker.internet.username(),
     registeredAt: new Date().toISOString(),
   }));
 
@@ -63,7 +64,7 @@ const deleteParticipants = async () => {
   );
 };
 
-const participantCount = 10;
+const participantCount = process.argv[2] ? parseInt(process.argv[2]) : 10;
 
 if (process.argv[2] === "--rm") {
   deleteParticipants();
