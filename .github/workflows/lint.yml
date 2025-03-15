@@ -88,6 +88,7 @@ jobs:
           VITE_SUBMIT_FUNCTION_ID: example
           VITE_WHEEL_COLLECTION_ID: example
           VITE_GET_PRIVATE_KEY_FUNCTION_ID: example
+          VITE_KV_COLLECTION_ID: example
           VITE_ASSETS_BUCKET_ID: example
         run: pnpm --filter web build
 
