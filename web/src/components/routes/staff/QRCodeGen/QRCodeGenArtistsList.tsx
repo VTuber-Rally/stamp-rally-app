@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 
+import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
-import { imagePrefix, images } from "@/lib/images.ts";
 
 function QRCodeGenArtistsList() {
   const { data: standistsList } = useStandists();
@@ -19,20 +19,12 @@ function QRCodeGenArtistsList() {
                 key={doc.userId}
                 className={clsx("flex flex-col items-center gap-2")}
               >
-                {images[
-                  `${imagePrefix}${doc.image}` as keyof typeof images
-                ] && (
-                  <Link
-                    to="/staff/gen-qrcode/$userId"
-                    params={{ userId: doc.userId }}
-                  >
-                    <img
-                      src={images[`${imagePrefix}${doc.image}`]}
-                      alt={doc.name}
-                      className={"w-32 rounded-full border-8 border-secondary"}
-                    />
-                  </Link>
-                )}
+                <Link
+                  to="/staff/gen-qrcode/$userId"
+                  params={{ userId: doc.userId }}
+                >
+                  <ArtistImage userId={doc.userId} name={doc.name} />
+                </Link>
 
                 <div className="relative w-40 rounded-xl bg-secondary py-1 text-center">
                   <p>{doc.name}</p>
