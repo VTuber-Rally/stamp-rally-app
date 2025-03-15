@@ -7,9 +7,9 @@
 
   --color-primary: var(--color-stone-600);
 
-  --color-secondary: #9fe0ea;
-  --color-secondary-light: #b6e6ee;
-  --color-tertiary: #ffa7c1;
+  --color-secondary: #8bceba;
+  --color-secondary-light: #cdebe5;
+  --color-tertiary: #f4b2c0;
   --color-success-orange: #fd9308;
   --color-background-black: rgba(0, 0, 0, 0.95);
 }
@@ -20,7 +20,7 @@
 
 .loader {
   border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
+  border-top: 16px solid #8bceba;
   border-radius: 50%;
   width: 120px;
   height: 120px;
