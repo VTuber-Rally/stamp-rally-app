@@ -349,6 +349,45 @@
                 }
             ],
             "indexes": []
+        },
+        {
+            "$id": "67d54ef600021e18818a",
+            "$permissions": [],
+            "databaseId": "6675f377000709b0db07",
+            "name": "key-value",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "key",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "value",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1024,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "key"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
         }
     ],
     "buckets": [

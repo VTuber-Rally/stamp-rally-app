@@ -22,8 +22,8 @@ const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
 const {
   APPWRITE_PROJECT_ID,
   APPWRITE_ENDPOINT,
-  PROFILE_DATABASE_ID,
-  PROFILE_COLLECTION_ID,
+  DATABASE_ID,
+  STANDISTS_COLLECTION_ID,
   APPWRITE_API_KEY,
 } = getEnv();
 
@@ -177,8 +177,8 @@ async function createProfilesAndDocuments() {
     .filter((profile) => profile !== null)
     .map((profile) => {
       return database.createDocument(
-        PROFILE_DATABASE_ID,
-        PROFILE_COLLECTION_ID,
+        DATABASE_ID,
+        STANDISTS_COLLECTION_ID,
         sdk.ID.unique(),
         profile,
         [

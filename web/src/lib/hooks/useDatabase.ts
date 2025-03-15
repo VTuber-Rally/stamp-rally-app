@@ -6,11 +6,13 @@ import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { Query, databases } from "@/lib/appwrite.ts";
 import {
   databaseId,
+  keyValueCollectionId,
   standistsCollectionId,
   submissionsCollectionId,
   wheelCollectionId,
 } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
+import { KeyValue } from "@/lib/models/KeyValue";
 import { Standist } from "@/lib/models/Standist.ts";
 import { Submission as SubmissionIndexedDB } from "@/lib/models/Submission.ts";
 
@@ -107,6 +109,20 @@ export const useDatabase = () => {
     }));
   };
 
+  const getKeyValue = async (key: string) => {
+    const doc = await databases.listDocuments<KeyValue>(
+      databaseId,
+      keyValueCollectionId,
+      [Query.equal("key", key)],
+    );
+
+    if (doc.documents.length === 0) {
+      throw new Error("Key not found");
+    }
+
+    return doc.documents[0];
+  };
+
   const findAndUpdateProfile = async (
     userId: string,
     profileData: StandistsEditProfileForm,
@@ -135,6 +151,7 @@ export const useDatabase = () => {
     getSubmission,
     getOwnSubmissions,
     getWheelEntries,
+    getKeyValue,
     findAndUpdateProfile,
   };
 };
