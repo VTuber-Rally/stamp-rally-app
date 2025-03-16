@@ -46,7 +46,7 @@ export default defineConfig({
         manifest: {
           name: "VTuber Stamp Rally",
           short_name: "Stamp Rally",
-          theme_color: "#9fe0ea",
+          theme_color: "#8bceba",
           display: "standalone",
           categories: ["entertainment"],
           orientation: "portrait",
