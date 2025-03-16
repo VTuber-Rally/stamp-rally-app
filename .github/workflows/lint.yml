@@ -1,8 +1,12 @@
 name: Lint
 
 on:
-  - push
-  - workflow_dispatch
+  push:
+    paths:
+      - 'web/**'
+      - 'pnpm-lock.yaml'
+  workflow_dispatch:
+  
 
 permissions:
   contents: read
@@ -71,6 +75,20 @@ jobs:
           run_install: true
 
       - name: 'web: pnpm build'
+        env:
+          NODE_ENV: production
+          VITE_PUBLIC_URL: https://example.com
+          VITE_APPWRITE_ENDPOINT: https://appwrite.example.com
+          VITE_APPWRITE_PROJECT_ID: example
+          VITE_DATABASE_ID: example
+          VITE_EVENT_END_DATE: example
+          VITE_STAMPS_TO_COLLECT: 10
+          VITE_STANDISTS_COLLECTION_ID: example
+          VITE_SUBMISSIONS_COLLECTION_ID: example
+          VITE_SUBMIT_FUNCTION_ID: example
+          VITE_WHEEL_COLLECTION_ID: example
+          VITE_GET_PRIVATE_KEY_FUNCTION_ID: example
+          VITE_ASSETS_BUCKET_ID: example
         run: pnpm --filter web build
 
     # upload artifacts
