@@ -25,7 +25,10 @@
   "cancel": "Cancel",
   "checkSubmit": "Verify a submission",
   "close": "Close",
-  "consentToSaveEmail": "I want to be informed about the next rallies!",
+  "consent": {
+    "email": "I want to be informed about the next rallies!",
+    "pushNotifications": "Notifications during the event"
+  },
   "contest": {
     "contact": {
       "description": "To be able to contact you if you win, please provide the following information:",
@@ -187,6 +190,16 @@
   "mapWillSoonBeAvailable": "The map will soon be available!",
   "name": "Name",
   "no": "No",
+  "notifications": {
+    "permissionNotGrantedToast": {
+      "title": "Notification permission",
+      "description": "Go to the web browser settings to allow notifications."
+    },
+    "fcmError": {
+      "title": "Cannot toggle notifications",
+      "description": "A connection to the notification backend could not be established."
+    }
+  },
   "notImplemented": "Not implemented yet",
   "notLoggedIn": "You're not logged in",
   "notRedeemed": "Unredeemed submissions",

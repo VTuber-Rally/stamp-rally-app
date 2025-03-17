@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { captureException } from "@sentry/react";
 import { createFileRoute } from "@tanstack/react-router";
 import i18n from "i18next";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
@@ -16,21 +17,38 @@ import InputField from "@/components/inputs/InputField";
 import { Header } from "@/components/layout/Header.tsx";
 import { AnalyticsOptOut } from "@/components/routes/AnalyticsOptOut.tsx";
 import { getPrefs, setPref } from "@/lib/appwrite.ts";
+import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
 import { useLogout } from "@/lib/hooks/useLogout.ts";
 import { useUpdateUsername } from "@/lib/hooks/useUpdateUsername";
 import { useUser } from "@/lib/hooks/useUser.ts";
+import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
+import {
+  disablePushNotifications,
+  enablePushNotifications,
+} from "@/lib/pushNotifications.ts";
 
 export const Route = createFileRoute(
   "/_rallyists/_withUserProviderNoAutoAnonymous/settings",
 )({
   component: SettingsPage,
   loader: async () => {
+    let emailConsent: boolean;
+    let pushNotificationsConsent: boolean;
     try {
       const prefs = await getPrefs();
-      return { consent: prefs["consent"] === true };
+      emailConsent = prefs[APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT] === true;
+      pushNotificationsConsent =
+        window.localStorage.getItem(
+          LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
+        ) === "true";
     } catch {
-      return { consent: false };
+      emailConsent = false;
+      pushNotificationsConsent = false;
     }
+    return {
+      emailConsent,
+      pushNotificationsConsent,
+    };
   },
 });
 
@@ -40,9 +58,45 @@ function SettingsPage() {
   const { t } = useTranslation();
   const { updateUsername, isPending } = useUpdateUsername();
 
-  const { consent } = Route.useLoaderData();
+  const { emailConsent, pushNotificationsConsent } = Route.useLoaderData();
 
-  const [consentChecked, setConsentChecked] = useState(consent);
+  const [emailConsentChecked, setEmailConsentChecked] = useState(emailConsent);
+
+  const toggleEmailConsent = useCallback(async () => {
+    setEmailConsentChecked(!emailConsentChecked);
+    setPref(
+      APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT,
+      !emailConsentChecked,
+    ).catch((error) => {
+      captureException(error);
+      setEmailConsentChecked(emailConsentChecked);
+    });
+  }, [emailConsentChecked]);
+
+  // This setting is per-device
+  const [pushNotificationsConsentChecked, setPushNotificationsConsentChecked] =
+    useState(pushNotificationsConsent);
+  const [isPushNotificationsLoading, setIsPushNotificationsLoading] =
+    useState(false);
+
+  const togglePushNotificationsConsent = useCallback(async () => {
+    setIsPushNotificationsLoading(true);
+    setPushNotificationsConsentChecked(!pushNotificationsConsentChecked);
+    try {
+      if (pushNotificationsConsentChecked) {
+        const pushNotificationsDisabled = await disablePushNotifications();
+        setPushNotificationsConsentChecked(!pushNotificationsDisabled);
+      } else {
+        const pushNotificationsEnabled = await enablePushNotifications();
+        setPushNotificationsConsentChecked(pushNotificationsEnabled);
+      }
+    } catch (error) {
+      captureException(error);
+      setPushNotificationsConsentChecked(pushNotificationsConsentChecked);
+    } finally {
+      setIsPushNotificationsLoading(false);
+    }
+  }, [pushNotificationsConsentChecked]);
 
   const isUserLoggedIn =
     user !== null && user?.email !== undefined && user?.email !== "";
@@ -118,15 +172,27 @@ function SettingsPage() {
 
               <div className={"flex items-center"}>
                 <Checkbox
-                  id={"consent"}
-                  checked={consentChecked}
-                  onCheckedChange={() => {
-                    setPref("consent", !consentChecked);
-                    setConsentChecked(!consentChecked);
-                  }}
+                  id={"email-consent"}
+                  checked={emailConsentChecked}
+                  onCheckedChange={toggleEmailConsent}
                 />
-                <label className={"ml-2"} htmlFor={"consent"}>
-                  {t("consentToSaveEmail")}
+                <label className={"ml-2"} htmlFor={"email-consent"}>
+                  {t("consent.email")}
+                </label>
+              </div>
+
+              <div className={"flex items-center"}>
+                <Checkbox
+                  id={"push-notifications-consent"}
+                  checked={pushNotificationsConsentChecked}
+                  disabled={isPushNotificationsLoading}
+                  onCheckedChange={togglePushNotificationsConsent}
+                />
+                <label
+                  className={"ml-2"}
+                  htmlFor={"push-notifications-consent"}
+                >
+                  {t("consent.pushNotifications")}
                 </label>
               </div>
 

@@ -10,9 +10,11 @@ import {
 
 import {
   appwriteEndpoint,
+  appwriteNotificationProviderId,
   appwriteProjectId,
   assetsBucketId,
 } from "@/lib/consts.ts";
+import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
 
 export const client = new Client();
 
@@ -88,7 +90,7 @@ export const setPref = async (
     return account.updatePrefs({ ...currentPrefs, [key]: value });
   } catch (error) {
     const appwriteError = error as AppwriteException;
-    throw new Error("Cannot set name", { cause: appwriteError });
+    throw new Error("Cannot set preference", { cause: appwriteError });
   }
 };
 
@@ -97,7 +99,7 @@ export const getPrefs = async () => {
     return account.getPrefs();
   } catch (error) {
     const appwriteError = error as AppwriteException;
-    throw new Error("Cannot set name", { cause: appwriteError });
+    throw new Error("Cannot get preferences", { cause: appwriteError });
   }
 };
 
@@ -154,5 +156,45 @@ export const getAssetsFilesList = async () => {
   } catch (error) {
     const appwriteError = error as AppwriteException;
     throw new Error("Cannot get files list", { cause: appwriteError });
+  }
+};
+
+export const registerPushTarget = async (token: string) => {
+  try {
+    const existingPushTargetId = window.localStorage.getItem(
+      LOCAL_STORAGE_KEYS.APPWRITE_PUSH_TARGET_ID,
+    );
+    if (existingPushTargetId) {
+      await account.updatePushTarget(existingPushTargetId, token);
+      return existingPushTargetId;
+    } else {
+      const { $id } = await account.createPushTarget(
+        ID.unique(),
+        token,
+        appwriteNotificationProviderId,
+      );
+      window.localStorage.setItem(
+        LOCAL_STORAGE_KEYS.APPWRITE_PUSH_TARGET_ID,
+        $id,
+      );
+      return $id;
+    }
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot register Push target", { cause: appwriteError });
+  }
+};
+
+export const unregisterPushTarget = async () => {
+  try {
+    const existingPushTargetId = window.localStorage.getItem(
+      LOCAL_STORAGE_KEYS.APPWRITE_PUSH_TARGET_ID,
+    );
+    if (!existingPushTargetId) return;
+    await account.deletePushTarget(existingPushTargetId);
+    window.localStorage.removeItem(LOCAL_STORAGE_KEYS.APPWRITE_PUSH_TARGET_ID);
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot unregister Push target", { cause: appwriteError });
   }
 };

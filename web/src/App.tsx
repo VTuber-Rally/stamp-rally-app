@@ -2,64 +2,24 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
-import { useRegisterSW } from "virtual:pwa-register/react";
+import { useTranslation } from "react-i18next";
 
-import { ToastAction } from "@/components/toasts/Toast.tsx";
 import { QRDrawerContextProvider } from "@/contexts/QRDrawerContextProvider.tsx";
 import { KEY_VALUES } from "@/lib/KeyValues.ts";
 import { useKeyValue } from "@/lib/hooks/useKeyValue";
-import { useToast } from "@/lib/hooks/useToast.ts";
+import { useRegisterAppSW } from "@/lib/hooks/useRegisterAppSW.tsx";
 import { queryClient } from "@/lib/queryClient.ts";
 import { router } from "@/router.tsx";
 
 const AppWrapped = () => {
   const { t } = useTranslation();
-  const { toast } = useToast();
   const { value: eventEndDate } = useKeyValue(KEY_VALUES.eventEndDate);
+
+  useRegisterAppSW();
 
   const [isEventFinishedScreenClosed, setIsEventFinishedScreenClosed] =
     useState(false);
   const isEventFinished = !!eventEndDate && new Date() > eventEndDate;
-
-  const { updateServiceWorker } = useRegisterSW({
-    onOfflineReady() {
-      toast({
-        title: t("appIsReady.title"),
-        description: (
-          <Trans
-            t={t}
-            i18nKey="appIsReady.description"
-            components={{ em: <em /> }}
-          />
-        ),
-      });
-    },
-    onNeedRefresh() {
-      toast({
-        title: t("updateTheApp.title"),
-        description: t("updateTheApp.description"),
-        action: (
-          <ToastAction
-            altText={t("updateTheApp.a11yDescription")}
-            onClick={() => updateServiceWorker()}
-          >
-            {t("updateTheApp.action")}
-          </ToastAction>
-        ),
-      });
-    },
-    onRegisteredSW(_url, registration) {
-      if (registration) {
-        setInterval(
-          () => {
-            registration.update();
-          },
-          60 * 10 * 1000,
-        );
-      }
-    },
-  });
 
   const ExpiredBlock = (
     <div className={"flex h-dvh flex-col pb-16"}>

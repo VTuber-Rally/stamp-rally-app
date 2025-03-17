@@ -28,6 +28,7 @@ export default defineConfig({
         schema: {
           VITE_APPWRITE_ENDPOINT: Schema.string(),
           VITE_APPWRITE_PROJECT_ID: Schema.string(),
+          VITE_APPWRITE_NOTIFICATION_PROVIDER_ID: Schema.string(),
           VITE_DATABASE_ID: Schema.string(),
           VITE_EVENT_END_DATE: Schema.string(),
           VITE_STAMPS_TO_COLLECT: Schema.number(),
@@ -39,12 +40,20 @@ export default defineConfig({
           VITE_GET_PRIVATE_KEY_FUNCTION_ID: Schema.string(),
           VITE_KV_COLLECTION_ID: Schema.string(),
           VITE_ASSETS_BUCKET_ID: Schema.string(),
+          VITE_FIREBASE_API_KEY: Schema.string(),
+          VITE_FIREBASE_AUTH_DOMAIN: Schema.string(),
+          VITE_FIREBASE_PROJECT_ID: Schema.string(),
+          VITE_FIREBASE_STORAGE_BUCKET: Schema.string(),
+          VITE_FIREBASE_MESSAGING_SENDER_ID: Schema.string(),
+          VITE_FIREBASE_APP_ID: Schema.string(),
+          VITE_FIREBASE_VAPID_PUBLIC_KEY: Schema.string(),
         },
       }),
     // This plugin is disabled in Storybook
     process.env.STORYBOOK !== "true" &&
       VitePWA({
         registerType: "autoUpdate",
+        strategies: "injectManifest",
         manifest: {
           name: "VTuber Stamp Rally",
           short_name: "Stamp Rally",
@@ -69,26 +78,12 @@ export default defineConfig({
           ],
         },
         includeAssets: ["**/*"],
-        workbox: {
+        injectManifest: {
           // https://vite-pwa-org.netlify.app/guide/static-assets#globpatterns
           globPatterns: ["**/*.{woff2,js,css,html,jpg,svg,png}"],
-          runtimeCaching: [
-            {
-              urlPattern: /v1\/storage\/buckets.+$/,
-              handler: "StaleWhileRevalidate",
-              options: {
-                cacheName: "rally-assets",
-                expiration: {
-                  maxEntries: 100,
-                  maxAgeSeconds: 60 * 60 * 24, // 24 heures?
-                },
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-          ],
         },
+        srcDir: "src",
+        filename: "serviceWorker.ts",
         devOptions: {
           enabled: true,
           type: "module",

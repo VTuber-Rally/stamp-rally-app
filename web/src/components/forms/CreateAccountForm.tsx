@@ -3,13 +3,14 @@ import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@/components/inputs/Checkbox.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
+import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
 type EmailNameFormType = {
   name: string;
   email: string;
-  consent: boolean;
+  emailConsent: boolean;
 };
 
 export const CreateAccountForm = () => {
@@ -31,8 +32,8 @@ export const CreateAccountForm = () => {
     try {
       if (data.email) {
         await setEmail(data.email);
-        if (data.consent) {
-          await setPref("consent", true);
+        if (data.emailConsent) {
+          await setPref(APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT, true);
         }
       }
 
@@ -78,9 +79,9 @@ export const CreateAccountForm = () => {
               />
 
               <div className={"flex items-center"}>
-                <Checkbox {...register("consent")} id={"consent"} />
-                <label className={"ml-2"} htmlFor={"consent"}>
-                  {t("consentToSaveEmail")}
+                <Checkbox {...register("emailConsent")} id={"emailConsent"} />
+                <label className={"ml-2"} htmlFor={"emailConsent"}>
+                  {t("consent.email")}
                 </label>
               </div>
             </>

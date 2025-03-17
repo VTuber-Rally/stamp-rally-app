@@ -4,6 +4,7 @@ const {
   VITE_PUBLIC_URL: publicUrl,
   VITE_APPWRITE_ENDPOINT: appwriteEndpoint,
   VITE_APPWRITE_PROJECT_ID: appwriteProjectId,
+  VITE_APPWRITE_NOTIFICATION_PROVIDER_ID: appwriteNotificationProviderId,
   VITE_DATABASE_ID: databaseId,
   VITE_STANDISTS_COLLECTION_ID: standistsCollectionId,
   VITE_SUBMISSIONS_COLLECTION_ID: submissionsCollectionId,
@@ -16,12 +17,27 @@ const {
   VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: contestParticipantsCollectionId,
   VITE_REGISTER_CONTEST_PARTICIPANT_FUNCTION_ID:
     registerContestParticipantFunctionId,
+  VITE_FIREBASE_API_KEY: firebaseApiKey,
+  VITE_FIREBASE_AUTH_DOMAIN: firebaseAuthDomain,
+  VITE_FIREBASE_PROJECT_ID: firebaseProjectId,
+  VITE_FIREBASE_STORAGE_BUCKET: firebaseStorageBucket,
+  VITE_FIREBASE_MESSAGING_SENDER_ID: firebaseMessagingSenderId,
+  VITE_FIREBASE_APP_ID: firebaseAppId,
+  VITE_FIREBASE_VAPID_PUBLIC_KEY: firebaseVapidPublicKey,
+  DEV: isDev,
+  PROD: isProd,
 } = import.meta.env;
 
 const stampsToCollect = parseInt(VITE_STAMPS_TO_COLLECT);
 
-const isDev = import.meta.env.DEV;
-const isProd = import.meta.env.PROD;
+const firebaseConfig = {
+  apiKey: firebaseApiKey,
+  authDomain: firebaseAuthDomain,
+  projectId: firebaseProjectId,
+  storageBucket: firebaseStorageBucket,
+  messagingSenderId: firebaseMessagingSenderId,
+  appId: firebaseAppId,
+};
 
 export {
   buildId,
@@ -29,6 +45,7 @@ export {
   publicUrl,
   appwriteEndpoint,
   appwriteProjectId,
+  appwriteNotificationProviderId,
   databaseId,
   standistsCollectionId,
   submissionsCollectionId,
@@ -42,4 +59,6 @@ export {
   isProd,
   contestParticipantsCollectionId,
   registerContestParticipantFunctionId,
+  firebaseConfig,
+  firebaseVapidPublicKey,
 };
