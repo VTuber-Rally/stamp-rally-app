@@ -1,0 +1,19 @@
+{
+  "name": "register-contest-participant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "node-appwrite": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "prettier": "^3.2.5",
+    "typescript": "^5.5.3"
+  }
+}
