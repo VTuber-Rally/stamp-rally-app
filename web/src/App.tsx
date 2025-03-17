@@ -1,6 +1,8 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "@tanstack/react-router";
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { StrictMode, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useRegisterSW } from "virtual:pwa-register/react";
@@ -53,6 +55,29 @@ export function App() {
           },
           60 * 10 * 1000,
         );
+
+        // FCM!
+        const firebaseConfig = {
+          apiKey: "AIzaSyBb4D9QQpeHG2v_7Yxf4DR0rVvD24eMdi0",
+          // authDomain: "vtuberstamprally.firebaseapp.com",
+          projectId: "vtuberstamprally",
+          // storageBucket: "vtuberstamprally.firebasestorage.app",
+          messagingSenderId: "689328750745",
+          appId: "1:689328750745:web:636031de1e4b3c4d493808",
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const messaging = getMessaging(app);
+        getToken(messaging, {
+          vapidKey:
+            "BF6S2yLPQbs7Oah2WGvazwMfL6hMo0g_QyAQ3eVQkb1cG4N7o8XJRi0jHMx5J6SvYlBK88Z9uniK9WwqXxWDjiA",
+          serviceWorkerRegistration: registration,
+        }).then(console.log);
+
+        onMessage(messaging, (payload) => {
+          console.log("hello", payload);
+        });
       }
     },
   });
