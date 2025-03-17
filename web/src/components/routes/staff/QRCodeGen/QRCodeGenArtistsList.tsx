@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 
 import { ArtistImage } from "@/components/artists/ArtistImage";
+import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Header } from "@/components/layout/Header.tsx";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
 
@@ -37,6 +38,10 @@ function QRCodeGenArtistsList() {
           })}
         </div>
       )}
+
+      <ButtonLink size={"small"} href="/staff/stamp-links">
+        Liens des stamps
+      </ButtonLink>
     </div>
   );
 }
