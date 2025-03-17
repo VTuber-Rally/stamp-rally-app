@@ -61,6 +61,7 @@ function SettingsPage() {
             {user?.name && t("hi_username", { name: user.name })}{" "}
             {user?.email && `(${user?.email})`}
           </p>
+
           <div className={"flex items-center"}>
             <Checkbox
               id={"consent"}
@@ -72,6 +73,19 @@ function SettingsPage() {
             />
             <label className={"ml-2"} htmlFor={"consent"}>
               {t("consentToSaveEmail")}
+            </label>
+          </div>
+
+          <div className={"flex items-center"}>
+            <Checkbox
+              id={"fcm-notifications"}
+              checked={consentChecked}
+              onCheckedChange={() => {
+                // TODO
+              }}
+            />
+            <label className={"ml-2"} htmlFor={"fcm-notifications"}>
+              {t("consentToReceiveNotifications")}
             </label>
           </div>
 
