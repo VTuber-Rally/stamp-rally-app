@@ -33,9 +33,9 @@ interface Stamp {
   id: number;
 }
 
-const SUBMISSION_DATABASE_ID = '6675f377000709b0db07';
-const SUBMISSION_COLLECTION_ID = '6687300000095507a828';
-const PROFILE_COLLECTION_ID = '6675f3a2000e52a39b67';
+const SUBMISSION_DATABASE_ID = process.env['DATABASE_ID'];
+const SUBMISSION_COLLECTION_ID = process.env['SUBMISSIONS_COLLECTION_ID'];
+const PROFILE_COLLECTION_ID = process.env['STANDISTS_COLLECTION_ID'];
 
 const signAlgorithm = {
   name: 'ECDSA',
@@ -72,6 +72,12 @@ function importJWK(jwk: JsonWebKey) {
 }
 
 export default async ({ req, res, log, error }: Context) => {
+  if (!SUBMISSION_DATABASE_ID || !SUBMISSION_COLLECTION_ID || !PROFILE_COLLECTION_ID) {
+    log('Missing environment variables.');
+    log(JSON.stringify(process.env, null, 2));
+    throw new Error('Missing environment variables.');
+  }
+
   const client = new Client()
     .setEndpoint(process.env['APPWRITE_FUNCTION_API_ENDPOINT'])
     .setProject(process.env['APPWRITE_FUNCTION_PROJECT_ID'])
