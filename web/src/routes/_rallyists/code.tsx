@@ -1,5 +1,5 @@
 import { useConfetti } from "@stevent-team/react-party";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { ListChecks, TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import { ArtistImage } from "@/components/artists/ArtistImage";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { Header } from "@/components/layout/Header.tsx";
 import { StampDetails } from "@/components/scan/StampDetails.tsx";
+import { parseQRCodeData } from "@/lib/StampQRCodes.ts";
 import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp.ts";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
@@ -24,15 +25,19 @@ export const Route = createFileRoute("/_rallyists/code")({
   loader: async ({ location: { hash } }) => {
     if (!hash) throw new TypeError("No hash provided");
 
-    const decodedHash = decodeURIComponent(hash);
+    const { type, data } = parseQRCodeData(hash);
 
-    const parsed = JSON.parse(decodedHash);
+    if (type === "contest") {
+      throw redirect({
+        to: "/", // TODO: à remplacer par la route du concours rallyiste
+        search: { secret: data as string },
+      });
+    }
 
-    console.log("parsed", decodedHash, parsed);
-
-    const serialized = StampTupleSerializer.safeParse(parsed);
-    if (!serialized.success)
+    const serialized = StampTupleSerializer.safeParse(data);
+    if (!serialized.success) {
       throw new TypeError("Stamp cannot be deserialized");
+    }
 
     return checkSignatureAndStoreStamp(serialized.data);
   },
