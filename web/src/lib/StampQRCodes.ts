@@ -10,6 +10,13 @@ export function encodeStampToQRCode(stamp: StampTuple) {
   return url.toString();
 }
 
+export function encodeContestSecretToQRCode(secret: string) {
+  const url = new URL(publicUrl);
+  url.pathname += url.pathname.endsWith("/") ? "code" : "/code";
+  url.hash = encodeURIComponent(secret);
+  return url.toString();
+}
+
 export function retrieveHashFromQRCode(qrData: string) {
   let url: URL;
   try {

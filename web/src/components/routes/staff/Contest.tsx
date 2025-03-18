@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
+import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Checkbox } from "@/components/inputs/Checkbox";
 import { useContestDrawWinner } from "@/lib/hooks/contest/useContestDrawWinner";
 import { useContestParticipants } from "@/lib/hooks/contest/useContestParticipants";
 import { useContestQRCode } from "@/lib/hooks/contest/useContestQRCode";
+import { useContestSecret } from "@/lib/hooks/contest/useContestSecret";
 import { useContestWinners } from "@/lib/hooks/contest/useContestWinners";
 
 export default function Contest() {
@@ -29,6 +31,8 @@ export default function Contest() {
     isDrumRoll,
     winner,
   } = useContestDrawWinner(participants);
+  const { resetContestSecret, isLoading: isContestSecretLoading } =
+    useContestSecret();
   const { data: qrCode, isLoading: isQRCodeLoading } = useContestQRCode();
   const { data: winners, isLoading: areWinnersLoading } = useContestWinners();
   const [isQRFullscreen, setIsQRFullscreen] = useState(false);
@@ -281,6 +285,24 @@ export default function Contest() {
                 {t("contest.staff.winners.noneFound")}
               </p>
             )}
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-white p-6 shadow">
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold">
+              {t("contest.staff.secret.title")}
+            </h2>
+
+            <ButtonLink
+              onClick={() => resetContestSecret()}
+              disabled={isContestSecretLoading}
+              type="button"
+              size="small"
+              className="rounded-lg"
+            >
+              {t("contest.staff.secret.reset")}
+            </ButtonLink>
           </div>
         </div>
       </div>
