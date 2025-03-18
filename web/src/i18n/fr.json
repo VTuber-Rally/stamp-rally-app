@@ -145,9 +145,9 @@
       "title": "Gestion du concours",
       "qrCode": {
         "title": "QR Code d'inscription",
-        "clickToEnlarge": "Cliquer pour agrandir",
-        "notAvailable": "Pas de QR Code disponible",
-        "scanInstructions": "Scannez le QR Code pour vous inscrire au concours. Il est nécessaire d'avoir déjà terminé le rally pour vous inscrire."
+        "clickToEnlarge": "Cliquez pour agrandir",
+        "notAvailable": "Aucun QR Code disponible",
+        "scanInstructions": "Scannez le QR Code pour vous inscrire au concours. Vous devez avoir complété le rally pour vous inscrire."
       },
       "participants": {
         "title": "Participants",
@@ -163,7 +163,7 @@
         "validateWinner": "Valider le gagnant"
       },
       "winner": {
-        "title": "Gagnant du tirage au sort"
+        "title": "Gagnant du concours"
       },
       "drawing": {
         "inProgress": "Tirage au sort en cours...",
@@ -172,6 +172,14 @@
       "winners": {
         "title": "Historique des gagnants",
         "noneFound": "Aucun gagnant trouvé"
+      },
+      "secret": {
+        "title": "Secret du concours",
+        "reset": "Réinitialiser le secret",
+        "updated": {
+          "title": "Secret du concours mis à jour",
+          "description": "Le secret du concours a été mis à jour"
+        }
       }
     }
   }

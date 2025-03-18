@@ -172,6 +172,14 @@
       "winners": {
         "title": "Winners History",
         "noneFound": "No winners found"
+      },
+      "secret": {
+        "title": "Contest Secret",
+        "reset": "Reset secret",
+        "updated": {
+          "title": "Contest secret updated",
+          "description": "The contest secret has been updated"
+        }
       }
     }
   }
