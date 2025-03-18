@@ -9,18 +9,16 @@ import { ArtistImage } from "@/components/artists/ArtistImage";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { Header } from "@/components/layout/Header.tsx";
 import { StampDetails } from "@/components/scan/StampDetails.tsx";
-import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp.ts";
+import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
 
-export const Route = createFileRoute("/_rallyists/code")({
-  component: Code,
-  pendingComponent: CodeLoading,
-  errorComponent: CodeError,
-  gcTime: 0,
+export const Route = createFileRoute("/_rallyists/stamp")({
+  component: Stamp,
+  errorComponent: StampError,
   loader: async ({ location: { hash } }) => {
     if (!hash) throw new TypeError("No hash provided");
 
@@ -28,17 +26,17 @@ export const Route = createFileRoute("/_rallyists/code")({
 
     const parsed = JSON.parse(decodedHash);
 
-    console.log("parsed", decodedHash, parsed);
-
     const serialized = StampTupleSerializer.safeParse(parsed);
-    if (!serialized.success)
+    if (!serialized.success) {
+      console.log("error", serialized.error);
       throw new TypeError("Stamp cannot be deserialized");
+    }
 
     return checkSignatureAndStoreStamp(serialized.data);
   },
 });
 
-function Code() {
+function Stamp() {
   const data = Route.useLoaderData();
 
   const { t } = useTranslation();
@@ -68,7 +66,7 @@ function Code() {
   const showIntro =
     stamps?.length === 1 && (!submissions || submissions.length === 0);
 
-  if (!standist) return <CodeError error={new Error("Standist not found")} />;
+  if (!standist) return <StampError error={new Error("Standist not found")} />;
 
   return (
     <>
@@ -120,12 +118,7 @@ function Code() {
   );
 }
 
-function CodeLoading() {
-  const { t } = useTranslation();
-  return t("loadingQRData");
-}
-
-function CodeError({ error }: { error: Error }) {
+function StampError({ error }: { error: Error }) {
   const { t } = useTranslation();
 
   return (
