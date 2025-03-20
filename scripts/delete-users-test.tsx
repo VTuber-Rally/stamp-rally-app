@@ -6,8 +6,8 @@ import { deleteUserMedia } from "./upload-user-medias.js";
 const {
   APPWRITE_PROJECT_ID,
   APPWRITE_ENDPOINT,
-  PROFILE_DATABASE_ID,
-  PROFILE_COLLECTION_ID,
+  DATABASE_ID,
+  STANDISTS_COLLECTION_ID,
   APPWRITE_API_KEY,
 } = getEnv();
 
@@ -27,15 +27,15 @@ console.log(
 
 const promises = usersExisting.users.map((user) => {
   return database
-    .listDocuments(PROFILE_DATABASE_ID, PROFILE_COLLECTION_ID, [
+    .listDocuments(DATABASE_ID, STANDISTS_COLLECTION_ID, [
       sdk.Query.equal("userId", user.$id),
     ])
     .then((documents) => {
       const documentDeletionPromises = documents.documents.map((document) => {
         return Promise.all([
           database.deleteDocument(
-            PROFILE_DATABASE_ID,
-            PROFILE_COLLECTION_ID,
+            DATABASE_ID,
+            STANDISTS_COLLECTION_ID,
             document.$id,
           ),
           deleteUserMedia(document.image),
