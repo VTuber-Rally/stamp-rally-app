@@ -82,6 +82,38 @@
   "rally.6": "You can span your rally over several days during the convention!",
   "redeemedSubmissions": "Redeemed submissions",
   "requestYourReward": "Request your reward!",
+  "reward": {
+    "title": "Rewards",
+    "description": "Discover the rewards available for your rally participations.",
+    "rally": {
+      "title": "Stamp Rally",
+      "description": "Collect {{minimumStampsCount}} stamps to get an exclusive illustrated card!",
+      "button": "View my stamps",
+      "completed": "Completed",
+      "inProgress": "{{count}}/{{total}} stamps"
+    },
+    "contest": {
+      "title": "Exclusive Contest",
+      "description": "Join our big contest and get a chance to win a shikishi created by Sedeto!",
+      "button": "Enter the contest",
+      "alreadyRegistered": "Already registered",
+      "registerNow": "Register now",
+      "requirements": "Requires a validated rally submission"
+    },
+    "wheel": {
+      "title": "Wheel of Fortune",
+      "description": "Spin the wheel and try to win additional rewards!",
+      "button": "Spin the wheel",
+      "spinsLeft": "{{count}} spin(s) left",
+      "noSpinsLeft": "No spins available"
+    },
+    "backToHome": "Back to home",
+    "scanQRCodeButton": "Scan a QR code",
+    "noRewardsAvailable": "No rewards available at the moment",
+    "completedRallies": "Completed rallies: {{count}}",
+    "disclaimer": "Rewards are available while supplies last.",
+    "comingSoon": "Coming soon"
+  },
   "rules": "Rules",
   "rules.1": "The rally will be completely digital and won't need any 4G, since you loaded it once. The access link will be there and on the booth.",
   "rules.2": "The rally features 17 booths. You'll need 10 stamps to complete your card. You'll need to visit the two halls (5 and 6) to complete your rally anyway, so prepare to walk!",
@@ -140,7 +172,70 @@
     "description": "We use Plausible to collect anonymous statistics (number of visitors, number of stamps scanned, etc.). You can opt out here.",
     "optOut": "Do not use my data for statistics."
   },
+  "contact": {
+    "error": "Profile update error",
+    "missingSecret": "Missing secret code",
+    "errorUpdatingProfile": "Error updating profile"
+  },
   "contest": {
+    "title": "Contest",
+    "description": "Join our contest and get a chance to win an exclusive shikishi!",
+    "scan": "Scan the QR code to participate",
+    "error": "Error",
+    "missingSecret": "Missing secret code",
+    "registration": {
+      "noSubmissions": "You don't have any validated submissions",
+      "error": "Registration error"
+    },
+    "entry": {
+      "title": "Contest Registration",
+      "confirm": "Confirm your registration",
+      "name": "Name",
+      "email": "Email",
+      "anonymous": "Anonymous",
+      "disclaimer": "By registering, you agree that we may keep your information to contact you if you win.",
+      "registering": "Registering...",
+      "register": "Register for the contest",
+      "cancel": "Cancel"
+    },
+    "contact": {
+      "title": "Your Contact Information",
+      "description": "To be able to contact you if you win, please provide the following information:",
+      "nameLabel": "Your name",
+      "nameRequired": "Please provide your name",
+      "emailLabel": "Your email",
+      "emailRequired": "Please provide your email",
+      "emailInvalid": "Please provide a valid email",
+      "privacyNotice": "Your information will only be used for the contest and to contact you if you win.",
+      "submitting": "Saving...",
+      "submit": "Continue",
+      "cancel": "Cancel"
+    },
+    "success": {
+      "title": "Registration Successful",
+      "registered": "Your contest registration has been successfully recorded.",
+      "checking": "Checking result...",
+      "backToRewards": "Back to rewards",
+      "winner": {
+        "title": "Congratulations!",
+        "description": "You've won a prize in the contest!",
+        "code": "Your reward code: {{code}}",
+        "instructions": "Present this code at Sedeto's stand to claim your prize."
+      },
+      "notWinner": {
+        "description": "You didn't win this time, but you can try again!",
+        "nextSteps": "What to do now?",
+        "step1": "Complete another rally to get another chance",
+        "step2": "Come back tomorrow to participate in the next draw"
+      }
+    },
+    "not-eligible": {
+      "title": "Contest - Not Eligible",
+      "description": "You are not eligible to participate in the contest.",
+      "reason": "To participate, you must have at least one validated submission.",
+      "goToRally": "Participate in the rally",
+      "back": "Back"
+    },
     "staff": {
       "title": "Contest Management",
       "qrCode": {

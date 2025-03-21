@@ -17,9 +17,6 @@ export const Route = createFileRoute(
       })
       .parse(search);
   },
-  loader: async () => {
-    return Route.useSearch();
-  },
   component: CodePage,
 });
 
@@ -30,7 +27,7 @@ function CodePage() {
   const { toast } = useToast();
 
   // Récupérer le secret de l'URL
-  const { secret } = Route.useLoaderData();
+  const { secret } = Route.useSearch();
 
   // Vérifier l'éligibilité de l'utilisateur
   const { data: eligibility, isLoading } = useContestEligibility();

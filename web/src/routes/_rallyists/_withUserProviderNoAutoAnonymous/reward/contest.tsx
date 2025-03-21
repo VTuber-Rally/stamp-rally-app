@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Award, Camera } from "lucide-react";
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-import { QRDrawerContext } from "@/contexts/QRDrawerContext";
+import { useQRDrawerContext } from "@/contexts/useQRDrawerContext";
 
 export const Route = createFileRoute(
   "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest",
@@ -13,7 +12,7 @@ export const Route = createFileRoute(
 
 function ContestPage() {
   const { t } = useTranslation();
-  const [_, setIsOpen] = useContext(QRDrawerContext);
+  const [, setIsOpen] = useQRDrawerContext();
 
   return (
     <div className="container mx-auto p-4">
