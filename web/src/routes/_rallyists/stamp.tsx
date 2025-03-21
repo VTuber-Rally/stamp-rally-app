@@ -95,10 +95,7 @@ function Stamp() {
           })}
         </div>
         {showSubmitButton && (
-          <ButtonLink
-            bg={"success-orange"}
-            href="/web/src/routes/_rallyists/_withUserProvider"
-          >
+          <ButtonLink bg={"success-orange"} href="/reward/submit">
             {t("requestYourReward")}
           </ButtonLink>
         )}

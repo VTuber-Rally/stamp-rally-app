@@ -11,8 +11,10 @@ export const Route = createFileRoute("/_rallyists/code/$type")({
     switch (type) {
       case "c":
         throw redirect({
-          to: "/", // TODO: à remplacer par la route du concours rallyiste
-          hash: hash,
+          to: "/reward/contest/code",
+          search: {
+            secret: decodeURIComponent(hash),
+          },
         });
 
       case "s":

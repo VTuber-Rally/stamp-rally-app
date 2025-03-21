@@ -2,11 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys";
+import { databases } from "@/lib/appwrite";
+import { contestParticipantsCollectionId, databaseId } from "@/lib/consts";
 import type { ContestParticipant } from "@/lib/models/ContestParticipant";
 import { queryClient } from "@/lib/queryClient";
-
-import { databases } from "../../appwrite";
-import { contestParticipantsCollectionId, databaseId } from "../../consts";
 
 export function useContestDrawWinner(
   participants: ContestParticipant[] | undefined,

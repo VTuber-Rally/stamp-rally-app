@@ -10,7 +10,9 @@ import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useRallySubmit } from "@/lib/hooks/useRallySubmit.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
 
-export const Route = createFileRoute("/_rallyists/_withUserProvider/submit")({
+export const Route = createFileRoute(
+  "/_rallyists/_withUserProvider/reward/submit",
+)({
   component: Submit,
 });
 

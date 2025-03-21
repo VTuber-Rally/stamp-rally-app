@@ -9,7 +9,7 @@ export const useRallySubmissions = () => {
   const { user } = useUser();
   const { getOwnSubmissions } = useDatabase();
 
-  const { isLoading, error, data } = useQuery({
+  const { isPending, error, data } = useQuery({
     queryKey: [QUERY_KEYS.SUBMISSIONS],
     refetchInterval: 1000 * 30, // toutes les 30 secondes
     refetchIntervalInBackground: true,
@@ -17,5 +17,5 @@ export const useRallySubmissions = () => {
     networkMode: "always",
   });
 
-  return { isLoading, error, data };
+  return { isPending, error, data };
 };
