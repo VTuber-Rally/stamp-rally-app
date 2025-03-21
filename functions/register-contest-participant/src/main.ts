@@ -1,4 +1,12 @@
-import { Client, Databases, ID, Query, Users } from 'node-appwrite';
+import {
+  Client,
+  Databases,
+  ID,
+  Permission,
+  Query,
+  Role,
+  Users,
+} from 'node-appwrite';
 
 type Context = {
   req: {
@@ -127,7 +135,8 @@ export default async ({ req, res, log, error }: Context) => {
       userId: userId,
       name: user.name ?? user.email,
       registeredAt: new Date().toISOString(),
-    }
+    },
+    [Permission.read(Role.user(userId))]
   );
 
   log(created);
