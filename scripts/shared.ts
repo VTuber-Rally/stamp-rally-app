@@ -9,6 +9,7 @@ const envSchema = z.object({
   STANDISTS_COLLECTION_ID: z.string(),
   KV_COLLECTION_ID: z.string(),
   BUCKET_ID: z.string(),
+  CONTEST_PARTICIPANTS_COLLECTION_ID: z.string(),
 });
 
 export const getEnv = () => {
@@ -23,7 +24,7 @@ export const getEnv = () => {
     CONTEST_PARTICIPANTS_COLLECTION_ID,
   } = process.env;
 
-  const env = envSchema.parse({
+  return envSchema.parse({
     APPWRITE_API_KEY,
     APPWRITE_PROJECT_ID,
     APPWRITE_ENDPOINT,
@@ -33,6 +34,4 @@ export const getEnv = () => {
     BUCKET_ID,
     CONTEST_PARTICIPANTS_COLLECTION_ID,
   });
-
-  return env;
 };

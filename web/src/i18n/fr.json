@@ -6,8 +6,13 @@
   },
   "QRRenewNotice": "Ce QR se renouvelle automatiquement.",
   "aboutText": "Développé avec le ❤️ par <1>Leon</1> et <2>Lucie</2>",
-  "alreadyHaveAccount": "Vous avez déjà créé compte ?",
+  "alreadyHaveAccount": "Vous avez déjà créé un compte ?",
   "alreadySubmitted": "Soumis le {{date}}",
+  "analyticsOptOut": {
+    "description": "Nous utilisons Plausible pour collecter des statistiques anonymes (nombre de visiteurs, nombre de tampons scannés, etc.). Vous pouvez vous y opposer ici.",
+    "optOut": "Ne pas utiliser mes données pour des statistiques.",
+    "title": "Analytiques"
+  },
   "anonymousLogoutButton": "Se déconnecter (attention, vous perdrez votre historique de soumissions !)",
   "anonymousLogoutWarning": "Vous êtes connecté·e en tant qu'<1>utilisateur anonyme</1>. Vous perdrez vos anciennes soumissions si vous vous déconnectez.",
   "appIsReady": {
@@ -16,13 +21,132 @@
   },
   "artistList": "Liste des artistes",
   "artists": "Artistes",
+  "cancel": "Annuler",
   "checkSubmit": "Vérifier un rally",
   "close": "Fermer",
-  "consentToSaveEmail": "Je veux être au courant des prochains rallys !",
+  "consentToSaveEmail": "Je veux être au courant des prochains rallys !",
+  "contest": {
+    "contact": {
+      "description": "Pour pouvoir vous contacter en cas de gain, merci de renseigner les informations suivantes :",
+      "emailInvalid": "Veuillez indiquer un email valide",
+      "emailLabel": "Votre adresse email",
+      "emailRequired": "Veuillez indiquer votre adresse email",
+      "error": "Erreur lors de la mise à jour du profil",
+      "nameLabel": "Votre nom",
+      "nameRequired": "Veuillez indiquer un nom",
+      "privacyNotice": "Vos informations ne seront utilisées que dans le cadre du concours et pour vous contacter en cas de gain.",
+      "submit": "Continuer",
+      "submitting": "Enregistrement en cours…",
+      "title": "Vos coordonnées"
+    },
+    "description": "Participez à notre concours et tentez de gagner un shikishi de Sedeto !",
+    "entry": {
+      "confirm": "Confirmez votre inscription",
+      "email": "Email : {{email}}",
+      "name": "Nom : {{name}}",
+      "register": "S'inscrire au concours",
+      "registering": "Inscription en cours…",
+      "title": "Inscription au concours"
+    },
+    "error": "Erreur",
+    "howToRegister": "Pour participer, il vous suffit de scanner le QR code affiché sur le stand quelques minutes avant le tirage, vers 16h.",
+    "missingSecret": "Secret manquant",
+    "notEligible": {
+      "backToContest": "Retour au concours",
+      "description": "Vous n'êtes pas éligible pour participer au concours.",
+      "requirements": {
+        "submissions": "Avoir au moins une participation validée au rally",
+        "title": "Conditions de participation"
+      },
+      "title": "Concours - Non éligible",
+      "whatToDo": {
+        "step1": "Il est probablement trop tard pour terminer le rally avant le tirage au sort, mais vous pouvez toujours le compléter pour pouvoir participer demain !",
+        "step2": "Revenez demain pour participer au prochain tirage",
+        "title": "Que faire maintenant ?"
+      }
+    },
+    "registration": {
+      "alreadyRegistered": "Vous êtes déjà inscrit à ce concours !",
+      "error": "Erreur lors de l'inscription",
+      "invalidSecret": "Secret incorrect",
+      "localSaveError": "Votre inscription a réussi, mais nous n'avons pas pu sauvegarder votre participation localement.",
+      "noSubmissions": "Vous n'avez pas de soumissions validées"
+    },
+    "scan": "Scannez le QR code pour participer",
+    "staff": {
+      "actions": {
+        "drawWinner": "Lancer le tirage au sort",
+        "resetDraw": "Réinitialiser le tirage",
+        "sendNotification": "Envoyer une notification",
+        "validateWinner": "Valider le gagnant"
+      },
+      "drawing": {
+        "drumRoll": "Roulement de tambour…",
+        "inProgress": "Tirage au sort en cours…"
+      },
+      "participants": {
+        "loading": "Chargement des participants…",
+        "loadingError": "Erreur lors du chargement des participants",
+        "noneFound": "Aucun participant trouvé",
+        "showRecent": "Participants récents seulement",
+        "title": "Participants"
+      },
+      "qrCode": {
+        "clickToEnlarge": "Cliquez pour agrandir",
+        "notAvailable": "Aucun QR Code disponible",
+        "scanInstructions": "Scannez le QR Code pour vous inscrire au concours. Vous devez avoir complété le rally pour vous inscrire.",
+        "title": "QR Code d'inscription"
+      },
+      "secret": {
+        "reset": "Réinitialiser le secret",
+        "title": "Secret du concours",
+        "updated": {
+          "description": "Le secret du concours a été mis à jour",
+          "title": "Secret du concours mis à jour"
+        }
+      },
+      "title": "Gestion du concours",
+      "winner": {
+        "title": "Gagnant du concours"
+      },
+      "winners": {
+        "noneFound": "Aucun gagnant trouvé",
+        "title": "Historique des gagnants"
+      }
+    },
+    "status": {
+      "lost": "Vous avez perdu.",
+      "registeredThe": "Vous vous êtes inscrit·e le {{date}}.",
+      "waiting": "En attente du tirage au sort.",
+      "win": "Vous avez gagné !",
+      "followParticipation": "Suivre ma participation"
+    },
+    "success": {
+      "backToRewards": "Retour aux récompenses",
+      "checking": "Vérification du résultat…",
+      "notWinner": {
+        "description": "Vous n'avez pas gagné cette fois-ci, mais vous pourrez retenter votre chance !"
+      },
+      "pending": {
+        "description": "Le tirage au sort aura lieu d'ici quelques minutes !",
+        "title": "En attente du tirage au sort"
+      },
+      "registered": "Votre inscription au concours a bien été enregistrée.",
+      "title": "Inscription réussie",
+      "winner": {
+        "description": "Vous avez gagné !",
+        "instructions": "Présentez cet écran au stand de Sedeto pour continuer",
+        "technicalInstructions": "Détails techniques",
+        "additionalInformation": "Inscrit·e le {{registeredAt}}, tiré·e le {{drawnAt}}. Gagnant·e : {{isWinner}}. Nom : {{name}}",
+        "title": "Félicitations !"
+      }
+    },
+    "title": "Concours"
+  },
   "description": "Description",
   "email": "Email",
   "error": "Une erreur est survenue",
-  "errorCreatingAccount": "Erreur lors de la création du compte. Est-ce que l'email est déjà utilisé ?",
+  "errorCreatingAccount": "Erreur lors de la création du compte. Est-ce que l'email est déjà utilisé ?",
   "errors": {
     "notAStandist": "Vous ne semblez pas être standiste. Si vous l'êtes, cela signifie qu'il y a une erreur quelque part. Contactez le staff si c'est le cas !"
   },
@@ -40,7 +164,7 @@
     "title": "Langue"
   },
   "loading": "Chargement…",
-  "loadingQRData": "Lecture des données du QR...",
+  "loadingQRData": "Lecture des données du QR…",
   "loggedLogoutButton": "Se déconnecter",
   "loggedLogoutWarning": "Vous êtes connecté·e en tant que <1>{{name}} ({{email}}</1>).",
   "loggingIn": "Connexion en cours…",
@@ -60,7 +184,7 @@
   "mapWillSoonBeAvailable": "La carte sera bientôt disponible !",
   "name": "Nom",
   "notLoggedIn": "Vous n'êtes pas connecté·e",
-  "notRedeemed": "Soumissions non validée",
+  "notRedeemed": "Soumissions non validées",
   "notRedeemedDescription": "Cette soumission n'a pas encore été validée.",
   "optionalName": "Nom (optionnel)",
   "password": "Mot de passe",
@@ -76,12 +200,31 @@
   "qrcode": "QR Code",
   "rally.1": "17 artistes participent à ce rallye autour des VTubers",
   "rally.2": "Après un achat (minimum 2€) chez un artiste, vous pourrez scanner un QR code",
-  "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
-  "rally.4": "Dès que vous avec une participation validée, participez au concours pour gagner un shikishi de Sedeto !",
-  "rally.5": "Vous pouvez rejouer autant de fois que vous le souhaitez !",
-  "rally.6": "Vous pouvez étaler votre rally sur plusieurs jours de la convention !",
+  "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
+  "rally.4": "Dès que vous avez une participation validée, participez au concours pour gagner un shikishi de Sedeto !",
+  "rally.5": "Vous pouvez rejouer autant de fois que vous le souhaitez !",
+  "rally.6": "Vous pouvez étaler votre rally sur plusieurs jours de la convention !",
   "redeemedSubmissions": "Soumissions déjà validées",
   "requestYourReward": "Demandez votre récompense !",
+  "reward": {
+    "contest": {
+      "alreadyRegistered": "Vous êtes déjà inscrit(e) au concours",
+      "button": "Participer au concours",
+      "description": "Nous organisons un concours à 16h chaque jour sur le stand de Sedeto. Vous pourrez gagner un shikishi réalisé par Sedeto !",
+      "registerNow": "S'inscrire maintenant",
+      "requirements": "Nécessite une participation validée au rally",
+      "title": "Concours à 16h"
+    },
+    "disclaimer": "Les récompenses sont disponibles dans la limite des stocks disponibles.",
+    "rally": {
+      "button": "Voir mes tampons",
+      "completed": "Complété",
+      "description": "Collectez {{minimumStampsCount}} tampons pour obtenir une ou plusieurs cartes illustrées exclusives !",
+      "inProgress": "{{count}}/{{total}} tampons",
+      "title": "Stamp Rally"
+    },
+    "title": "Récompense"
+  },
   "rules": "Règles",
   "rules.1": "Le rally est entièrement numérique et accessible depuis votre smartphone, la page ne nécessite plus d'internet une fois qu'elle a été chargée une fois. Il sera accessible depuis ce site et depuis un QR code sur le stand de Sedeto (Hall 6, Q652).",
   "rules.2": "Le rally rassemble 17 stands. Il nécessite 10 tampons issus de différents stands pour être complété.",
@@ -93,14 +236,14 @@
   "rules.8": "Vous pouvez recommencer plusieurs fois le rally :)",
   "rules.9": "Si nous rencontrons de gros soucis, ces règles peuvent être ajustées pour que le rally puisse continuer de fonctionner de la façon la plus plaisante et équitable pour toustes.",
   "save": "Enregistrer",
-  "saveSubmissionQuestion": "Souhaitez-vous sauvegarder vos soumissions ?",
+  "saveSubmissionQuestion": "Souhaitez-vous sauvegarder vos soumissions ?",
   "scanQRCode": "Scanner un QR code",
   "scanQRDrawer": {
     "description": "Ajoutez un tampon dans votre collection en scannant le code fourni par l'artiste !",
-    "title": "Scannez un QR Code",
-    "nativeCameraHint": "En cas de difficultés, vous pouvez utiliser l'application Caméra de votre appareil pour tenter de scanner le QR code."
+    "nativeCameraHint": "En cas de difficultés, vous pouvez utiliser l'application Caméra de votre appareil pour tenter de scanner le QR code.",
+    "title": "Scannez un QR Code"
   },
-  "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
+  "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {
     "title": "Paramètres"
   },
@@ -114,15 +257,15 @@
     "summary": "Détails du tampon"
   },
   "stampValidated": "Tampon validé !",
-  "stampsCount_one": "{{count}} tampon collecté sur {{maxCount}} !",
-  "stampsCount_other": "{{count}} tampons collectés sur {{maxCount}} !",
+  "stampsCount_one": "{{count}} tampon collecté sur {{maxCount}} !",
+  "stampsCount_other": "{{count}} tampons collectés sur {{maxCount}} !",
   "stand": "Stand de {{name}}",
   "standistSpace": "Espace standistes",
   "submission": "Soumission {{id}}",
   "submissions": "Soumissions",
   "submit": "Soumission",
   "submitNotAllowed": "Vous devez scanner au moins {{stamps}} tampons.",
-  "submitStamps": "Soumettez vos tampons collectés ici !",
+  "submitStamps": "Soumettez vos tampons collectés ici !",
   "submitTerms": "Ce code ne périme pas, vous pouvez récupérer votre récompense n'importe quel jour de la convention pour récupérer des cartes qui ne sont plus en stock pour la journée.",
   "submittedAgo": "Soumis {{time}}",
   "submitting": "Soumission en cours…",
@@ -134,53 +277,5 @@
     "description": "Une mise à jour a été téléchargée. Veuillez rafraichir la page pour l'appliquer.",
     "title": "Une mise à jour est disponible"
   },
-  "wheelOfFortune": "Roue de la fortune",
-  "analyticsOptOut": {
-    "title": "Analytiques",
-    "description": "Nous utilisons Plausible pour collecter des statistiques anonymes (nombre de visiteurs, nombre de tampons scannés, etc.). Vous pouvez vous y opposer ici.",
-    "optOut": "Ne pas utiliser mes données pour des statistiques."
-  },
-  "contest": {
-    "staff": {
-      "title": "Gestion du concours",
-      "qrCode": {
-        "title": "QR Code d'inscription",
-        "clickToEnlarge": "Cliquez pour agrandir",
-        "notAvailable": "Aucun QR Code disponible",
-        "scanInstructions": "Scannez le QR Code pour vous inscrire au concours. Vous devez avoir complété le rally pour vous inscrire."
-      },
-      "participants": {
-        "title": "Participants",
-        "loading": "Chargement des participants...",
-        "loadingError": "Erreur lors du chargement des participants",
-        "noneFound": "Aucun participant trouvé",
-        "showRecent": "Participants récents seulement"
-      },
-      "actions": {
-        "drawWinner": "Lancer le tirage au sort",
-        "sendNotification": "Envoyer une notification",
-        "resetDraw": "Réinitialiser le tirage",
-        "validateWinner": "Valider le gagnant"
-      },
-      "winner": {
-        "title": "Gagnant du concours"
-      },
-      "drawing": {
-        "inProgress": "Tirage au sort en cours...",
-        "drumRoll": "Roulement de tambour..."
-      },
-      "winners": {
-        "title": "Historique des gagnants",
-        "noneFound": "Aucun gagnant trouvé"
-      },
-      "secret": {
-        "title": "Secret du concours",
-        "reset": "Réinitialiser le secret",
-        "updated": {
-          "title": "Secret du concours mis à jour",
-          "description": "Le secret du concours a été mis à jour"
-        }
-      }
-    }
-  }
+  "wheelOfFortune": "Roue de la fortune"
 }

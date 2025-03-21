@@ -1,4 +1,12 @@
-import { Client, Databases, ID, Query, Users } from 'node-appwrite';
+import {
+  Client,
+  Databases,
+  ID,
+  Permission,
+  Query,
+  Role,
+  Users,
+} from 'node-appwrite';
 
 type Context = {
   req: {
@@ -84,7 +92,12 @@ export default async ({ req, res, log, error }: Context) => {
   log('user' + JSON.stringify(user, null, 2));
 
   if (secretFromUser !== secret) {
-    return res.json({ error: 'Invalid secret' });
+    log(`Expected secret: ${secret}, got: ${secretFromUser}`);
+    return res.json({
+      status: 'error',
+      message: 'contest.registration.invalidSecret',
+      error: 'Invalid secret',
+    });
   }
 
   const submissions = await db.listDocuments(
@@ -127,7 +140,8 @@ export default async ({ req, res, log, error }: Context) => {
       userId: userId,
       name: user.name ?? user.email,
       registeredAt: new Date().toISOString(),
-    }
+    },
+    [Permission.read(Role.user(userId))]
   );
 
   log(created);

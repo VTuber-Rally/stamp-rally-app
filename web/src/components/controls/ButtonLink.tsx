@@ -7,7 +7,7 @@ export type ButtonLinkProps = {
   href: string;
   onClick?: never;
   size?: "small" | "medium" | "big";
-  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous";
+  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous" | null;
   type?: "link";
   disabled?: boolean;
   target?: string;
@@ -19,7 +19,7 @@ export type ButtonLinkButtonProps = {
   href?: never;
   onClick: MouseEventHandler<HTMLButtonElement>;
   size?: "small" | "medium" | "big";
-  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous";
+  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous" | null;
   type: "button";
   disabled?: boolean;
   target?: never;
@@ -46,6 +46,7 @@ export const ButtonLink: FC<ButtonLinkProps | ButtonLinkButtonProps> = ({
     bg === "tertiary" && "bg-tertiary",
     bg === "success-orange" && "bg-success-orange",
     bg === "dangerous" && "bg-red-500/80",
+    bg === null && "",
     disabled && "opacity-75 cursor-not-allowed",
     className,
   );

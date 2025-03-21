@@ -14,6 +14,8 @@ const {
   VITE_ASSETS_BUCKET_ID: assetsBucketId,
   VITE_STAMPS_TO_COLLECT,
   VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: contestParticipantsCollectionId,
+  VITE_REGISTER_CONTEST_PARTICIPANT_FUNCTION_ID:
+    registerContestParticipantFunctionId,
 } = import.meta.env;
 
 const stampsToCollect = parseInt(VITE_STAMPS_TO_COLLECT);
@@ -39,4 +41,5 @@ export {
   isDev,
   isProd,
   contestParticipantsCollectionId,
+  registerContestParticipantFunctionId,
 };

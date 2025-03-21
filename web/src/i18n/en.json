@@ -8,6 +8,11 @@
   "aboutText": "Built with ❤️ by <1>Leon</1> and <2>Lucie</2>",
   "alreadyHaveAccount": "Already have an account?",
   "alreadySubmitted": "Submitted on {{date}}",
+  "analyticsOptOut": {
+    "description": "We use Plausible to collect anonymous statistics (number of visitors, number of stamps scanned, etc.). You can opt out here.",
+    "optOut": "Do not use my data for statistics.",
+    "title": "Analytics"
+  },
   "anonymousLogoutButton": "Log out (warning, you will lose your submission history!)",
   "anonymousLogoutWarning": "You are logged in as an <1>anonymous user</1>. You will lose your previous submissions if you log out.",
   "appIsReady": {
@@ -16,9 +21,128 @@
   },
   "artistList": "Artist List",
   "artists": "Artists",
+  "cancel": "Cancel",
   "checkSubmit": "Verify a submission",
   "close": "Close",
   "consentToSaveEmail": "I want to be informed about the next rallies!",
+  "contest": {
+    "contact": {
+      "description": "To be able to contact you if you win, please provide the following information:",
+      "emailInvalid": "Please provide a valid email",
+      "emailLabel": "Your email",
+      "emailRequired": "Please provide your email",
+      "error": "Profile update error",
+      "nameLabel": "Your name",
+      "nameRequired": "Please provide your name",
+      "privacyNotice": "Your information will only be used for the contest and to contact you if you win.",
+      "submit": "Continue",
+      "submitting": "Saving…",
+      "title": "Your Contact Information"
+    },
+    "description": "Join our contest and get a chance to win an exclusive shikishi!",
+    "entry": {
+      "confirm": "Confirm your registration",
+      "email": "Email: {{email}}",
+      "name": "Name: {{name}}",
+      "register": "Register for the contest",
+      "registering": "Registering…",
+      "title": "Contest Registration"
+    },
+    "error": "Error",
+    "howToRegister": "To participate, simply scan the QR code displayed on the stand a few minutes before the draw, around 4PM.",
+    "missingSecret": "Missing secret code",
+    "notEligible": {
+      "backToContest": "Back to contest",
+      "description": "You are not eligible to participate in the contest.",
+      "requirements": {
+        "submissions": "Have at least one validated rally participation",
+        "title": "Participation Requirements"
+      },
+      "title": "Contest - Not Eligible",
+      "whatToDo": {
+        "step1": "It's probably too late to complete the rally before the draw, but you can still complete it to be able to participate tomorrow!",
+        "step2": "Come back tomorrow to participate in the next draw",
+        "title": "What to do now?"
+      }
+    },
+    "registration": {
+      "alreadyRegistered": "You are already registered for the contest!",
+      "error": "Registration error",
+      "invalidSecret": "Invalid secret",
+      "localSaveError": "Your registration was successful, but we couldn't save your participation locally.",
+      "noSubmissions": "You don't have any validated submissions"
+    },
+    "scan": "Scan the QR code to participate",
+    "staff": {
+      "actions": {
+        "drawWinner": "Draw winner",
+        "resetDraw": "Reset draw",
+        "sendNotification": "Send notification",
+        "validateWinner": "Validate winner"
+      },
+      "drawing": {
+        "drumRoll": "Drum roll…",
+        "inProgress": "Drawing in progress…"
+      },
+      "participants": {
+        "loading": "Loading participants…",
+        "loadingError": "Error loading participants",
+        "noneFound": "No participants found",
+        "showRecent": "Show only recent participants",
+        "title": "Participants"
+      },
+      "qrCode": {
+        "clickToEnlarge": "Click to enlarge",
+        "notAvailable": "No QR Code available",
+        "scanInstructions": "Scan the QR Code to register for the contest. You must have completed the rally to register.",
+        "title": "Registration QR Code"
+      },
+      "secret": {
+        "reset": "Reset secret",
+        "title": "Contest Secret",
+        "updated": {
+          "description": "The contest secret has been updated",
+          "title": "Contest secret updated"
+        }
+      },
+      "title": "Contest Management",
+      "winner": {
+        "title": "Contest Winner"
+      },
+      "winners": {
+        "noneFound": "No winners found",
+        "title": "Winners History"
+      }
+    },
+    "status": {
+      "lost": "You lost.",
+      "registeredThe": "You registered on {{date}}.",
+      "waiting": "Waiting for the draw.",
+      "win": "You've won!",
+      "followParticipation": "Follow my participation"
+    },
+    "success": {
+      "backToRewards": "Back to rewards",
+      "checking": "Checking result…",
+      "notWinner": {
+        "description": "You didn't win this time, but you can try again!"
+      },
+      "pending": {
+        "description": "The draw will take place in a few minutes!",
+        "title": "Waiting for the draw"
+      },
+      "registered": "Your contest registration has been successfully recorded.",
+      "title": "Registration Successful",
+      "winner": {
+        "description": "You've won!",
+        "instructions": "Present this code at Sedeto's stand to claim your prize.",
+        "technicalInstructions": "Technical details",
+        "additionalInformation": "Registered on {{registeredAt}}, drawn on {{drawnAt}}. Winner: {{isWinner}}. Name: {{name}}",
+        "title": "Congratulations!"
+      }
+    },
+    "title": "Contest"
+  },
   "description": "Description",
   "email": "Email",
   "error": "An error occurred",
@@ -40,7 +164,7 @@
     "title": "Language"
   },
   "loading": "Loading…",
-  "loadingQRData": "Reading QR Code data...",
+  "loadingQRData": "Reading QR Code data…",
   "loggedLogoutButton": "Log out",
   "loggedLogoutWarning": "You are logged in as <1>{{name}} ({{email}}</1>).",
   "loggingIn": "Logging in…",
@@ -60,7 +184,7 @@
   "mapWillSoonBeAvailable": "The map will soon be available!",
   "name": "Name",
   "notLoggedIn": "You're not logged in",
-  "notRedeemed": "Soumissions non validée",
+  "notRedeemed": "Unredeemed submissions",
   "notRedeemedDescription": "This submission has not been redeemed yet.",
   "optionalName": "Name (optional)",
   "password": "Password",
@@ -74,14 +198,33 @@
     "title": "My profile"
   },
   "qrcode": "QR Code",
-  "rally.1": "17 artists take part in this Rally around VTubers",
+  "rally.1": "17 artists take part in this rally around VTubers",
   "rally.2": "After making a purchase (minimum 2€) from an artist, you can scan a QR code",
   "rally.3": "Once you've collected {{minimumStampsCount}} stamps, head over to Sedeto's stand to get a reward!",
   "rally.4": "As soon as your submission is validated, enter the draw to win a shikishi from Sedeto!",
-  "rally.5": "You can replay as many times you like!",
+  "rally.5": "You can replay as many times as you like!",
   "rally.6": "You can span your rally over several days during the convention!",
   "redeemedSubmissions": "Redeemed submissions",
   "requestYourReward": "Request your reward!",
+  "reward": {
+    "contest": {
+      "alreadyRegistered": "You are already registered to the contest",
+      "button": "Enter the contest",
+      "description": "Join our big contest and get a chance to win a shikishi created by Sedeto!",
+      "registerNow": "Register now",
+      "requirements": "Requires a validated rally submission",
+      "title": "Exclusive Contest"
+    },
+    "disclaimer": "Rewards are available while supplies last.",
+    "rally": {
+      "button": "View my stamps",
+      "completed": "Completed",
+      "description": "Collect {{minimumStampsCount}} stamps to get one or more exclusive illustrated cards!",
+      "inProgress": "{{count}}/{{total}} stamps",
+      "title": "Stamp Rally"
+    },
+    "title": "Rewards"
+  },
   "rules": "Rules",
   "rules.1": "The rally will be completely digital and won't need any 4G, since you loaded it once. The access link will be there and on the booth.",
   "rules.2": "The rally features 17 booths. You'll need 10 stamps to complete your card. You'll need to visit the two halls (5 and 6) to complete your rally anyway, so prepare to walk!",
@@ -97,8 +240,8 @@
   "scanQRCode": "Scan a QR code",
   "scanQRDrawer": {
     "description": "Add a stamp in your collection by scanning the QR code showed to you by the artist!",
-    "title": "Scan a QR Code",
-    "nativeCameraHint": "If you're experiencing issues, please try using your device's Camera app to scan the QR code."
+    "nativeCameraHint": "If you're experiencing issues, please try using your device's Camera app to scan the QR code.",
+    "title": "Scan a QR Code"
   },
   "scanThisQR": "Scan this QR code to get the stamp!",
   "settings": {
@@ -134,53 +277,5 @@
     "description": "An update was downloaded, please refresh the page to apply it.",
     "title": "Update available"
   },
-  "wheelOfFortune": "Wheel of fortune",
-  "analyticsOptOut": {
-    "title": "Analytics",
-    "description": "We use Plausible to collect anonymous statistics (number of visitors, number of stamps scanned, etc.). You can opt out here.",
-    "optOut": "Do not use my data for statistics."
-  },
-  "contest": {
-    "staff": {
-      "title": "Contest Management",
-      "qrCode": {
-        "title": "Registration QR Code",
-        "clickToEnlarge": "Click to enlarge",
-        "notAvailable": "No QR Code available",
-        "scanInstructions": "Scan the QR Code to register for the contest. You must have completed the rally to register."
-      },
-      "participants": {
-        "title": "Participants",
-        "loading": "Loading participants...",
-        "loadingError": "Error loading participants",
-        "noneFound": "No participants found",
-        "showRecent": "Show only recent participants"
-      },
-      "actions": {
-        "drawWinner": "Draw winner",
-        "sendNotification": "Send notification",
-        "resetDraw": "Reset draw",
-        "validateWinner": "Validate winner"
-      },
-      "winner": {
-        "title": "Contest Winner"
-      },
-      "drawing": {
-        "inProgress": "Drawing in progress...",
-        "drumRoll": "Drum roll..."
-      },
-      "winners": {
-        "title": "Winners History",
-        "noneFound": "No winners found"
-      },
-      "secret": {
-        "title": "Contest Secret",
-        "reset": "Reset secret",
-        "updated": {
-          "title": "Contest secret updated",
-          "description": "The contest secret has been updated"
-        }
-      }
-    }
-  }
+  "wheelOfFortune": "Wheel of fortune"
 }
