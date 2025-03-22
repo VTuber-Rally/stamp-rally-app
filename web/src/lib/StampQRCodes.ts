@@ -30,8 +30,11 @@ export function retrieveHashFromQRCode(qrData: string) {
 }
 
 export function parseQRCodeData(hash: string): {
-  type: "stamp" | "contest";
-  data: unknown;
+  type: "stamp";
+  data: StampTuple;
+} | {
+  type: "contest";
+  data: string;
 } {
   const decodedHash = decodeURIComponent(hash);
   const type = decodedHash[0];
