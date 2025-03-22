@@ -37,14 +37,14 @@ import { Route as RallyistsStampsScannerImport } from './routes/_rallyists/stamp
 import { Route as RallyistsWithUserProviderNoAutoAnonymousSettingsImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/settings'
 import { Route as RallyistsWithUserProviderNoAutoAnonymousLoginImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/login'
 import { Route as RallyistsWithUserProviderNoAutoAnonymousHandleLoginImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
-import { Route as RallyistsWithUserProviderSubmitImport } from './routes/_rallyists/_withUserProvider/submit'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardIndexImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/index'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardContestImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardContestContactImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact'
-import { Route as RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code'
+import { Route as RallyistsWithUserProviderRewardIndexImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/index
+import { Route as RallyistsWithUserProviderRewardSubmitImport } from './routes/_rallyists/_withUserProvider/reward/submit'
+import { Route as RallyistsWithUserProviderRewardContestIndexImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/contest/index
+import { Route as RallyistsWithUserProviderRewardContestSuccessImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/contest/success
+import { Route as RallyistsWithUserProviderRewardContestNotEligibleImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/contest/not-eligible
+import { Route as RallyistsWithUserProviderRewardContestEntryImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/contest/entry
+import { Route as RallyistsWithUserProviderRewardContestContactImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/contest/contact
+import { Route as RallyistsWithUserProviderRewardContestCodeImport } from './routes/_rally./routes/_rallyists/_withUserProvider/reward/contest/code
 
 // Create Virtual Routes
 
@@ -222,67 +222,60 @@ const RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute =
     getParentRoute: () => RallyistsWithUserProviderNoAutoAnonymousRoute,
   } as any)
 
-const RallyistsWithUserProviderSubmitRoute =
-  RallyistsWithUserProviderSubmitImport.update({
-    id: '/submit',
-    path: '/submit',
+const RallyistsWithUserProviderRewardIndexRoute =
+  RallyistsWithUserProviderRewardIndexImport.update({
+    id: '/reward/',
+    path: '/reward/',
     getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardIndexImport.update({
-    id: '/reward/',
-    path: '/reward/',
-    getParentRoute: () => RallyistsWithUserProviderNoAutoAnonymousRoute,
+const RallyistsWithUserProviderRewardSubmitRoute =
+  RallyistsWithUserProviderRewardSubmitImport.update({
+    id: '/reward/submit',
+    path: '/reward/submit',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestImport.update({
-    id: '/reward/contest',
-    path: '/reward/contest',
-    getParentRoute: () => RallyistsWithUserProviderNoAutoAnonymousRoute,
+const RallyistsWithUserProviderRewardContestIndexRoute =
+  RallyistsWithUserProviderRewardContestIndexImport.update({
+    id: '/reward/contest/',
+    path: '/reward/contest/',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessImport.update({
-    id: '/success',
-    path: '/success',
-    getParentRoute: () =>
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute,
+const RallyistsWithUserProviderRewardContestSuccessRoute =
+  RallyistsWithUserProviderRewardContestSuccessImport.update({
+    id: '/reward/contest/success',
+    path: '/reward/contest/success',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleImport.update(
-    {
-      id: '/not-eligible',
-      path: '/not-eligible',
-      getParentRoute: () =>
-        RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute,
-    } as any,
-  )
-
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryImport.update({
-    id: '/entry',
-    path: '/entry',
-    getParentRoute: () =>
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute,
+const RallyistsWithUserProviderRewardContestNotEligibleRoute =
+  RallyistsWithUserProviderRewardContestNotEligibleImport.update({
+    id: '/reward/contest/not-eligible',
+    path: '/reward/contest/not-eligible',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestContactImport.update({
-    id: '/contact',
-    path: '/contact',
-    getParentRoute: () =>
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute,
+const RallyistsWithUserProviderRewardContestEntryRoute =
+  RallyistsWithUserProviderRewardContestEntryImport.update({
+    id: '/reward/contest/entry',
+    path: '/reward/contest/entry',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeImport.update({
-    id: '/code',
-    path: '/code',
-    getParentRoute: () =>
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute,
+const RallyistsWithUserProviderRewardContestContactRoute =
+  RallyistsWithUserProviderRewardContestContactImport.update({
+    id: '/reward/contest/contact',
+    path: '/reward/contest/contact',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
+  } as any)
+
+const RallyistsWithUserProviderRewardContestCodeRoute =
+  RallyistsWithUserProviderRewardContestCodeImport.update({
+    id: '/reward/contest/code',
+    path: '/reward/contest/code',
+    getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -422,13 +415,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandistsIndexImport
       parentRoute: typeof StandistsImport
     }
-    '/_rallyists/_withUserProvider/submit': {
-      id: '/_rallyists/_withUserProvider/submit'
-      path: '/submit'
-      fullPath: '/submit'
-      preLoaderRoute: typeof RallyistsWithUserProviderSubmitImport
-      parentRoute: typeof RallyistsWithUserProviderImport
-    }
     '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin': {
       id: '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
       path: '/handleLogin'
@@ -485,54 +471,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeIndexImport
       parentRoute: typeof StaffImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest'
-      path: '/reward/contest'
-      fullPath: '/reward/contest'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousImport
+    '/_rallyists/_withUserProvider/reward/submit': {
+      id: '/_rallyists/_withUserProvider/reward/submit'
+      path: '/reward/submit'
+      fullPath: '/reward/submit'
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardSubmitImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/'
+    '/_rallyists/_withUserProvider/reward/': {
+      id: '/_rallyists/_withUserProvider/reward/'
       path: '/reward'
       fullPath: '/reward'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardIndexImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousImport
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardIndexImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code'
-      path: '/code'
+    '/_rallyists/_withUserProvider/reward/contest/code': {
+      id: '/_rallyists/_withUserProvider/reward/contest/code'
+      path: '/reward/contest/code'
       fullPath: '/reward/contest/code'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestImport
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardContestCodeImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact'
-      path: '/contact'
+    '/_rallyists/_withUserProvider/reward/contest/contact': {
+      id: '/_rallyists/_withUserProvider/reward/contest/contact'
+      path: '/reward/contest/contact'
       fullPath: '/reward/contest/contact'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestContactImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestImport
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardContestContactImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry'
-      path: '/entry'
+    '/_rallyists/_withUserProvider/reward/contest/entry': {
+      id: '/_rallyists/_withUserProvider/reward/contest/entry'
+      path: '/reward/contest/entry'
       fullPath: '/reward/contest/entry'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestImport
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardContestEntryImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible'
-      path: '/not-eligible'
+    '/_rallyists/_withUserProvider/reward/contest/not-eligible': {
+      id: '/_rallyists/_withUserProvider/reward/contest/not-eligible'
+      path: '/reward/contest/not-eligible'
       fullPath: '/reward/contest/not-eligible'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestImport
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardContestNotEligibleImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
-    '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success': {
-      id: '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success'
-      path: '/success'
+    '/_rallyists/_withUserProvider/reward/contest/success': {
+      id: '/_rallyists/_withUserProvider/reward/contest/success'
+      path: '/reward/contest/success'
       fullPath: '/reward/contest/success'
-      preLoaderRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessImport
-      parentRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestImport
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardContestSuccessImport
+      parentRoute: typeof RallyistsWithUserProviderImport
+    }
+    '/_rallyists/_withUserProvider/reward/contest/': {
+      id: '/_rallyists/_withUserProvider/reward/contest/'
+      path: '/reward/contest'
+      fullPath: '/reward/contest'
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardContestIndexImport
+      parentRoute: typeof RallyistsWithUserProviderImport
     }
   }
 }
@@ -540,12 +533,34 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface RallyistsWithUserProviderRouteChildren {
-  RallyistsWithUserProviderSubmitRoute: typeof RallyistsWithUserProviderSubmitRoute
+  RallyistsWithUserProviderRewardSubmitRoute: typeof RallyistsWithUserProviderRewardSubmitRoute
+  RallyistsWithUserProviderRewardIndexRoute: typeof RallyistsWithUserProviderRewardIndexRoute
+  RallyistsWithUserProviderRewardContestCodeRoute: typeof RallyistsWithUserProviderRewardContestCodeRoute
+  RallyistsWithUserProviderRewardContestContactRoute: typeof RallyistsWithUserProviderRewardContestContactRoute
+  RallyistsWithUserProviderRewardContestEntryRoute: typeof RallyistsWithUserProviderRewardContestEntryRoute
+  RallyistsWithUserProviderRewardContestNotEligibleRoute: typeof RallyistsWithUserProviderRewardContestNotEligibleRoute
+  RallyistsWithUserProviderRewardContestSuccessRoute: typeof RallyistsWithUserProviderRewardContestSuccessRoute
+  RallyistsWithUserProviderRewardContestIndexRoute: typeof RallyistsWithUserProviderRewardContestIndexRoute
 }
 
 const RallyistsWithUserProviderRouteChildren: RallyistsWithUserProviderRouteChildren =
   {
-    RallyistsWithUserProviderSubmitRoute: RallyistsWithUserProviderSubmitRoute,
+    RallyistsWithUserProviderRewardSubmitRoute:
+      RallyistsWithUserProviderRewardSubmitRoute,
+    RallyistsWithUserProviderRewardIndexRoute:
+      RallyistsWithUserProviderRewardIndexRoute,
+    RallyistsWithUserProviderRewardContestCodeRoute:
+      RallyistsWithUserProviderRewardContestCodeRoute,
+    RallyistsWithUserProviderRewardContestContactRoute:
+      RallyistsWithUserProviderRewardContestContactRoute,
+    RallyistsWithUserProviderRewardContestEntryRoute:
+      RallyistsWithUserProviderRewardContestEntryRoute,
+    RallyistsWithUserProviderRewardContestNotEligibleRoute:
+      RallyistsWithUserProviderRewardContestNotEligibleRoute,
+    RallyistsWithUserProviderRewardContestSuccessRoute:
+      RallyistsWithUserProviderRewardContestSuccessRoute,
+    RallyistsWithUserProviderRewardContestIndexRoute:
+      RallyistsWithUserProviderRewardContestIndexRoute,
   }
 
 const RallyistsWithUserProviderRouteWithChildren =
@@ -553,39 +568,10 @@ const RallyistsWithUserProviderRouteWithChildren =
     RallyistsWithUserProviderRouteChildren,
   )
 
-interface RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteChildren {
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute
-}
-
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteChildren: RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteChildren =
-  {
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute,
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute,
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute,
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute,
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute,
-  }
-
-const RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteWithChildren =
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute._addFileChildren(
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteChildren,
-  )
-
 interface RallyistsWithUserProviderNoAutoAnonymousRouteChildren {
   RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute: typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
   RallyistsWithUserProviderNoAutoAnonymousLoginRoute: typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
   RallyistsWithUserProviderNoAutoAnonymousSettingsRoute: typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
-  RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteWithChildren
-  RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute: typeof RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute
 }
 
 const RallyistsWithUserProviderNoAutoAnonymousRouteChildren: RallyistsWithUserProviderNoAutoAnonymousRouteChildren =
@@ -596,10 +582,6 @@ const RallyistsWithUserProviderNoAutoAnonymousRouteChildren: RallyistsWithUserPr
       RallyistsWithUserProviderNoAutoAnonymousLoginRoute,
     RallyistsWithUserProviderNoAutoAnonymousSettingsRoute:
       RallyistsWithUserProviderNoAutoAnonymousSettingsRoute,
-    RallyistsWithUserProviderNoAutoAnonymousRewardContestRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteWithChildren,
-    RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute:
-      RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute,
   }
 
 const RallyistsWithUserProviderNoAutoAnonymousRouteWithChildren =
@@ -696,7 +678,6 @@ export interface FileRoutesByFullPath {
   '/': typeof RallyistsIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/standists/': typeof StandistsIndexRoute
-  '/submit': typeof RallyistsWithUserProviderSubmitRoute
   '/handleLogin': typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
   '/login': typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
   '/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
@@ -705,13 +686,14 @@ export interface FileRoutesByFullPath {
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
-  '/reward/contest': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteWithChildren
-  '/reward': typeof RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute
-  '/reward/contest/code': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute
-  '/reward/contest/contact': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute
-  '/reward/contest/entry': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute
-  '/reward/contest/not-eligible': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute
-  '/reward/contest/success': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute
+  '/reward/submit': typeof RallyistsWithUserProviderRewardSubmitRoute
+  '/reward': typeof RallyistsWithUserProviderRewardIndexRoute
+  '/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
+  '/reward/contest/contact': typeof RallyistsWithUserProviderRewardContestContactRoute
+  '/reward/contest/entry': typeof RallyistsWithUserProviderRewardContestEntryRoute
+  '/reward/contest/not-eligible': typeof RallyistsWithUserProviderRewardContestNotEligibleRoute
+  '/reward/contest/success': typeof RallyistsWithUserProviderRewardContestSuccessRoute
+  '/reward/contest': typeof RallyistsWithUserProviderRewardContestIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -730,7 +712,6 @@ export interface FileRoutesByTo {
   '/': typeof RallyistsIndexRoute
   '/staff': typeof StaffIndexRoute
   '/standists': typeof StandistsIndexRoute
-  '/submit': typeof RallyistsWithUserProviderSubmitRoute
   '/handleLogin': typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
   '/login': typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
   '/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
@@ -739,13 +720,14 @@ export interface FileRoutesByTo {
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
-  '/reward/contest': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteWithChildren
-  '/reward': typeof RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute
-  '/reward/contest/code': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute
-  '/reward/contest/contact': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute
-  '/reward/contest/entry': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute
-  '/reward/contest/not-eligible': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute
-  '/reward/contest/success': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute
+  '/reward/submit': typeof RallyistsWithUserProviderRewardSubmitRoute
+  '/reward': typeof RallyistsWithUserProviderRewardIndexRoute
+  '/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
+  '/reward/contest/contact': typeof RallyistsWithUserProviderRewardContestContactRoute
+  '/reward/contest/entry': typeof RallyistsWithUserProviderRewardContestEntryRoute
+  '/reward/contest/not-eligible': typeof RallyistsWithUserProviderRewardContestNotEligibleRoute
+  '/reward/contest/success': typeof RallyistsWithUserProviderRewardContestSuccessRoute
+  '/reward/contest': typeof RallyistsWithUserProviderRewardContestIndexRoute
 }
 
 export interface FileRoutesById {
@@ -769,7 +751,6 @@ export interface FileRoutesById {
   '/_rallyists/': typeof RallyistsIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/standists/': typeof StandistsIndexRoute
-  '/_rallyists/_withUserProvider/submit': typeof RallyistsWithUserProviderSubmitRoute
   '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin': typeof RallyistsWithUserProviderNoAutoAnonymousHandleLoginRoute
   '/_rallyists/_withUserProviderNoAutoAnonymous/login': typeof RallyistsWithUserProviderNoAutoAnonymousLoginRoute
   '/_rallyists/_withUserProviderNoAutoAnonymous/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
@@ -778,13 +759,14 @@ export interface FileRoutesById {
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/_rallyists/artists/': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode/': typeof StaffGenQrcodeIndexRoute
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestRouteWithChildren
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/': typeof RallyistsWithUserProviderNoAutoAnonymousRewardIndexRoute
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestCodeRoute
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestContactRoute
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestEntryRoute
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestNotEligibleRoute
-  '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success': typeof RallyistsWithUserProviderNoAutoAnonymousRewardContestSuccessRoute
+  '/_rallyists/_withUserProvider/reward/submit': typeof RallyistsWithUserProviderRewardSubmitRoute
+  '/_rallyists/_withUserProvider/reward/': typeof RallyistsWithUserProviderRewardIndexRoute
+  '/_rallyists/_withUserProvider/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
+  '/_rallyists/_withUserProvider/reward/contest/contact': typeof RallyistsWithUserProviderRewardContestContactRoute
+  '/_rallyists/_withUserProvider/reward/contest/entry': typeof RallyistsWithUserProviderRewardContestEntryRoute
+  '/_rallyists/_withUserProvider/reward/contest/not-eligible': typeof RallyistsWithUserProviderRewardContestNotEligibleRoute
+  '/_rallyists/_withUserProvider/reward/contest/success': typeof RallyistsWithUserProviderRewardContestSuccessRoute
+  '/_rallyists/_withUserProvider/reward/contest/': typeof RallyistsWithUserProviderRewardContestIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -807,7 +789,6 @@ export interface FileRouteTypes {
     | '/'
     | '/staff/'
     | '/standists/'
-    | '/submit'
     | '/handleLogin'
     | '/login'
     | '/settings'
@@ -816,13 +797,14 @@ export interface FileRouteTypes {
     | '/staff/submission/$submissionId'
     | '/artists'
     | '/staff/gen-qrcode'
-    | '/reward/contest'
+    | '/reward/submit'
     | '/reward'
     | '/reward/contest/code'
     | '/reward/contest/contact'
     | '/reward/contest/entry'
     | '/reward/contest/not-eligible'
     | '/reward/contest/success'
+    | '/reward/contest'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
@@ -840,7 +822,6 @@ export interface FileRouteTypes {
     | '/'
     | '/staff'
     | '/standists'
-    | '/submit'
     | '/handleLogin'
     | '/login'
     | '/settings'
@@ -849,13 +830,14 @@ export interface FileRouteTypes {
     | '/staff/submission/$submissionId'
     | '/artists'
     | '/staff/gen-qrcode'
-    | '/reward/contest'
+    | '/reward/submit'
     | '/reward'
     | '/reward/contest/code'
     | '/reward/contest/contact'
     | '/reward/contest/entry'
     | '/reward/contest/not-eligible'
     | '/reward/contest/success'
+    | '/reward/contest'
   id:
     | '__root__'
     | '/_rallyists'
@@ -877,7 +859,6 @@ export interface FileRouteTypes {
     | '/_rallyists/'
     | '/staff/'
     | '/standists/'
-    | '/_rallyists/_withUserProvider/submit'
     | '/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
     | '/_rallyists/_withUserProviderNoAutoAnonymous/login'
     | '/_rallyists/_withUserProviderNoAutoAnonymous/settings'
@@ -886,13 +867,14 @@ export interface FileRouteTypes {
     | '/staff/submission/$submissionId'
     | '/_rallyists/artists/'
     | '/staff/gen-qrcode/'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible'
-    | '/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success'
+    | '/_rallyists/_withUserProvider/reward/submit'
+    | '/_rallyists/_withUserProvider/reward/'
+    | '/_rallyists/_withUserProvider/reward/contest/code'
+    | '/_rallyists/_withUserProvider/reward/contest/contact'
+    | '/_rallyists/_withUserProvider/reward/contest/entry'
+    | '/_rallyists/_withUserProvider/reward/contest/not-eligible'
+    | '/_rallyists/_withUserProvider/reward/contest/success'
+    | '/_rallyists/_withUserProvider/reward/contest/'
   fileRoutesById: FileRoutesById
 }
 
@@ -963,7 +945,14 @@ export const routeTree = rootRoute
       "filePath": "_rallyists/_withUserProvider.tsx",
       "parent": "/_rallyists",
       "children": [
-        "/_rallyists/_withUserProvider/submit"
+        "/_rallyists/_withUserProvider/reward/submit",
+        "/_rallyists/_withUserProvider/reward/",
+        "/_rallyists/_withUserProvider/reward/contest/code",
+        "/_rallyists/_withUserProvider/reward/contest/contact",
+        "/_rallyists/_withUserProvider/reward/contest/entry",
+        "/_rallyists/_withUserProvider/reward/contest/not-eligible",
+        "/_rallyists/_withUserProvider/reward/contest/success",
+        "/_rallyists/_withUserProvider/reward/contest/"
       ]
     },
     "/_rallyists/_withUserProviderNoAutoAnonymous": {
@@ -972,9 +961,7 @@ export const routeTree = rootRoute
       "children": [
         "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin",
         "/_rallyists/_withUserProviderNoAutoAnonymous/login",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/settings",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/"
+        "/_rallyists/_withUserProviderNoAutoAnonymous/settings"
       ]
     },
     "/_rallyists/code": {
@@ -1033,10 +1020,6 @@ export const routeTree = rootRoute
       "filePath": "standists/index.tsx",
       "parent": "/standists"
     },
-    "/_rallyists/_withUserProvider/submit": {
-      "filePath": "_rallyists/_withUserProvider/submit.tsx",
-      "parent": "/_rallyists/_withUserProvider"
-    },
     "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin": {
       "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/handleLogin.tsx",
       "parent": "/_rallyists/_withUserProviderNoAutoAnonymous"
@@ -1069,40 +1052,37 @@ export const routeTree = rootRoute
       "filePath": "staff/gen-qrcode/index.tsx",
       "parent": "/staff"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/contest.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous",
-      "children": [
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible",
-        "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success"
-      ]
+    "/_rallyists/_withUserProvider/reward/submit": {
+      "filePath": "_rallyists/_withUserProvider/reward/submit.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/index.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous"
+    "/_rallyists/_withUserProvider/reward/": {
+      "filePath": "_rallyists/_withUserProvider/reward/index.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/code.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest"
+    "/_rallyists/_withUserProvider/reward/contest/code": {
+      "filePath": "_rallyists/_withUserProvider/reward/contest/code.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/contact.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest"
+    "/_rallyists/_withUserProvider/reward/contest/contact": {
+      "filePath": "_rallyists/_withUserProvider/reward/contest/contact.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest"
+    "/_rallyists/_withUserProvider/reward/contest/entry": {
+      "filePath": "_rallyists/_withUserProvider/reward/contest/entry.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/not-eligible.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest"
+    "/_rallyists/_withUserProvider/reward/contest/not-eligible": {
+      "filePath": "_rallyists/_withUserProvider/reward/contest/not-eligible.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     },
-    "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success": {
-      "filePath": "_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success.tsx",
-      "parent": "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest"
+    "/_rallyists/_withUserProvider/reward/contest/success": {
+      "filePath": "_rallyists/_withUserProvider/reward/contest/success.tsx",
+      "parent": "/_rallyists/_withUserProvider"
+    },
+    "/_rallyists/_withUserProvider/reward/contest/": {
+      "filePath": "_rallyists/_withUserProvider/reward/contest/index.tsx",
+      "parent": "/_rallyists/_withUserProvider"
     }
   }
 }

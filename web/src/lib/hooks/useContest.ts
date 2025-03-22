@@ -1,42 +1,26 @@
-import { skipToken, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
-import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { functions } from "@/lib/appwrite";
-import { useUser } from "@/lib/hooks/useUser";
 
 import { registerContestParticipantFunctionId } from "../consts";
-import { useRallySubmissions } from "./useRallySubmissions";
+import { db } from "../db";
+import { SubmissionWithId } from "../models/Submission";
 
 /**
  * Hook pour vérifier l'éligibilité de l'utilisateur pour le concours
  * Vérifie si l'utilisateur a un compte utilisateur valide et des soumissions
  */
-export const useContestEligibility = () => {
-  const { user } = useUser();
 
-  const { data: submissions } = useRallySubmissions();
+export const getContestEligibility = async (
+  submissions: SubmissionWithId[],
+) => {
+  const hasSubmitted = submissions.length >= 1;
 
-  return useQuery({
-    queryKey: [QUERY_KEYS.CONTEST_ELIGIBILITY, user?.$id],
-    queryFn: submissions
-      ? async () => {
-          // Vérifier que l'utilisateur est connecté
-          if (!user) {
-            return { eligible: false, reason: "unauthenticated" };
-          }
+  if (!hasSubmitted) {
+    return { eligible: false, reason: "not_submitted" };
+  }
 
-          const hasSubmitted = submissions.length >= 1;
-
-          if (!hasSubmitted) {
-            return { eligible: false, reason: "not_submitted" };
-          }
-
-          return { eligible: true };
-        }
-      : skipToken,
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
-  });
+  return { eligible: true };
 };
 
 export const useRegisterContestParticipant = () => {
@@ -48,17 +32,42 @@ export const useRegisterContestParticipant = () => {
           JSON.stringify({ secret }),
         );
 
-        if (result.responseStatusCode !== 200) {
-          throw new Error(result.responseBody);
+        // {\"status\":\"error\",\"message\":\"contest.registration.alreadyRegistered\",\"error\":\"User has already registered\"}
+        type ServerResponse =
+          | ({
+              status: string;
+              message: string;
+            } & {
+              status: "success";
+              contestParticipantId: string;
+            })
+          | {
+              status: "error";
+              message: string;
+              error: string;
+            };
+
+        const data: ServerResponse = JSON.parse(result.responseBody);
+
+        if (data.status === "error") {
+          throw new Error(data.error);
         }
 
-        return JSON.parse(result.responseBody);
+        return data;
       } catch (error) {
         if (error instanceof Error) {
           throw error;
         }
         throw new Error("contest.registration.error");
       }
+    },
+    onSuccess: (data) => {
+      db.contestParticipations.add({
+        id: data.contestParticipantId,
+        submittedAt: new Date(),
+        isWinner: false,
+        drawnDate: undefined,
+      });
     },
   });
 };

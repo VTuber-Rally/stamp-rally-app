@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
+import { ButtonLink } from "@/components/controls/ButtonLink";
+import { Header } from "@/components/layout/Header";
 import { useRegisterContestParticipant } from "@/lib/hooks/useContest";
 import { useToast } from "@/lib/hooks/useToast";
 import { useUser } from "@/lib/hooks/useUser";
 
 export const Route = createFileRoute(
-  "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/entry",
+  "/_rallyists/_withUserProvider/reward/contest/entry",
 )({
   validateSearch: (search) => {
     return z
@@ -68,9 +70,7 @@ function EntryPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="mb-6 flex items-center justify-center rounded-lg bg-blue-50 p-4 text-blue-600">
-        <h1 className="text-2xl font-bold">{t("contest.entry.title")}</h1>
-      </div>
+      <Header>{t("contest.entry.title")}</Header>
 
       <div className="rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-4 text-xl font-semibold">
@@ -93,10 +93,11 @@ function EntryPage() {
           </div>
         </div>
 
-        <button
+        <ButtonLink
           onClick={handleRegister}
           disabled={isRegistering || isPending}
-          className="w-full rounded-md bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-600 disabled:bg-blue-300"
+          type="button"
+          bg="secondary"
         >
           {isRegistering || isPending ? (
             <span className="flex items-center justify-center">
@@ -106,15 +107,17 @@ function EntryPage() {
           ) : (
             t("contest.entry.register")
           )}
-        </button>
+        </ButtonLink>
 
-        <button
-          onClick={() => navigate({ to: "/reward/contest" })}
-          disabled={isRegistering || isPending}
-          className="mt-3 w-full rounded-md bg-gray-200 px-4 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-300 disabled:opacity-50"
+        <ButtonLink
+          href="/reward"
+          type="link"
+          size="small"
+          className="bg-gray-200"
+          bg={null}
         >
           {t("contest.entry.cancel")}
-        </button>
+        </ButtonLink>
       </div>
     </div>
   );

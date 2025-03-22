@@ -1,21 +1,25 @@
 import { useConfetti } from "@stevent-team/react-party";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
 import { Check, Gift } from "lucide-react";
 import { LegacyRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useContestWinner } from "@/lib/hooks/useContest";
+import { Header } from "@/components/layout/Header";
+import { useFollowParticipation } from "@/lib/hooks/contest/useFollowParticipation";
 
 export const Route = createFileRoute(
-  "/_rallyists/_withUserProviderNoAutoAnonymous/reward/contest/success",
+  "/_rallyists/_withUserProvider/reward/contest/success",
 )({
   component: SuccessPage,
 });
 
 function SuccessPage() {
   const { t } = useTranslation();
-  const { isWinner, isLoading } = useContestWinner();
   const [confettiLaunched, setConfettiLaunched] = useState(false);
+
+  const { currentParticipation, isCurrentParticipationPending } =
+    useFollowParticipation();
 
   const { createConfetti, canvasProps } = useConfetti({
     count: 700,
@@ -24,11 +28,11 @@ function SuccessPage() {
 
   // Lancer des confettis si l'utilisateur est un gagnant
   useEffect(() => {
-    if (isWinner && !confettiLaunched) {
+    if (currentParticipation?.isWinner && !confettiLaunched) {
       setConfettiLaunched(true);
       createConfetti();
     }
-  }, [isWinner, confettiLaunched, createConfetti]);
+  }, [currentParticipation?.isWinner, confettiLaunched, createConfetti]);
 
   return (
     <div className="container mx-auto p-4">
@@ -37,18 +41,18 @@ function SuccessPage() {
         className="pointer-events-none absolute inset-0 block h-full w-full"
       />
 
-      <div className="mb-6 flex items-center justify-center rounded-lg bg-green-50 p-4 text-green-600">
+      <Header className="rounded-xl bg-green-100 text-green-800">
         <Check className="mr-2 h-6 w-6" />
-        <h1 className="text-2xl font-bold">{t("contest.success.title")}</h1>
-      </div>
+        {t("contest.success.title")}
+      </Header>
 
       <div className="rounded-lg bg-white p-4 shadow-md">
-        {isLoading ? (
+        {isCurrentParticipationPending ? (
           <div className="flex items-center justify-center py-8">
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
             <p className="ml-2">{t("contest.success.checking")}</p>
           </div>
-        ) : isWinner ? (
+        ) : currentParticipation?.isWinner ? (
           <div className="flex flex-col items-center py-6">
             <div className="mb-4 rounded-full bg-green-100 p-4">
               <Gift className="h-12 w-12 text-green-600" />
@@ -85,15 +89,6 @@ function SuccessPage() {
             </div>
           </div>
         )}
-
-        <div className="mt-6">
-          <Link
-            to="/reward"
-            className="block w-full rounded-md bg-gray-200 py-3 text-center font-medium text-gray-800 transition-colors hover:bg-gray-300"
-          >
-            {t("contest.success.backToRewards")}
-          </Link>
-        </div>
       </div>
     </div>
   );

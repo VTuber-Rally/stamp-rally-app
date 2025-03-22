@@ -1,20 +1,18 @@
 import clsx from "clsx";
-import { FieldError } from "react-hook-form";
+import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 
-type InputFieldProps = {
+type InputFieldProps<T extends FieldValues> = {
   type: string;
   name: string;
   placeholder: string;
-  // register: UseFormRegister<FieldValues>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: any; // car ça marche pas avec UseFormRegister<FieldValues>
+  register: UseFormRegister<T>;
   errors?: FieldError;
   required?: boolean;
   className?: string;
   inputType?: "input" | "textarea";
 };
 
-const InputField = ({
+const InputField = <T extends FieldValues>({
   type,
   name,
   placeholder,
@@ -23,7 +21,7 @@ const InputField = ({
   required = true,
   className,
   inputType = "input",
-}: InputFieldProps) => {
+}: InputFieldProps<T>) => {
   const commonProps = {
     placeholder,
     className: clsx(

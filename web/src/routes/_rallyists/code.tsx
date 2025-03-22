@@ -29,7 +29,7 @@ export const Route = createFileRoute("/_rallyists/code")({
 
     if (type === "contest") {
       throw redirect({
-        to: "/", // TODO: à remplacer par la route du concours rallyiste
+        to: "/reward/contest/code",
         search: { secret: data as string },
       });
     }

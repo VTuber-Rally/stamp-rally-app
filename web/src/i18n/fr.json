@@ -86,17 +86,17 @@
     "title": "Récompense",
     "description": "Découvrez les récompenses disponibles pour vos participations au rally.",
     "rally": {
-      "title": "Rally de tampons",
-      "description": "Collectez {{minimumStampsCount}} tampons pour obtenir une carte illustrée exclusive !",
+      "title": "Stamp rally",
+      "description": "Collectez {{minimumStampsCount}} tampons pour obtenir une ou plusieurs cartes illustrées exclusives !",
       "button": "Voir mes tampons",
       "completed": "Complété",
       "inProgress": "{{count}}/{{total}} tampons"
     },
     "contest": {
-      "title": "Concours exclusif",
-      "description": "Participez à notre grand concours et tentez de gagner un shikishi réalisé par Sedeto !",
+      "title": "Concours à 16h",
+      "description": "Nous organisons un concours à 16h chaque jour sur le stand de Sedeto. Vous pourrez gagner un shikishi réalisé par Sedeto !",
       "button": "Participer au concours",
-      "alreadyRegistered": "Déjà inscrit(e)",
+      "alreadyRegistered": "Vous êtes déjà inscrit(e) au concours",
       "registerNow": "S'inscrire maintenant",
       "requirements": "Nécessite une participation validée au rally"
     },
@@ -229,12 +229,20 @@
         "step2": "Revenez demain pour participer au prochain tirage"
       }
     },
-    "not-eligible": {
+    "notEligible": {
       "title": "Concours - Non éligible",
       "description": "Vous n'êtes pas éligible pour participer au concours.",
-      "reason": "Pour participer, vous devez avoir au moins une soumission validée.",
-      "goToRally": "Participer au rally",
-      "back": "Retour"
+      "requirements": {
+        "title": "Conditions de participation",
+        "submissions": "Avoir au moins une participation validée au rally"
+      },
+      "whatToDo": {
+        "title": "Que faire maintenant ?",
+        "step1": "Il est probablement trop tard pour terminer le rally avant le tirage au sort, mais vous pouvez toujours le compléter pour pouvoir participer demain !",
+        "step2": "Revenez demain pour participer au prochain tirage"
+      },
+      "viewMap": "Voir la carte des artistes",
+      "backToContest": "Retour au concours"
     },
     "staff": {
       "title": "Gestion du concours",

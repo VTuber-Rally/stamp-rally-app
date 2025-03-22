@@ -96,7 +96,7 @@
       "title": "Exclusive Contest",
       "description": "Join our big contest and get a chance to win a shikishi created by Sedeto!",
       "button": "Enter the contest",
-      "alreadyRegistered": "Already registered",
+      "alreadyRegistered": "You are already registered to the contest",
       "registerNow": "Register now",
       "requirements": "Requires a validated rally submission"
     },
@@ -229,12 +229,20 @@
         "step2": "Come back tomorrow to participate in the next draw"
       }
     },
-    "not-eligible": {
+    "notEligible": {
       "title": "Contest - Not Eligible",
       "description": "You are not eligible to participate in the contest.",
-      "reason": "To participate, you must have at least one validated submission.",
-      "goToRally": "Participate in the rally",
-      "back": "Back"
+      "requirements": {
+        "title": "Participation Requirements",
+        "submissions": "Have at least one validated rally participation"
+      },
+      "whatToDo": {
+        "title": "What to do now?",
+        "step1": "It's probably too late to complete the rally before the draw, but you can still complete it to be able to participate tomorrow!",
+        "step2": "Come back tomorrow to participate in the next draw"
+      },
+      "viewMap": "View artists list",
+      "backToContest": "Back to contest"
     },
     "staff": {
       "title": "Contest Management",

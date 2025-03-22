@@ -33,7 +33,7 @@ const RallyistsHomepage = ({
       {showIntro && <Intro />}
 
       {showSubmitButton && (
-        <ButtonLink bg={"success-orange"} href="/submit">
+        <ButtonLink bg={"success-orange"} href="/reward/submit">
           {t("requestYourReward")}
         </ButtonLink>
       )}
