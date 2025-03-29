@@ -6,6 +6,7 @@
   },
   "QRRenewNotice": "This QR renews itself automatically.",
   "aboutText": "Built with ❤️ by <1>Leon</1> and <2>Lucie</2>",
+  "account": "Account",
   "alreadyHaveAccount": "Already have an account?",
   "alreadySubmitted": "Submitted on {{date}}",
   "anonymousLogoutButton": "Log out (warning, you will lose your submission history!)",
@@ -102,7 +103,11 @@
   },
   "scanThisQR": "Scan this QR code to get the stamp!",
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "usernameEmpty": "Your username can't be empty",
+    "usernameTooLong": "Your username can't be more than 50 characters long",
+    "usernameUpdateFailed": "Failed to update username",
+    "usernameUpdated": "Your username has been successfully updated"
   },
   "showThisQRCodeToSubmit": "Show this QR Code to Sedeto's staff (in Hall 6, Q652) to get your reward!",
   "staffSpace": "Staff space",
