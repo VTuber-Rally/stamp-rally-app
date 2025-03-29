@@ -2,31 +2,38 @@ import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import type { FC, MouseEventHandler, ReactNode } from "react";
 
-export type ButtonLinkProps = {
+type BaseButtonLinkProps = {
   children: ReactNode;
+  size?: "small" | "medium" | "big";
+  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous";
+  disabled?: boolean;
+  className?: string;
+};
+
+export type ButtonLinkProps = BaseButtonLinkProps & {
   href: string;
   onClick?: never;
-  size?: "small" | "medium" | "big";
-  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous";
   type?: "link";
-  disabled?: boolean;
   target?: string;
-  className?: string;
 };
 
-export type ButtonLinkButtonProps = {
-  children: ReactNode;
+export type ButtonLinkButtonProps = BaseButtonLinkProps & {
   href?: never;
   onClick: MouseEventHandler<HTMLButtonElement>;
-  size?: "small" | "medium" | "big";
-  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous";
   type: "button";
-  disabled?: boolean;
   target?: never;
-  className?: string;
 };
 
-export const ButtonLink: FC<ButtonLinkProps | ButtonLinkButtonProps> = ({
+export type ButtonLinkSubmitProps = BaseButtonLinkProps & {
+  href?: never;
+  onClick?: never;
+  type: "submit";
+  target?: never;
+};
+
+export const ButtonLink: FC<
+  ButtonLinkProps | ButtonLinkButtonProps | ButtonLinkSubmitProps
+> = ({
   children,
   href,
   onClick,
@@ -50,12 +57,13 @@ export const ButtonLink: FC<ButtonLinkProps | ButtonLinkButtonProps> = ({
     className,
   );
 
-  if (type === "button") {
+  if (type === "button" || type === "submit") {
     return (
       <button
         className={combinedClassName}
         onClick={onClick}
         disabled={disabled}
+        type={type}
       >
         {children}
       </button>
