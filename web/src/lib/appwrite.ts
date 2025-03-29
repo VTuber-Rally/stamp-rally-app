@@ -10,6 +10,7 @@ import {
 
 import {
   appwriteEndpoint,
+  appwriteNotificationProviderId,
   appwriteProjectId,
   assetsBucketId,
 } from "@/lib/consts.ts";
@@ -154,5 +155,44 @@ export const getAssetsFilesList = async () => {
   } catch (error) {
     const appwriteError = error as AppwriteException;
     throw new Error("Cannot get files list", { cause: appwriteError });
+  }
+};
+
+const pushTargetIdStorageKey = "appwrite_push_target_id";
+
+export const registerPushTarget = async (token: string) => {
+  try {
+    const existingPushTargetId = window.localStorage.getItem(
+      pushTargetIdStorageKey,
+    );
+    if (existingPushTargetId) {
+      await account.updatePushTarget(existingPushTargetId, token);
+      return existingPushTargetId;
+    } else {
+      const { $id } = await account.createPushTarget(
+        ID.unique(),
+        token,
+        appwriteNotificationProviderId,
+      );
+      window.localStorage.setItem(pushTargetIdStorageKey, $id);
+      return $id;
+    }
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot register Push target", { cause: appwriteError });
+  }
+};
+
+export const unregisterPushTarget = async () => {
+  try {
+    const existingPushTargetId = window.localStorage.getItem(
+      pushTargetIdStorageKey,
+    );
+    if (!existingPushTargetId) return;
+    await account.deletePushTarget(existingPushTargetId);
+    window.localStorage.removeItem(pushTargetIdStorageKey);
+  } catch (error) {
+    const appwriteError = error as AppwriteException;
+    throw new Error("Cannot unregister Push target", { cause: appwriteError });
   }
 };

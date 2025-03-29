@@ -44,6 +44,7 @@ export default defineConfig({
     process.env.STORYBOOK !== "true" &&
       VitePWA({
         registerType: "autoUpdate",
+        strategies: "injectManifest",
         manifest: {
           name: "VTuber Stamp Rally",
           short_name: "Stamp Rally",
@@ -68,26 +69,30 @@ export default defineConfig({
           ],
         },
         includeAssets: ["**/*"],
-        workbox: {
+        injectManifest: {
           // https://vite-pwa-org.netlify.app/guide/static-assets#globpatterns
           globPatterns: ["**/*.{woff2,js,css,html,jpg,svg,png}"],
-          runtimeCaching: [
-            {
-              urlPattern: /v1\/storage\/buckets.+$/,
-              handler: "StaleWhileRevalidate",
-              options: {
-                cacheName: "rally-assets",
-                expiration: {
-                  maxEntries: 100,
-                  maxAgeSeconds: 60 * 60 * 24, // 24 heures?
-                },
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-          ],
         },
+        srcDir: "src",
+        filename: "serviceWorker.ts",
+        // workbox: {
+        //   runtimeCaching: [
+        //     {
+        //       urlPattern: /v1\/storage\/buckets.+$/,
+        //       handler: "StaleWhileRevalidate",
+        //       options: {
+        //         cacheName: "rally-assets",
+        //         expiration: {
+        //           maxEntries: 100,
+        //           maxAgeSeconds: 60 * 60 * 24, // 24 heures?
+        //         },
+        //         cacheableResponse: {
+        //           statuses: [0, 200],
+        //         },
+        //       },
+        //     },
+        //   ],
+        // },
         devOptions: {
           enabled: true,
           type: "module",
