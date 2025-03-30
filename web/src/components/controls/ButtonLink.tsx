@@ -5,7 +5,7 @@ import type { FC, MouseEventHandler, ReactNode } from "react";
 type BaseButtonLinkProps = {
   children: ReactNode;
   size?: "small" | "medium" | "big";
-  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous";
+  bg?: "secondary" | "tertiary" | "success-orange" | "dangerous" | null;
   disabled?: boolean;
   className?: string;
 };
@@ -53,6 +53,7 @@ export const ButtonLink: FC<
     bg === "tertiary" && "bg-tertiary",
     bg === "success-orange" && "bg-success-orange",
     bg === "dangerous" && "bg-red-500/80",
+    bg === null && "",
     disabled && "opacity-75 cursor-not-allowed",
     className,
   );
