@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "packageManager": "pnpm@9.12.3",
+  "packageManager": "pnpm@10.9.0",
   "keywords": [],
   "author": "",
   "license": "ISC"
