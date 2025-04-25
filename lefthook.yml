@@ -1,0 +1,5 @@
+ pre-commit:
+   parallel: true
+   jobs:
+     - run: pnpm prettier --check {staged_files}
+       glob: "*.{js,ts,jsx,tsx,json}"
