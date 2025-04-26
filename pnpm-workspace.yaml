@@ -1,4 +1,8 @@
 packages:
-  - 'web/'
-  - 'functions/**'
-  - 'scripts/'
+  - web/
+  - functions/**
+  - scripts/
+
+onlyBuiltDependencies:
+  - msw
+injectWorkspacePackages: true

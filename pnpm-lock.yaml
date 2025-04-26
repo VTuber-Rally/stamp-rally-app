@@ -3,12 +3,13 @@ lockfileVersion: '9.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
+  injectWorkspacePackages: true
 
 importers:
 
   .: {}
 
-  functions/get-private-key:
+  functions/modules/get-private-key:
     dependencies:
       node-appwrite:
         specifier: ^14.1.0
@@ -24,7 +25,7 @@ importers:
         specifier: ^5.5.3
         version: 5.7.3
 
-  functions/verify-qrcodes:
+  functions/modules/submit-rally:
     dependencies:
       node-appwrite:
         specifier: ^14.1.0
