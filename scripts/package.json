@@ -12,7 +12,7 @@
   "dependencies": {
     "@faker-js/faker": "^9.6.0",
     "dotenv": "^16.4.5",
-    "node-appwrite": "^15.0.1",
+    "node-appwrite": "^16.0.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {

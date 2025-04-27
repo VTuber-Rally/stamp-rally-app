@@ -6,3 +6,6 @@ packages:
 onlyBuiltDependencies:
   - msw
 injectWorkspacePackages: true
+
+syncInjectedDepsAfterScripts:
+  - build

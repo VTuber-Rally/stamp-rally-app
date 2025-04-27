@@ -2,17 +2,18 @@
   "name": "register-contest-participant",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.ts",
-  "type": "module",
+  "main": "dist/index.js",
+  "type": "commonjs",
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/main.ts --bundle --outfile=dist/index.js --platform=node --format=cjs --target=node20 --legal-comments=none --minify",
     "format": "prettier --write ."
   },
   "dependencies": {
-    "node-appwrite": "^14.1.0"
+    "node-appwrite": "^16.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
+    "esbuild": "^0.25.3",
     "prettier": "^3.2.5",
     "typescript": "^5.5.3"
   }

@@ -1,5 +1,5 @@
 import { Client, Databases, ID, Role, Query, Permission } from 'node-appwrite';
-import { dataUrlToBytes } from './base64.js';
+import { dataUrlToBytes } from './base64';
 
 type Context = {
   req: {
