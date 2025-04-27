@@ -25,7 +25,10 @@
   "cancel": "Annuler",
   "checkSubmit": "Vérifier un rally",
   "close": "Fermer",
-  "consentToSaveEmail": "Je veux être au courant des prochains rallys !",
+  "consent": {
+    "email": "Je veux être au courant des prochains rallys !",
+    "pushNotifications": "Notifications pendant l'événement"
+  },
   "contest": {
     "contact": {
       "description": "Pour pouvoir vous contacter en cas de gain, merci de renseigner les informations suivantes :",
@@ -188,6 +191,16 @@
   "name": "Nom",
   "no": "Non",
   "notImplemented": "Pas encore supporté",
+  "notifications": {
+    "permissionNotGrantedToast": {
+      "title": "Permission pour les notifications",
+      "description": "Accédez aux paramètres du navigateur Internet pour autoriser les notifications."
+    },
+    "fcmError": {
+      "title": "Impossible de modifier le paramètre de notifications",
+      "description": "La connexion au serveur de notifications n'a pas pu être établie."
+    }
+  },
   "notLoggedIn": "Vous n'êtes pas connecté·e",
   "notRedeemed": "Soumissions non validées",
   "notRedeemedDescription": "Cette soumission n'a pas encore été validée.",

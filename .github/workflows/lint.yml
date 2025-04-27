@@ -80,6 +80,7 @@ jobs:
           VITE_PUBLIC_URL: https://example.com
           VITE_APPWRITE_ENDPOINT: https://appwrite.example.com
           VITE_APPWRITE_PROJECT_ID: example
+          VITE_APPWRITE_NOTIFICATION_PROVIDER_ID: example
           VITE_DATABASE_ID: example
           VITE_EVENT_END_DATE: example
           VITE_STAMPS_TO_COLLECT: 10
@@ -91,6 +92,13 @@ jobs:
           VITE_KV_COLLECTION_ID: example
           VITE_ASSETS_BUCKET_ID: example
           VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: example
+          VITE_FIREBASE_API_KEY: example
+          VITE_FIREBASE_AUTH_DOMAIN: example
+          VITE_FIREBASE_PROJECT_ID: example
+          VITE_FIREBASE_STORAGE_BUCKET: example
+          VITE_FIREBASE_MESSAGING_SENDER_ID: example
+          VITE_FIREBASE_APP_ID: example
+          VITE_FIREBASE_VAPID_PUBLIC_KEY: example
         run: pnpm --filter web build
 
     # upload artifacts
