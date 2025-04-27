@@ -14,7 +14,8 @@
       "enabled": true,
       "logging": true,
       "entrypoint": "index.js",
-      "path": "functions/artifacts/submit-rally"
+      "path": "functions/artifacts/submit-rally",
+      "specification": "s-0.5vcpu-512mb"
     },
     {
       "$id": "118315b50900e5b86311",
@@ -28,7 +29,8 @@
       "enabled": true,
       "logging": true,
       "entrypoint": "index.js",
-      "path": "functions/artifacts/get-private-key"
+      "path": "functions/artifacts/get-private-key",
+      "specification": "s-1vcpu-512mb"
     },
     {
       "$id": "67d7f57300140a6901bd",
@@ -42,7 +44,8 @@
       "enabled": true,
       "logging": true,
       "entrypoint": "index.js",
-      "path": "functions/artifacts/register-contest-participant"
+      "path": "functions/artifacts/register-contest-participant",
+      "specification": "s-1vcpu-512mb"
     }
   ],
   "databases": [

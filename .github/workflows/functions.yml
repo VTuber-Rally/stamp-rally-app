@@ -1,0 +1,140 @@
+name: Build & push functions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - functions/modules/**
+      - functions/scripts/**
+      - appwrite.json
+  workflow_dispatch:
+    inputs:
+      specific_function:
+        description: "Specific function to build and push"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  detect_changed_functions:
+    runs-on: ubuntu-latest
+    outputs:
+      functions: ${{ steps.changed_functions.outputs.functions }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Identify changed functions
+        id: changed_functions
+        run: |
+          # Check if this is workflow_dispatch with specific function
+          if [ ! -z "${{ github.event.inputs.specific_function }}" ]; then
+            echo "Manual trigger for specific function: ${{ github.event.inputs.specific_function }}"
+            json_array="[\"${{ github.event.inputs.specific_function }}\"]"
+            echo "functions=$json_array" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check if appwrite.json changed
+          if git diff --name-only HEAD^ HEAD | grep -q "appwrite.json"; then
+            echo "appwrite.json changed, deploying all functions"
+            # Extract all function names from appwrite.json
+            function_names=$(jq -r '.functions[] | .name' appwrite.json)
+            
+            # Format as JSON
+            json_array="["
+            first=true
+            for function in $function_names; do
+              if [ "$first" = true ]; then
+                json_array="$json_array\"$function\""
+                first=false
+              else
+                json_array="$json_array,\"$function\""
+              fi
+            done
+            json_array="$json_array]"
+          else
+            # Original code-based detection
+            functions_list=$(git diff --name-only HEAD^ HEAD -- 'functions/modules/' | awk -F/ '{if ($3 != "") print $3}' | sort -u)
+            json_array="["
+            first=true
+            for function in $functions_list; do
+              if [ "$first" = true ]; then
+                json_array="$json_array\"$function\""
+                first=false
+              else
+                json_array="$json_array,\"$function\""
+              fi
+            done
+            json_array="$json_array]"
+          fi
+
+          echo "functions=$json_array" >> $GITHUB_OUTPUT
+          echo "Output JSON: $json_array"
+
+  build_function:
+    needs: detect_changed_functions
+    if: ${{ needs.detect_changed_functions.outputs.functions != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        function: ${{ fromJson(needs.detect_changed_functions.outputs.functions) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            functions/modules/${{ matrix.function }}
+            functions/scripts
+            appwrite.json
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+        with:
+          run_install: true
+
+      - name: Build function ${{ matrix.function }}
+        run: functions/scripts/build.sh ${{ matrix.function }}
+
+      - name: Upload function artifact for ${{ matrix.function }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: function-${{ matrix.function }} # Nom unique pour l'artefact
+          path: functions/artifacts/${{ matrix.function }}
+
+  push_function:
+    needs: [detect_changed_functions, build_function]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        function: ${{ fromJson(needs.detect_changed_functions.outputs.functions) }}
+    steps:
+      - name: Checkout code (only for push.sh)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            functions/scripts
+            appwrite.json
+
+      - name: Install Appwrite CLI
+        run: npm install -g appwrite-cli
+
+      - name: Login to Appwrite
+        run: appwrite client --project-id ${{ vars.APPWRITE_PROJECT_ID }} --endpoint ${{ vars.APPWRITE_ENDPOINT }} --key ${{ secrets.APPWRITE_API_KEY }}
+
+      - name: Download function artifact for ${{ matrix.function }}
+        uses: actions/download-artifact@v4
+        with:
+          name: function-${{ matrix.function }}
+          path: functions/artifacts/${{ matrix.function }}
+
+      - name: Push function ${{ matrix.function }}
+        run: functions/scripts/push.sh ${{ matrix.function }}
