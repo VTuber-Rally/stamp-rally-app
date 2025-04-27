@@ -3,10 +3,9 @@ name: Lint
 on:
   push:
     paths:
-      - 'web/**'
-      - 'pnpm-lock.yaml'
+      - "web/**"
+      - "pnpm-lock.yaml"
   workflow_dispatch:
-  
 
 permissions:
   contents: read
@@ -25,8 +24,8 @@ jobs:
         with:
           run_install: true
 
-      - name: 'web: pnpm lint'
-        run: cd web && pnpm lint
+      - name: "web: pnpm lint"
+        run: pnpm --filter=web lint
 
   test:
     name: Test web
@@ -41,8 +40,8 @@ jobs:
         with:
           run_install: true
 
-      - name: 'web: pnpm test'
-        run: pnpm --filter web test
+      - name: "web: pnpm test"
+        run: pnpm --filter=web test
 
   style:
     name: Check style (Prettier)
@@ -57,9 +56,8 @@ jobs:
         with:
           run_install: true
 
-      - name: 'web: pnpm prettier:check'
-        run: pnpm --filter web prettier:check
-
+      - name: "web: pnpm prettier:check"
+        run: pnpm --filter=web prettier:check
 
   build:
     name: Build web
@@ -74,7 +72,7 @@ jobs:
         with:
           run_install: true
 
-      - name: 'web: pnpm build'
+      - name: "web: pnpm build"
         env:
           NODE_ENV: production
           VITE_PUBLIC_URL: https://example.com
@@ -99,9 +97,9 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: example
           VITE_FIREBASE_APP_ID: example
           VITE_FIREBASE_VAPID_PUBLIC_KEY: example
-        run: pnpm --filter web build
+        run: pnpm --filter=web build
 
-    # upload artifacts
+      # upload artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
