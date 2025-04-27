@@ -13,10 +13,8 @@
       "timeout": 15,
       "enabled": true,
       "logging": true,
-      "entrypoint": "src/main.js",
-      "commands": "npm install && npm run build",
-      "ignore": ["node_modules", ".npm"],
-      "path": "functions/modules/submit-rally"
+      "entrypoint": "index.js",
+      "path": "functions/artifacts/submit-rally"
     },
     {
       "$id": "118315b50900e5b86311",
@@ -29,31 +27,22 @@
       "timeout": 15,
       "enabled": true,
       "logging": true,
-      "entrypoint": "src/main.js",
-      "commands": "npm install && npm run build",
-      "ignore": ["node_modules", ".npm"],
-      "path": "functions/get-private-key"
+      "entrypoint": "index.js",
+      "path": "functions/artifacts/get-private-key"
     },
     {
       "$id": "67d7f57300140a6901bd",
       "name": "register-contest-participant",
       "runtime": "node-20.0",
-      "execute": [
-        "users"
-      ],
+      "execute": ["users"],
       "events": [],
-      "scopes": [
-        "users.read",
-        "documents.read",
-        "documents.write"
-      ],
+      "scopes": ["users.read", "documents.read", "documents.write"],
       "schedule": "",
       "timeout": 15,
       "enabled": true,
       "logging": true,
-      "entrypoint": "src/main.js",
-      "commands": "npm install && npm run build",
-      "path": "functions/modules/register-contest-participant"
+      "entrypoint": "index.js",
+      "path": "functions/artifacts/register-contest-participant"
     }
   ],
   "databases": [
