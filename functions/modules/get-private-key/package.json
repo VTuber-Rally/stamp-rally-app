@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "build": "esbuild src/main.ts --bundle --outfile=dist/index.js --platform=node --format=cjs --target=node20 --legal-comments=none --minify",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check-types": "tsc"
   },
   "dependencies": {
     "node-appwrite": "^16.0.0"
@@ -15,6 +16,7 @@
     "@types/node": "^20.14.9",
     "esbuild": "^0.25.3",
     "prettier": "^3.2.5",
-    "typescript": "^5.5.3"
+    "typescript": "^5.7.3",
+    "shared-lib": "workspace:*"
   }
 }

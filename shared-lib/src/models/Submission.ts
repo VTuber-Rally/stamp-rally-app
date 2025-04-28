@@ -1,4 +1,4 @@
-import { Stamp } from "@/lib/models/Stamp.ts";
+import { Stamp } from "./Stamp";
 
 export interface Submission {
   submissionId: string; // comes from the server when submitted, unique

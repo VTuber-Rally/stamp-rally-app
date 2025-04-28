@@ -1,6 +1,7 @@
 packages:
   - web/
   - functions/modules/**
+  - shared-lib/
   - scripts/
 
 onlyBuiltDependencies:

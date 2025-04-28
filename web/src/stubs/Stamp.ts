@@ -1,4 +1,4 @@
-import { Stamp, StampWithId } from "@/lib/models/Stamp.ts";
+import { Stamp, StampWithId } from "shared-lib";
 
 // FUDE
 export const NotSubmittedStamp = {

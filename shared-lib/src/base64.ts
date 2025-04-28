@@ -3,6 +3,10 @@ export function bytesToBase64DataUrl(
   type = "application/octet-stream",
 ): Promise<string> {
   return new Promise((resolve, reject) => {
+    if (typeof window === "undefined") {
+      const base64 = Buffer.from(bytes).toString("base64");
+      return resolve(`data:${type};base64,${base64}`);
+    }
     const reader = new FileReader();
     reader.addEventListener("load", () => resolve(reader.result as string));
     reader.addEventListener("error", () => reject(reader.error));

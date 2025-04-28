@@ -2,11 +2,11 @@ import { useConfetti } from "@stevent-team/react-party";
 import { Check, Gift } from "lucide-react";
 import { LegacyRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ContestParticipant } from "shared-lib";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Header } from "@/components/layout/Header";
 import { useFollowParticipation } from "@/lib/hooks/contest/useFollowParticipation";
-import { ContestParticipant } from "@/lib/models/ContestParticipant";
 
 export function SuccessPage() {
   const { t } = useTranslation();

@@ -1,13 +1,13 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Query, RealtimeResponseEvent } from "appwrite";
 import { useCallback, useEffect } from "react";
+import { ContestParticipant } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { client, databases } from "@/lib/appwrite";
 import { contestParticipantsCollectionId, databaseId } from "@/lib/consts";
 import { db } from "@/lib/db";
 import { useUser } from "@/lib/hooks/useUser";
-import { ContestParticipant } from "@/lib/models/ContestParticipant";
 import { queryClient } from "@/lib/queryClient";
 
 export const useFollowParticipation = () => {

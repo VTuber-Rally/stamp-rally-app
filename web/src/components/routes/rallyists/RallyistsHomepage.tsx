@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
+import type { StampWithId, SubmissionWithId } from "shared-lib";
 
 import Logo from "@/assets/logo.png";
 import Intro from "@/components/Intro.tsx";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
-import { StampWithId } from "@/lib/models/Stamp.ts";
-import { SubmissionWithId } from "@/lib/models/Submission.ts";
 
 type RallyistsHomepageProps = {
   stamps?: StampWithId[];

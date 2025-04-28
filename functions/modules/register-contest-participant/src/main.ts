@@ -9,43 +9,10 @@ import {
   Users,
 } from 'node-appwrite';
 
-type FunctionReturnType =
-  | ({
-      status: string;
-      message: string;
-    } & {
-      status: 'success';
-      contestParticipantId: string;
-    })
-  | {
-      status: 'error';
-      message: string;
-      error: string;
-    };
-
-type Context = {
-  req: {
-    body: string;
-    bodyRaw: string;
-    headers: { [key: string]: string };
-    scheme: string;
-    method: string;
-    url: string;
-    host: string;
-    port: string;
-    path: string;
-    queryString: string;
-    query: { [key: string]: string };
-  };
-  res: {
-    send: (body: string, code?: number, headers?: any[]) => void;
-    json: (body: FunctionReturnType) => void;
-    empty: () => void;
-    redirect: (url: string, code: number) => void;
-  };
-  log: (message: any) => void;
-  error: (message: any) => void;
-};
+import type {
+  RegisterContestParticipantFunctionResponse,
+  Context,
+} from 'shared-lib';
 
 // partial model
 export interface Submission extends Models.Document {
@@ -58,7 +25,12 @@ const CONTEST_PARTICIPANTS_COLLECTION_ID =
   process.env['CONTEST_PARTICIPANTS_COLLECTION_ID'];
 const KV_COLLECTION_ID = process.env['KV_COLLECTION_ID'];
 
-export default async ({ req, res, log, error }: Context) => {
+export default async ({
+  req,
+  res,
+  log,
+  error,
+}: Context<RegisterContestParticipantFunctionResponse>) => {
   const missingVars = [];
   if (!DATABASE_ID) missingVars.push('DATABASE_ID');
   if (!SUBMISSIONS_COLLECTION_ID) missingVars.push('SUBMISSIONS_COLLECTION_ID');

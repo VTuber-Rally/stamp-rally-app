@@ -1,9 +1,9 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
+import { signData } from "shared-lib";
 
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
 import { functions } from "@/lib/appwrite.ts";
 import { getPrivateKeyFunctionId } from "@/lib/consts.ts";
-import { signData } from "@/lib/signatures.ts";
 
 import { QUERY_KEYS } from "../QueryKeys.ts";
 
@@ -31,6 +31,17 @@ function usePrivateKey(userId: string, key?: JsonWebKey) {
   return privateKey;
 }
 
+// TODO: refactor with ev
+type FunctionReturnType =
+  | {
+      status: "success";
+      privateKey: JsonWebKey;
+    }
+  | {
+      status: "error";
+      message: string;
+    };
+
 const usePrivateKeyJWK = (userId: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.STAFF_GEN_QRCODE, userId],
@@ -40,9 +51,13 @@ const usePrivateKeyJWK = (userId: string) => {
         JSON.stringify({ userId }),
       );
 
-      const key = JSON.parse(resp.responseBody) as JsonWebKey;
+      const respJson = JSON.parse(resp.responseBody) as FunctionReturnType;
 
-      return key;
+      if (respJson.status !== "success") {
+        throw new Error(respJson.message);
+      }
+
+      return respJson.privateKey;
     },
   });
 };
