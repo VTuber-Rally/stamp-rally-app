@@ -1,8 +1,8 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
+import { signData } from "shared-lib";
 
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
-import { signData } from "@/lib/signatures.ts";
 
 import { QUERY_KEYS } from "../QueryKeys.ts";
 

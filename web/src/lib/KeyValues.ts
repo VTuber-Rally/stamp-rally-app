@@ -1,4 +1,4 @@
-import { KeyValueEntry } from "./models/KeyValue";
+import { type KeyValueEntry } from "shared-lib";
 
 export const KEY_VALUES = {
   eventEndDate: {

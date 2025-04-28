@@ -1,7 +1,8 @@
 import { describe, expect, test } from "vitest";
 
-import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
-import { signData, verifyData } from "@/lib/signatures.ts";
+import { crypto } from "./crypto";
+import { StampTupleSerializer } from "./models";
+import { signData, verifyData } from "./signatures";
 
 const keyAlgorithm = {
   name: "ECDSA",
@@ -31,12 +32,12 @@ const privateKey = {
 
 describe("signatures", () => {
   test("should be able to sign and verify", async () => {
-    const importedPrivateKey = await window.crypto.subtle.importKey(
+    const importedPrivateKey = await crypto.subtle.importKey(
       "jwk",
       privateKey,
       keyAlgorithm,
       true,
-      ["sign"],
+      ["sign"]
     );
 
     // sign data
@@ -45,12 +46,12 @@ describe("signatures", () => {
     const data = await signData(importedPrivateKey, payload);
 
     // verify data
-    const importedPublicKey = await window.crypto.subtle.importKey(
+    const importedPublicKey = await crypto.subtle.importKey(
       "jwk",
       publicKey,
       keyAlgorithm,
       true,
-      ["verify"],
+      ["verify"]
     );
 
     const dataToVerify = [...payload, data];
@@ -64,13 +65,13 @@ describe("signatures", () => {
     expect(verified).toBe(true);
   });
 
-  test("should not tampered payload", async () => {
-    const importedPrivateKey = await window.crypto.subtle.importKey(
+  test("should not accept tampered payload", async () => {
+    const importedPrivateKey = await crypto.subtle.importKey(
       "jwk",
       privateKey,
       keyAlgorithm,
       true,
-      ["sign"],
+      ["sign"]
     );
 
     // sign data
@@ -80,12 +81,12 @@ describe("signatures", () => {
     const data = await signData(importedPrivateKey, payload);
 
     // verify data
-    const importedPublicKey = await window.crypto.subtle.importKey(
+    const importedPublicKey = await crypto.subtle.importKey(
       "jwk",
       publicKey,
       keyAlgorithm,
       true,
-      ["verify"],
+      ["verify"]
     );
 
     const dataToVerify = [...tamperedPayload, data];

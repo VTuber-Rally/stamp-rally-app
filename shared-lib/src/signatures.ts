@@ -1,5 +1,6 @@
-import { bytesToBase64DataUrl, dataUrlToBytes } from "@/lib/base64.ts";
-import { StampTuple } from "@/lib/models/Stamp.ts";
+import { bytesToBase64DataUrl, dataUrlToBytes } from "./base64";
+import { crypto } from "./crypto";
+import { StampTuple } from "./models";
 
 const signAlgorithm = {
   name: "ECDSA",
@@ -13,7 +14,7 @@ export async function signData(
   payload: readonly (string | number)[],
 ) {
   return bytesToBase64DataUrl(
-    await window.crypto.subtle.sign(
+    await crypto.subtle.sign(
       signAlgorithm,
       signatureKey,
       textEncoder.encode(payload.join(":")),
@@ -27,7 +28,7 @@ export async function verifyData(
 ) {
   const [standistId, timestamp, signature] = payload;
   const signatureBuffer = await dataUrlToBytes(signature);
-  return window.crypto.subtle.verify(
+  return crypto.subtle.verify(
     signAlgorithm,
     verificationKey,
     // we have to convert the ArrayBuffer to a Uint8Array because of a bug in JSDOM (somehow)

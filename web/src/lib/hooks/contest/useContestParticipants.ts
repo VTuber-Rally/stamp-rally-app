@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import type { ContestParticipant } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { Query, client, databases } from "@/lib/appwrite";
 import { contestParticipantsCollectionId, databaseId } from "@/lib/consts";
-import type { ContestParticipant } from "@/lib/models/ContestParticipant";
 
 async function fetchContestParticipants() {
   const response = await databases.listDocuments<ContestParticipant>(

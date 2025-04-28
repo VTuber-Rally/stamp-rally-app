@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import { Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { ContestParticipant } from "shared-lib";
 
 import Loader from "@/components/Loader";
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { useFollowParticipation } from "@/lib/hooks/contest/useFollowParticipation";
 import { useIsEligibleForContest } from "@/lib/hooks/contest/useIsEligibleForContest";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions";
-import { ContestParticipant } from "@/lib/models/ContestParticipant";
 
 export const ContestBlock = () => {
   const { t } = useTranslation();

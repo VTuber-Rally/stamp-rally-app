@@ -1,21 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { Standist, importJWK } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { databases } from "@/lib/appwrite.ts";
 import { databaseId, standistsCollectionId } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
-import { Standist } from "@/lib/models/Standist.ts";
 import { queryClient } from "@/lib/queryClient.ts";
-
-function importJWK(jwk: JsonWebKey) {
-  return window.crypto.subtle.importKey(
-    "jwk",
-    jwk,
-    { name: "ECDSA", namedCurve: "P-384" },
-    true,
-    ["verify"],
-  );
-}
 
 const importStandists = async (): Promise<Standist[]> => {
   const { documents: standists } = await databases.listDocuments(

@@ -1,6 +1,5 @@
 import { Models } from "appwrite";
-
-import { Standist } from "@/lib/models/Standist.ts";
+import { Standist } from "shared-lib";
 
 export const StandistsFromAppwrite = {
   total: 12,

@@ -1,11 +1,11 @@
 import * as Sentry from "@sentry/react";
+import { type Standist } from "shared-lib";
 
 import fallback from "@/assets/fallback-avatar.png";
 
 import { storage } from "./appwrite";
 import { assetsBucketId } from "./consts";
 import { getStandists } from "./hooks/useStandists";
-import { Standist } from "./models/Standist";
 
 export const getArtistImage = async (standistId: string) => {
   try {

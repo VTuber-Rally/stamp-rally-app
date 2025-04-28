@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ListChecks, TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { StampTupleSerializer } from "shared-lib";
 
 import Intro from "@/components/Intro.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
@@ -14,7 +15,6 @@ import { stampsToCollect } from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
-import { StampTupleSerializer } from "@/lib/models/Stamp.ts";
 
 export const Route = createFileRoute("/_rallyists/stamp")({
   component: Stamp,

@@ -1,0 +1,20 @@
+{
+  "name": "shared-lib",
+  "version": "1.0.0",
+  "description": "Code partagé entre le web et les fonctions",
+  "main": "src/index.ts",
+  "keywords": [],
+  "author": "",
+  "scripts": {
+    "test": "vitest",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.15",
+    "appwrite": "^16.1.0",
+    "vitest": "^3.0.8"
+  }
+}

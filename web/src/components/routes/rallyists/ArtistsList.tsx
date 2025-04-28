@@ -2,13 +2,13 @@ import clsx from "clsx";
 import { TicketCheck } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { StampWithId } from "shared-lib";
 
 import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";
 import { stampsToCollect } from "@/lib/consts.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
-import { StampWithId } from "@/lib/models/Stamp.ts";
 
 type ArtistsListProps = {
   stamps: StampWithId[];

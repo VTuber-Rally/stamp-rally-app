@@ -1,4 +1,5 @@
 import { ArrowUpRightFromSquare } from "lucide-react";
+import { Standist } from "shared-lib";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Header } from "@/components/layout/Header.tsx";
@@ -12,7 +13,6 @@ import {
 } from "@/components/layout/Table";
 import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
-import { Standist } from "@/lib/models/Standist";
 
 function StampLinksArtistsList() {
   const { data: standistsList } = useStandists();

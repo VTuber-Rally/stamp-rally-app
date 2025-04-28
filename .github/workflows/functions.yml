@@ -2,12 +2,11 @@ name: Build & push functions
 
 on:
   push:
-    branches:
-      - main
     paths:
       - functions/modules/**
       - functions/scripts/**
       - appwrite.json
+      - shared-lib/**
   workflow_dispatch:
     inputs:
       specific_function:
@@ -92,12 +91,16 @@ jobs:
           sparse-checkout: |
             functions/modules/${{ matrix.function }}
             functions/scripts
+            shared-lib
             appwrite.json
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4.0.0
         with:
           run_install: true
+
+      - name: Validate function ${{ matrix.function }}
+        run: functions/scripts/validate.sh ${{ matrix.function }}
 
       - name: Build function ${{ matrix.function }}
         run: functions/scripts/build.sh ${{ matrix.function }}
@@ -110,6 +113,8 @@ jobs:
 
   push_function:
     needs: [detect_changed_functions, build_function]
+    # On ne push que sur la branche main
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

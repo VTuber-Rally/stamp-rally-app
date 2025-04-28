@@ -1,4 +1,4 @@
-import { Models } from "appwrite";
+import { type Models } from "appwrite";
 
 export interface KeyValue extends Models.Document {
   key: string;

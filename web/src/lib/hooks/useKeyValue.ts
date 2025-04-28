@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { type KeyValueEntry } from "shared-lib";
 
 import { QUERY_KEYS } from "../QueryKeys";
-import { KeyValueEntry } from "../models/KeyValue";
 import { useDatabase } from "./useDatabase";
 
 export const useKeyValue = <T>(keyValueEntry: KeyValueEntry<T>) => {

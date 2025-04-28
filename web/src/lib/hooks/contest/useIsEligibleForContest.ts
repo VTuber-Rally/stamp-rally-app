@@ -1,9 +1,9 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
+import { SubmissionWithId } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { db } from "@/lib/db.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
-import { SubmissionWithId } from "@/lib/models/Submission.ts";
 
 export const getContestEligibility = async (
   submissions: SubmissionWithId[],

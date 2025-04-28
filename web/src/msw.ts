@@ -1,6 +1,6 @@
 import { HttpResponse, http } from "msw";
+import { type Standist } from "shared-lib";
 
-import { Standist } from "@/lib/models/Standist.ts";
 import avatar from "@/stubs/avatar.png";
 
 import { StandistsFromAppwrite } from "./stubs/Standists.ts";

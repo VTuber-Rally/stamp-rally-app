@@ -1,15 +1,8 @@
 import Dexie, { type EntityTable } from "dexie";
-
-import {
-  ContestParticipation,
-  contestParticipationIndexes,
-} from "@/lib/models/ContestParticipation.ts";
-import { StampWithId, stampIndexes } from "@/lib/models/Stamp.ts";
-import { Standist, standistIndexes } from "@/lib/models/Standist.ts";
-import {
-  SubmissionWithId,
-  submissionIndexes,
-} from "@/lib/models/Submission.ts";
+import { ContestParticipation, contestParticipationIndexes } from "shared-lib";
+import { StampWithId, stampIndexes } from "shared-lib";
+import { Standist, standistIndexes } from "shared-lib";
+import { SubmissionWithId, submissionIndexes } from "shared-lib";
 
 export const db = new Dexie("StampRally") as Dexie & {
   stamps: EntityTable<StampWithId, "id">;

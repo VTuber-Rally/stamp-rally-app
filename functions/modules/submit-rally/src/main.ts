@@ -1,37 +1,13 @@
 import { Client, Databases, ID, Role, Query, Permission } from 'node-appwrite';
-import { dataUrlToBytes } from './base64';
 
-type Context = {
-  req: {
-    body: string;
-    bodyRaw: string;
-    headers: { [key: string]: string };
-    scheme: string;
-    method: string;
-    url: string;
-    host: string;
-    port: string;
-    path: string;
-    queryString: string;
-    query: { [key: string]: string };
-  };
-  res: {
-    send: (body: string, code?: number, headers?: any[]) => void;
-    json: (body: any) => void;
-    empty: () => void;
-    redirect: (url: string, code: number) => void;
-  };
-  log: (message: any) => void;
-  error: (message: any) => void;
-};
-
-interface Stamp {
-  standistId: string;
-  timestamp: number;
-  scanTimestamp: number;
-  signature: string;
-  id: number;
-}
+import {
+  type Context,
+  type Stamp,
+  type SubmitRallyFunctionResponse,
+  dataUrlToBytes,
+  Standist,
+  importJWK,
+} from 'shared-lib';
 
 const SUBMISSION_DATABASE_ID = process.env['DATABASE_ID'];
 const SUBMISSION_COLLECTION_ID = process.env['SUBMISSIONS_COLLECTION_ID'];
@@ -44,34 +20,12 @@ const signAlgorithm = {
 
 const textEncoder = new TextEncoder();
 
-type Standist = {
-  // to link with the generated qr codes
-  userId: string;
-  publicKey: CryptoKey;
-
-  name: string;
-  hall: string;
-  boothNumber: string;
-  description: string;
-
-  image: string;
-
-  twitter?: string;
-  instagram?: string;
-  twitch?: string;
-};
-
-function importJWK(jwk: JsonWebKey) {
-  return crypto.subtle.importKey(
-    'jwk',
-    jwk,
-    { name: 'ECDSA', namedCurve: 'P-384' },
-    true,
-    ['verify']
-  );
-}
-
-export default async ({ req, res, log, error }: Context) => {
+export default async ({
+  req,
+  res,
+  log,
+  error,
+}: Context<SubmitRallyFunctionResponse>) => {
   const missingVars = [];
   if (!SUBMISSION_DATABASE_ID) missingVars.push('DATABASE_ID');
   if (!SUBMISSION_COLLECTION_ID) missingVars.push('SUBMISSIONS_COLLECTION_ID');
@@ -147,15 +101,9 @@ export default async ({ req, res, log, error }: Context) => {
     }
 
     const signature = await dataUrlToBytes(stamp.signature);
-
-    log(`Verifying signature for ${stamp.standistId} - ${standist.name}.`);
+    log('signature: ' + signature);
 
     const dataToBeEncoded = [stamp.standistId, stamp.timestamp].join(':');
-
-    log('data: ' + dataToBeEncoded);
-
-    let publicKey = await crypto.subtle.exportKey('jwk', standist.publicKey);
-    log(JSON.stringify(publicKey));
 
     const isValid = await crypto.subtle.verify(
       signAlgorithm,
@@ -165,13 +113,12 @@ export default async ({ req, res, log, error }: Context) => {
     );
 
     if (!isValid) {
-      throw new Error('Invalid signature.');
+      error('Invalid signature.');
+      return res.json({ status: 'error', message: 'Invalid signature' });
     }
 
     log(`Signature is valid for ${stamp.standistId} - ${standist.name}.`);
   }
-
-  // [{"standistId":"66873ba1003580d5cfa5","timestamp":1720138952022,"signature":"data:application/octet-stream;base64,IHZgknnGlzgf78i3W+APBzkAW1pGQt6xgl0G2KsLIbaIQTGuXklJ6hfLbmF/iehlqoJpVm3E78AKCT9W1cfH4cIDnUFQhbMlGIEC7z3Q9wgdS8P79UUJ0eayy6lIlave","scanTimestamp":1720138956024,"id":1},{"standistId":"66873ba100357fcd48f0","timestamp":1720140819422,"signature":"data:application/octet-stream;base64,IFnJe+B6o3iUDiTga5UUdX20IVGw/d8r5Ktp1YXVN/9kZ32xAjMj7B89pqROkN2yNWbFRYjd2F1jL29DWjrdBkL2vlnbQqaRItJJIDqi15wTja+p2+etmhjhxdWMB1hI","scanTimestamp":1720140821377,"id":2}]
 
   const stampPromises = stamps.map(async (stamp) => {
     // get standist's document id from its userid
@@ -215,5 +162,5 @@ export default async ({ req, res, log, error }: Context) => {
     [Permission.read(Role.user(userId))]
   );
 
-  return res.json({ submissionId });
+  return res.json({ status: 'success', submissionId });
 };
