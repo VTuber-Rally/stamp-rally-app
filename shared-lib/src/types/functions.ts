@@ -31,3 +31,7 @@ export type RegisterContestParticipantFunctionResponse =
       message: string;
       error: string;
     };
+
+export type SendNotificationResponse = {
+  status: 'success' | 'error';
+}

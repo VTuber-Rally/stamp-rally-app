@@ -53,6 +53,28 @@ importers:
         specifier: ^5.7.3
         version: 5.7.3
 
+  functions/modules/send-notification:
+    dependencies:
+      node-appwrite:
+        specifier: ^16.0.0
+        version: 16.0.0
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.9
+        version: 20.17.14
+      esbuild:
+        specifier: ^0.25.3
+        version: 0.25.3
+      prettier:
+        specifier: ^3.2.5
+        version: 3.4.2
+      shared-lib:
+        specifier: workspace:*
+        version: link:../../../shared-lib
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
+
   functions/modules/submit-rally:
     dependencies:
       node-appwrite:
