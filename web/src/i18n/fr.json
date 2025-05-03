@@ -196,9 +196,19 @@
       "title": "Permission pour les notifications",
       "description": "Accédez aux paramètres du navigateur Internet pour autoriser les notifications."
     },
+    "notificationSentToast": {
+      "title": "Notification envoyée",
+      "description": "Elle peut mettre plusieurs minutes à arriver vers les appareils."
+    },
     "fcmError": {
       "title": "Impossible de modifier le paramètre de notifications",
       "description": "La connexion au serveur de notifications n'a pas pu être établie."
+    },
+    "templates": {
+      "contest": {
+        "title": "Le concours du Rally VTuber commence bientôt !",
+        "text": "Rendez-vous au stand de Sedeto (H6, R687) pour tenter votre chance de remporter un shikishi personnalisé de Sedeto."
+      }
     }
   },
   "notLoggedIn": "Vous n'êtes pas connecté·e",
