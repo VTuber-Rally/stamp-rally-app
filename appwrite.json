@@ -46,6 +46,23 @@
       "entrypoint": "index.js",
       "path": "functions/artifacts/register-contest-participant",
       "specification": "s-1vcpu-512mb"
+    },
+    {
+      "$id": "680e8fc7d0cdd79cff10",
+      "execute": [
+        "label:staff"
+      ],
+      "name": "send-notification",
+      "enabled": true,
+      "logging": true,
+      "runtime": "node-20.0",
+      "scopes": ["messages.read", "messages.write"],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "entrypoint": "index.js",
+      "specification": "s-1vcpu-512mb",
+      "path": "functions/artifacts/send-notification"
     }
   ],
   "databases": [

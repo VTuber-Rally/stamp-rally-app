@@ -1,0 +1,26 @@
+{
+  "name": "@vtube-stamp-rally/functions__send-notification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --outfile=dist/index.js --platform=node --format=cjs --target=node20 --legal-comments=none --minify",
+    "check-types": "tsc",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "prettier:write": "prettier --write src/ eslint.config.mjs",
+    "prettier:check": "prettier -c src/ eslint.config.mjs"
+  },
+  "dependencies": {
+    "node-appwrite": "^16.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "esbuild": "^0.25.3",
+    "prettier": "^3.2.5",
+    "typescript": "5.8.3",
+    "@vtube-stamp-rally/shared-lib": "workspace:*",
+    "@vtube-stamp-rally/linter-configs": "workspace:*"
+  }
+}

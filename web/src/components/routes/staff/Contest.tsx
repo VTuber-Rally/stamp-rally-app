@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import clsx from "clsx";
 import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -5,6 +6,11 @@ import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
+import { sendNotification } from "@/lib/appwrite.ts";
+import {
+  rallyFinishersEnTopicId,
+  rallyFinishersFrTopicId,
+} from "@/lib/consts.ts";
 import { useContestDrawWinner } from "@/lib/hooks/contest/useContestDrawWinner";
 import { useContestParticipants } from "@/lib/hooks/contest/useContestParticipants";
 import { useContestQRCode } from "@/lib/hooks/contest/useContestQRCode";
@@ -34,6 +40,7 @@ export default function Contest() {
   const { data: qrCode, isLoading: isQRCodeLoading } = useContestQRCode();
   const { data: winners, isLoading: areWinnersLoading } = useContestWinners();
   const [isQRFullscreen, setIsQRFullscreen] = useState(false);
+  const [isSendingNotifications, setIsSendingNotifications] = useState(false);
   const { t } = useTranslation();
   const { t: tFR } = useTranslation("", { lng: "fr" });
   const { t: tEN } = useTranslation("", { lng: "en" });
@@ -52,13 +59,33 @@ export default function Contest() {
     }, 1000);
   };
 
-  // remove along with todo
-  // eslint-disable-next-line @typescript-eslint/require-await
-  const sendNotification = async () => {
-    // TODO
+  const onSendNotificationClick = async () => {
+    setIsSendingNotifications(true);
+    const [englishNotification, frenchNotification] = await Promise.allSettled([
+      sendNotification(
+        tEN("notifications.templates.contest.title"),
+        tEN("notifications.templates.contest.text"),
+        rallyFinishersEnTopicId,
+      ),
+      sendNotification(
+        tFR("notifications.templates.contest.title"),
+        tFR("notifications.templates.contest.text"),
+        rallyFinishersFrTopicId,
+      ),
+    ]);
+    if (englishNotification.status === "rejected") {
+      console.warn("Could not send English notification");
+      captureException(englishNotification.reason);
+    }
+    if (frenchNotification.status === "rejected") {
+      console.warn("Could not send French notification");
+      captureException(frenchNotification.reason);
+    }
     toast({
-      title: t("notImplemented"),
+      title: t("notifications.notificationSentToast.title"),
+      description: t("notifications.notificationSentToast.description"),
     });
+    setIsSendingNotifications(false);
   };
 
   if (areParticipantsLoading && isQRCodeLoading) {
@@ -241,8 +268,8 @@ export default function Contest() {
             {t("contest.staff.actions.drawWinner")}
           </button>
           <button
-            onClick={sendNotification}
-            disabled={participants?.length == 0}
+            onClick={onSendNotificationClick}
+            disabled={isDrawing || isSendingNotifications}
             className="rounded-lg bg-secondary px-4 py-2 text-black transition-colors hover:bg-secondary/80 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {t("contest.staff.actions.sendNotification")}
