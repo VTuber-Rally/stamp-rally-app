@@ -1,4 +1,4 @@
-import type{ Polygon } from "geojson";
+import type { Polygon } from "geojson";
 
 export interface Standist {
   // to link with the generated qr codes

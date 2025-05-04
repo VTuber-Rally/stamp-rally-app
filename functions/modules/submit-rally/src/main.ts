@@ -1,21 +1,20 @@
-import { Client, Databases, ID, Role, Query, Permission } from 'node-appwrite';
-
+import { Client, Databases, ID, Permission, Query, Role } from "node-appwrite";
 import {
   type Context,
   type Stamp,
+  Standist,
   type SubmitRallyFunctionResponse,
   dataUrlToBytes,
-  Standist,
   importJWK,
-} from 'shared-lib';
+} from "shared-lib";
 
-const SUBMISSION_DATABASE_ID = process.env['DATABASE_ID'];
-const SUBMISSION_COLLECTION_ID = process.env['SUBMISSIONS_COLLECTION_ID'];
-const PROFILE_COLLECTION_ID = process.env['STANDISTS_COLLECTION_ID'];
+const SUBMISSION_DATABASE_ID = process.env["DATABASE_ID"];
+const SUBMISSION_COLLECTION_ID = process.env["SUBMISSIONS_COLLECTION_ID"];
+const PROFILE_COLLECTION_ID = process.env["STANDISTS_COLLECTION_ID"];
 
 const signAlgorithm = {
-  name: 'ECDSA',
-  hash: { name: 'SHA-384' },
+  name: "ECDSA",
+  hash: { name: "SHA-384" },
 } as const;
 
 const textEncoder = new TextEncoder();
@@ -27,33 +26,33 @@ export default async ({
   error,
 }: Context<SubmitRallyFunctionResponse>) => {
   const missingVars = [];
-  if (!SUBMISSION_DATABASE_ID) missingVars.push('DATABASE_ID');
-  if (!SUBMISSION_COLLECTION_ID) missingVars.push('SUBMISSIONS_COLLECTION_ID');
-  if (!PROFILE_COLLECTION_ID) missingVars.push('STANDISTS_COLLECTION_ID');
+  if (!SUBMISSION_DATABASE_ID) missingVars.push("DATABASE_ID");
+  if (!SUBMISSION_COLLECTION_ID) missingVars.push("SUBMISSIONS_COLLECTION_ID");
+  if (!PROFILE_COLLECTION_ID) missingVars.push("STANDISTS_COLLECTION_ID");
 
   if (missingVars.length > 0) {
-    log(`Missing environment variables: ${missingVars.join(', ')}`);
+    log(`Missing environment variables: ${missingVars.join(", ")}`);
     log(
-      `Available environment variables: ${Object.keys(process.env).join(', ')}`
+      `Available environment variables: ${Object.keys(process.env).join(", ")}`,
     );
-    throw new Error(`Missing environment variables: ${missingVars.join(', ')}`);
+    throw new Error(`Missing environment variables: ${missingVars.join(", ")}`);
   }
 
   const client = new Client()
-    .setEndpoint(process.env['APPWRITE_FUNCTION_API_ENDPOINT'])
-    .setProject(process.env['APPWRITE_FUNCTION_PROJECT_ID'])
-    .setKey(req.headers['x-appwrite-key']);
+    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
+    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
+    .setKey(req.headers["x-appwrite-key"]);
 
-  const userId = req.headers['x-appwrite-user-id'];
+  const userId = req.headers["x-appwrite-user-id"];
 
   const database = new Databases(client);
 
   const { documents: standists } = await database.listDocuments(
     SUBMISSION_DATABASE_ID,
-    PROFILE_COLLECTION_ID
+    PROFILE_COLLECTION_ID,
   );
 
-  console.time('Signatures import');
+  console.time("Signatures import");
   const standistsList: Standist[] = await Promise.all(
     standists.map(async (document) => {
       const {
@@ -80,9 +79,9 @@ export default async ({
         instagram,
         twitch,
       };
-    })
+    }),
   );
-  console.timeEnd('Signatures import');
+  console.timeEnd("Signatures import");
 
   log(JSON.stringify(req.body, null, 2));
 
@@ -93,28 +92,28 @@ export default async ({
   // first, let's check that every signature are valid
   for (const stamp of stamps) {
     const standist = standistsList.find(
-      (standist) => standist.userId === stamp.standistId
+      (standist) => standist.userId === stamp.standistId,
     );
 
     if (!standist) {
-      throw new Error('Standist not found.');
+      throw new Error("Standist not found.");
     }
 
     const signature = await dataUrlToBytes(stamp.signature);
-    log('signature: ' + signature);
+    log("signature: " + signature);
 
-    const dataToBeEncoded = [stamp.standistId, stamp.timestamp].join(':');
+    const dataToBeEncoded = [stamp.standistId, stamp.timestamp].join(":");
 
     const isValid = await crypto.subtle.verify(
       signAlgorithm,
       standist.publicKey,
       signature,
-      textEncoder.encode(dataToBeEncoded)
+      textEncoder.encode(dataToBeEncoded),
     );
 
     if (!isValid) {
-      error('Invalid signature.');
-      return res.json({ status: 'error', message: 'Invalid signature' });
+      error("Invalid signature.");
+      return res.json({ status: "error", message: "Invalid signature" });
     }
 
     log(`Signature is valid for ${stamp.standistId} - ${standist.name}.`);
@@ -125,11 +124,11 @@ export default async ({
     const { documents } = await database.listDocuments(
       SUBMISSION_DATABASE_ID,
       PROFILE_COLLECTION_ID,
-      [Query.equal('userId', stamp.standistId)]
+      [Query.equal("userId", stamp.standistId)],
     );
 
     if (documents.length === 0 || documents.length > 1) {
-      throw new Error('Standist not found or multiple found.');
+      throw new Error("Standist not found or multiple found.");
     }
 
     const standist = documents[0];
@@ -159,8 +158,8 @@ export default async ({
     SUBMISSION_COLLECTION_ID,
     submissionId,
     data,
-    [Permission.read(Role.user(userId))]
+    [Permission.read(Role.user(userId))],
   );
 
-  return res.json({ status: 'success', submissionId });
+  return res.json({ status: "success", submissionId });
 };

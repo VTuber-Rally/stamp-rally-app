@@ -1,5 +1,5 @@
-import { Client, Users } from 'node-appwrite';
-import type { Context, GetPrivateKeyFunctionResponse } from 'shared-lib';
+import { Client, Users } from "node-appwrite";
+import type { Context, GetPrivateKeyFunctionResponse } from "shared-lib";
 
 export default async ({
   req,
@@ -8,9 +8,9 @@ export default async ({
   error,
 }: Context<GetPrivateKeyFunctionResponse>) => {
   const client = new Client()
-    .setEndpoint(process.env['APPWRITE_FUNCTION_API_ENDPOINT'])
-    .setProject(process.env['APPWRITE_FUNCTION_PROJECT_ID'])
-    .setKey(req.headers['x-appwrite-key']);
+    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
+    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
+    .setKey(req.headers["x-appwrite-key"]);
 
   const users = new Users(client);
 
@@ -20,16 +20,16 @@ export default async ({
     const user = await users.get(userId);
 
     if (!user) {
-      return res.json({ status: 'error', message: 'User not found' });
+      return res.json({ status: "error", message: "User not found" });
     }
 
     return res.json({
-      status: 'success',
+      status: "success",
       privateKey: JSON.parse(user.prefs.privateKey),
     });
   } catch (e) {
     return res.json({
-      status: 'error',
+      status: "error",
       message: `Failed to get private key: ${e}`,
     });
   }

@@ -34,7 +34,7 @@ Sample `200` Response:
 ## ⚙️ Configuration
 
 | Setting           | Value         |
-|-------------------|---------------|
+| ----------------- | ------------- |
 | Runtime           | Node (20.0)   |
 | Entrypoint        | `src/main.ts` |
 | Build Commands    | `npm install` |
