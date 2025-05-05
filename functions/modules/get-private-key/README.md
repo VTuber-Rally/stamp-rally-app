@@ -1,6 +1,6 @@
-# register-contest-participant
+# get-private-key
 
-Vérifie l'éligibilité d'un participant au concours, puis l'inscrit si c'est le cas.
+Renvoie la clé privée d'un standiste.
 
 ## ⚙️ Configuration
 

@@ -1,46 +1,60 @@
-# verify-qrcodes
+# submit-rally
 
-## 🧰 Usage
+Vérifie les signatures d'un rally complété puis crée une soumission.
 
-### GET /
+## Étape par étape
 
-- Returns a "Hello, World!" message.
+- Importe les clés publiques de tous les artistes
+- Reçoit la liste des stamps collectés par l'utilisateur
+- Valide la signature de chaque tampon
+- Si toutes les signatures sont valides, crée un nouveau document Appwrite dans la collection des soumissions et on renvoie l'id de la soumission
+- Sinon on renvoie une erreur
 
-**Response**
+## Requêtes
 
-Sample `200` Response:
-
-```text
-Hello, World!
-```
-
-### POST, PUT, PATCH, DELETE /
-
-- Returns a "Learn More" JSON response.
-
-**Response**
-
-Sample `200` Response:
+Le corps de la requête est composé d'un tableau `stamps` de type `Stamp`. Par ex:
 
 ```json
 {
-  "motto": "Build like a team of hundreds_",
-  "learn": "https://appwrite.io/docs",
-  "connect": "https://appwrite.io/discord",
-  "getInspired": "https://builtwith.appwrite.io"
+  "stamps": [
+    {
+      "standistId": "artisteA",
+      "timestamp": "2025-07-01T10:00:00.000Z",
+      "signature": "data:application/octet-stream;signature...",
+      "scanTimestamp": "2025-07-01T11:05:30.123Z"
+    },
+    {
+      "standistId": "artisteB",
+      "timestamp": "2025-07-01T10:15:00.000Z",
+      "signature": "data:application/octet-stream;signature...",
+      "scanTimestamp": "2025-07-01T11:20:45.456Z"
+    }
+  ]
 }
 ```
 
+## Réponses Possibles
+
+- Les signatures ont été validées et la soumission a été créée avec succès:
+
+  ```json
+  {
+    "status": "success",
+    "submissionId": "abc123"
+  }
+  ```
+
+- Si au moins une signature est invalide, ou autre:
+  ```json
+  {
+    "status": "error",
+    "message": "Invalid signature"
+  }
+  ```
+
 ## ⚙️ Configuration
 
-| Setting           | Value         |
-| ----------------- | ------------- |
-| Runtime           | Node (20.0)   |
-| Entrypoint        | `src/main.ts` |
-| Build Commands    | `npm install` |
-| Permissions       | `any`         |
-| Timeout (Seconds) | 15            |
-
-## 🔒 Environment Variables
-
-No environment variables required.
+| Paramètre      | Valeur        |
+| -------------- | ------------- |
+| Runtime        | Node (20.0)   |
+| Point d'entrée | `src/main.ts` |
