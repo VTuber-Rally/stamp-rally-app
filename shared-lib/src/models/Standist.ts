@@ -1,3 +1,4 @@
+import type { Models } from "appwrite";
 import type { Polygon } from "geojson";
 
 export interface Standist {
@@ -17,6 +18,12 @@ export interface Standist {
   twitch?: string;
 
   geometry?: Polygon["coordinates"];
+}
+
+export interface StandistDocument
+  extends Omit<Standist, "publicKey">,
+    Models.Document {
+  publicKey: string;
 }
 
 export const standistIndexes =

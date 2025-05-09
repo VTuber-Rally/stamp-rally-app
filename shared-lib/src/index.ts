@@ -6,3 +6,4 @@ export * from "./types";
 export * from "./types/";
 export { GetPrivateKeyFunctionResponse } from "./functions/getPrivateKey";
 export { RegisterContestParticipantFunctionResponse } from "./functions/registerContestParticipant";
+export { SubmitRallyFunctionResponse } from "./functions/submitRally";

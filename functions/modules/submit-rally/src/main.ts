@@ -1,12 +1,13 @@
 import { Client, Databases, ID, Permission, Query, Role } from "node-appwrite";
 import {
   type Context,
-  type Stamp,
   Standist,
-  type SubmitRallyFunctionResponse,
+  StandistDocument,
+  SubmitRallyFunctionResponse,
   dataUrlToBytes,
   importJWK,
 } from "shared-lib";
+import { SubmitRallyFunctionRequestValidator } from "shared-lib/src/functions/submitRally";
 
 const SUBMISSION_DATABASE_ID = process.env["DATABASE_ID"];
 const SUBMISSION_COLLECTION_ID = process.env["SUBMISSIONS_COLLECTION_ID"];
@@ -38,6 +39,14 @@ export default async ({
     throw new Error(`Missing environment variables: ${missingVars.join(", ")}`);
   }
 
+  log(req.body);
+  const { success: isDataValid, data: inputData } =
+    SubmitRallyFunctionRequestValidator.safeParse(JSON.parse(req.body));
+
+  if (!isDataValid) {
+    return res.send("", 400);
+  }
+
   const client = new Client()
     .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
     .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
@@ -47,10 +56,11 @@ export default async ({
 
   const database = new Databases(client);
 
-  const { documents: standists } = await database.listDocuments(
-    SUBMISSION_DATABASE_ID,
-    PROFILE_COLLECTION_ID,
-  );
+  const { documents: standists } =
+    await database.listDocuments<StandistDocument>(
+      SUBMISSION_DATABASE_ID,
+      PROFILE_COLLECTION_ID,
+    );
 
   console.time("Signatures import");
   const standistsList: Standist[] = await Promise.all(
@@ -69,7 +79,7 @@ export default async ({
       } = document;
       return {
         userId,
-        publicKey: await importJWK(JSON.parse(publicKey)),
+        publicKey: await importJWK(JSON.parse(publicKey) as JsonWebKey),
         name,
         hall,
         boothNumber,
@@ -83,9 +93,7 @@ export default async ({
   );
   console.timeEnd("Signatures import");
 
-  log(JSON.stringify(req.body, null, 2));
-
-  const { stamps } = JSON.parse(req.body) as { stamps: Stamp[] };
+  const stamps = inputData.stamps;
 
   log(stamps);
 
@@ -100,7 +108,8 @@ export default async ({
     }
 
     const signature = await dataUrlToBytes(stamp.signature);
-    log("signature: " + signature);
+    log("signature: ");
+    log(signature);
 
     const dataToBeEncoded = [stamp.standistId, stamp.timestamp].join(":");
 
