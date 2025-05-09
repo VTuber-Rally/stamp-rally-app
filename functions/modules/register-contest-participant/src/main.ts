@@ -12,6 +12,7 @@ import type {
   Context,
   RegisterContestParticipantFunctionResponse,
 } from "shared-lib";
+import { RegisterContestParticipantFunctionRequestValidator } from "shared-lib/src/functions/registerContestParticipant";
 
 // partial model
 export interface Submission extends Models.Document {
@@ -28,7 +29,6 @@ export default async ({
   req,
   res,
   log,
-  error,
 }: Context<RegisterContestParticipantFunctionResponse>) => {
   const missingVars = [];
   if (!DATABASE_ID) missingVars.push("DATABASE_ID");
@@ -46,9 +46,9 @@ export default async ({
   }
 
   const client = new Client()
-    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"]!)
-    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"]!)
-    .setKey(req.headers["x-appwrite-key"]!);
+    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
+    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
+    .setKey(req.headers["x-appwrite-key"]);
 
   const users = new Users(client);
 
@@ -78,8 +78,8 @@ export default async ({
     });
   }
 
-  const secret = secretDoc.value;
-  const isContestOpenToRegistration = JSON.parse(isOpenDoc.value);
+  const secret = secretDoc.value as string;
+  const isContestOpenToRegistration = isOpenDoc.value === "true";
 
   if (!isContestOpenToRegistration) {
     return res.json({
@@ -89,7 +89,16 @@ export default async ({
     });
   }
 
-  const { secret: secretFromUser } = JSON.parse(req.body) as { secret: string };
+  const { success: isInputValid, data } =
+    RegisterContestParticipantFunctionRequestValidator.safeParse(
+      JSON.parse(req.body),
+    );
+
+  if (!isInputValid) {
+    return res.send("", 400);
+  }
+
+  const secretFromUser = data.secret;
 
   const userId = req.headers["x-appwrite-user-id"];
 
