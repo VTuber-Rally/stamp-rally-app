@@ -1,13 +1,3 @@
-export type GetPrivateKeyFunctionResponse =
-  | {
-      status: "success";
-      privateKey: JsonWebKey;
-    }
-  | {
-      status: "error";
-      message: string;
-    };
-
 export type SubmitRallyFunctionResponse =
   | {
       status: "success";

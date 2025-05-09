@@ -4,3 +4,4 @@ export * from "./crypto";
 export * from "./signatures";
 export * from "./types";
 export * from "./types/";
+export { GetPrivateKeyFunctionResponse } from "./functions/getPrivateKey";
