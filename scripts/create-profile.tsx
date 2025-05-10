@@ -13,6 +13,7 @@ import * as sdk from "node-appwrite";
 import { Permission, Role } from "node-appwrite";
 import { randomBytes } from "node:crypto";
 import path from "path";
+import { StandistDocument } from "shared-lib";
 
 import { getEnv } from "./shared.js";
 import { uploadUserMedia } from "./upload-user-medias.js";
@@ -51,7 +52,7 @@ if (!fs.existsSync(userMediasPath)) {
   throw new Error(`User medias path not found: ${userMediasPath}`);
 }
 
-let content = fs.readFileSync(filePath, "utf8");
+const content = fs.readFileSync(filePath, "utf8");
 
 const lines = content
   .split("\n")
@@ -101,15 +102,16 @@ type Line = {
 console.log(`Found ${lines.length} profiles`);
 
 async function createProfilesAndDocuments() {
-  const creationPromises = lines.map((line) => {
-    if (
-      line.email === "Adresse e-mail" ||
-      line.email === "" ||
-      line.boothName === ""
-    ) {
-      return Promise.resolve(null); // ligne vide
-    }
-    return (async () => {
+  const creationPromises = lines.map<Promise<Partial<StandistDocument> | null>>(
+    async (line) => {
+      if (
+        line.email === "Adresse e-mail" ||
+        line.email === "" ||
+        line.boothName === ""
+      ) {
+        return null; // ligne vide
+      }
+
       // modify email for testing
       const emailModified = isProduction
         ? line.email
@@ -168,9 +170,9 @@ async function createProfilesAndDocuments() {
         publicKey: JSON.stringify(exportedPublicKey),
         image: imageId,
         twitch: line.promotionalLink,
-      };
-    })();
-  });
+      } satisfies Partial<StandistDocument>;
+    },
+  );
 
   const profiles = await Promise.all(creationPromises);
   const documentCreationPromises = profiles

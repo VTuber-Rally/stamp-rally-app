@@ -146,6 +146,9 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../linter-configs
+      shared-lib:
+        specifier: workspace:*
+        version: link:../shared-lib
       typescript:
         specifier: 5.8.3
         version: 5.8.3

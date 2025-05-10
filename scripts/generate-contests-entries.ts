@@ -67,7 +67,15 @@ const deleteParticipants = async () => {
 const participantCount = process.argv[2] ? parseInt(process.argv[2]) : 10;
 
 if (process.argv[2] === "--rm") {
-  deleteParticipants();
+  deleteParticipants()
+    .then(() => {
+      console.log("🔥 Participations supprimées");
+      process.exit(0);
+    })
+    .catch((error) => {
+      console.error("Erreur:", error);
+      process.exit(1);
+    });
 } else {
   generateParticipants(participantCount)
     .then(() => {
