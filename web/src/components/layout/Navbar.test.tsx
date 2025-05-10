@@ -32,10 +32,11 @@ describe("standists navbar", () => {
 
 describe("rallyists navbar", () => {
   beforeAll(() => {
-    vi.mock("qr-scanner", () => {
-      const QrScanner = vi.fn();
-      QrScanner.prototype.start = vi.fn().mockReturnValue(Promise.resolve());
-      return { default: QrScanner };
+    vi.mock(import("qr-scanner"), async (importOriginal) => {
+      const original = await importOriginal();
+      original.default.createQrEngine = vi.fn();
+      original.default.prototype.start = vi.fn().mockResolvedValue(undefined);
+      return original;
     });
   });
 

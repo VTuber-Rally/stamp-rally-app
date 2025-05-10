@@ -19,7 +19,7 @@ import {
 
 const NOT_INITIALIZED = undefined;
 
-const notInitialized = async () => {
+const notInitialized = () => {
   throw new Error("UserContext is not initialized");
 };
 
@@ -193,7 +193,7 @@ export function UserProvider({
       }
     }
 
-    init();
+    void init();
   }, [registerAutoAnonymous]);
 
   return (

@@ -12,7 +12,7 @@ export const useSendLoginMagicLink = () => {
   return useMutation({
     mutationFn: async (data: { email: string }) =>
       await createMagicLink(data.email),
-    onSuccess: async () => {
+    onSuccess: () => {
       toast({
         title: t("loginMagicLinkToast.title"),
         description: t("loginMagicLinkToast.description"),

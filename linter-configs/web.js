@@ -30,6 +30,29 @@ export const webESLintConfig = defineConfig([
         projectService: true,
       },
     },
+    rules: {
+      "@typescript-eslint/no-floating-promises": [
+        "error",
+        {
+          allowForKnownSafeCalls: [
+            {
+              from: "package",
+              name: "invalidateQueries",
+              package: "@tanstack/query-core",
+            },
+          ],
+        },
+      ],
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+          checksVoidReturn: {
+            arguments: false,
+            attributes: false,
+          },
+        },
+      ],
+    },
   },
   reactRefresh.configs.recommended,
   storybook.configs["flat/recommended"],
@@ -44,6 +67,14 @@ export const webESLintConfig = defineConfig([
           allowConstantExport: true,
         },
       ],
+    },
+  },
+  {
+    // Disable require await on test files
+    // this is because of some weirdness in RTL
+    files: ["**/*.test.tsx"],
+    rules: {
+      "@typescript-eslint/require-await": "off",
     },
   },
 ]);

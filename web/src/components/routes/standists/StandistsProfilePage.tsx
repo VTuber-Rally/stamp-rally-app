@@ -21,7 +21,7 @@ const StandistsProfilePage = () => {
   const { $id } = user || {};
   const artist = useStandist($id);
 
-  const { mutate, isPending } = useUpdateStandistProfile();
+  const { mutateAsync, isPending } = useUpdateStandistProfile();
 
   const methods = useForm<StandistsEditProfileForm>({
     defaultValues: {
@@ -58,7 +58,7 @@ const StandistsProfilePage = () => {
 
   const onSubmit = async (data: StandistsEditProfileForm) => {
     try {
-      mutate({ ...data, userId: $id });
+      await mutateAsync({ ...data, userId: $id });
       toast({
         title: t("profile.profileUpdated"),
       });

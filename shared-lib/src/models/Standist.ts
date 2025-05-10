@@ -21,9 +21,10 @@ export interface Standist {
 }
 
 export interface StandistDocument
-  extends Omit<Standist, "publicKey">,
+  extends Omit<Standist, "publicKey" | "geometry">,
     Models.Document {
   publicKey: string;
+  geometry?: string;
 }
 
 export const standistIndexes =

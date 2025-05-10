@@ -10,7 +10,7 @@ import "@/lib/i18n.ts";
 
 import "./index.css";
 
-prefetchStandists();
+void prefetchStandists();
 
 if (isProd) {
   Sentry.init({

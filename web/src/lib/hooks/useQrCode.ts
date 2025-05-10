@@ -13,7 +13,11 @@ function usePrivateKey() {
     queryKey: [QUERY_KEYS.PRIVATE_KEY],
     queryFn: user
       ? () => {
-          if (!user.prefs.privateKey) throw new Error("No private key");
+          if (
+            !user.prefs.privateKey ||
+            typeof user?.prefs.privateKey !== "string"
+          )
+            throw new Error("No private key");
 
           const key = JSON.parse(user.prefs.privateKey) as JsonWebKey;
 

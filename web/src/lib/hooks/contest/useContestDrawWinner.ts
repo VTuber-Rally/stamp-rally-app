@@ -52,7 +52,7 @@ export function useContestDrawWinner(
     setIsWinnerDrawn(true);
   }, [participants]);
 
-  const { mutate: updateWinner } = useMutation({
+  const { mutateAsync: updateWinner } = useMutation({
     mutationFn: async () => {
       if (!winner) {
         return;
@@ -75,7 +75,7 @@ export function useContestDrawWinner(
     },
   });
 
-  const { mutate: updateDayDrawn } = useMutation({
+  const { mutateAsync: updateDayDrawn } = useMutation({
     mutationFn: async () => {
       if (!participants) {
         return;
