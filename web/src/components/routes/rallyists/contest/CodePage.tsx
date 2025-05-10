@@ -27,10 +27,9 @@ export function CodePage() {
             title: t("contest.error"),
             description: t("contest.missingSecret"),
           });
-          navigate({
+          return navigate({
             to: "/reward/contest",
           });
-          return;
         }
 
         const submissions = await getOwnSubmissions(userId);
@@ -38,27 +37,26 @@ export function CodePage() {
         const numbersOfContestParticipations =
           await db.contestParticipations.count();
 
-        const eligibility = await getContestEligibility(
+        const eligibility = getContestEligibility(
           submissions,
           numbersOfContestParticipations,
         );
 
         if (!eligibility?.eligible) {
-          navigate({
+          return navigate({
             to: "/reward/contest/not-eligible",
           });
-          return;
         }
 
         // If the user has a username, redirect to entry (that means they have both a username and an email)
         if (user?.name) {
-          navigate({
+          return navigate({
             to: "/reward/contest/entry",
             search: { secret },
           });
         } else {
           // Otherwise, redirect to contact (that means they might have an email but no username)
-          navigate({
+          return navigate({
             to: "/reward/contest/contact",
             search: { secret },
           });
@@ -69,13 +67,13 @@ export function CodePage() {
           title: t("contest.error"),
           description: t("error.unknown"),
         });
-        navigate({
+        return navigate({
           to: "/reward/contest",
         });
       }
     }
     if (user?.$id) {
-      checkEligibility(user.$id);
+      void checkEligibility(user.$id);
     }
   }, [getOwnSubmissions, navigate, secret, t, toast, user?.$id, user?.name]);
 

@@ -22,8 +22,8 @@ class KV {
     );
 
     return docs.documents.map((doc) => ({
-      key: doc.key,
-      value: doc.value,
+      key: doc.key as string,
+      value: doc.value as string,
     }));
   }
 
@@ -95,10 +95,11 @@ class KV {
 const kv = new KV(database);
 
 switch (process.argv[2]) {
-  case "--list":
+  case "--list": {
     const entries = await kv.listEntries();
     console.table(entries);
     break;
+  }
   case "--create":
     if (process.argv[3] && process.argv[4]) {
       await kv.createEntry(process.argv[3], process.argv[4]);
@@ -106,7 +107,7 @@ switch (process.argv[2]) {
       console.error("Usage: pnpm run kv --create <key> <value>");
     }
     break;
-  case "--import":
+  case "--import": {
     const entriesBeforeImport = await kv.listEntries();
     console.log("Before import");
     console.table(entriesBeforeImport);
@@ -117,6 +118,7 @@ switch (process.argv[2]) {
     console.log("After import");
     console.table(entriesAfterImport);
     break;
+  }
   case "--delete":
     if (process.argv[3]) {
       await kv.deleteEntry(process.argv[3]);

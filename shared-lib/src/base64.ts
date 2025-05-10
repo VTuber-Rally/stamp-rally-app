@@ -9,7 +9,7 @@ export function bytesToBase64DataUrl(
     }
     const reader = new FileReader();
     reader.addEventListener("load", () => resolve(reader.result as string));
-    reader.addEventListener("error", () => reject(reader.error));
+    reader.addEventListener("error", () => reject(reader.error!));
     reader.readAsDataURL(new File([bytes], "", { type }));
   });
 }

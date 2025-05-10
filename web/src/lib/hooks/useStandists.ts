@@ -1,5 +1,7 @@
+import { captureException } from "@sentry/react";
 import { useQuery } from "@tanstack/react-query";
-import { Standist, importJWK } from "shared-lib";
+import { Polygon } from "geojson";
+import { Standist, StandistDocument, importJWK } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { databases } from "@/lib/appwrite.ts";
@@ -8,10 +10,11 @@ import { db } from "@/lib/db.ts";
 import { queryClient } from "@/lib/queryClient.ts";
 
 const importStandists = async (): Promise<Standist[]> => {
-  const { documents: standists } = await databases.listDocuments(
-    databaseId,
-    standistsCollectionId,
-  );
+  const { documents: standists } =
+    await databases.listDocuments<StandistDocument>(
+      databaseId,
+      standistsCollectionId,
+    );
 
   const artists = await Promise.all(
     standists.map(async (document) => {
@@ -30,7 +33,7 @@ const importStandists = async (): Promise<Standist[]> => {
       } = document;
       return {
         userId,
-        publicKey: await importJWK(JSON.parse(publicKey)),
+        publicKey: await importJWK(JSON.parse(publicKey) as JsonWebKey),
         name,
         hall,
         boothNumber,
@@ -39,17 +42,22 @@ const importStandists = async (): Promise<Standist[]> => {
         twitter,
         instagram,
         twitch,
-        geometry: JSON.parse(geometry),
+        geometry: geometry
+          ? (JSON.parse(geometry) as Polygon["coordinates"])
+          : undefined,
       } as Standist;
     }),
   );
 
   artists.sort((a, b) => a.userId.localeCompare(b.userId));
 
-  // voluntary not waiting for the clear to finish
-  db.standists.clear().then(() => {
-    db.standists.bulkAdd(artists);
-  });
+  db.standists
+    .clear()
+    .then(() => db.standists.bulkAdd(artists))
+    .catch((error) => {
+      captureException(error);
+      console.error("Cannot import standists", error);
+    });
 
   return artists;
 };
@@ -63,7 +71,7 @@ const standistQuery = {
 };
 
 export const prefetchStandists = () => {
-  queryClient.prefetchQuery(standistQuery);
+  return queryClient.prefetchQuery(standistQuery);
 };
 
 export const useStandists = () => {

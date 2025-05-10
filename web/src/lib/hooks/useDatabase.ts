@@ -33,7 +33,7 @@ type Submission = {
 };
 
 type WheelEntry = {
-  option: string;
+  name: string;
   order: number;
   probability: number;
   disabled: boolean;
@@ -83,7 +83,7 @@ export const useDatabase = () => {
         queryKey: [QUERY_KEYS.SUBMISSION, submission.id],
       });
 
-      db.submissions.update(dbSubmission, {
+      await db.submissions.update(dbSubmission, {
         redeemed: submission.redeemed,
       });
     }

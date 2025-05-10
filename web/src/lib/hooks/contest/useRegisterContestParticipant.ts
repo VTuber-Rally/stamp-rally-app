@@ -33,7 +33,7 @@ export const useRegisterContestParticipant = () => {
             error: string;
           };
 
-      const data: ServerResponse = JSON.parse(result.responseBody);
+      const data = JSON.parse(result.responseBody) as ServerResponse;
 
       if (data.status === "error") {
         throw new Error(data.message);
@@ -57,7 +57,7 @@ export const useRegisterContestParticipant = () => {
           });
         });
 
-      navigate({
+      return navigate({
         to: "/reward/contest/success",
       });
     },
@@ -68,7 +68,7 @@ export const useRegisterContestParticipant = () => {
       });
 
       if (error.message === "contest.registration.noSubmissions") {
-        navigate({
+        return navigate({
           to: "/reward/contest/not-eligible",
         });
       }

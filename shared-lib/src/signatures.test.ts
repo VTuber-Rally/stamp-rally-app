@@ -37,7 +37,7 @@ describe("signatures", () => {
       privateKey,
       keyAlgorithm,
       true,
-      ["sign"]
+      ["sign"],
     );
 
     // sign data
@@ -51,7 +51,7 @@ describe("signatures", () => {
       publicKey,
       keyAlgorithm,
       true,
-      ["verify"]
+      ["verify"],
     );
 
     const dataToVerify = [...payload, data];
@@ -71,7 +71,7 @@ describe("signatures", () => {
       privateKey,
       keyAlgorithm,
       true,
-      ["sign"]
+      ["sign"],
     );
 
     // sign data
@@ -86,7 +86,7 @@ describe("signatures", () => {
       publicKey,
       keyAlgorithm,
       true,
-      ["verify"]
+      ["verify"],
     );
 
     const dataToVerify = [...tamperedPayload, data];

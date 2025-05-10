@@ -7,13 +7,14 @@ export const StampTupleSerializer = z.tuple([
 ]);
 export type StampTuple = z.infer<typeof StampTupleSerializer>;
 
-export interface Stamp {
-  standistId: string;
-  timestamp: number;
-  scanTimestamp: number;
-  signature: string;
-  submitted: boolean;
-}
+export const StampModelValidator = z.object({
+  standistId: z.string(),
+  timestamp: z.number(),
+  scanTimestamp: z.number(),
+  signature: z.string(),
+  submitted: z.boolean(),
+});
+export type Stamp = z.infer<typeof StampModelValidator>;
 
 export interface StampWithId extends Stamp {
   id: number;

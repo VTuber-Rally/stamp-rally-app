@@ -37,7 +37,7 @@ export const QRCodeDrawer = () => {
               const { type, hash } = retrieveInfosFromQRCode(result.data);
 
               setOpen(false);
-              navigate({
+              void navigate({
                 to: "/code/$type",
                 params: { type },
                 hash,

@@ -9,5 +9,5 @@
     "strict": true,
     "noEmit": true
   },
-  "include": ["vite.config.ts", "tailwind.config.ts"]
+  "include": ["vite.config.ts", "vitest.config.ts", "vitest.setup.crypto.ts", "vitest.setup.ts"]
 }

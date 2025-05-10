@@ -1,5 +1,5 @@
 {
-  "name": "vtube-stamp-ralley",
+  "name": "@vtube-stamp-rally/monorepo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,6 +8,13 @@
   },
   "packageManager": "pnpm@10.10.0",
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "VTube Stamp Rally Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "eslint": "^9.26.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "5.8.3"
+  }
 }

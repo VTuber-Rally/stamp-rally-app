@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,7 +12,7 @@ export const Route = createFileRoute(
   "/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin",
 )({
   gcTime: 0,
-  loader: async ({ location: { search } }) => {
+  loader: ({ location: { search } }) => {
     if (!hasQueryParams(search)) {
       throw new Error("Invalid query params");
     }
@@ -62,8 +63,12 @@ function HandleLogin() {
     console.log("logging in with", userId, secret);
     try {
       if (!user) {
-        registerMagicLink(userId, secret);
-        navigate({ to: "/settings" });
+        registerMagicLink(userId, secret)
+          .then(() => navigate({ to: "/settings" }))
+          .catch((error) => {
+            captureException(error);
+            console.error("Cannot login through Magic Link", error);
+          });
       } else {
         if (user.$id === userId) {
           console.log("Already logged in", user);
@@ -74,7 +79,7 @@ function HandleLogin() {
             type: "foreground",
           });
         }
-        navigate({ to: "/settings" });
+        void navigate({ to: "/settings" });
       }
     } catch (error) {
       console.log("Error with login", error);

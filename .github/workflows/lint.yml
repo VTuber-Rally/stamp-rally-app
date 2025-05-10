@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint web
+    name: Lint
 
     runs-on: ubuntu-latest
 
@@ -24,8 +24,24 @@ jobs:
         with:
           run_install: true
 
-      - name: "web: pnpm lint"
-        run: pnpm --filter=web lint
+      - name: "pnpm run lint"
+        run: pnpm run -r --parallel lint
+
+  style:
+    name: Check style (Prettier)
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+        with:
+          run_install: true
+
+      - name: "pnpm run prettier:check"
+        run: pnpm run -r --parallel prettier:check
 
   test:
     name: Test web
@@ -42,22 +58,6 @@ jobs:
 
       - name: "web: pnpm test"
         run: pnpm --filter=web test
-
-  style:
-    name: Check style (Prettier)
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: true
-
-      - name: "web: pnpm prettier:check"
-        run: pnpm --filter=web prettier:check
 
   build:
     name: Build web

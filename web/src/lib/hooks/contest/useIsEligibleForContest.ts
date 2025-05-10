@@ -5,10 +5,10 @@ import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { db } from "@/lib/db.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 
-export const getContestEligibility = async (
+export const getContestEligibility = (
   submissions: SubmissionWithId[],
   numbersOfContestParticipations: number,
-): Promise<{ eligible: true } | { eligible: false; reason: string }> => {
+): { eligible: true } | { eligible: false; reason: string } => {
   const numbersOfValidatedSubmissions = submissions.filter(
     (x) => x.redeemed,
   ).length;

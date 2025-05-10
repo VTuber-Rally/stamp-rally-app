@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Query, RealtimeResponseEvent } from "appwrite";
 import { useCallback, useEffect } from "react";
@@ -30,7 +31,7 @@ export const useFollowParticipation = () => {
       } else {
         await db.contestParticipations.add({
           id: participation.$id,
-          submittedAt: new Date(participation.submittedAt),
+          submittedAt: new Date(participation.registeredAt),
           isWinner: participation.isWinner ?? false,
           drawnDate: date,
         });
@@ -73,7 +74,8 @@ export const useFollowParticipation = () => {
       // Récupérer la participation la plus ancienne par date de soumission
       return participationsAppwrite.documents.sort(
         (a, b) =>
-          new Date(a.submittedAt).getTime() - new Date(b.submittedAt).getTime(),
+          new Date(a.registeredAt).getTime() -
+          new Date(b.registeredAt).getTime(),
       )[0].$id;
     } catch (error) {
       console.error(
@@ -131,12 +133,19 @@ export const useFollowParticipation = () => {
           );
 
           // Mettre à jour IndexedDB
-          db.contestParticipations.update(response.payload.$id, {
-            isWinner: response.payload.isWinner,
-            drawnDate: response.payload.drawnDate
-              ? new Date(response.payload.drawnDate)
-              : undefined,
-          });
+          db.contestParticipations
+            .update(response.payload.$id, {
+              isWinner: response.payload.isWinner,
+              drawnDate: response.payload.drawnDate
+                ? new Date(response.payload.drawnDate)
+                : undefined,
+            })
+            .catch((error) => {
+              console.warn(
+                "Failed to update IndexedDB for contest participations",
+              );
+              captureException(error);
+            });
 
           // ça ne devrait jamais arriver, mais on vérifie quand même si c'est bien la dernière participation qui est mise à jour
           if (response.payload.$id !== currentParticipation?.$id) {

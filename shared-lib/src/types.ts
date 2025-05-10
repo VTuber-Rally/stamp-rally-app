@@ -13,11 +13,11 @@ export type Context<T> = {
     query: Record<string, string>;
   };
   res: {
-    send: (body: string, code?: number, headers?: any[]) => void;
+    send: (body: string, code?: number, headers?: unknown[]) => void;
     json: (body: T) => void;
     empty: () => void;
     redirect: (url: string, code: number) => void;
   };
-  log: (message: any) => void;
-  error: (message: any) => void;
+  log: (message: unknown) => void;
+  error: (message: unknown) => void;
 };

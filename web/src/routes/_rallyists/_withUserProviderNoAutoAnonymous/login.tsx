@@ -38,7 +38,7 @@ function LoginPage() {
     },
   });
 
-  const onSubmitRegister: SubmitHandler<SigninForm> = async (data) => {
+  const onSubmitRegister: SubmitHandler<SigninForm> = (data) => {
     try {
       console.log("data", data);
       clearErrors();

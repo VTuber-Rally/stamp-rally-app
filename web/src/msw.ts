@@ -14,14 +14,14 @@ export const handlers = [
       if (url.searchParams.has("queries[0]")) {
         const query = url.searchParams.get("queries[0]");
         if (query != null) {
-          const parsedQuery = JSON.parse(query);
+          const parsedQuery = JSON.parse(query) as {
+            attribute: keyof Standist;
+            values: string[];
+          };
           return HttpResponse.json({
             ...StandistsFromAppwrite,
             documents: StandistsFromAppwrite.documents.filter((standist) => {
-              return (
-                standist[parsedQuery.attribute as keyof Standist] ===
-                parsedQuery.values[0]
-              );
+              return standist[parsedQuery.attribute] === parsedQuery.values[0];
             }),
           });
         }

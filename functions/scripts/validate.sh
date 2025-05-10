@@ -33,6 +33,6 @@ if [ ! -d "$MODULE_PATH" ]; then
 fi
 
 echo "🔨 Checking $FUNCTION_NAME with TypeScript..."
-pnpm run --filter "$FUNCTION_NAME" check-types
+pnpm run --filter "@vtube-stamp-rally/functions__$FUNCTION_NAME" check-types
 
 echo "✅ $FUNCTION_NAME is valid"

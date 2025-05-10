@@ -38,4 +38,4 @@ if (firebaseConfig.apiKey) {
 }
 
 // Claim clients and activate the service worker
-self.skipWaiting().then(() => clientsClaim());
+void self.skipWaiting().then(() => clientsClaim());

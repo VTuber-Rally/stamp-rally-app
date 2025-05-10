@@ -66,10 +66,11 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
   const { parameters } = ctx;
 
   const [user, setUser] = useState<Models.User<Models.Preferences> | null>(
-    parameters?.auth?.user ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    (parameters?.auth?.user as Models.User<Models.Preferences>) ?? null,
   );
 
-  const loginUser = async (email: string, password: string) => {
+  const loginUser = (email: string, password: string) => {
     console.log("loginUser", email, password);
     if (email === "staff@user.com" && password === "password") {
       setUser(LoggedInUserStaff);
@@ -78,38 +79,38 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
     } else {
       throw new AppwriteException("Wrong email or password", 401);
     }
+    return Promise.resolve();
   };
 
-  const registerUser = async (
-    email: string,
-    password: string,
-    name: string,
-  ) => {
+  const registerUser = (email: string, password: string, name: string) => {
     try {
       console.log("registerUser", email, password, name);
       setUser(LoggedInUser);
     } catch (error) {
       throw new Error((error as Error).message);
     }
+    return Promise.resolve();
   };
 
-  const logoutUser = async () => {
+  const logoutUser = () => {
     try {
       setUser(null);
     } catch (error) {
       throw new Error((error as Error).message);
     }
+    return Promise.resolve();
   };
 
-  const loginAnonymousUser = async () => {
+  const loginAnonymousUser = () => {
     try {
       setUser(LoggedInUser);
     } catch (error) {
       throw new Error((error as Error).message);
     }
+    return Promise.resolve();
   };
 
-  const setUserName = async (name: string) => {
+  const setUserName = (name: string) => {
     if (user === null) {
       throw new Error("User is not logged in");
     }
@@ -118,9 +119,10 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
     } catch (error) {
       throw new Error((error as Error).message);
     }
+    return Promise.resolve();
   };
 
-  const setUserEmail = async (email: string) => {
+  const setUserEmail = (email: string) => {
     if (user === null) {
       throw new Error("User is not logged in");
     }
@@ -130,9 +132,11 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
     } catch (error) {
       throw new Error((error as Error).message);
     }
+
+    return Promise.resolve();
   };
 
-  const setPrefUser = async (key: string, value: string | number | boolean) => {
+  const setPrefUser = (key: string, value: string | number | boolean) => {
     if (user === null) {
       throw new Error("User is not logged in");
     }
@@ -141,6 +145,7 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
     } catch (error) {
       throw new Error((error as Error).message);
     }
+    return Promise.resolve();
   };
 
   const contextData = {
@@ -148,11 +153,13 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
     login: loginUser,
     logout: logoutUser,
     loginAnonymous: loginAnonymousUser,
-    createMagicLink: async (email: string) => {
+    createMagicLink: (email: string) => {
       console.log("createMagicLink", email);
+      return Promise.resolve();
     },
-    registerMagicLink: async (userId: string, secret: string) => {
+    registerMagicLink: (userId: string, secret: string) => {
       console.log("registerMagicLink", userId, secret);
+      return Promise.resolve();
     },
     setName: setUserName,
     setEmail: setUserEmail,
@@ -168,12 +175,12 @@ export const AuthDecorator: Decorator = (Story, ctx) => {
 };
 
 export const I18nextDecorator: Decorator = (Story, context) => {
-  const { locale } = context.globals;
+  const { locale } = context.globals as { locale: string };
 
   // When the locale global changes
   // Set the new locale in i18n
   useEffect(() => {
-    i18n.changeLanguage(locale);
+    void i18n.changeLanguage(locale);
   }, [locale]);
 
   return (

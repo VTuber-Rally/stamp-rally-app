@@ -29,7 +29,7 @@ function SignInForm({ navigateTo }: SigninPageProps) {
         await navigate({ to: navigateTo });
       }
     };
-    redirect();
+    void redirect();
   }, [user, navigate, navigateTo]);
 
   const {
@@ -39,7 +39,7 @@ function SignInForm({ navigateTo }: SigninPageProps) {
     setError,
     clearErrors,
   } = useForm<SigninForm>();
-  const onSubmitRegister: SubmitHandler<SigninForm> = async (data) => {
+  const onSubmitRegister: SubmitHandler<SigninForm> = (data) => {
     try {
       clearErrors();
       mutate(data);

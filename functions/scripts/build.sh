@@ -35,7 +35,7 @@ if [ ! -d "$MODULE_PATH" ]; then
 fi
 
 echo "🔨 Building $FUNCTION_NAME function with esbuild..."
-pnpm run --filter "$FUNCTION_NAME" build
+pnpm run --filter "@vtube-stamp-rally/functions__$FUNCTION_NAME" build
 
 if [ $? -ne 0 ]; then
     echo "❌ esbuild failed for $FUNCTION_NAME"

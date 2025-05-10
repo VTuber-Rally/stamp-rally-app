@@ -5,12 +5,12 @@ export const Route = createFileRoute("/_rallyists/code/$type")({
   pendingComponent: CodeLoading,
   errorComponent: CodeError,
   gcTime: 0,
-  loader: async ({ location: { hash }, params: { type } }) => {
+  loader: ({ location: { hash }, params: { type } }) => {
     if (!hash) throw new TypeError("No hash provided");
 
     switch (type) {
       case "c":
-        throw redirect({
+        return redirect({
           to: "/reward/contest/code",
           search: {
             secret: decodeURIComponent(hash),
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_rallyists/code/$type")({
         });
 
       case "s":
-        throw redirect({
+        return redirect({
           to: "/stamp",
           hash: hash,
         });

@@ -27,7 +27,7 @@ export function SuccessPage() {
     if (currentParticipation?.drawnDate && currentParticipation.isWinner) {
       if (!confettiLaunched) {
         setConfettiLaunched(true);
-        createConfetti();
+        void createConfetti();
       }
     }
   }, [confettiLaunched, createConfetti, currentParticipation]);

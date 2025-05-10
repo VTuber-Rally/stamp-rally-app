@@ -39,6 +39,8 @@ const firebaseConfig = {
   appId: firebaseAppId,
 };
 
+const mapCenter = [2.518988, 48.970091] as [number, number];
+
 export {
   buildId,
   commitRef,
@@ -61,4 +63,5 @@ export {
   registerContestParticipantFunctionId,
   firebaseConfig,
   firebaseVapidPublicKey,
+  mapCenter,
 };

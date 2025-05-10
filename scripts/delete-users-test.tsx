@@ -1,4 +1,5 @@
 import * as sdk from "node-appwrite";
+import { StandistDocument } from "shared-lib";
 
 import { getEnv } from "./shared.js";
 import { deleteUserMedia } from "./upload-user-medias.js";
@@ -27,7 +28,7 @@ console.log(
 
 const promises = usersExisting.users.map((user) => {
   return database
-    .listDocuments(DATABASE_ID, STANDISTS_COLLECTION_ID, [
+    .listDocuments<StandistDocument>(DATABASE_ID, STANDISTS_COLLECTION_ID, [
       sdk.Query.equal("userId", user.$id),
     ])
     .then((documents) => {

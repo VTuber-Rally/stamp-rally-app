@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import { useSearch } from "@tanstack/react-router";
 import {
   GeoJSONSource,
@@ -8,6 +9,7 @@ import {
 import "maplibre-gl/dist/maplibre-gl.css";
 import { FC, useEffect, useRef } from "react";
 
+import { mapCenter } from "@/lib/consts.ts";
 import {
   generateStyleSpec,
   getStandistsFeatureCollection,
@@ -16,6 +18,7 @@ import {
 export const MapLibreMap: FC<{ onStandClick: (standId: string) => void }> = ({
   onStandClick,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const searchParams = useSearch({ strict: false }) as {
     center?: [number, number];
   };
@@ -34,12 +37,7 @@ export const MapLibreMap: FC<{ onStandClick: (standId: string) => void }> = ({
         ],
         style: generateStyleSpec(),
         bearing: 69,
-        center: searchParams?.center
-          ? searchParams.center
-          : {
-              lng: 2.518988,
-              lat: 48.970091,
-            },
+        center: searchParams?.center ? searchParams.center : mapCenter,
         maxPitch: 0,
         minZoom: 14,
         zoom: searchParams?.center ? 19 : 16,
@@ -51,16 +49,21 @@ export const MapLibreMap: FC<{ onStandClick: (standId: string) => void }> = ({
           positionOptions: { enableHighAccuracy: true, timeout: 6000 },
         }),
       );
-      getStandistsFeatureCollection().then((featureCollection) => {
-        const writeStandists = () =>
-          (map.getSource("standists") as GeoJSONSource).setData(
-            featureCollection,
-          );
-        if (!map.isStyleLoaded()) {
-          map.once("styledata", writeStandists);
-          map.once("load", writeStandists);
-        } else writeStandists();
-      });
+      getStandistsFeatureCollection().then(
+        (featureCollection) => {
+          const writeStandists = () =>
+            (map.getSource("standists") as GeoJSONSource).setData(
+              featureCollection,
+            );
+          if (!map.isStyleLoaded()) {
+            void map.once("styledata", writeStandists);
+            void map.once("load", writeStandists);
+          } else writeStandists();
+        },
+        (error) => {
+          captureException(error);
+        },
+      );
       const handleFeatureClick = ({
         features,
       }: {

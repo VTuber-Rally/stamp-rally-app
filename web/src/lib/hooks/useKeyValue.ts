@@ -16,5 +16,5 @@ export const useKeyValue = <T>(keyValueEntry: KeyValueEntry<T>) => {
     staleTime: Infinity,
   });
 
-  return { value: value as T | undefined, isPending };
+  return { value, isPending };
 };
