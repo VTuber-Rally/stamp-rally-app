@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
 import { crypto } from "./crypto";
-import { StampTupleSerializer } from "./models";
+import { StampTupleSerializer } from "./models/Stamp";
 import { signData, verifyData } from "./signatures";
 
 const keyAlgorithm = {

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { type KeyValueEntry } from "shared-lib";
+
+import type { KeyValueEntry } from "@vtube-stamp-rally/shared-lib/models/KeyValue.ts";
 
 import { QUERY_KEYS } from "../QueryKeys";
 import { useDatabase } from "./useDatabase";

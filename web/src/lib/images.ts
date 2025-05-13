@@ -1,5 +1,6 @@
 import * as Sentry from "@sentry/react";
-import { type Standist } from "shared-lib";
+
+import { type Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import fallback from "@/assets/fallback-avatar.png";
 

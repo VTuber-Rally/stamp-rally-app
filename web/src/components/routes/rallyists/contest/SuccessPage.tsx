@@ -2,7 +2,8 @@ import { useConfetti } from "@stevent-team/react-party";
 import { Check, Gift } from "lucide-react";
 import { LegacyRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ContestParticipant } from "shared-lib";
+
+import { ContestParticipant } from "@vtube-stamp-rally/shared-lib/models/ContestParticipant.ts";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Header } from "@/components/layout/Header";

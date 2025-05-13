@@ -8,11 +8,12 @@ import {
   Role,
   Users,
 } from "node-appwrite";
-import type {
-  Context,
+
+import {
+  RegisterContestParticipantFunctionRequestValidator,
   RegisterContestParticipantFunctionResponse,
-} from "shared-lib";
-import { RegisterContestParticipantFunctionRequestValidator } from "shared-lib/src/functions/registerContestParticipant";
+} from "@vtube-stamp-rally/shared-lib/functions/registerContestParticipant.ts";
+import { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
 
 // partial model
 export interface Submission extends Models.Document {

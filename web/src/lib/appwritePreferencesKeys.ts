@@ -1,4 +1,4 @@
-import { UserPreferences } from "shared-lib/src/types/userPreferences";
+import { UserPreferences } from "@vtube-stamp-rally/shared-lib/types/userPreferences.ts";
 
 export const APPWRITE_PREFERENCES_KEYS = {
   EMAIL_CONSENT: "emailConsent",

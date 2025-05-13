@@ -13,7 +13,8 @@ import * as sdk from "node-appwrite";
 import { Permission, Role } from "node-appwrite";
 import { randomBytes } from "node:crypto";
 import path from "path";
-import { StandistDocument } from "shared-lib";
+
+import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import { getEnv } from "./shared.js";
 import { uploadUserMedia } from "./upload-user-medias.js";

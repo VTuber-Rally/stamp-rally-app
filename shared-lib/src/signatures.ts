@@ -1,6 +1,6 @@
 import { bytesToBase64DataUrl, dataUrlToBytes } from "./base64";
 import { crypto } from "./crypto";
-import { StampTuple } from "./models";
+import { StampTuple } from "./models/Stamp";
 
 const signAlgorithm = {
   name: "ECDSA",

@@ -1,4 +1,4 @@
-import { StampTuple } from "shared-lib";
+import { StampTuple } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 
 import { publicUrl } from "@/lib/consts.ts";
 

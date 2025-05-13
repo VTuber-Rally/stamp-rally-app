@@ -10,7 +10,8 @@
     "kv": "bun run kv.ts",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "prettier:write": "prettier --write .",
-    "prettier:check": "prettier -c ."
+    "prettier:check": "prettier -c .",
+    "check-types": "tsc"
   },
   "dependencies": {
     "@faker-js/faker": "^9.6.0",
@@ -21,7 +22,7 @@
   "devDependencies": {
     "@types/node": "^20.14.9",
     "@vtube-stamp-rally/linter-configs": "workspace:*",
-    "shared-lib": "workspace:*",
+    "@vtube-stamp-rally/shared-lib": "workspace:*",
     "typescript": "5.8.3"
   }
 }

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Standist } from "shared-lib";
+
+import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import { NotSubmittedStamp, OtherStamps } from "@/stubs/Stamp.ts";
 import { StandistsFromAppwrite } from "@/stubs/Standists.ts";

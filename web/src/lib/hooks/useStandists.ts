@@ -1,7 +1,12 @@
 import { captureException } from "@sentry/react";
 import { useQuery } from "@tanstack/react-query";
 import { Polygon } from "geojson";
-import { Standist, StandistDocument, importJWK } from "shared-lib";
+
+import { importJWK } from "@vtube-stamp-rally/shared-lib/crypto.ts";
+import {
+  Standist,
+  StandistDocument,
+} from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { databases } from "@/lib/appwrite.ts";

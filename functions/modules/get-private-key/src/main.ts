@@ -1,7 +1,11 @@
 import { Client, Users } from "node-appwrite";
-import type { Context, GetPrivateKeyFunctionResponse } from "shared-lib";
-import { GetPrivateKeyFunctionRequestValidator } from "shared-lib/src/functions/getPrivateKey";
-import { UserPreferences } from "shared-lib/src/types/userPreferences";
+
+import {
+  GetPrivateKeyFunctionRequestValidator,
+  GetPrivateKeyFunctionResponse,
+} from "@vtube-stamp-rally/shared-lib/functions/getPrivateKey.ts";
+import type { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
+import { UserPreferences } from "@vtube-stamp-rally/shared-lib/types/userPreferences.ts";
 
 export default async ({ req, res }: Context<GetPrivateKeyFunctionResponse>) => {
   const client = new Client()
@@ -28,7 +32,7 @@ export default async ({ req, res }: Context<GetPrivateKeyFunctionResponse>) => {
     return res.json({
       status: "success",
       privateKey: JSON.parse(
-        (user.prefs as UserPreferences).privateKey!,
+        (user.prefs as UserPreferences).privateKey ?? "null",
       ) as JsonWebKey,
     });
   } catch (e) {

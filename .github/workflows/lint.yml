@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "web/**"
+      - "scripts/**"
+      - "functions/modules/**/*.ts"
+      - "shared-lib/**"
       - "pnpm-lock.yaml"
   workflow_dispatch:
 
@@ -26,6 +29,22 @@ jobs:
 
       - name: "pnpm run lint"
         run: pnpm run -r --parallel lint
+
+  typescript:
+    name: TypeScript compile
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+        with:
+          run_install: true
+
+      - name: "pnpm run check-types"
+        run: pnpm run -r --parallel check-types
 
   style:
     name: Check style (Prettier)

@@ -3,7 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ListChecks, TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { StampTupleSerializer } from "shared-lib";
+
+import { StampTupleSerializer } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 
 import Intro from "@/components/Intro.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
