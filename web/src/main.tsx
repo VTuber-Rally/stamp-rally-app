@@ -3,7 +3,7 @@ import * as Sentry from "@sentry/react";
 import { createRoot } from "react-dom/client";
 
 import { App } from "@/App.tsx";
-import { isProd } from "@/lib/consts.ts";
+import { isProd, sentryDSN, sentryEnvironment } from "@/lib/consts.ts";
 // prefetch les standists
 import { prefetchStandists } from "@/lib/hooks/useStandists.ts";
 import "@/lib/i18n.ts";
@@ -14,7 +14,8 @@ void prefetchStandists();
 
 if (isProd) {
   Sentry.init({
-    dsn: "https://5a3a737f4070245be590f5afd80aa2ac@o4507582960959488.ingest.de.sentry.io/4507582967775312",
+    dsn: sentryDSN,
+    environment: sentryEnvironment,
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration(),

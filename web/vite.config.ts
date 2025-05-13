@@ -47,6 +47,8 @@ export default defineConfig({
           VITE_FIREBASE_MESSAGING_SENDER_ID: Schema.string(),
           VITE_FIREBASE_APP_ID: Schema.string(),
           VITE_FIREBASE_VAPID_PUBLIC_KEY: Schema.string(),
+          VITE_SENTRY_DSN: Schema.string(),
+          VITE_SENTRY_ENVIRONMENT: Schema.string(),
         },
       }),
     // This plugin is disabled in Storybook
@@ -93,15 +95,32 @@ export default defineConfig({
     TanStackRouterVite(),
     react(),
     tailwindcss(),
-    process.env.NODE_ENV === "production" &&
-      sentryVitePlugin({
-        org: "japex-rally",
-        project: "javascript-react",
-        telemetry: false,
-        sourcemaps: {
-          filesToDeleteAfterUpload: ["**/*.js.map"],
+    sentryVitePlugin({
+      org: process.env.VITE_SENTRY_ORG_ID,
+      project: process.env.VITE_SENTRY_PROJECT_ID,
+      telemetry: false,
+      disable: process.env.CF_PAGES !== "1",
+      release: {
+        name: process.env.CF_PAGES_COMMIT_SHA,
+        dist: new Date().toISOString(),
+        deploy: {
+          name:
+            process.env.VITE_SENTRY_ENVIRONMENT === "preview"
+              ? `Cloudflare Preview for ${process.env.CF_PAGES_BRANCH}`
+              : "Cloudflare Pages production",
+          env: process.env.VITE_SENTRY_ENVIRONMENT ?? "production",
+          url: process.env.CF_PAGES_URL,
         },
-      }),
+        setCommits: {
+          repo: process.env.VITE_SENTRY_REPO!,
+          commit: process.env.CF_PAGES_COMMIT_SHA!,
+          ignoreEmpty: true,
+        },
+      },
+      sourcemaps: {
+        filesToDeleteAfterUpload: ["**/*.js.map"],
+      },
+    }),
   ],
   define: {
     BUILD_TIMESTAMP: new Date(),
