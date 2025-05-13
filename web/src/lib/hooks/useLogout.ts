@@ -15,7 +15,7 @@ export const useLogout = () => {
       await unregisterPushTarget();
       await logout();
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       toast({
         title: t("logoutToast.title"),
         description: t("logoutToast.description"),

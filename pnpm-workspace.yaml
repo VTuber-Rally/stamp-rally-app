@@ -3,6 +3,7 @@ packages:
   - functions/modules/**
   - shared-lib/
   - scripts/
+  - linter-configs/
 
 onlyBuiltDependencies:
   - msw

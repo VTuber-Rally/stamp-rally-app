@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import { Trans, useTranslation } from "react-i18next";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
@@ -41,7 +42,10 @@ export function useRegisterAppSW() {
       if (!registration) return;
       setInterval(
         () => {
-          registration.update();
+          registration.update().catch((error) => {
+            captureException(error);
+            console.warn("Cannot update SW registration", error);
+          });
         },
         60 * 10 * 1000,
       );
@@ -50,7 +54,10 @@ export function useRegisterAppSW() {
           LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
         ) === "true"
       ) {
-        registerToFCM();
+        registerToFCM().catch((error) => {
+          captureException(error);
+          console.warn("Cannot register to FCM", error);
+        });
       }
     },
   });

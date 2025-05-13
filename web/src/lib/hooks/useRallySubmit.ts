@@ -1,4 +1,6 @@
+import { captureException } from "@sentry/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { SubmitRallyFunctionResponse } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { submitFunctionId } from "@/lib/consts.ts";
@@ -25,19 +27,34 @@ const useRallySubmit = () => {
         throw new Error(data.responseBody);
       }
 
-      const submissionInfo = JSON.parse(data.responseBody);
+      const submissionInfo = JSON.parse(
+        data.responseBody,
+      ) as SubmitRallyFunctionResponse;
 
-      db.submissions.add({
-        submissionId: submissionInfo.submissionId,
-        stamps: stamps ?? [],
-        redeemed: false,
-        submitted: new Date(),
-      });
+      if (submissionInfo.status === "error") {
+        throw new Error(submissionInfo.message);
+      }
 
-      // mark the stamps as submitted
-      stamps?.forEach((stamp) => {
-        db.stamps.update(stamp.id, { submitted: true });
-      });
+      db.submissions
+        .add({
+          submissionId: submissionInfo.submissionId,
+          stamps: stamps ?? [],
+          redeemed: false,
+          submitted: new Date(),
+        })
+        .then(
+          () => {
+            // mark the stamps as submitted
+            stamps?.forEach((stamp) => {
+              db.stamps.update(stamp.id, { submitted: true }).catch((error) => {
+                captureException(error);
+              });
+            });
+          },
+          (error) => {
+            captureException(error);
+          },
+        );
 
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SUBMISSIONS] });
     },

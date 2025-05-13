@@ -24,7 +24,7 @@ export const Route = createFileRoute("/_rallyists/stamp")({
 
     const decodedHash = decodeURIComponent(hash);
 
-    const parsed = JSON.parse(decodedHash);
+    const parsed = JSON.parse(decodedHash) as unknown;
 
     const serialized = StampTupleSerializer.safeParse(parsed);
     if (!serialized.success) {
@@ -57,7 +57,7 @@ function Stamp() {
   useEffect(() => {
     if (showSubmitButton) {
       setTimeout(() => {
-        createConfetti();
+        void createConfetti();
         window.plausible("Rally Completed");
       }, 1000);
     }

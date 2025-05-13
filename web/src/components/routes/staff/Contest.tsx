@@ -52,6 +52,8 @@ export default function Contest() {
     }, 1000);
   };
 
+  // remove along with todo
+  // eslint-disable-next-line @typescript-eslint/require-await
   const sendNotification = async () => {
     // TODO
     toast({
@@ -155,13 +157,15 @@ export default function Contest() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="flex flex-col items-center space-y-4 rounded-lg bg-white p-8">
             <div className="flex space-x-2">
-              {[...Array(5)].map((_, i) => (
-                <div
-                  key={i}
-                  className="h-4 w-4 animate-bounce rounded-full bg-success-orange"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                />
-              ))}
+              {Array(5)
+                .fill(0)
+                .map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-4 w-4 animate-bounce rounded-full bg-success-orange"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  />
+                ))}
             </div>
             <div className="text-xl text-gray-700">
               {t("contest.staff.drawing.drumRoll")}

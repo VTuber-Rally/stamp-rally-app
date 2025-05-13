@@ -1,4 +1,5 @@
-import type{ Polygon } from "geojson";
+import type { Models } from "appwrite";
+import type { Polygon } from "geojson";
 
 export interface Standist {
   // to link with the generated qr codes
@@ -17,6 +18,13 @@ export interface Standist {
   twitch?: string;
 
   geometry?: Polygon["coordinates"];
+}
+
+export interface StandistDocument
+  extends Omit<Standist, "publicKey" | "geometry">,
+    Models.Document {
+  publicKey: string;
+  geometry?: string;
 }
 
 export const standistIndexes =

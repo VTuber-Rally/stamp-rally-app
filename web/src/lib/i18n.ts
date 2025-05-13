@@ -7,7 +7,7 @@ import { isDev } from "@/lib/consts.ts";
 import en from "../i18n/en.json";
 import fr from "../i18n/fr.json";
 
-i18n
+await i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({

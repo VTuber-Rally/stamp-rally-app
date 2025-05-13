@@ -1,0 +1,31 @@
+{
+  "name": "@vtube-stamp-rally/linter-configs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./function": {
+      "import": "./function.js",
+      "types": "./function.d.ts"
+    },
+    "./web": {
+      "import": "./web.js",
+      "types": "./web.d.ts"
+    }
+  },
+  "types": "./types.d.ts",
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@tanstack/eslint-plugin-router": "^1.115.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-storybook": "^0.12.0",
+    "globals": "^16.0.0",
+    "typescript-eslint": "^8.31.1"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^10.1.2"
+  }
+}

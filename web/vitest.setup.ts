@@ -2,34 +2,31 @@ import { vi } from "vitest";
 
 import "@/lib/i18n.ts";
 
-vi.mock("appwrite", () => {
-  const Client = vi.fn();
-  Client.prototype.setEndpoint = vi.fn().mockReturnThis();
-  Client.prototype.setProject = vi.fn().mockReturnThis();
+vi.mock(import("appwrite"), async (importOriginal) => {
+  const original = await importOriginal();
 
-  const Account = vi.fn();
-  Account.prototype.get = vi.fn();
-  Account.prototype.createEmailPasswordSession = vi.fn();
-  Account.prototype.createAnonymousSession = vi.fn();
+  original.Client.prototype.setEndpoint = vi.fn().mockReturnThis();
+  original.Client.prototype.setProject = vi.fn().mockReturnThis();
 
-  const Databases = vi.fn();
-  Databases.prototype.listDocuments = vi.fn();
-  Databases.prototype.createDocument = vi.fn();
-  Databases.prototype.updateDocument = vi.fn();
+  original.Account.prototype.get = vi.fn();
+  original.Account.prototype.createEmailPasswordSession = vi.fn();
+  original.Account.prototype.createAnonymousSession = vi.fn();
 
-  const Functions = vi.fn();
-  Functions.prototype.createExecution = vi.fn();
+  original.Databases.prototype.listDocuments = vi.fn();
+  original.Databases.prototype.createDocument = vi.fn();
+  original.Databases.prototype.updateDocument = vi.fn();
 
-  const Storage = vi.fn();
-  Storage.prototype.getFileDownload = vi.fn();
-  Storage.prototype.listFiles = vi.fn();
+  original.Functions.prototype.createExecution = vi.fn();
 
-  return { Client, Account, Functions, Databases, Storage };
+  original.Storage.prototype.getFileDownload = vi.fn();
+  original.Storage.prototype.listFiles = vi.fn();
+
+  return original;
 });
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: vi.fn().mockImplementation((query) => ({
+  value: vi.fn().mockImplementation((query: string) => ({
     matches: false,
     media: query,
     onchange: null,

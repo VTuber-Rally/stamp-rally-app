@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { RegisterContestParticipantFunctionResponse } from "shared-lib";
 
 import { functions } from "@/lib/appwrite.ts";
 import { registerContestParticipantFunctionId } from "@/lib/consts.ts";
@@ -19,21 +20,9 @@ export const useRegisterContestParticipant = () => {
         JSON.stringify({ secret }),
       );
 
-      type ServerResponse =
-        | ({
-            status: string;
-            message: string;
-          } & {
-            status: "success";
-            contestParticipantId: string;
-          })
-        | {
-            status: "error";
-            message: string;
-            error: string;
-          };
-
-      const data: ServerResponse = JSON.parse(result.responseBody);
+      const data = JSON.parse(
+        result.responseBody,
+      ) as RegisterContestParticipantFunctionResponse;
 
       if (data.status === "error") {
         throw new Error(data.message);
@@ -57,7 +46,7 @@ export const useRegisterContestParticipant = () => {
           });
         });
 
-      navigate({
+      return navigate({
         to: "/reward/contest/success",
       });
     },
@@ -68,7 +57,7 @@ export const useRegisterContestParticipant = () => {
       });
 
       if (error.message === "contest.registration.noSubmissions") {
-        navigate({
+        return navigate({
           to: "/reward/contest/not-eligible",
         });
       }

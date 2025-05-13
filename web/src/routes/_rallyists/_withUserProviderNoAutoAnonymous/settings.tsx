@@ -62,7 +62,7 @@ function SettingsPage() {
 
   const [emailConsentChecked, setEmailConsentChecked] = useState(emailConsent);
 
-  const toggleEmailConsent = useCallback(async () => {
+  const toggleEmailConsent = useCallback(() => {
     setEmailConsentChecked(!emailConsentChecked);
     setPref(
       APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT,
@@ -103,8 +103,8 @@ function SettingsPage() {
 
   function changeLanguage(language: string) {
     if (language === i18n.language) return;
-    if (user) setPref("language", language); // purely analytical
-    i18n.changeLanguage(language);
+    if (user) void setPref("language", language); // purely analytical
+    void i18n.changeLanguage(language);
   }
 
   const i18nKeyButton = isUserLoggedIn

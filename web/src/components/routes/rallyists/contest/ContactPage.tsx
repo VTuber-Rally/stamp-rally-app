@@ -53,7 +53,7 @@ export function ContactPage() {
       if (data.consent) {
         await setPref("consent", true);
       }
-      navigate({
+      return navigate({
         to: "/reward/contest/entry",
         search: { secret },
       });

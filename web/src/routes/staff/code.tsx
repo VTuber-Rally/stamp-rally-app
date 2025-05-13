@@ -15,7 +15,7 @@ function CheckCode() {
         onScanSuccess={(result) => {
           const submissionId = result.data;
 
-          navigate({
+          void navigate({
             to: `/staff/submission/${submissionId}`,
           });
         }}

@@ -7,13 +7,17 @@
   "author": "",
   "scripts": {
     "test": "vitest",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "prettier:write": "prettier --write .",
+    "prettier:check": "prettier -c ."
   },
   "dependencies": {
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/geojson": "^7946.0.15",
+    "@vtube-stamp-rally/linter-configs": "workspace:*",
     "appwrite": "^16.1.0",
     "vitest": "^3.0.8"
   }

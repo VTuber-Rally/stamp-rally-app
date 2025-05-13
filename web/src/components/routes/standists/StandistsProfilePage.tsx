@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Standist } from "shared-lib";
@@ -21,7 +22,7 @@ const StandistsProfilePage = () => {
   const { $id } = user || {};
   const artist = useStandist($id);
 
-  const { mutate, isPending } = useUpdateStandistProfile();
+  const { mutate: updateProfile, isPending } = useUpdateStandistProfile();
 
   const methods = useForm<StandistsEditProfileForm>({
     defaultValues: {
@@ -56,18 +57,24 @@ const StandistsProfilePage = () => {
       </>
     );
 
-  const onSubmit = async (data: StandistsEditProfileForm) => {
-    try {
-      mutate({ ...data, userId: $id });
-      toast({
-        title: t("profile.profileUpdated"),
-      });
-    } catch (error) {
-      console.error(error);
-      toast({
-        title: t("error"),
-      });
-    }
+  const onSubmit = (data: StandistsEditProfileForm) => {
+    updateProfile(
+      { ...data, userId: $id },
+      {
+        onSuccess: () => {
+          toast({
+            title: t("profile.profileUpdated"),
+          });
+        },
+        onError: (error) => {
+          console.error(error);
+          captureException(error);
+          toast({
+            title: t("error"),
+          });
+        },
+      },
+    );
   };
 
   return (
