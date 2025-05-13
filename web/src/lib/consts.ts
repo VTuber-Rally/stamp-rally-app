@@ -24,6 +24,8 @@ const {
   VITE_FIREBASE_MESSAGING_SENDER_ID: firebaseMessagingSenderId,
   VITE_FIREBASE_APP_ID: firebaseAppId,
   VITE_FIREBASE_VAPID_PUBLIC_KEY: firebaseVapidPublicKey,
+  VITE_SENTRY_DSN: sentryDSN,
+  VITE_SENTRY_ENVIRONMENT: sentryEnvironment,
   DEV: isDev,
   PROD: isProd,
 } = import.meta.env;
@@ -64,4 +66,6 @@ export {
   firebaseConfig,
   firebaseVapidPublicKey,
   mapCenter,
+  sentryDSN,
+  sentryEnvironment,
 };

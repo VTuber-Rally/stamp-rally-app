@@ -97,6 +97,8 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: example
           VITE_FIREBASE_APP_ID: example
           VITE_FIREBASE_VAPID_PUBLIC_KEY: example
+          VITE_SENTRY_DSN: unknown
+          VITE_SENTRY_ENVIRONMENT: ci
         run: pnpm --filter=web build
 
       # upload artifacts
