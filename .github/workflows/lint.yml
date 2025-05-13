@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "web/**"
+      - "scripts/**"
+      - "functions/modules/**/*.ts"
+      - "shared-lib/**"
       - "pnpm-lock.yaml"
   workflow_dispatch:
 
