@@ -8,12 +8,13 @@
  *  Example: `bun scripts/create-profile.tsx ./data.tsv`
  *
  **/
-import { StandistDocument } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 import * as fs from "fs";
 import * as sdk from "node-appwrite";
 import { Permission, Role } from "node-appwrite";
 import { randomBytes } from "node:crypto";
 import path from "path";
+
+import { StandistDocument } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 
 import { getEnv } from "./shared.js";
 import { uploadUserMedia } from "./upload-user-medias.js";

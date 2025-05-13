@@ -1,5 +1,6 @@
-import { StandistDocument } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 import * as sdk from "node-appwrite";
+
+import { StandistDocument } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 
 import { getEnv } from "./shared.js";
 import { deleteUserMedia } from "./upload-user-medias.js";

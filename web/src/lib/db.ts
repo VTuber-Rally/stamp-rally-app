@@ -1,3 +1,5 @@
+import Dexie, { type EntityTable } from "dexie";
+
 import {
   ContestParticipation,
   contestParticipationIndexes,
@@ -14,7 +16,6 @@ import {
   SubmissionWithId,
   submissionIndexes,
 } from "@vtuber-stamp-rally/shared-lib/models/Submission.ts";
-import Dexie, { type EntityTable } from "dexie";
 
 export const db = new Dexie("StampRally") as Dexie & {
   stamps: EntityTable<StampWithId, "id">;

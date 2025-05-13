@@ -1,4 +1,5 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
+
 import { signData } from "@vtuber-stamp-rally/shared-lib/signatures.ts";
 
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";

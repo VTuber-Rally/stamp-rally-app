@@ -1,5 +1,6 @@
-import { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 import { ArrowUpRightFromSquare } from "lucide-react";
+
+import { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Header } from "@/components/layout/Header.tsx";

@@ -1,5 +1,6 @@
 import { captureException } from "@sentry/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { SubmitRallyFunctionResponse } from "@vtuber-stamp-rally/shared-lib/functions/submitRally.ts";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";

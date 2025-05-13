@@ -1,8 +1,9 @@
-import { StampWithId } from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
 import clsx from "clsx";
 import { TicketCheck } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { StampWithId } from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
 
 import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";

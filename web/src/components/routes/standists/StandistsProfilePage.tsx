@@ -1,7 +1,8 @@
 import { captureException } from "@sentry/react";
-import { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+
+import { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 
 import Loader from "@/components/Loader.tsx";
 import InputField from "@/components/inputs/InputField.tsx";

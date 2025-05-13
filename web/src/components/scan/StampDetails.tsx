@@ -1,5 +1,3 @@
-import type { Stamp } from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
-import type { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 import {
   CalendarCogIcon,
   Printer,
@@ -10,6 +8,9 @@ import {
 } from "lucide-react";
 import { FC, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
+
+import type { Stamp } from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
+import type { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 
 type StampDetailsProps = {
   stamp: Stamp;
