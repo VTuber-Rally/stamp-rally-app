@@ -1,14 +1,14 @@
 import { Client, Databases, ID, Permission, Query, Role } from "node-appwrite";
 
-import { dataUrlToBytes } from "@vtuber-stamp-rally/shared-lib/base64.ts";
-import { importJWK } from "@vtuber-stamp-rally/shared-lib/crypto.ts";
-import { SubmitRallyFunctionRequestValidator } from "@vtuber-stamp-rally/shared-lib/functions/submitRally.ts";
-import { SubmitRallyFunctionResponse } from "@vtuber-stamp-rally/shared-lib/functions/submitRally.ts";
+import { dataUrlToBytes } from "@vtube-stamp-rally/shared-lib/base64.ts";
+import { importJWK } from "@vtube-stamp-rally/shared-lib/crypto.ts";
+import { SubmitRallyFunctionRequestValidator } from "@vtube-stamp-rally/shared-lib/functions/submitRally.ts";
+import { SubmitRallyFunctionResponse } from "@vtube-stamp-rally/shared-lib/functions/submitRally.ts";
 import {
   Standist,
   StandistDocument,
-} from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
-import type { Context } from "@vtuber-stamp-rally/shared-lib/types.ts";
+} from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
+import type { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
 
 const SUBMISSION_DATABASE_ID = process.env["DATABASE_ID"];
 const SUBMISSION_COLLECTION_ID = process.env["SUBMISSIONS_COLLECTION_ID"];

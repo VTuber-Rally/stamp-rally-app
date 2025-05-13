@@ -12,8 +12,8 @@ import {
 import {
   RegisterContestParticipantFunctionRequestValidator,
   RegisterContestParticipantFunctionResponse,
-} from "@vtuber-stamp-rally/shared-lib/functions/registerContestParticipant.ts";
-import { Context } from "@vtuber-stamp-rally/shared-lib/types.ts";
+} from "@vtube-stamp-rally/shared-lib/functions/registerContestParticipant.ts";
+import { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
 
 // partial model
 export interface Submission extends Models.Document {

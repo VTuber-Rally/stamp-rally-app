@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/node": "^20.14.9",
     "@vtube-stamp-rally/linter-configs": "workspace:*",
-    "@vtuber-stamp-rally/shared-lib": "workspace:*",
+    "@vtube-stamp-rally/shared-lib": "workspace:*",
     "typescript": "5.8.3"
   }
 }

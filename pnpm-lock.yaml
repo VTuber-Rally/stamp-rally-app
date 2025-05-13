@@ -37,7 +37,7 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../../../linter-configs
-      '@vtuber-stamp-rally/shared-lib':
+      '@vtube-stamp-rally/shared-lib':
         specifier: workspace:*
         version: link:../../../shared-lib
       esbuild:
@@ -59,7 +59,7 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../../../linter-configs
-      '@vtuber-stamp-rally/shared-lib':
+      '@vtube-stamp-rally/shared-lib':
         specifier: workspace:*
         version: link:../../../shared-lib
       esbuild:
@@ -81,7 +81,7 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../../../linter-configs
-      '@vtuber-stamp-rally/shared-lib':
+      '@vtube-stamp-rally/shared-lib':
         specifier: workspace:*
         version: link:../../../shared-lib
       esbuild:
@@ -146,7 +146,7 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../linter-configs
-      '@vtuber-stamp-rally/shared-lib':
+      '@vtube-stamp-rally/shared-lib':
         specifier: workspace:*
         version: link:../shared-lib
       typescript:
@@ -225,7 +225,7 @@ importers:
       '@turf/helpers':
         specifier: ^7.2.0
         version: 7.2.0
-      '@vtuber-stamp-rally/shared-lib':
+      '@vtube-stamp-rally/shared-lib':
         specifier: workspace:*
         version: link:../shared-lib
       appwrite:

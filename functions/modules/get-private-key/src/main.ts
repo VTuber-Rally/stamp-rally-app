@@ -3,9 +3,9 @@ import { Client, Users } from "node-appwrite";
 import {
   GetPrivateKeyFunctionRequestValidator,
   GetPrivateKeyFunctionResponse,
-} from "@vtuber-stamp-rally/shared-lib/functions/getPrivateKey.ts";
-import type { Context } from "@vtuber-stamp-rally/shared-lib/types.ts";
-import { UserPreferences } from "@vtuber-stamp-rally/shared-lib/types/userPreferences.ts";
+} from "@vtube-stamp-rally/shared-lib/functions/getPrivateKey.ts";
+import type { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
+import { UserPreferences } from "@vtube-stamp-rally/shared-lib/types/userPreferences.ts";
 
 export default async ({ req, res }: Context<GetPrivateKeyFunctionResponse>) => {
   const client = new Client()

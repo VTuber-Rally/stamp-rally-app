@@ -1,8 +1,8 @@
 import {
   Stamp,
   StampTuple,
-} from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
-import { verifyData } from "@vtuber-stamp-rally/shared-lib/signatures.ts";
+} from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
+import { verifyData } from "@vtube-stamp-rally/shared-lib/signatures.ts";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { db } from "@/lib/db.ts";

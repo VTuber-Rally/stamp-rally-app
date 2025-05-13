@@ -1,4 +1,4 @@
-import { type KeyValueEntry } from "@vtuber-stamp-rally/shared-lib/models/KeyValue.ts";
+import { type KeyValueEntry } from "@vtube-stamp-rally/shared-lib/models/KeyValue.ts";
 
 export const KEY_VALUES = {
   eventEndDate: {

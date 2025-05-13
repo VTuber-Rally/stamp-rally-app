@@ -1,7 +1,7 @@
 import {
   Stamp,
   StampWithId,
-} from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
+} from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 
 // FUDE
 export const NotSubmittedStamp = {

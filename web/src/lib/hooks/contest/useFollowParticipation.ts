@@ -3,7 +3,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { Query, RealtimeResponseEvent } from "appwrite";
 import { useCallback, useEffect } from "react";
 
-import { ContestParticipant } from "@vtuber-stamp-rally/shared-lib/models/ContestParticipant.ts";
+import { ContestParticipant } from "@vtube-stamp-rally/shared-lib/models/ContestParticipant.ts";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { client, databases } from "@/lib/appwrite";

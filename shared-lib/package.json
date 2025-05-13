@@ -1,5 +1,5 @@
 {
-  "name": "@vtuber-stamp-rally/shared-lib",
+  "name": "@vtube-stamp-rally/shared-lib",
   "version": "1.0.0",
   "description": "Code partagé entre le web et les fonctions",
   "exports": {

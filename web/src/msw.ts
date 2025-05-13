@@ -1,6 +1,6 @@
 import { HttpResponse, http } from "msw";
 
-import { type Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
+import { type Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import avatar from "@/stubs/avatar.png";
 

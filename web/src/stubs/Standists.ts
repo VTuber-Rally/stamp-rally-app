@@ -1,6 +1,6 @@
 import { Models } from "appwrite";
 
-import { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
+import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 export const StandistsFromAppwrite = {
   total: 12,

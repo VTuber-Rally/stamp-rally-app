@@ -9,8 +9,8 @@ import {
 import { FC, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { Stamp } from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
-import type { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
+import type { Stamp } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
+import type { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 type StampDetailsProps = {
   stamp: Stamp;

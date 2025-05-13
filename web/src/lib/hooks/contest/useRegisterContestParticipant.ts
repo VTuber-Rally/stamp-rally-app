@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { RegisterContestParticipantFunctionResponse } from "@vtuber-stamp-rally/shared-lib/functions/registerContestParticipant.ts";
+import { RegisterContestParticipantFunctionResponse } from "@vtube-stamp-rally/shared-lib/functions/registerContestParticipant.ts";
 
 import { functions } from "@/lib/appwrite.ts";
 import { registerContestParticipantFunctionId } from "@/lib/consts.ts";
