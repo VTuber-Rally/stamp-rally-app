@@ -30,14 +30,20 @@ export default async ({
   res,
   log,
 }: Context<RegisterContestParticipantFunctionResponse>) => {
-  const missingVars = [];
-  if (!DATABASE_ID) missingVars.push("DATABASE_ID");
-  if (!SUBMISSIONS_COLLECTION_ID) missingVars.push("SUBMISSIONS_COLLECTION_ID");
-  if (!CONTEST_PARTICIPANTS_COLLECTION_ID)
-    missingVars.push("CONTEST_PARTICIPANTS_COLLECTION_ID");
-  if (!KV_COLLECTION_ID) missingVars.push("KV_COLLECTION_ID");
+  if (
+    !DATABASE_ID ||
+    !SUBMISSIONS_COLLECTION_ID ||
+    !CONTEST_PARTICIPANTS_COLLECTION_ID ||
+    !KV_COLLECTION_ID
+  ) {
+    const missingVars = [];
+    if (!DATABASE_ID) missingVars.push("DATABASE_ID");
+    if (!SUBMISSIONS_COLLECTION_ID)
+      missingVars.push("SUBMISSIONS_COLLECTION_ID");
+    if (!CONTEST_PARTICIPANTS_COLLECTION_ID)
+      missingVars.push("CONTEST_PARTICIPANTS_COLLECTION_ID");
+    if (!KV_COLLECTION_ID) missingVars.push("KV_COLLECTION_ID");
 
-  if (missingVars.length > 0) {
     log(`Missing environment variables: ${missingVars.join(", ")}`);
     log(
       `Available environment variables: ${Object.keys(process.env).join(", ")}`,
@@ -46,8 +52,8 @@ export default async ({
   }
 
   const client = new Client()
-    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
-    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
+    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"]!)
+    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"]!)
     .setKey(req.headers["x-appwrite-key"]);
 
   const users = new Users(client);
@@ -182,7 +188,6 @@ export default async ({
 
   return res.json({
     status: "success",
-    message: "contest.registration.success",
     contestParticipantId: created.$id,
   });
 };

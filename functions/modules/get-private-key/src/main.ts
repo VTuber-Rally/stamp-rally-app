@@ -5,8 +5,8 @@ import { UserPreferences } from "shared-lib/src/types/userPreferences";
 
 export default async ({ req, res }: Context<GetPrivateKeyFunctionResponse>) => {
   const client = new Client()
-    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
-    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
+    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"]!)
+    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"]!)
     .setKey(req.headers["x-appwrite-key"]);
 
   const users = new Users(client);
@@ -28,13 +28,13 @@ export default async ({ req, res }: Context<GetPrivateKeyFunctionResponse>) => {
     return res.json({
       status: "success",
       privateKey: JSON.parse(
-        (user.prefs as UserPreferences).privateKey,
+        (user.prefs as UserPreferences).privateKey!,
       ) as JsonWebKey,
     });
   } catch (e) {
     return res.json({
       status: "error",
-      message: `Failed to get private key: ${e}`,
+      message: `Failed to get private key: ${e as Error}`,
     });
   }
 };

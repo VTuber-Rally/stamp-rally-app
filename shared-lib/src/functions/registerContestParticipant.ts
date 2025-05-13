@@ -9,13 +9,10 @@ export type RegisterContestParticipantFunctionRequest = z.infer<
 >;
 
 export type RegisterContestParticipantFunctionResponse =
-  | ({
-      status: string;
-      message: string;
-    } & {
+  | {
       status: "success";
       contestParticipantId: string;
-    })
+    }
   | {
       status: "error";
       message: string;

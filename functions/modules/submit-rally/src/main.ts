@@ -31,7 +31,12 @@ export default async ({
   if (!SUBMISSION_COLLECTION_ID) missingVars.push("SUBMISSIONS_COLLECTION_ID");
   if (!PROFILE_COLLECTION_ID) missingVars.push("STANDISTS_COLLECTION_ID");
 
-  if (missingVars.length > 0) {
+  // writing it in a way that the TS compiler will see through
+  if (
+    !SUBMISSION_DATABASE_ID ||
+    !SUBMISSION_COLLECTION_ID ||
+    !PROFILE_COLLECTION_ID
+  ) {
     log(`Missing environment variables: ${missingVars.join(", ")}`);
     log(
       `Available environment variables: ${Object.keys(process.env).join(", ")}`,
@@ -48,8 +53,8 @@ export default async ({
   }
 
   const client = new Client()
-    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"])
-    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"])
+    .setEndpoint(process.env["APPWRITE_FUNCTION_API_ENDPOINT"]!)
+    .setProject(process.env["APPWRITE_FUNCTION_PROJECT_ID"]!)
     .setKey(req.headers["x-appwrite-key"]);
 
   const userId = req.headers["x-appwrite-user-id"];
