@@ -1,8 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { KeyValue } from "@vtuber-stamp-rally/shared-lib/models/KeyValue.ts";
+import { Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
+import { Submission as SubmissionIndexedDB } from "@vtuber-stamp-rally/shared-lib/models/Submission.ts";
 import type { Models } from "appwrite";
-import { KeyValue } from "shared-lib";
-import { Standist } from "shared-lib";
-import { Submission as SubmissionIndexedDB } from "shared-lib";
 
 import { StandistsEditProfileForm } from "@/components/routes/standists/StandistsProfilePage.tsx";
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";

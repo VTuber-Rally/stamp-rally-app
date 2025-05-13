@@ -1,5 +1,6 @@
+import type { StampWithId } from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
+import type { SubmissionWithId } from "@vtuber-stamp-rally/shared-lib/models/Submission.ts";
 import { useTranslation } from "react-i18next";
-import type { StampWithId, SubmissionWithId } from "shared-lib";
 
 import Logo from "@/assets/logo.png";
 import Intro from "@/components/Intro.tsx";

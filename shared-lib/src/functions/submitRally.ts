@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { StampModelValidator } from "../models";
+import { StampModelValidator } from "../models/Stamp";
 
 export const SubmitRallyFunctionRequestValidator = z.object({
   stamps: StampModelValidator.array().nonempty(),

@@ -1,5 +1,5 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { SubmissionWithId } from "shared-lib";
+import { SubmissionWithId } from "@vtuber-stamp-rally/shared-lib/models/Submission.ts";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { db } from "@/lib/db.ts";

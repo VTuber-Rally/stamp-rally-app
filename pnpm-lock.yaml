@@ -37,12 +37,12 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../../../linter-configs
+      '@vtuber-stamp-rally/shared-lib':
+        specifier: workspace:*
+        version: link:../../../shared-lib
       esbuild:
         specifier: ^0.25.3
         version: 0.25.3
-      shared-lib:
-        specifier: workspace:*
-        version: link:../../../shared-lib
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -59,12 +59,12 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../../../linter-configs
+      '@vtuber-stamp-rally/shared-lib':
+        specifier: workspace:*
+        version: link:../../../shared-lib
       esbuild:
         specifier: ^0.25.3
         version: 0.25.3
-      shared-lib:
-        specifier: workspace:*
-        version: link:../../../shared-lib
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -81,12 +81,12 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../../../linter-configs
+      '@vtuber-stamp-rally/shared-lib':
+        specifier: workspace:*
+        version: link:../../../shared-lib
       esbuild:
         specifier: ^0.25.3
         version: 0.25.3
-      shared-lib:
-        specifier: workspace:*
-        version: link:../../../shared-lib
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -146,7 +146,7 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../linter-configs
-      shared-lib:
+      '@vtuber-stamp-rally/shared-lib':
         specifier: workspace:*
         version: link:../shared-lib
       typescript:
@@ -225,6 +225,9 @@ importers:
       '@turf/helpers':
         specifier: ^7.2.0
         version: 7.2.0
+      '@vtuber-stamp-rally/shared-lib':
+        specifier: workspace:*
+        version: link:../shared-lib
       appwrite:
         specifier: ^16.1.0
         version: 16.1.0
@@ -273,9 +276,6 @@ importers:
       react-qr-code:
         specifier: ^2.0.15
         version: 2.0.15(react@18.3.1)
-      shared-lib:
-        specifier: workspace:*
-        version: link:../shared-lib
       vaul:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

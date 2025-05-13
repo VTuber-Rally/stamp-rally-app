@@ -1,13 +1,15 @@
 {
-  "name": "shared-lib",
+  "name": "@vtuber-stamp-rally/shared-lib",
   "version": "1.0.0",
   "description": "Code partagé entre le web et les fonctions",
-  "main": "src/index.ts",
+  "exports": {
+    "./*": "./src/*"
+  },
   "keywords": [],
   "author": "",
   "scripts": {
     "test": "vitest",
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier -c ."

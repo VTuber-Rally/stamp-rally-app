@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
+import type { ContestParticipant } from "@vtuber-stamp-rally/shared-lib/models/ContestParticipant.ts";
 import { useCallback, useState } from "react";
-import type { ContestParticipant } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { databases } from "@/lib/appwrite";

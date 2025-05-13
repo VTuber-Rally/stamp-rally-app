@@ -1,5 +1,5 @@
+import { type Standist } from "@vtuber-stamp-rally/shared-lib/models/Standist.ts";
 import { HttpResponse, http } from "msw";
-import { type Standist } from "shared-lib";
 
 import avatar from "@/stubs/avatar.png";
 

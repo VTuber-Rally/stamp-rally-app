@@ -4,6 +4,7 @@
     "strict": true,
     "module": "NodeNext",
     "target": "ESNext",
+    "allowImportingTsExtensions": true,
     "moduleResolution": "NodeNext"
   },
   "include": ["src"]

@@ -1,7 +1,7 @@
+import { ContestParticipant } from "@vtuber-stamp-rally/shared-lib/models/ContestParticipant.ts";
 import clsx from "clsx";
 import { Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { ContestParticipant } from "shared-lib";
 
 import Loader from "@/components/Loader";
 import { ButtonLink } from "@/components/controls/ButtonLink";

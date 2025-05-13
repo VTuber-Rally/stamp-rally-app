@@ -1,4 +1,9 @@
 import {
+  RegisterContestParticipantFunctionRequestValidator,
+  RegisterContestParticipantFunctionResponse,
+} from "@vtuber-stamp-rally/shared-lib/functions/registerContestParticipant.ts";
+import { Context } from "@vtuber-stamp-rally/shared-lib/types.ts";
+import {
   Client,
   Databases,
   ID,
@@ -8,11 +13,6 @@ import {
   Role,
   Users,
 } from "node-appwrite";
-import type {
-  Context,
-  RegisterContestParticipantFunctionResponse,
-} from "shared-lib";
-import { RegisterContestParticipantFunctionRequestValidator } from "shared-lib/src/functions/registerContestParticipant";
 
 // partial model
 export interface Submission extends Models.Document {

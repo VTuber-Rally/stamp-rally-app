@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import type { ContestParticipant } from "@vtuber-stamp-rally/shared-lib/models/ContestParticipant.ts";
 import { useEffect } from "react";
-import type { ContestParticipant } from "shared-lib";
 
 import { QUERY_KEYS } from "@/lib/QueryKeys";
 import { Query, client, databases } from "@/lib/appwrite";

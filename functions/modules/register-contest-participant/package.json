@@ -18,7 +18,7 @@
     "@types/node": "^20.14.9",
     "esbuild": "^0.25.3",
     "typescript": "5.8.3",
-    "shared-lib": "workspace:*",
+    "@vtuber-stamp-rally/shared-lib": "workspace:*",
     "@vtube-stamp-rally/linter-configs": "workspace:*"
   }
 }

@@ -1,4 +1,7 @@
-import { Stamp, StampWithId } from "shared-lib";
+import {
+  Stamp,
+  StampWithId,
+} from "@vtuber-stamp-rally/shared-lib/models/Stamp.ts";
 
 // FUDE
 export const NotSubmittedStamp = {
