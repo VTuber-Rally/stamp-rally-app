@@ -111,6 +111,11 @@ export default defineConfig({
           env: process.env.VITE_SENTRY_ENVIRONMENT ?? "production",
           url: process.env.CF_PAGES_URL,
         },
+        setCommits: {
+          repo: process.env.VITE_SENTRY_REPO!,
+          commit: process.env.CF_PAGES_COMMIT_SHA!,
+          ignoreEmpty: true,
+        },
       },
       sourcemaps: {
         filesToDeleteAfterUpload: ["**/*.js.map"],
