@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
-    "check-types": "tsc",
+    "check-types": "tsc -p tsconfig.app.json",
     "preview": "vite preview",
     "test": "LANG=C vitest",
     "test:ui": "LANG=C vitest --ui",
