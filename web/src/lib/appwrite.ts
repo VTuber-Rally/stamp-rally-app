@@ -8,11 +8,14 @@ import {
   Storage,
 } from "appwrite";
 
+import { SendNotificationFunctionRequest } from "@vtube-stamp-rally/shared-lib/functions/sendNotification.ts";
+
 import {
   appwriteEndpoint,
   appwriteNotificationProviderId,
   appwriteProjectId,
   assetsBucketId,
+  sendNotificationFunctionId,
 } from "@/lib/consts.ts";
 import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
 
@@ -197,4 +200,19 @@ export const unregisterPushTarget = async () => {
     const appwriteError = error as AppwriteException;
     throw new Error("Cannot unregister Push target", { cause: appwriteError });
   }
+};
+
+export const sendNotification = (
+  title: string,
+  text: string,
+  topic: string,
+) => {
+  return functions.createExecution(
+    sendNotificationFunctionId,
+    JSON.stringify({
+      title,
+      text,
+      topic,
+    } satisfies SendNotificationFunctionRequest),
+  );
 };
