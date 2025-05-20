@@ -16,6 +16,7 @@ interface ImportMetaEnv {
   VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: string;
   VITE_REGISTER_CONTEST_PARTICIPANT_FUNCTION_ID: string;
   VITE_GET_PRIVATE_KEY_FUNCTION_ID: string;
+  VITE_SEND_NOTIFICATION_FUNCTION_ID: string;
   VITE_KV_COLLECTION_ID: string;
   VITE_ASSETS_BUCKET_ID: string;
 
@@ -29,6 +30,8 @@ interface ImportMetaEnv {
   readonly VITE_FIREBASE_MESSAGING_SENDER_ID: string;
   readonly VITE_FIREBASE_APP_ID: string;
   readonly VITE_FIREBASE_VAPID_PUBLIC_KEY: string;
+  readonly VITE_RALLY_FINISHERS_EN_TOPIC_ID: string;
+  readonly VITE_RALLY_FINISHERS_FR_TOPIC_ID: string;
 
   readonly VITE_SENTRY_DSN: string;
   readonly VITE_SENTRY_ENVIRONMENT: string;

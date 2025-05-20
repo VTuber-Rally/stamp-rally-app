@@ -195,9 +195,19 @@
       "title": "Notification permission",
       "description": "Go to the web browser settings to allow notifications."
     },
+    "notificationSentToast": {
+      "title": "Notification sent",
+      "description": "It may take a few minutes to reach all users."
+    },
     "fcmError": {
       "title": "Cannot toggle notifications",
       "description": "A connection to the notification backend could not be established."
+    },
+    "templates": {
+      "contest": {
+        "title": "VTuber Rally contest begins soon!",
+        "text": "Head to Sedeto's booth (H6, R687) to register for a chance to win a commission from Sedeto."
+      }
     }
   },
   "notImplemented": "Not implemented yet",
