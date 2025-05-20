@@ -5,6 +5,7 @@ import {
   Databases,
   Functions,
   ID,
+  Messaging,
   Storage,
 } from "appwrite";
 
@@ -29,6 +30,7 @@ export const account = new Account(client);
 export const databases = new Databases(client);
 export const functions = new Functions(client);
 export const storage = new Storage(client);
+export const messaging = new Messaging(client);
 export const getUserData = async () => {
   try {
     return account.get();
@@ -215,4 +217,22 @@ export const sendNotification = (
       topic,
     } satisfies SendNotificationFunctionRequest),
   );
+};
+
+export const subscribeToTopic = async (topicId: string, targetId?: string) => {
+  const pushTargetId =
+    targetId ??
+    window.localStorage.getItem(LOCAL_STORAGE_KEYS.APPWRITE_PUSH_TARGET_ID);
+
+  if (!topicId?.trim()) {
+    throw new Error("Invalid topic ID provided");
+  }
+
+  if (!pushTargetId) {
+    throw new Error(
+      "No push target ID available. Notifications should be enabled beforehand.",
+    );
+  }
+
+  await messaging.createSubscriber(topicId, ID.unique(), pushTargetId);
 };

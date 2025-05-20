@@ -45,7 +45,7 @@ export const ButtonLink: FC<
   className = "",
 }) => {
   const combinedClassName = clsx(
-    "text-center text-black px-2 py-4 w-full max-w-xl flex justify-center items-center rounded-2xl font-bold",
+    "cursor-pointer text-center text-black px-2 py-4 w-full max-w-xl flex justify-center items-center rounded-2xl font-bold shadow-md border border-gray-200",
     size === "big" && "h-20 text-2xl mt-4",
     size === "medium" && "h-15 text-xl mt-2",
     size === "small" && "h-10 text-lg mt-2",

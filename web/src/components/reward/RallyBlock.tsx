@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import QRCodeLink from "@/components/controls/QRCodeLink";
+import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
 import { stampsToCollect } from "@/lib/consts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
@@ -17,14 +18,14 @@ export const RallyBlock = () => {
 
   if (stampsError || submissionsError) {
     return (
-      <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
+      <ShadowBox>
         <p className="text-red-500">{t("errors.dataFetchFailed")}</p>
-      </div>
+      </ShadowBox>
     );
   }
 
   return (
-    <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
+    <ShadowBox>
       <div className="mb-4 flex items-center">
         <Gift className="mr-2 h-6 w-6 text-primary" />
         <h2 className="text-xl font-semibold">{t("reward.rally.title")}</h2>
@@ -77,6 +78,6 @@ export const RallyBlock = () => {
           </ButtonLink>
         ) : null}
       </div>
-    </div>
+    </ShadowBox>
   );
 };
