@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
-import { Map, TicketCheck } from "lucide-react";
+import { MapIcon, TicketCheck } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +41,7 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
               });
             }}
           >
-            <Map />
+            <MapIcon />
             {t("map")}
           </button>
         </Header>
