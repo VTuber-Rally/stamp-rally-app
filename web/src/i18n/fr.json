@@ -226,7 +226,7 @@
     "title": "Mon profil"
   },
   "qrcode": "QR Code",
-  "rally.1": "17 artistes participent à ce rallye autour des VTubers",
+  "rally.1": "16 artistes participent à ce rallye autour des VTubers",
   "rally.2": "Après un achat (minimum 2€) chez un artiste, vous pourrez scanner un QR code",
   "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
   "rally.4": "Dès que vous avez une participation validée, participez au concours pour gagner un shikishi de Sedeto !",
@@ -258,10 +258,10 @@
     "title": "Récompense"
   },
   "rules": "Règles",
-  "rules.1": "Le rally est entièrement numérique et accessible depuis votre smartphone, la page ne nécessite plus d'internet une fois qu'elle a été chargée une fois. Il sera accessible depuis ce site et depuis un QR code sur le stand de Sedeto (Hall 6, Q652).",
-  "rules.2": "Le rally rassemble 17 stands. Il nécessite 10 tampons issus de différents stands pour être complété.",
+  "rules.1": "Le rally est entièrement numérique et accessible depuis votre smartphone, la page ne nécessite plus d'internet une fois qu'elle a été chargée une fois. Il sera accessible depuis ce site et depuis un QR code sur le stand de Sedeto (Hall 6, R687).",
+  "rules.2": "Le rally rassemble 16 stands. Il nécessite 10 tampons issus de différents stands pour être complété.",
   "rules.3": "Pour obtenir un tampon sur un stand, il faut y dépenser au moins 2€.",
-  "rules.4": "Quand votre carte de rally est complète, il faut se rendre sur le stand de Sedeto (Hall 6, Q652) pour demander sa récompense. Demandez à un membre de l'équipe du stand de Sedeto de valider votre carte complétée et tirez bien votre prix en sa présence.",
+  "rules.4": "Quand votre carte de rally est complète, il faut se rendre sur le stand de Sedeto (Hall 6, R687) pour demander sa récompense. Demandez à un membre de l'équipe du stand de Sedeto de valider votre carte complétée et tirez bien votre prix en sa présence.",
   "rules.5": "Les récompenses sont des cartes exclusives illustrées par les artistes participants au rally (et quelques invités), représentant des Vtubers populaires. Ils sont designés à la façon de shikishi originaux signés ! Il y a 17 cartes différentes et vous pourrez choisir celui que vous souhaitez. Chaque design sera en quantité limitée chaque jour pour donner sa chance à chacun.",
   "rules.6": "Vous pouvez gagner une, deux ou trois cartes par la loterie!",
   "rules.7": "Une fois votre carte complétée, vous pouvez également tenter votre chance pour gagner un shikishi réalisé par Sedeto représentant votre oshi ! Le tirage aura lieu chaque jour à 16h sur le stand.",
@@ -283,7 +283,7 @@
     "usernameUpdateFailed": "Le changement de nom d'utilisateur a échoué",
     "usernameUpdated": "Votre nom d'utilisateur a été mis à jour avec succès"
   },
-  "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, Q652) pour pouvoir récupérer votre récompense !",
+  "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, R687) pour pouvoir récupérer votre récompense !",
   "staffSpace": "Espace staff",
   "stampDetails": {
     "generatedAt": "Tampon numérique généré le {{dateTime}}",
