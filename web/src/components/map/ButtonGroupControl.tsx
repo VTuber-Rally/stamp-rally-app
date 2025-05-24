@@ -34,6 +34,12 @@ export const ButtonGroupControl: FC<ButtonGroupControlProps> = ({
   useEffect(() => {
     if (!mapInstance) return;
     mapInstance.addControl(control, placement);
+
+    return () => {
+      if (mapInstance.hasControl(control)) {
+        mapInstance.removeControl(control);
+      }
+    };
   }, [mapInstance, control, placement]);
 
   return createPortal(children, controlContainer);

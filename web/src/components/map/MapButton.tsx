@@ -5,7 +5,7 @@ export const MapButton: FC<{ children?: ReactNode; onClick?: () => void }> = ({
   onClick,
 }) => {
   return (
-    <button type="button" onClick={onClick} className="p-[calc(9px/2)]!">
+    <button type="button" onClick={onClick} className="!p-[4.5px]">
       {children}
     </button>
   );
