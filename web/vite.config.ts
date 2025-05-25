@@ -99,7 +99,7 @@ export default defineConfig({
       org: process.env.VITE_SENTRY_ORG_ID,
       project: process.env.VITE_SENTRY_PROJECT_ID,
       telemetry: false,
-      disable: process.env.CF_PAGES !== "1",
+      disable: process.env.CF_PAGES !== "1" || process.env.STORYBOOK === "true",
       release: {
         name: process.env.CF_PAGES_COMMIT_SHA,
         dist: new Date().toISOString(),
