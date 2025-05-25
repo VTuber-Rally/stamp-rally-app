@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
@@ -10,7 +10,7 @@ import {
   isCTAIgnored,
 } from "@/lib/pushNotifications.ts";
 
-export const EnableNotificationNudge = () => {
+export const EnableNotificationNudge: FC = () => {
   const { t } = useTranslation();
 
   const [mount, setMount] = useState(
