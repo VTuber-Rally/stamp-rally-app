@@ -64,13 +64,13 @@ function Submit() {
                 </button>
               </>
             )}
-            {!isEligible ? (
+            {!isEligible && (
               <p>{t("submitNotAllowed", { stamps: stampsToCollect })}</p>
-            ) : null}
+            )}
           </div>
         </ShadowBox>
 
-        {submissions?.length ? <EnableNotificationNudge /> : null}
+        {!!submissions?.length && <EnableNotificationNudge />}
         <SubmissionsList />
         {!user?.email && (
           <>

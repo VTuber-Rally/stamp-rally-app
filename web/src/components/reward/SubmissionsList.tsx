@@ -53,9 +53,9 @@ export const SubmissionsList: FC = () => {
         </>
       )}
 
-      {pendingSubmissions.length > 0 && redeemedSubmissions.length > 0 ? (
+      {pendingSubmissions.length > 0 && redeemedSubmissions.length > 0 && (
         <HorizontalBar />
-      ) : null}
+      )}
 
       {redeemedSubmissions.length > 0 && (
         <>
