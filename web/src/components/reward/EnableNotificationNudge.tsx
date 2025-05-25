@@ -56,12 +56,10 @@ export const EnableNotificationNudge = () => {
         size="small"
         disabled={isLoading || isDone}
       >
-        {isDone ? t("notifications.nudge.done") : null}
-        {isLoading ? t("loading") : null}
-        {isError ? t("error") : null}
-        {!isError && !isDone && !isLoading
-          ? t("notifications.nudge.button")
-          : null}
+        {isDone && t("notifications.nudge.done")}
+        {isLoading && t("loading")}
+        {isError && t("error")}
+        {!isError && !isDone && !isLoading && t("notifications.nudge.button")}
       </ButtonLink>
       <p className="mt-2 text-xs text-gray-600">
         {t("notifications.nudge.reminder")}{" "}

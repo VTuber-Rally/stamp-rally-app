@@ -67,7 +67,7 @@ export const RallyBlock = () => {
       <div className="flex flex-col items-center justify-center gap-2">
         <QRCodeLink size="medium" />
 
-        {(stamps && stamps.length >= stampsToCollect) || hasSubmitted ? (
+        {((stamps && stamps.length >= stampsToCollect) || hasSubmitted) && (
           <ButtonLink
             type="link"
             href="/reward/submit"
@@ -76,7 +76,7 @@ export const RallyBlock = () => {
           >
             {t("requestYourReward")}
           </ButtonLink>
-        ) : null}
+        )}
       </div>
     </ShadowBox>
   );

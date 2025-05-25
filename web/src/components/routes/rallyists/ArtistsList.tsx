@@ -68,11 +68,11 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
                     <div>
                       H{doc.hall} {doc.boothNumber}
                     </div>
-                    {isStamped ? (
+                    {isStamped && (
                       <div className="absolute -top-1 -right-1 rotate-12 drop-shadow-sm">
                         <TicketCheck size={30} />
                       </div>
-                    ) : null}
+                    )}
                   </div>
                 </button>
               );
