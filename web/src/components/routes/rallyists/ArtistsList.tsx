@@ -1,5 +1,6 @@
+import { useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
-import { TicketCheck } from "lucide-react";
+import { MapIcon, TicketCheck } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,6 +21,7 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
   const { data: standistsList } = useStandists();
   const [artistDrawerOpen, setArtistDrawerOpen] = useState(false);
   const [activeStandistId, setActiveStandistId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -29,7 +31,22 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
         activeStandistId={activeStandistId}
       />
       <div className={"mb-4"}>
-        <Header>{t("artistList")}</Header>
+        <Header>
+          <div className="flex w-full justify-between">
+            <div className="content-center">{t("artists")}</div>
+            <button
+              className="ml-4 flex cursor-pointer items-center gap-2 rounded-xl bg-secondary p-2 text-xl"
+              onClick={() => {
+                void navigate({
+                  to: "/map",
+                });
+              }}
+            >
+              <MapIcon />
+              {t("map")}
+            </button>
+          </div>
+        </Header>
         <p className="my-4 text-center text-xl">
           {t("stampsCount", {
             count: stamps.length,

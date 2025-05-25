@@ -29,7 +29,7 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
         {artist.description}
       </DrawerDescription>
 
-      <Header>{artist.name}</Header>
+      <Header className="text-center">{artist.name}</Header>
 
       <div className={"flex flex-col items-center"}>
         <Suspense

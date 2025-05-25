@@ -1,8 +1,11 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import { List } from "lucide-react";
 import { useCallback, useState } from "react";
 
 import { MapLibreMap } from "@/components/MapLibreMap.tsx";
 import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
+import { ButtonGroupControl } from "@/components/map/ButtonGroupControl";
+import { MapButton } from "@/components/map/MapButton";
 
 export const Route = createLazyFileRoute("/_rallyists/map")({
   component: StandMap,
@@ -17,6 +20,8 @@ function StandMap() {
     setActiveStandistId(standId);
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <ArtistDrawer
@@ -24,7 +29,13 @@ function StandMap() {
         setOpen={setArtistDrawerOpen}
         activeStandistId={activeStandistId}
       />
-      <MapLibreMap onStandClick={onStandClick} />
+      <MapLibreMap onStandClick={onStandClick}>
+        <ButtonGroupControl placement="top-right">
+          <MapButton onClick={() => navigate({ to: "/artists" })}>
+            <List size={20} />
+          </MapButton>
+        </ButtonGroupControl>
+      </MapLibreMap>
     </>
   );
 }
