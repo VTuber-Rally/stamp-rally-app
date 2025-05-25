@@ -10,7 +10,7 @@ export const Header: FC<HeaderProps> = ({ className, children }) => {
   return (
     <h1
       className={clsx(
-        "flex items-center justify-center text-center",
+        "flex items-center text-center",
         "min-h-20 w-full break-words text-black",
         "mb-2 p-4 text-3xl font-bold",
         className,
