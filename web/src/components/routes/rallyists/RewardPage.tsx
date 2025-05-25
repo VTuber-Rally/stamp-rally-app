@@ -11,9 +11,10 @@ export function RewardPage() {
     <>
       <Header>{t("reward.title")}</Header>
 
-      <RallyBlock />
-
-      <ContestBlock />
+      <div className="flex flex-col gap-2">
+        <RallyBlock />
+        <ContestBlock />
+      </div>
 
       <div className="mt-4 text-center text-sm text-gray-500">
         {t("reward.disclaimer")}

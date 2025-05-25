@@ -6,6 +6,7 @@ import { ContestParticipant } from "@vtube-stamp-rally/shared-lib/models/Contest
 
 import Loader from "@/components/Loader";
 import { ButtonLink } from "@/components/controls/ButtonLink";
+import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
 import { useFollowParticipation } from "@/lib/hooks/contest/useFollowParticipation";
 import { useIsEligibleForContest } from "@/lib/hooks/contest/useIsEligibleForContest";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions";
@@ -70,7 +71,7 @@ export const ContestBlock = () => {
   };
 
   return (
-    <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
+    <ShadowBox>
       <div className="mb-4 flex items-center">
         <Award className="mr-2 h-6 w-6 text-primary" />
         <h2 className="text-xl font-semibold">{t("reward.contest.title")}</h2>
@@ -138,6 +139,6 @@ export const ContestBlock = () => {
           <ContestButton />
         </>
       )}
-    </div>
+    </ShadowBox>
   );
 };

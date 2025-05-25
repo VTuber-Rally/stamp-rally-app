@@ -15,6 +15,7 @@ import { CreateAccountForm } from "@/components/forms/CreateAccountForm.tsx";
 import { Checkbox } from "@/components/inputs/Checkbox.tsx";
 import InputField from "@/components/inputs/InputField";
 import { Header } from "@/components/layout/Header.tsx";
+import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
 import { AnalyticsOptOut } from "@/components/routes/AnalyticsOptOut.tsx";
 import { getPrefs, setPref } from "@/lib/appwrite.ts";
 import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
@@ -145,7 +146,7 @@ function SettingsPage() {
       <Header>{t("settings.title")}</Header>
       {isUserLoggedIn ? (
         <>
-          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+          <ShadowBox>
             <h1 className="mb-4 text-2xl">{t("account")}</h1>
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -227,21 +228,21 @@ function SettingsPage() {
             >
               {t(i18nKeyButton)}
             </ButtonLink>
-          </div>
+          </ShadowBox>
         </>
       ) : (
         <>
-          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+          <ShadowBox>
             <CreateAccountForm />
             <p className="mt-4">{t("alreadyHaveAccount")}</p>
             <ButtonLink size={"small"} href="/login" className="mt-2">
               {t("loginThere")}
             </ButtonLink>
-          </div>
+          </ShadowBox>
         </>
       )}
 
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+      <ShadowBox>
         <div className={"flex flex-col items-center"}>
           <h1 className={"text-2xl"}>{t("language.title")}</h1>
           <h1 className={"text-xl"}>{t("language.description")}</h1>
@@ -266,15 +267,15 @@ function SettingsPage() {
             </button>
           </div>
         </div>
-      </div>
+      </ShadowBox>
 
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+      <ShadowBox>
         <h1 className={"text-center text-2xl"}>{t("analyticsOptOut.title")}</h1>
         <p className={"py-2 text-sm text-gray-700"}>
           {t("analyticsOptOut.description")}
         </p>
         <AnalyticsOptOut />
-      </div>
+      </ShadowBox>
     </div>
   );
 }

@@ -204,6 +204,14 @@
       "title": "Impossible de modifier le paramètre de notifications",
       "description": "La connexion au serveur de notifications n'a pas pu être établie."
     },
+    "nudge": {
+      "title": "Soyez à l'affût",
+      "description": "Si vous êtes d'accord, une gentille notification vous rappellera de vous rendre au concours shikishi du rally. À la clé, une commission aquarelle gratuite de Sedeto !",
+      "button": "Activer les notifications",
+      "done": "Notifications activées !",
+      "reminder": "Vous pouvez désactiver ces notifications dans le menu Paramètres.",
+      "ignore": "Ignorer et ne plus montrer ce message"
+    },
     "templates": {
       "contest": {
         "title": "Le concours du Rally VTuber commence bientôt !",

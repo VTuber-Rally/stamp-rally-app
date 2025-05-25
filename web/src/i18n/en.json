@@ -203,6 +203,14 @@
       "title": "Cannot toggle notifications",
       "description": "A connection to the notification backend could not be established."
     },
+    "nudge": {
+      "title": "Stay informed",
+      "description": "If you agree, a friendly notification will remind you to go to the rally's shikishi contest. The prize is a free watercolor commission from Sedeto!",
+      "button": "Enable notifications",
+      "done": "Notifications enabled!",
+      "reminder": "You can disable them later in the Settings menu.",
+      "ignore": "Ignore and don't show this again"
+    },
     "templates": {
       "contest": {
         "title": "VTuber Rally contest begins soon!",
