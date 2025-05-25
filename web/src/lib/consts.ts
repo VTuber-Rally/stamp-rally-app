@@ -13,7 +13,8 @@ const {
   VITE_GET_PRIVATE_KEY_FUNCTION_ID: getPrivateKeyFunctionId,
   VITE_KV_COLLECTION_ID: keyValueCollectionId,
   VITE_ASSETS_BUCKET_ID: assetsBucketId,
-  VITE_STAMPS_TO_COLLECT,
+  VITE_STANDARD_REWARD_MIN_STAMPS_REQUIREMENT,
+  VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT,
   VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: contestParticipantsCollectionId,
   VITE_REGISTER_CONTEST_PARTICIPANT_FUNCTION_ID:
     registerContestParticipantFunctionId,
@@ -33,7 +34,12 @@ const {
   PROD: isProd,
 } = import.meta.env;
 
-const stampsToCollect = parseInt(VITE_STAMPS_TO_COLLECT);
+const standardRewardMinStampsRequirement = parseInt(
+  VITE_STANDARD_REWARD_MIN_STAMPS_REQUIREMENT,
+);
+const premiumRewardMinStampsRequirement = parseInt(
+  VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT,
+);
 
 const firebaseConfig = {
   apiKey: firebaseApiKey,
@@ -61,7 +67,8 @@ export {
   keyValueCollectionId,
   getPrivateKeyFunctionId,
   assetsBucketId,
-  stampsToCollect,
+  standardRewardMinStampsRequirement,
+  premiumRewardMinStampsRequirement,
   isDev,
   isProd,
   contestParticipantsCollectionId,

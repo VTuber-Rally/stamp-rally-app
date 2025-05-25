@@ -20,7 +20,8 @@ interface ImportMetaEnv {
   VITE_KV_COLLECTION_ID: string;
   VITE_ASSETS_BUCKET_ID: string;
 
-  VITE_STAMPS_TO_COLLECT: string;
+  readonly VITE_STANDARD_REWARD_MIN_STAMPS_REQUIREMENT: string;
+  readonly VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT: string;
   VITE_EVENT_END_DATE: string;
 
   readonly VITE_FIREBASE_API_KEY: string;
