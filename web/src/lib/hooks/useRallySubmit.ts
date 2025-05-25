@@ -10,7 +10,7 @@ import { db } from "@/lib/db.ts";
 import { functions } from "../appwrite.ts";
 import { useCollectedStamps } from "./useCollectedStamps.ts";
 
-const useRallySubmit = () => {
+const useRallySubmit = ({ onSuccess }: { onSuccess?: () => void } = {}) => {
   const { data: stamps } = useCollectedStamps();
   const queryClient = useQueryClient();
 
@@ -57,7 +57,15 @@ const useRallySubmit = () => {
           },
         );
 
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SUBMISSIONS] });
+      queryClient.invalidateQueries({
+        queryKey: [
+          QUERY_KEYS.SUBMISSIONS,
+          QUERY_KEYS.STAMPS,
+          QUERY_KEYS.CONTEST_ELIGIBILITY,
+        ],
+      });
+
+      onSuccess?.();
     },
   });
 

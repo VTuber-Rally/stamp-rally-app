@@ -1,83 +1,90 @@
 import { Link } from "@tanstack/react-router";
-import clsx from "clsx";
-import { Gift } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { ExternalLink, Gift } from "lucide-react";
+import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
-import QRCodeLink from "@/components/controls/QRCodeLink";
+import { Accordion, AccordionItem } from "@/components/layout/Accordion.tsx";
 import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
-import { stampsToCollect } from "@/lib/consts";
-import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
+import { RewardsAvailabilityList } from "@/components/reward/RewardsAvailabilityList.tsx";
+import { SubmitDrawer } from "@/components/reward/SubmitDrawer.tsx";
 
 export const RallyBlock = () => {
   const { t } = useTranslation();
-  const { data: stamps, error: stampsError } = useCollectedStamps();
-  const { data: submissions, error: submissionsError } = useRallySubmissions();
-  const hasSubmitted = !!submissions && submissions.length > 0;
 
-  if (stampsError || submissionsError) {
-    return (
-      <ShadowBox>
-        <p className="text-red-500">{t("errors.dataFetchFailed")}</p>
-      </ShadowBox>
-    );
-  }
+  const [isSubmitDrawerOpen, setIsSubmitDrawerOpen] = useState(false);
+  const openSubmitDrawer = () => {
+    setIsSubmitDrawerOpen(true);
+  };
 
   return (
-    <ShadowBox>
-      <div className="mb-4 flex items-center">
-        <Gift className="mr-2 h-6 w-6 text-primary" />
-        <h2 className="text-xl font-semibold">{t("reward.rally.title")}</h2>
-      </div>
-      <p className="mb-4 text-gray-700">
-        {t("reward.rally.description", {
-          minimumStampsCount: stampsToCollect,
-        })}
-      </p>
+    <>
+      <SubmitDrawer open={isSubmitDrawerOpen} setOpen={setIsSubmitDrawerOpen} />
+      <ShadowBox>
+        <div className="mb-4 flex items-center">
+          <Gift className="mr-2 h-6 w-6 text-primary" />
+          <h2 className="text-xl font-semibold">{t("reward.rally.title")}</h2>
+        </div>
+        <p className="mb-4 text-gray-700">{t("reward.rally.description")}</p>
 
-      <div
-        className={clsx(
-          "mb-4 rounded-lg p-3 shadow-md",
-          stamps
-            ? stamps.length >= stampsToCollect
-              ? "bg-green-200/30"
-              : "bg-red-200/15"
-            : "bg-gray-50",
-        )}
-      >
-        <div className="flex items-center justify-between">
-          <span className="font-medium text-gray-700">
-            {stamps
-              ? t("reward.rally.inProgress", {
-                  count: stamps.length,
-                  total: stampsToCollect,
-                })
-              : t("loading")}
-          </span>
-          <Link
-            to="/artists"
-            className="hover:text-primary-dark text-sm font-medium text-primary"
+        <RallyProgressBar />
+
+        <Accordion>
+          <AccordionItem
+            value="rewards"
+            title={t("reward.rally.faq.rewards.title")}
           >
-            {t("reward.rally.button")}
+            <div className="px-1 py-2">
+              <RewardsAvailabilityList />
+            </div>
+          </AccordionItem>
+          <AccordionItem
+            value="submissions"
+            title={t("reward.rally.faq.submissions.title")}
+          >
+            <p className="px-1 py-2">
+              {t("reward.rally.faq.submissions.description.1")}
+              <br />
+              {t("reward.rally.faq.submissions.description.2")}
+            </p>
+          </AccordionItem>
+          <AccordionItem
+            value="help"
+            title={t("reward.rally.faq.stamps.title")}
+          >
+            <p className="px-1 py-2">
+              <Trans
+                t={t}
+                i18nKey="reward.rally.faq.stamps.description"
+                components={{
+                  em: <em />,
+                }}
+              />
+              <ButtonLink size="small" href="/artists">
+                {t("artistList")}
+              </ButtonLink>
+            </p>
+          </AccordionItem>
+          <AccordionItem
+            value="replay"
+            title={t("reward.rally.faq.replay.title")}
+          >
+            <p className="px-1 py-2">
+              {t("reward.rally.faq.replay.description")}
+            </p>
+          </AccordionItem>
+        </Accordion>
+        <ButtonLink type="button" onClick={openSubmitDrawer} size="medium">
+          {t("currentRallyBlock.submitAction")}
+        </ButtonLink>
+        <div className="mt-2 text-center">
+          <Link to={"/reward/submissions"}>
+            {t("reward.rally.button")}{" "}
+            <ExternalLink className="inline-block align-middle" />
           </Link>
         </div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center gap-2">
-        <QRCodeLink size="medium" />
-
-        {((stamps && stamps.length >= stampsToCollect) || hasSubmitted) && (
-          <ButtonLink
-            type="link"
-            href="/reward/submit"
-            size="medium"
-            bg="success-orange"
-          >
-            {t("requestYourReward")}
-          </ButtonLink>
-        )}
-      </div>
-    </ShadowBox>
+      </ShadowBox>
+    </>
   );
 };
