@@ -45,16 +45,17 @@ export const ButtonLink: FC<
   className = "",
 }) => {
   const combinedClassName = clsx(
-    "cursor-pointer text-center text-black px-2 py-4 w-full max-w-xl flex justify-center items-center rounded-2xl font-bold shadow-md border border-gray-200",
+    "text-center text-black px-2 py-4 w-full max-w-xl flex justify-center items-center rounded-2xl font-bold shadow-md border border-gray-200",
     size === "big" && "h-20 text-2xl mt-4",
-    size === "medium" && "h-15 text-xl mt-2",
+    size === "medium" && "h-15 text-xl mt-4",
     size === "small" && "h-10 text-lg mt-2",
     (bg === undefined || bg === "secondary") && "bg-secondary",
     bg === "tertiary" && "bg-tertiary",
     bg === "success-orange" && "bg-success-orange",
     bg === "dangerous" && "bg-red-500/80",
     bg === null && "",
-    disabled && "opacity-75 cursor-not-allowed",
+    !disabled && "cursor-pointer",
+    disabled && "opacity-65 cursor-not-allowed",
     className,
   );
 

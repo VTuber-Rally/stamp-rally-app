@@ -1,14 +1,14 @@
 import {
-  Calendar,
   Dices,
   QrCode,
   Repeat,
+  Sparkles,
   TicketCheck,
   Users,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { stampsToCollect } from "@/lib/consts.ts";
+import { standardRewardMinStampsRequirement } from "@/lib/consts.ts";
 
 const Intro = () => {
   const { t } = useTranslation();
@@ -25,18 +25,22 @@ const Intro = () => {
         </li>
         <li className={"flex items-center"}>
           <TicketCheck size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.3", { minimumStampsCount: stampsToCollect })}</span>
+          <span>
+            {t("rally.3", {
+              minimumStampsCount: standardRewardMinStampsRequirement,
+            })}
+          </span>
         </li>
         <li className={"flex items-center"}>
-          <Dices size={36} className={"mr-2 shrink-0"} />
+          <Sparkles size={36} className={"mr-2 shrink-0"} />
           <span>{t("rally.4")}</span>
         </li>
         <li className={"flex items-center"}>
-          <Repeat size={36} className={"mr-2 shrink-0"} />
+          <Dices size={36} className={"mr-2 shrink-0"} />
           <span>{t("rally.5")}</span>
         </li>
         <li className={"flex items-center"}>
-          <Calendar size={36} className={"mr-2 shrink-0"} />
+          <Repeat size={36} className={"mr-2 shrink-0"} />
           <span>{t("rally.6")}</span>
         </li>
       </ul>

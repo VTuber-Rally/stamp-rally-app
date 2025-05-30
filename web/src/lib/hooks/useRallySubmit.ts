@@ -57,7 +57,13 @@ const useRallySubmit = () => {
           },
         );
 
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SUBMISSIONS] });
+      queryClient.invalidateQueries({
+        queryKey: [
+          QUERY_KEYS.SUBMISSIONS,
+          QUERY_KEYS.STAMPS,
+          QUERY_KEYS.CONTEST_ELIGIBILITY,
+        ],
+      });
     },
   });
 
