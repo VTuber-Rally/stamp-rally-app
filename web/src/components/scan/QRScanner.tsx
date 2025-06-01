@@ -12,15 +12,12 @@ interface QRScannerProps {
 const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
   const { t } = useTranslation();
 
-  // Références pour les éléments DOM et l'instance QrScanner
   const qrScannerRef = useRef<QrScanner | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // États du composant
   const [qrOn, setQrOn] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Fonction pour créer l'instance QrScanner
   const createQrScanner = useCallback(() => {
     if (!videoRef.current) return;
 
@@ -35,10 +32,9 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
       },
       {
         onDecodeError: (error) => {
-          // Gestion silencieuse des erreurs de décodage (normales pendant le scan)
           console.debug("Erreur de décodage QR (normale):", error);
         },
-        preferredCamera: "environment", // Caméra arrière par défaut
+        preferredCamera: "environment",
         highlightScanRegion: false,
         highlightCodeOutline: false,
       },
@@ -47,7 +43,6 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
     return qrScanner;
   }, [onScanSuccess]);
 
-  // Effet pour initialiser et gérer le scanner
   useEffect(() => {
     if (!videoRef.current) return;
 
@@ -58,7 +53,6 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
 
     qrScannerRef.current = qrScanner;
 
-    // Démarrer le scanner
     qrScanner
       .start()
       .then(() => {
@@ -84,7 +78,6 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
 
   return (
     <div className="relative mx-auto w-full max-w-md">
-      {/* Indicateur de chargement */}
       {isLoading && (
         <div className="bg-opacity-50 absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-black">
           <div className="text-center text-white">
@@ -94,7 +87,7 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
         </div>
       )}
 
-      {/* Élément vidéo pour le flux de la caméra - Format carré */}
+      {/* Flux de la caméra, au format carré */}
       {qrOn && (
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-black">
           <video
@@ -109,14 +102,12 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
       {/* Overlay avec cadre de scan */}
       {qrOn && !isLoading && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          {/* Cadre de scan */}
           <div className="relative">
             <img
               src={QrFrame}
               alt={t("qrScanner.scanFrame")}
               className="h-64 w-64 opacity-90"
             />
-            {/* Instructions pour l'utilisateur */}
             <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 transform whitespace-nowrap">
               <p className="bg-opacity-70 rounded-lg bg-black px-3 py-2 text-sm text-white">
                 {t("qrScanner.instruction")}
