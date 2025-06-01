@@ -309,6 +309,13 @@
     "nativeCameraHint": "If you're experiencing issues, please try using your device's Camera app to scan the QR code.",
     "title": "Scan a QR Code"
   },
+  "qrScanner": {
+    "loading": "Loading camera…",
+    "scanFrame": "QR scan frame",
+    "instruction": "Place the QR code in the frame",
+    "noCameraAccess": "Unable to access camera",
+    "checkPermissions": "Check your browser permissions"
+  },
   "scanThisQR": "Scan this QR code to get the stamp!",
   "settings": {
     "title": "Settings",
