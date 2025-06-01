@@ -11,7 +11,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/layout/Drawer.tsx";
-import QrReader from "@/components/scan/QrReader.tsx";
+import QRScanner from "@/components/scan/QRScanner";
 import { useQRDrawerContext } from "@/contexts/useQRDrawerContext.ts";
 import { retrieveInfosFromQRCode } from "@/lib/StampQRCodes.ts";
 
@@ -31,7 +31,7 @@ export const QRCodeDrawer = () => {
         {error && (
           <p className="px-4 py-2 text-center text-red-600">{error.message}</p>
         )}
-        <QrReader
+        <QRScanner
           onScanSuccess={(result) => {
             try {
               const { type, hash } = retrieveInfosFromQRCode(result.data);
@@ -46,7 +46,6 @@ export const QRCodeDrawer = () => {
               if (e instanceof Error) setError(e);
             }
           }}
-          onCameraAccessFail={() => console.log("oh no, no camera :(")}
         />
         <p className="px-4 py-2 text-center text-xs text-gray-600">
           {t("scanQRDrawer.nativeCameraHint")}
