@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useBlocker, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,6 +20,16 @@ export const QRCodeDrawer = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [error, setError] = useState<Error | null>(null);
+
+  useBlocker({
+    shouldBlockFn: () => {
+      if (open) {
+        setOpen(false);
+        return true;
+      }
+      return false;
+    },
+  });
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
