@@ -6,8 +6,13 @@
       "$id": "668315b50900e5b86354",
       "name": "submit-rally",
       "runtime": "node-20.0",
-      "execute": ["any"],
-      "scopes": ["documents.read", "documents.write"],
+      "execute": [
+        "any"
+      ],
+      "scopes": [
+        "documents.read",
+        "documents.write"
+      ],
       "events": [],
       "schedule": "",
       "timeout": 15,
@@ -21,8 +26,12 @@
       "$id": "118315b50900e5b86311",
       "name": "get-private-key",
       "runtime": "node-20.0",
-      "execute": ["label:staff"],
-      "scopes": ["users.read"],
+      "execute": [
+        "label:staff"
+      ],
+      "scopes": [
+        "users.read"
+      ],
       "events": [],
       "schedule": "",
       "timeout": 15,
@@ -36,9 +45,15 @@
       "$id": "67d7f57300140a6901bd",
       "name": "register-contest-participant",
       "runtime": "node-20.0",
-      "execute": ["users"],
+      "execute": [
+        "users"
+      ],
       "events": [],
-      "scopes": ["users.read", "documents.read", "documents.write"],
+      "scopes": [
+        "users.read",
+        "documents.read",
+        "documents.write"
+      ],
       "schedule": "",
       "timeout": 15,
       "enabled": true,
@@ -56,7 +71,10 @@
       "enabled": true,
       "logging": true,
       "runtime": "node-20.0",
-      "scopes": ["messages.read", "messages.write"],
+      "scopes": [
+        "messages.read",
+        "messages.write"
+      ],
       "events": [],
       "schedule": "",
       "timeout": 15,
@@ -75,7 +93,9 @@
   "collections": [
     {
       "$id": "6675f3a2000e52a39b67",
-      "$permissions": ["read(\"any\")"],
+      "$permissions": [
+        "read(\"any\")"
+      ],
       "databaseId": "6675f377000709b0db07",
       "name": "standists",
       "enabled": true,
@@ -237,7 +257,7 @@
       "documentSecurity": true,
       "attributes": [
         {
-          "key": "generated",
+          "key": "expiry",
           "type": "datetime",
           "required": true,
           "array": false,
@@ -289,7 +309,10 @@
     },
     {
       "$id": "668dae8c0038a25a95db",
-      "$permissions": ["read(\"label:staff\")", "update(\"label:staff\")"],
+      "$permissions": [
+        "read(\"label:staff\")",
+        "update(\"label:staff\")"
+      ],
       "databaseId": "6675f377000709b0db07",
       "name": "prizes",
       "enabled": true,
@@ -388,8 +411,12 @@
           "key": "index_1",
           "type": "key",
           "status": "available",
-          "attributes": ["key"],
-          "orders": ["ASC"]
+          "attributes": [
+            "key"
+          ],
+          "orders": [
+            "ASC"
+          ]
         }
       ]
     },
@@ -452,7 +479,9 @@
   "buckets": [
     {
       "$id": "rally2025-assets",
-      "$permissions": ["read(\"any\")"],
+      "$permissions": [
+        "read(\"any\")"
+      ],
       "fileSecurity": false,
       "name": "avatars",
       "enabled": true,

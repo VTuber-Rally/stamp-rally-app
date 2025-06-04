@@ -24,7 +24,7 @@ export const db = new Dexie("StampRally") as Dexie & {
   contestParticipations: EntityTable<ContestParticipation, "id">;
 };
 
-db.version(3).stores({
+db.version(4).stores({
   stamps: stampIndexes,
   standists: standistIndexes,
   submissions: submissionIndexes,

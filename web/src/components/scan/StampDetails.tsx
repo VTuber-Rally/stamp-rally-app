@@ -1,11 +1,4 @@
-import {
-  CalendarCogIcon,
-  Printer,
-  ScanSearch,
-  ShieldCheck,
-  TicketMinus,
-  TicketPlus,
-} from "lucide-react";
+import { ScanSearch, ShieldCheck, TicketMinus, TicketPlus } from "lucide-react";
 import { FC, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -35,22 +28,6 @@ export const StampDetails: FC<StampDetailsProps> = ({ stamp, standist }) => {
         {t("stampDetails.summary")}
       </summary>
       <ul className="space-y-1">
-        {stamp.timestamp === -1 ? (
-          <StampLine>
-            <Printer />
-            {t("stampDetails.paperStamp")}
-          </StampLine>
-        ) : (
-          <StampLine>
-            <CalendarCogIcon />
-            {t("stampDetails.generatedAt", {
-              dateTime: new Date(stamp.timestamp).toLocaleString(undefined, {
-                dateStyle: "long",
-                timeStyle: "medium",
-              }),
-            })}
-          </StampLine>
-        )}
         <StampLine>
           <ScanSearch />
           {t("stampDetails.scannedAt", {

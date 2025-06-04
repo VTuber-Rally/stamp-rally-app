@@ -1,4 +1,5 @@
 import { ArrowUpRightFromSquare } from "lucide-react";
+import { useState } from "react";
 
 import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
@@ -12,15 +13,28 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/layout/Table";
+import { QRCodeSettings } from "@/components/routes/staff/QRCodeGen/QRCodeSettings.tsx";
 import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
 
 function StampLinksArtistsList() {
   const { data: standistsList } = useStandists();
 
+  const [perpetual, setPerpetual] = useState(false);
+  const [expiryDate, setExpiryDate] = useState<Date | null>(null);
+
   return (
     <div className={"mb-4"}>
       <Header>Liens des stamps par artiste</Header>
+      <QRCodeSettings
+        perpetual={perpetual}
+        onCheckedChange={setPerpetual}
+        expiryDate={expiryDate}
+        onExpiryChange={(e) =>
+          setExpiryDate(e.target.value ? new Date(e.target.value) : null)
+        }
+        resetExpiry={() => setExpiryDate(null)}
+      />
       {standistsList && (
         <Table className={"gap-4 overflow-x-scroll"}>
           <TableHeader>
@@ -31,7 +45,11 @@ function StampLinksArtistsList() {
           </TableHeader>
           <TableBody>
             {standistsList.map((doc) => (
-              <StampLinksArtistRow key={doc.userId} doc={doc} />
+              <StampLinksArtistRow
+                key={doc.userId}
+                doc={doc}
+                expiry={expiryDate}
+              />
             ))}
           </TableBody>
         </Table>
@@ -40,8 +58,14 @@ function StampLinksArtistsList() {
   );
 }
 
-const StampLinksArtistRow = ({ doc }: { doc: Standist }) => {
-  const { data: qrValue } = useStaffQRCode(doc.userId, false);
+const StampLinksArtistRow = ({
+  doc,
+  expiry,
+}: {
+  doc: Standist;
+  expiry: Date | null;
+}) => {
+  const { data: qrValue } = useStaffQRCode(doc.userId, false, expiry);
 
   return (
     <TableRow key={doc.userId}>

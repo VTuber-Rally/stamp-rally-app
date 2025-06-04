@@ -1,10 +1,10 @@
-import { Cog, RefreshCcw, TicketCheck } from "lucide-react";
+import { RefreshCcw, TicketCheck } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
-import { Switch } from "@/components/inputs/Switch.tsx";
 import { Header } from "@/components/layout/Header.tsx";
+import { QRCodeSettings } from "@/components/routes/staff/QRCodeGen/QRCodeSettings.tsx";
 import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
 
@@ -16,8 +16,13 @@ const QRCodeGenPage = ({ userId }: { userId: string }) => {
   const standist = standists.find((s) => s.userId === userId);
 
   const [perpetual, setPerpetual] = useState(false);
+  const [expiryDate, setExpiryDate] = useState<Date | null>(null);
 
-  const { isLoading, error, data: qrValue } = useStaffQRCode(userId, perpetual);
+  const {
+    isLoading,
+    error,
+    data: qrValue,
+  } = useStaffQRCode(userId, perpetual, expiryDate);
 
   return (
     <div className={"flex flex-col items-center"}>
@@ -54,20 +59,15 @@ const QRCodeGenPage = ({ userId }: { userId: string }) => {
             {tEN("QRRenewNotice")}
           </p>
         </div>
-        <details className="group border-4 border-dashed border-secondary-light p-2">
-          <summary className="flex items-center justify-center gap-1 select-none group-open:pb-2">
-            <Cog /> QR Settings
-          </summary>
-          {perpetual ? "Perpetual QR code" : "One-time QR code"}
-          <div className="mt-2 flex items-center space-x-2">
-            <Switch
-              id="perpetual-qrcode"
-              checked={perpetual}
-              onCheckedChange={setPerpetual}
-            />
-            <label htmlFor="perpetual-qrcode">Perpetual QR code</label>
-          </div>
-        </details>
+        <QRCodeSettings
+          perpetual={perpetual}
+          onCheckedChange={setPerpetual}
+          expiryDate={expiryDate}
+          onExpiryChange={(e) =>
+            setExpiryDate(e.target.value ? new Date(e.target.value) : null)
+          }
+          resetExpiry={() => setExpiryDate(null)}
+        />
       </div>
     </div>
   );
