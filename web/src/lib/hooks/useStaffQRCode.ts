@@ -1,5 +1,9 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 
+import {
+  GetPrivateKeyFunctionRequest,
+  GetPrivateKeyFunctionResponse,
+} from "@vtube-stamp-rally/shared-lib/functions/getPrivateKey.ts";
 import { signData } from "@vtube-stamp-rally/shared-lib/signatures.ts";
 
 import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
@@ -33,15 +37,6 @@ function usePrivateKey(userId: string, key?: JsonWebKey) {
 }
 
 // TODO: refactor with ev
-type FunctionReturnType =
-  | {
-      status: "success";
-      privateKey: JsonWebKey;
-    }
-  | {
-      status: "error";
-      message: string;
-    };
 
 const usePrivateKeyJWK = (userId: string) => {
   return useQuery({
@@ -49,10 +44,12 @@ const usePrivateKeyJWK = (userId: string) => {
     queryFn: async () => {
       const resp = await functions.createExecution(
         getPrivateKeyFunctionId,
-        JSON.stringify({ userId }),
+        JSON.stringify({ userId } satisfies GetPrivateKeyFunctionRequest),
       );
 
-      const respJson = JSON.parse(resp.responseBody) as FunctionReturnType;
+      const respJson = JSON.parse(
+        resp.responseBody,
+      ) as GetPrivateKeyFunctionResponse;
 
       if (respJson.status !== "success") {
         throw new Error(respJson.message);
@@ -67,8 +64,11 @@ const generateQRCode = async (
   userId: string,
   privateKey: CryptoKey,
   perpetual: boolean,
+  expiryDate: number | undefined = Date.now() + 2 * 60 * 1000, // 2 minutes comme avant
 ) => {
-  const data = [userId, perpetual ? -1 : Date.now()] as const;
+  const expiryTimestamp = perpetual ? -1 : expiryDate;
+
+  const data = [userId, expiryTimestamp] as const;
   const signature = await signData(privateKey, data);
 
   const codeData = encodeStampToQRCode([...data, signature]);
@@ -78,15 +78,20 @@ const generateQRCode = async (
   };
 };
 
-export function useStaffQRCode(userId: string, perpetual: boolean) {
+export function useStaffQRCode(
+  userId: string,
+  perpetual: boolean,
+  expiryDate: Date | null,
+) {
   const { data: privateKeyJWK } = usePrivateKeyJWK(userId);
 
   const privateKey = usePrivateKey(userId, privateKeyJWK);
 
   const { isLoading, error, data } = useQuery({
-    queryKey: [QUERY_KEYS.NEW_QR_CODE, userId, perpetual],
+    queryKey: [QUERY_KEYS.NEW_QR_CODE, userId, perpetual, expiryDate],
     queryFn: privateKey
-      ? () => generateQRCode(userId, privateKey, perpetual)
+      ? () =>
+          generateQRCode(userId, privateKey, perpetual, expiryDate?.getTime())
       : skipToken,
     refetchInterval: 5 * 1000,
     staleTime: 1000 * 60,

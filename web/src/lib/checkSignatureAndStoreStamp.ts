@@ -17,7 +17,7 @@ function invalidateStamps() {
 }
 
 export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
-  const [standistId, timestamp, signature] = stamp;
+  const [standistId, expiryTimestamp, signature] = stamp;
 
   const standist = (await getStandists()).find(
     (standist) => standist.userId === standistId,
@@ -30,7 +30,7 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
 
   const stampRecord = {
     standistId,
-    timestamp,
+    expiryTimestamp,
     signature,
     submitted: false,
     scanTimestamp: Date.now(),
@@ -43,14 +43,14 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
 
   if (
     alreadyExistingStampRecord &&
-    alreadyExistingStampRecord.timestamp === stampRecord.timestamp
+    alreadyExistingStampRecord.expiryTimestamp === stampRecord.expiryTimestamp
   ) {
     return { ...stampRecord, updated: true };
   }
 
   // si timestamp de -1, alors on saute la vérification de l'âge
-  if (stampRecord.timestamp !== -1) {
-    if (stampRecord.scanTimestamp - stampRecord.timestamp > 2 * 60 * 1000) {
+  if (stampRecord.expiryTimestamp !== -1) {
+    if (stampRecord.scanTimestamp >= stampRecord.expiryTimestamp) {
       throw new IntegrityError("The QR code is too old");
     }
   }

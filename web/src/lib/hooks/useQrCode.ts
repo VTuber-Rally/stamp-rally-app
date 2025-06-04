@@ -48,7 +48,8 @@ export function useQrCode() {
     queryFn:
       privateKey && user
         ? async () => {
-            const data = [user.$id, Date.now()] as const;
+            const expiryTimestamp = Date.now() + 2 * 60 * 1000; // 2 minutes comme avant
+            const data = [user.$id, expiryTimestamp] as const;
             const signature = await signData(privateKey, data);
 
             const codeData = encodeStampToQRCode([...data, signature]);

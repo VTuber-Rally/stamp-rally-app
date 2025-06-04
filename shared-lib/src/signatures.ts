@@ -26,13 +26,13 @@ export async function verifyData(
   verificationKey: CryptoKey,
   payload: StampTuple,
 ) {
-  const [standistId, timestamp, signature] = payload;
+  const [standistId, expiryTimestamp, signature] = payload;
   const signatureBuffer = await dataUrlToBytes(signature);
   return crypto.subtle.verify(
     signAlgorithm,
     verificationKey,
     // we have to convert the ArrayBuffer to a Uint8Array because of a bug in JSDOM (somehow)
     new Uint8Array(signatureBuffer),
-    textEncoder.encode([standistId, timestamp].join(":")),
+    textEncoder.encode([standistId, expiryTimestamp].join(":")),
   );
 }

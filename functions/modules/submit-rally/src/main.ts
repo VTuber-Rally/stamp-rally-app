@@ -117,7 +117,7 @@ export default async ({
     log("signature: ");
     log(signature);
 
-    const dataToBeEncoded = [stamp.standistId, stamp.timestamp].join(":");
+    const dataToBeEncoded = [stamp.standistId, stamp.expiryTimestamp].join(":");
 
     const isValid = await crypto.subtle.verify(
       signAlgorithm,
@@ -150,7 +150,7 @@ export default async ({
 
     return {
       standist: standist.$id,
-      generated: new Date(stamp.timestamp).toISOString(),
+      expiry: new Date(stamp.expiryTimestamp).toISOString(),
       signature: stamp.signature,
       scanned: new Date(stamp.scanTimestamp).toISOString(),
       $permissions: [Permission.read(Role.user(userId))],
