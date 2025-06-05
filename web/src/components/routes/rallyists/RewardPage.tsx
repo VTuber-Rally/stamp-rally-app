@@ -9,7 +9,7 @@ export function RewardPage() {
 
   return (
     <>
-      <Header>{t("reward.title")}</Header>
+      <Header>{t("reward.pageTitle")}</Header>
 
       <div className="flex flex-col gap-2">
         <RallyBlock />

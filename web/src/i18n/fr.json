@@ -282,7 +282,8 @@
         }
       }
     },
-    "title": "Récompenses"
+    "pageTitle": "Récompenses",
+    "navbarTitle": "Récompense"
   },
   "rules": "Règles",
   "rules.1": "Le rally est entièrement numérique et accessible depuis votre smartphone, la page ne nécessite plus d'internet une fois qu'elle a été chargée une fois. Il sera accessible depuis ce site et depuis un QR code sur le stand de Sedeto (Hall 6, R687).",

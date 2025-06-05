@@ -29,7 +29,7 @@ const RallyistsHomepage = ({
       {showIntro && <Intro />}
 
       <ButtonLink href="/artists">{t("artistList")}</ButtonLink>
-      <ButtonLink href="/reward">{t("reward.title")}</ButtonLink>
+      <ButtonLink href="/reward">{t("reward.pageTitle")}</ButtonLink>
       <ButtonLink href="/map">{t("map")}</ButtonLink>
       <ButtonLink href="/rules" size="medium">
         {t("rules")}

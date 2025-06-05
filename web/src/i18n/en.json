@@ -282,7 +282,8 @@
         }
       }
     },
-    "title": "Rewards"
+    "pageTitle": "Rewards",
+    "navbarTitle": "Rewards"
   },
   "rules": "Rules",
   "rules.1": "The rally will be completely digital and won't need any 4G, since you loaded it once. The access link will be there and on the booth.",

@@ -110,7 +110,7 @@ export const RallyistNavbar = () => {
       <NavbarElement to={"/artists"} label={t("artists")}>
         <UsersRound className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
-      <NavbarElement to={"/reward"} label={t("reward.title")}>
+      <NavbarElement to={"/reward"} label={t("reward.navbarTitle")}>
         <Trophy className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarButton onClick={() => setQRCodeDrawer(true)} label={t("qrcode")}>
