@@ -131,7 +131,7 @@ function Stamp() {
         </p>
         {showSubmitButton && (
           <ButtonLink bg={"success-orange"} href="/reward">
-            {t("reward.title")}
+            {t("reward.pageTitle")}
           </ButtonLink>
         )}
         <ButtonLink href="/artists" bg="tertiary">
