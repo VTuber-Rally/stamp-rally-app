@@ -38,7 +38,7 @@ import { Route as RallyistsWithUserProviderNoAutoAnonymousSettingsImport } from 
 import { Route as RallyistsWithUserProviderNoAutoAnonymousLoginImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/login'
 import { Route as RallyistsWithUserProviderNoAutoAnonymousHandleLoginImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/handleLogin'
 import { Route as RallyistsWithUserProviderRewardIndexImport } from './routes/_rallyists/_withUserProvider/reward/index'
-import { Route as RallyistsWithUserProviderRewardSubmitImport } from './routes/_rallyists/_withUserProvider/reward/submit'
+import { Route as RallyistsWithUserProviderRewardSubmissionsImport } from './routes/_rallyists/_withUserProvider/reward/submissions'
 import { Route as RallyistsWithUserProviderRewardContestIndexImport } from './routes/_rallyists/_withUserProvider/reward/contest/index'
 import { Route as RallyistsWithUserProviderRewardContestSuccessImport } from './routes/_rallyists/_withUserProvider/reward/contest/success'
 import { Route as RallyistsWithUserProviderRewardContestNotEligibleImport } from './routes/_rallyists/_withUserProvider/reward/contest/not-eligible'
@@ -229,10 +229,10 @@ const RallyistsWithUserProviderRewardIndexRoute =
     getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
-const RallyistsWithUserProviderRewardSubmitRoute =
-  RallyistsWithUserProviderRewardSubmitImport.update({
-    id: '/reward/submit',
-    path: '/reward/submit',
+const RallyistsWithUserProviderRewardSubmissionsRoute =
+  RallyistsWithUserProviderRewardSubmissionsImport.update({
+    id: '/reward/submissions',
+    path: '/reward/submissions',
     getParentRoute: () => RallyistsWithUserProviderRoute,
   } as any)
 
@@ -471,11 +471,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeIndexImport
       parentRoute: typeof StaffImport
     }
-    '/_rallyists/_withUserProvider/reward/submit': {
-      id: '/_rallyists/_withUserProvider/reward/submit'
-      path: '/reward/submit'
-      fullPath: '/reward/submit'
-      preLoaderRoute: typeof RallyistsWithUserProviderRewardSubmitImport
+    '/_rallyists/_withUserProvider/reward/submissions': {
+      id: '/_rallyists/_withUserProvider/reward/submissions'
+      path: '/reward/submissions'
+      fullPath: '/reward/submissions'
+      preLoaderRoute: typeof RallyistsWithUserProviderRewardSubmissionsImport
       parentRoute: typeof RallyistsWithUserProviderImport
     }
     '/_rallyists/_withUserProvider/reward/': {
@@ -533,7 +533,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface RallyistsWithUserProviderRouteChildren {
-  RallyistsWithUserProviderRewardSubmitRoute: typeof RallyistsWithUserProviderRewardSubmitRoute
+  RallyistsWithUserProviderRewardSubmissionsRoute: typeof RallyistsWithUserProviderRewardSubmissionsRoute
   RallyistsWithUserProviderRewardIndexRoute: typeof RallyistsWithUserProviderRewardIndexRoute
   RallyistsWithUserProviderRewardContestCodeRoute: typeof RallyistsWithUserProviderRewardContestCodeRoute
   RallyistsWithUserProviderRewardContestContactRoute: typeof RallyistsWithUserProviderRewardContestContactRoute
@@ -545,8 +545,8 @@ interface RallyistsWithUserProviderRouteChildren {
 
 const RallyistsWithUserProviderRouteChildren: RallyistsWithUserProviderRouteChildren =
   {
-    RallyistsWithUserProviderRewardSubmitRoute:
-      RallyistsWithUserProviderRewardSubmitRoute,
+    RallyistsWithUserProviderRewardSubmissionsRoute:
+      RallyistsWithUserProviderRewardSubmissionsRoute,
     RallyistsWithUserProviderRewardIndexRoute:
       RallyistsWithUserProviderRewardIndexRoute,
     RallyistsWithUserProviderRewardContestCodeRoute:
@@ -686,7 +686,7 @@ export interface FileRoutesByFullPath {
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
-  '/reward/submit': typeof RallyistsWithUserProviderRewardSubmitRoute
+  '/reward/submissions': typeof RallyistsWithUserProviderRewardSubmissionsRoute
   '/reward': typeof RallyistsWithUserProviderRewardIndexRoute
   '/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
   '/reward/contest/contact': typeof RallyistsWithUserProviderRewardContestContactRoute
@@ -720,7 +720,7 @@ export interface FileRoutesByTo {
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
-  '/reward/submit': typeof RallyistsWithUserProviderRewardSubmitRoute
+  '/reward/submissions': typeof RallyistsWithUserProviderRewardSubmissionsRoute
   '/reward': typeof RallyistsWithUserProviderRewardIndexRoute
   '/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
   '/reward/contest/contact': typeof RallyistsWithUserProviderRewardContestContactRoute
@@ -759,7 +759,7 @@ export interface FileRoutesById {
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/_rallyists/artists/': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode/': typeof StaffGenQrcodeIndexRoute
-  '/_rallyists/_withUserProvider/reward/submit': typeof RallyistsWithUserProviderRewardSubmitRoute
+  '/_rallyists/_withUserProvider/reward/submissions': typeof RallyistsWithUserProviderRewardSubmissionsRoute
   '/_rallyists/_withUserProvider/reward/': typeof RallyistsWithUserProviderRewardIndexRoute
   '/_rallyists/_withUserProvider/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
   '/_rallyists/_withUserProvider/reward/contest/contact': typeof RallyistsWithUserProviderRewardContestContactRoute
@@ -797,7 +797,7 @@ export interface FileRouteTypes {
     | '/staff/submission/$submissionId'
     | '/artists'
     | '/staff/gen-qrcode'
-    | '/reward/submit'
+    | '/reward/submissions'
     | '/reward'
     | '/reward/contest/code'
     | '/reward/contest/contact'
@@ -830,7 +830,7 @@ export interface FileRouteTypes {
     | '/staff/submission/$submissionId'
     | '/artists'
     | '/staff/gen-qrcode'
-    | '/reward/submit'
+    | '/reward/submissions'
     | '/reward'
     | '/reward/contest/code'
     | '/reward/contest/contact'
@@ -867,7 +867,7 @@ export interface FileRouteTypes {
     | '/staff/submission/$submissionId'
     | '/_rallyists/artists/'
     | '/staff/gen-qrcode/'
-    | '/_rallyists/_withUserProvider/reward/submit'
+    | '/_rallyists/_withUserProvider/reward/submissions'
     | '/_rallyists/_withUserProvider/reward/'
     | '/_rallyists/_withUserProvider/reward/contest/code'
     | '/_rallyists/_withUserProvider/reward/contest/contact'
@@ -945,7 +945,7 @@ export const routeTree = rootRoute
       "filePath": "_rallyists/_withUserProvider.tsx",
       "parent": "/_rallyists",
       "children": [
-        "/_rallyists/_withUserProvider/reward/submit",
+        "/_rallyists/_withUserProvider/reward/submissions",
         "/_rallyists/_withUserProvider/reward/",
         "/_rallyists/_withUserProvider/reward/contest/code",
         "/_rallyists/_withUserProvider/reward/contest/contact",
@@ -1052,8 +1052,8 @@ export const routeTree = rootRoute
       "filePath": "staff/gen-qrcode/index.tsx",
       "parent": "/staff"
     },
-    "/_rallyists/_withUserProvider/reward/submit": {
-      "filePath": "_rallyists/_withUserProvider/reward/submit.tsx",
+    "/_rallyists/_withUserProvider/reward/submissions": {
+      "filePath": "_rallyists/_withUserProvider/reward/submissions.tsx",
       "parent": "/_rallyists/_withUserProvider"
     },
     "/_rallyists/_withUserProvider/reward/": {

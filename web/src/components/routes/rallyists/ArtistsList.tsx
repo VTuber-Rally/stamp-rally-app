@@ -9,7 +9,7 @@ import { StampWithId } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";
-import { stampsToCollect } from "@/lib/consts.ts";
+import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
 import { useStandists } from "@/lib/hooks/useStandists.ts";
 
 type ArtistsListProps = {
@@ -47,12 +47,7 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
             </button>
           </div>
         </Header>
-        <p className="my-4 text-center text-xl">
-          {t("stampsCount", {
-            count: stamps.length,
-            maxCount: stampsToCollect,
-          })}
-        </p>
+        <RallyProgressBar hideMarker />
         {standistsList && (
           <div className={"grid grid-cols-2 gap-4 overflow-x-clip"}>
             {standistsList.map((doc) => {

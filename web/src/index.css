@@ -12,6 +12,29 @@
   --color-tertiary: #f4b2c0;
   --color-success-orange: #fd9308;
   --color-background-black: rgba(0, 0, 0, 0.95);
+
+  --animate-accordion-slide-down: 300ms cubic-bezier(0.87, 0, 0.13, 1)
+    accordion-slide-down;
+  --animate-accordion-slide-up: 300ms cubic-bezier(0.87, 0, 0.13, 1)
+    accordion-slide-up;
+
+  @keyframes accordion-slide-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-slide-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
 }
 
 :root {
@@ -25,6 +48,10 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
+}
+
+.triangle-clip {
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
 }
 
 @keyframes spin {

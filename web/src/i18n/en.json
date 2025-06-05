@@ -8,7 +8,7 @@
   "aboutText": "Built with ❤️ by <1>Leon</1> and <2>Lucie</2>",
   "account": "Account",
   "alreadyHaveAccount": "Already have an account?",
-  "alreadySubmitted": "Submitted on {{date}}",
+  "alreadySubmitted": "Submitted on {{date}}<br/><1><icon/>{{count}} stamps</1>",
   "analyticsOptOut": {
     "description": "We use Plausible to collect anonymous statistics (number of visitors, number of stamps scanned, etc.). You can opt out here.",
     "optOut": "Do not use my data for statistics.",
@@ -235,33 +235,52 @@
   },
   "qrcode": "QR Code",
   "rally.1": "16 artists take part in this rally around VTubers",
-  "rally.2": "After making a purchase (minimum 2€) from an artist, you can scan a QR code",
-  "rally.3": "Once you've collected {{minimumStampsCount}} stamps, head over to Sedeto's stand to get a reward!",
-  "rally.4": "As soon as your submission is validated, enter the draw to win a shikishi from Sedeto!",
-  "rally.5": "You can replay as many times as you like!",
-  "rally.6": "You can span your rally over several days during the convention!",
+  "rally.2": "After making a purchase (minimum 2€) from a participant booth, scan the QR code to get a stamp",
+  "rally.3": "Once you've collected {{minimumStampsCount}} stamps, head over to Sedeto's booth to get a reward!",
+  "rally.4": "This year, try to win a holographic card by getting all the stamps!",
+  "rally.5": "Once you get your reward, enter the draw to win a shikishi from Sedeto!",
+  "rally.6": "You can replay as many times as you like while rewards last!",
   "redeemedSubmissions": "Redeemed submissions",
   "requestYourReward": "Request your reward!",
   "reward": {
     "contest": {
       "alreadyRegistered": "You are already registered to the contest",
       "button": "Enter the contest",
-      "description": "Join our big contest and get a chance to win a shikishi created by Sedeto!",
+      "description": "Join our big contest at 4pm every day and get a chance to win a shikishi created by Sedeto!",
       "registerNow": "Register now",
       "requirements": {
         "OK": "You're eligible",
         "noRally": "Complete a rally to take part",
         "oneMore": "Complete another rally to take part"
       },
-      "title": "Exclusive Contest"
+      "title": "4pm Exclusive Contest"
     },
     "disclaimer": "Rewards are available while supplies last.",
     "rally": {
-      "button": "View my stamps",
-      "completed": "Completed",
-      "description": "Collect {{minimumStampsCount}} stamps to get one or more exclusive illustrated cards!",
-      "inProgress": "{{count}}/{{total}} stamps",
-      "title": "Stamp Rally"
+      "collectedStamps_zero": "No stamps collected",
+      "collectedStamps_one": "{{count}} stamp collected",
+      "collectedStamps_other": "{{count}} stamps collected",
+      "button": "View my submissions",
+      "description": "Collect stamps to get one or more exclusive rewards.",
+      "title": "Stamp Rally",
+      "faq": {
+        "rewards": {
+          "title": "What are the rewards?"
+        },
+        "submissions": {
+          "title": "How do I claim the prizes?",
+          "description.1": "To get one or more prizes depending on the tier reached, submit your rally using the button below.",
+          "description.2": "After submission, go to the organizer's booth (Arqo & Sedeto, Hall 6, R687) to collect your prize on site!"
+        },
+        "stamps": {
+          "title": "How do I get stamps?",
+          "description": "To get a stamp, buy a product at a participating booth and ask for the rally's QR code. Scan it using the button at the bottom right of the application! <em>The minimum purchase amount is 2€. Maximum one stamp per artist.</em>"
+        },
+        "replay": {
+          "title": "Can you do a rally again?",
+          "description": "You can play as many times as you want! However, it is forbidden to play with multiple devices simultaneously."
+        }
+      }
     },
     "title": "Rewards"
   },
@@ -300,6 +319,14 @@
     "signedBy": "Signed by {{name}}",
     "summary": "Stamp details"
   },
+  "stampGoals": {
+    "getToStandardCardReward_zero": "Congrats! You can now win one, two, or three <1><icon/>exclusive cards</1>.",
+    "getToStandardCardReward_one": "One more stamp before you win one, two, or three <1><icon/>exclusive cards</1>.",
+    "getToStandardCardReward_other": "Only {{count}} more stamps to win one, two, or three <1><icon/>exclusive cards</1>.",
+    "getToPremiumCardReward_zero": "You've finished everything! You can now try your luck to get <1><icon/>a special holographic card</1>.",
+    "getToPremiumCardReward_one": "One more stamp for a chance to get <1><icon/>a special holographic card</1>!",
+    "getToPremiumCardReward_other": "Only {{count}} more stamps for a chance to get <1><icon/>a special holographic card</1>!"
+  },
   "stampValidated": "Stamp added!",
   "stampsCount_one": "{{count}} stamp collected, go to {{maxCount}}!",
   "stampsCount_other": "{{count}} stamps collected, go to {{maxCount}}!",
@@ -307,7 +334,22 @@
   "standistSpace": "Standist space",
   "submission": "Submission {{id}}",
   "submissions": "Submissions",
-  "submit": "Submit",
+  "submissionsGoesHere": "When you finish the rally, you will find information here about claiming your rewards!",
+  "currentRallyBlock": {
+    "title": "Ongoing rally",
+    "availableRewardPresentation_one": "By submitting now, you will be entitled to the following reward:",
+    "availableRewardPresentation_other": "By submitting now, you will be entitled to the following rewards:",
+    "standardCardRewardPresentation": "By reaching the <1><icon/>first tier</1> at {{stamps}} stamps, you will be entitled to the following reward:",
+    "premiumCardRewardPresentation": "By continuing to the <1><icon/>next tier</1> at {{stamps}} stamps, you also unlock the following rewards:",
+    "oneOrMoreClassicCards": "One, two, or three exclusive cards",
+    "evenMoreClassicCards": "A second special draw for even more exclusive cards",
+    "holographicCard": "A chance to get an exclusive card in its holographic version!",
+    "resetDisclaimer": "Once the stamps are submitted, you'll start from scratch to reach the tiers.",
+    "submitError": "Sorry, the submit hasn't gone through, please reach to us at Arqo & Sedeto's booth.",
+    "submitAction": "Submit",
+    "submitDrawerTitle": "Submit your rally",
+    "submitDrawerDescription": "Send your stamps to the server to claim your rewards!"
+  },
   "submitNotAllowed": "You have to scan at least {{stamps}} stamps.",
   "submitStamps": "Submit your collected stamps here!",
   "submitTerms": "This code is valid for the entire duration of the convention, you may get your reward at any day of the convention, if you want to try to get cards that are out-of-stock for the day.",

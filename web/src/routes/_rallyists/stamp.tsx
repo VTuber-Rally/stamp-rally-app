@@ -1,8 +1,8 @@
 import { useConfetti } from "@stevent-team/react-party";
 import { createFileRoute } from "@tanstack/react-router";
-import { ListChecks, TicketCheck } from "lucide-react";
+import { TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { StampTupleSerializer } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 
@@ -10,12 +10,20 @@ import Intro from "@/components/Intro.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { Header } from "@/components/layout/Header.tsx";
+import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
 import { StampDetails } from "@/components/scan/StampDetails.tsx";
 import { checkSignatureAndStoreStamp } from "@/lib/checkSignatureAndStoreStamp";
-import { stampsToCollect } from "@/lib/consts.ts";
+import {
+  premiumRewardMinStampsRequirement,
+  standardRewardMinStampsRequirement,
+} from "@/lib/consts.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
+import {
+  orangeTriangleEmphasis,
+  pinkSquareEmphasis,
+} from "@/lib/transComponentSets.tsx";
 
 export const Route = createFileRoute("/_rallyists/stamp")({
   component: Stamp,
@@ -46,7 +54,14 @@ function Stamp() {
 
   const { data: stamps } = useCollectedStamps();
 
-  const showSubmitButton = (stamps?.length ?? 1) >= stampsToCollect;
+  const stampCount = stamps?.length ?? 1;
+
+  const showSubmitButton = stampCount >= standardRewardMinStampsRequirement;
+
+  const launchConfetti = [
+    standardRewardMinStampsRequirement,
+    premiumRewardMinStampsRequirement,
+  ].includes(stampCount);
 
   const { data: submissions } = useRallySubmissions();
 
@@ -56,16 +71,16 @@ function Stamp() {
   });
 
   useEffect(() => {
-    if (showSubmitButton) {
+    if (launchConfetti) {
       setTimeout(() => {
         void createConfetti();
         window.plausible("Rally Completed");
       }, 1000);
     }
-  }, [showSubmitButton, createConfetti]);
+  }, [launchConfetti, createConfetti]);
 
   const showIntro =
-    stamps?.length === 1 && (!submissions || submissions.length === 0);
+    stampCount === 1 && (!submissions || submissions.length === 0);
 
   if (!standist) return <StampError error={new Error("Standist not found")} />;
 
@@ -85,19 +100,38 @@ function Stamp() {
         >
           <ArtistImage userId={standist.userId} name={standist.name} />
         </Suspense>
-        <div className="flex items-center gap-2 text-xl font-bold text-green-700">
+        <div className="flex items-center gap-2 text-xl font-bold text-green-800">
           <TicketCheck size={42} className="-rotate-12" /> {t("stampValidated")}
         </div>
-        <div className="flex items-center gap-2 text-xl font-bold text-green-700">
-          <ListChecks size={42} />{" "}
-          {t("stampsCount", {
-            count: stamps?.length ?? 1,
-            maxCount: stampsToCollect,
-          })}
-        </div>
+        <RallyProgressBar />
+        <p className="text-gray-700">
+          <Trans
+            t={t}
+            i18nKey="stampGoals.getToStandardCardReward"
+            components={orangeTriangleEmphasis}
+            values={{
+              count: Math.max(
+                standardRewardMinStampsRequirement - stampCount,
+                0,
+              ),
+            }}
+          />
+          <br className="mb-2" />
+          <Trans
+            t={t}
+            i18nKey="stampGoals.getToPremiumCardReward"
+            components={pinkSquareEmphasis}
+            values={{
+              count: Math.max(
+                premiumRewardMinStampsRequirement - stampCount,
+                0,
+              ),
+            }}
+          />
+        </p>
         {showSubmitButton && (
-          <ButtonLink bg={"success-orange"} href="/reward/submit">
-            {t("requestYourReward")}
+          <ButtonLink bg={"success-orange"} href="/reward">
+            {t("reward.title")}
           </ButtonLink>
         )}
         <ButtonLink href="/artists" bg="tertiary">

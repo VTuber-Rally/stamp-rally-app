@@ -1,43 +1,74 @@
+import clsx from "clsx";
 import { FC } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import { HorizontalBar } from "@/components/layout/HorizontalBar.tsx";
 import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
+import { premiumRewardMinStampsRequirement } from "@/lib/consts.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import {
+  orangeTriangleEmphasis,
+  pinkSquareEmphasis,
+} from "@/lib/transComponentSets.tsx";
 
 export const SubmissionsList: FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: submissions, isPending } = useRallySubmissions();
 
   if (isPending) return <ShadowBox>{t("loading")}</ShadowBox>;
 
   if (!submissions) return <ShadowBox>{t("error")}</ShadowBox>;
 
-  if (!submissions.length) return null;
-
   const pendingSubmissions = submissions.filter((e) => !e.redeemed);
   const redeemedSubmissions = submissions.filter((e) => e.redeemed);
 
   return (
     <ShadowBox>
+      {submissions.length === 0 && (
+        <>
+          <p>{t("submissionsGoesHere")}</p>
+        </>
+      )}
+
       {pendingSubmissions.length !== 0 && (
         <>
-          <h2 className={"mb-4 text-xl font-semibold"}>{t("submissions")}</h2>
           <div className="divide-y divide-gray-300">
             {pendingSubmissions.map((submission) => (
               <div
                 className="flex grow flex-col items-center justify-center gap-4 py-2"
                 key={submission.submissionId}
               >
-                <div>
-                  {t("alreadySubmitted", {
-                    date: submission.submitted.toLocaleString(),
-                  })}{" "}
-                </div>
+                <p className="text-center">
+                  <Trans
+                    t={t}
+                    i18nKey="alreadySubmitted"
+                    values={{
+                      date: submission.submitted.toLocaleString(i18n.language, {
+                        dateStyle: "full",
+                        timeStyle: "short",
+                      }),
+                      count: submission.stamps.length,
+                    }}
+                    components={{
+                      ...(submission.stamps.length >=
+                      premiumRewardMinStampsRequirement
+                        ? pinkSquareEmphasis
+                        : orangeTriangleEmphasis),
+                      br: <br />,
+                    }}
+                  />
+                </p>
 
                 <QRCode
-                  className="rounded-lg border-4 border-tertiary p-2 dark:bg-white"
+                  className={clsx(
+                    "rounded-lg border-4 p-2 dark:bg-white",
+                    submission.stamps.length >=
+                      premiumRewardMinStampsRequirement && "border-tertiary",
+                    submission.stamps.length <
+                      premiumRewardMinStampsRequirement &&
+                      "border-success-orange",
+                  )}
                   value={submission.submissionId}
                 />
 
