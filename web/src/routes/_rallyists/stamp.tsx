@@ -45,6 +45,11 @@ export const Route = createFileRoute("/_rallyists/stamp")({
   },
 });
 
+/**
+ * Displays the main stamp validation and progress interface for the rally.
+ *
+ * Shows the validated stamp, standist information, progress towards rewards, and relevant actions. Triggers confetti animation and event logging when reward milestones are reached. Handles missing standist data by displaying an error.
+ */
 function Stamp() {
   const data = Route.useLoaderData();
 
