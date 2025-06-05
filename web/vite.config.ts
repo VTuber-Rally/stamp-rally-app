@@ -8,6 +8,8 @@ import { defineConfig } from "vite";
 import mkcert from "vite-plugin-mkcert";
 import { VitePWA } from "vite-plugin-pwa";
 
+const MAX_SENTRY_DEPLOY_NAME_LENGTH = 64 as const;
+
 // https://vitejs.dev/config/
 export default defineConfig({
   // configure @ for src directory
@@ -107,7 +109,10 @@ export default defineConfig({
         deploy: {
           name:
             process.env.VITE_SENTRY_ENVIRONMENT === "preview"
-              ? `Cloudflare Preview for ${process.env.CF_PAGES_BRANCH}`
+              ? `Cloudflare Preview for ${process.env.CF_PAGES_BRANCH}`.substring(
+                  0,
+                  MAX_SENTRY_DEPLOY_NAME_LENGTH,
+                ) // Tronquer pour respecter la limite de 64 caractères
               : "Cloudflare Pages production",
           env: process.env.VITE_SENTRY_ENVIRONMENT ?? "production",
           url: process.env.CF_PAGES_URL,
