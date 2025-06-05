@@ -61,7 +61,7 @@ export default defineConfig({
           name: "VTuber Stamp Rally",
           short_name: "Stamp Rally",
           theme_color: "#8bceba",
-          display: "standalone",
+          display: "browser",
           categories: ["entertainment"],
           orientation: "portrait",
           dir: "ltr",
