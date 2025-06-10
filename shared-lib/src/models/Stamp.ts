@@ -20,4 +20,4 @@ export interface StampWithId extends Stamp {
   id: number;
 }
 
-export const stampIndexes = "++id, standistId, submitted, timestamp";
+export const stampIndexes = "++id, standistId, submitted, scanTimestamp";

@@ -17,14 +17,16 @@ import {
   submissionIndexes,
 } from "@vtube-stamp-rally/shared-lib/models/Submission.ts";
 
-export const db = new Dexie("StampRally") as Dexie & {
+import { indexedDbName } from "./consts";
+
+export const db = new Dexie(indexedDbName) as Dexie & {
   stamps: EntityTable<StampWithId, "id">;
   standists: EntityTable<Standist, "userId">;
   submissions: EntityTable<SubmissionWithId, "id">;
   contestParticipations: EntityTable<ContestParticipation, "id">;
 };
 
-db.version(4).stores({
+db.version(5).stores({
   stamps: stampIndexes,
   standists: standistIndexes,
   submissions: submissionIndexes,
