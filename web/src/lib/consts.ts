@@ -30,6 +30,7 @@ const {
   VITE_RALLY_FINISHERS_FR_TOPIC_ID: rallyFinishersFrTopicId,
   VITE_SENTRY_DSN: sentryDSN,
   VITE_SENTRY_ENVIRONMENT: sentryEnvironment,
+  VITE_INDEXEDDB_NAME: indexedDbName,
   DEV: isDev,
   PROD: isProd,
 } = import.meta.env;
@@ -78,6 +79,7 @@ export {
   firebaseVapidPublicKey,
   rallyFinishersEnTopicId,
   rallyFinishersFrTopicId,
+  indexedDbName,
   mapCenter,
   sentryDSN,
   sentryEnvironment,

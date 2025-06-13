@@ -24,6 +24,8 @@ interface ImportMetaEnv {
   readonly VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT: string;
   VITE_EVENT_END_DATE: string;
 
+  readonly VITE_INDEXEDDB_NAME: string;
+
   readonly VITE_FIREBASE_API_KEY: string;
   readonly VITE_FIREBASE_AUTH_DOMAIN: string;
   readonly VITE_FIREBASE_PROJECT_ID: string;

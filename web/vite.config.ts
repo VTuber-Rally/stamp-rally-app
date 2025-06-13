@@ -52,6 +52,7 @@ export default defineConfig({
           VITE_FIREBASE_VAPID_PUBLIC_KEY: Schema.string(),
           VITE_SENTRY_DSN: Schema.string(),
           VITE_SENTRY_ENVIRONMENT: Schema.string(),
+          VITE_INDEXEDDB_NAME: Schema.string(),
         },
       }),
     // This plugin is disabled in Storybook
