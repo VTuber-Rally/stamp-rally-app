@@ -35,3 +35,11 @@ export const getEnv = () => {
     BUCKET_ID,
   });
 };
+
+export const isProduction = process.env.NODE_ENV === "production";
+
+export const debugPrint = (...args: string[]) => {
+  if (!isProduction) {
+    console.log(...args);
+  }
+};

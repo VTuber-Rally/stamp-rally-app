@@ -16,7 +16,7 @@ import path from "path";
 
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
-import { getEnv } from "./shared.js";
+import { debugPrint, getEnv, isProduction } from "./shared.js";
 import { uploadUserMedia } from "./upload-user-medias.js";
 
 const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
@@ -28,8 +28,6 @@ const {
   STANDISTS_COLLECTION_ID,
   APPWRITE_API_KEY,
 } = getEnv();
-
-const isProduction = process.env.NODE_ENV === "production";
 
 const client = new sdk.Client()
   .setEndpoint(APPWRITE_ENDPOINT)
@@ -175,7 +173,7 @@ async function createProfilesAndDocuments() {
           if (!fs.existsSync(imagePath)) {
             throw new Error(`Image file not found: ${imagePath}`);
           }
-          console.log(`Uploading image: ${imagePath}`);
+          debugPrint(`Uploading image: ${imagePath}`);
           imageId = await uploadUserMedia(imagePath);
         }
 
