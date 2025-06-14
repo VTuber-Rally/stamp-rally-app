@@ -2,10 +2,10 @@ import * as sdk from "node-appwrite";
 
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
-import { appwriteClient, getEnv } from "./shared.js";
+import { appwriteClient, env } from "./shared.js";
 import { deleteUserMedia } from "./upload-user-medias.js";
 
-const { DATABASE_ID, STANDISTS_COLLECTION_ID } = getEnv();
+const { DATABASE_ID, STANDISTS_COLLECTION_ID } = env;
 
 const users = new sdk.Users(appwriteClient);
 const database = new sdk.Databases(appwriteClient);

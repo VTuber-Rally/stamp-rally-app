@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { Databases, ID } from "node-appwrite";
 
-import { appwriteClient, getEnv } from "./shared.js";
+import { appwriteClient, env } from "./shared.js";
 
-const { DATABASE_ID, CONTEST_PARTICIPANTS_COLLECTION_ID } = getEnv();
+const { DATABASE_ID, CONTEST_PARTICIPANTS_COLLECTION_ID } = env;
 
 const databases = new Databases(appwriteClient);
 

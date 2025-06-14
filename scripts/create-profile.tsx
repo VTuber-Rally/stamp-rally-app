@@ -16,12 +16,12 @@ import path from "path";
 
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
-import { appwriteClient, debugPrint, getEnv, isProduction } from "./shared.js";
+import { appwriteClient, debugPrint, env, isProduction } from "./shared.js";
 import { uploadUserMedia } from "./upload-user-medias.js";
 
 const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
 
-const { DATABASE_ID, STANDISTS_COLLECTION_ID } = getEnv();
+const { DATABASE_ID, STANDISTS_COLLECTION_ID } = env;
 
 const users = new sdk.Users(appwriteClient);
 const database = new sdk.Databases(appwriteClient);

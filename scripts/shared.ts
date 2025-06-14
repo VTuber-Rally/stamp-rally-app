@@ -13,7 +13,7 @@ const envSchema = z.object({
   BUCKET_ID: z.string(),
 });
 
-export const getEnv = () => {
+const getEnv = () => {
   const {
     APPWRITE_API_KEY,
     APPWRITE_PROJECT_ID,
@@ -39,7 +39,7 @@ export const getEnv = () => {
 
 export const isProduction = process.env.NODE_ENV === "production";
 
-export const debugPrint = (...args: string[]) => {
+export const debugPrint = (...args: Parameters<typeof console.log>) => {
   if (!isProduction) {
     console.log(...args);
   }
