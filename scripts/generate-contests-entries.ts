@@ -1,23 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { Databases, ID } from "node-appwrite";
-import * as sdk from "node-appwrite";
 
-import { getEnv } from "./shared.js";
+import { appwriteClient, env } from "./shared.js";
 
-const {
-  APPWRITE_PROJECT_ID,
-  APPWRITE_ENDPOINT,
-  DATABASE_ID,
-  APPWRITE_API_KEY,
-  CONTEST_PARTICIPANTS_COLLECTION_ID,
-} = getEnv();
+const { DATABASE_ID, CONTEST_PARTICIPANTS_COLLECTION_ID } = env;
 
-const client = new sdk.Client()
-  .setEndpoint(APPWRITE_ENDPOINT)
-  .setProject(APPWRITE_PROJECT_ID)
-  .setKey(APPWRITE_API_KEY);
-
-const databases = new Databases(client);
+const databases = new Databases(appwriteClient);
 
 const generateParticipants = async (count: number) => {
   console.log(`Génération de ${count} participants...`);

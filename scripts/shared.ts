@@ -1,4 +1,5 @@
 import "dotenv/config";
+import * as sdk from "node-appwrite";
 import { z } from "zod";
 
 const envSchema = z.object({
@@ -12,7 +13,7 @@ const envSchema = z.object({
   BUCKET_ID: z.string(),
 });
 
-export const getEnv = () => {
+const getEnv = () => {
   const {
     APPWRITE_API_KEY,
     APPWRITE_PROJECT_ID,
@@ -35,3 +36,18 @@ export const getEnv = () => {
     BUCKET_ID,
   });
 };
+
+export const isProduction = process.env.NODE_ENV === "production";
+
+export const debugPrint = (...args: Parameters<typeof console.log>) => {
+  if (!isProduction) {
+    console.log(...args);
+  }
+};
+
+export const env = getEnv();
+
+export const appwriteClient = new sdk.Client()
+  .setEndpoint(env.APPWRITE_ENDPOINT)
+  .setProject(env.APPWRITE_PROJECT_ID)
+  .setKey(env.APPWRITE_API_KEY);

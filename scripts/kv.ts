@@ -1,16 +1,9 @@
-import { Client, Databases, ID, Query } from "node-appwrite";
+import { Databases, ID, Query } from "node-appwrite";
 
 import { KV_LIST } from "./kvList.js";
-import { getEnv } from "./shared.js";
+import { appwriteClient, env } from "./shared.js";
 
-const env = getEnv();
-
-const client = new Client()
-  .setEndpoint(env.APPWRITE_ENDPOINT)
-  .setProject(env.APPWRITE_PROJECT_ID)
-  .setKey(env.APPWRITE_API_KEY);
-
-const database = new Databases(client);
+const database = new Databases(appwriteClient);
 
 class KV {
   constructor(private db: Databases) {}
