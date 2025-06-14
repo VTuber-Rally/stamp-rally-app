@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { z } from "zod";
 import * as sdk from "node-appwrite";
+import { z } from "zod";
 
 const envSchema = z.object({
   APPWRITE_API_KEY: z.string(),
