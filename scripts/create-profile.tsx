@@ -17,7 +17,7 @@ import path from "path";
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import { appwriteClient, debugPrint, env, isProduction } from "./shared.js";
-import { uploadUserMedia } from "./upload-user-medias.js";
+import { uploadMedia } from "./upload-media.ts";
 
 const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
 
@@ -163,7 +163,7 @@ async function createProfilesAndDocuments() {
             throw new Error(`Image file not found: ${imagePath}`);
           }
           debugPrint(`Uploading image: ${imagePath}`);
-          imageId = await uploadUserMedia(imagePath);
+          imageId = await uploadMedia(imagePath);
         }
 
         return {
