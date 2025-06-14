@@ -157,15 +157,9 @@ importers:
       '@faker-js/faker':
         specifier: ^9.6.0
         version: 9.6.0
-      csv-parser:
-        specifier: ^3.2.0
-        version: 3.2.0
       dotenv:
         specifier: ^16.4.5
         version: 16.4.7
-      ics:
-        specifier: ^3.8.1
-        version: 3.8.1
       node-appwrite:
         specifier: ^16.0.0
         version: 16.0.0
