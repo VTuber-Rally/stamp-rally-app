@@ -121,6 +121,11 @@ jobs:
           VITE_SENTRY_DSN: unknown
           VITE_SENTRY_ENVIRONMENT: ci
           VITE_MAP_TILES_URL: "https://example.com/tiles/{z}/{x}/{y}.webp"
+          VITE_CARDS_COLLECTION_ID: example
+          VITE_GROUPS_COLLECTION_ID: example
+          VITE_CARD_DESIGNS_COLLECTION_ID: example
+          VITE_SELL_CARDS_FUNCTION_ID: example
+          VITE_GET_AVAILABLE_CARDS_FUNCTION_ID: example
         run: pnpm --filter=web build
 
       # upload artifacts

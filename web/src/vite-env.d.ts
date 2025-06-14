@@ -20,6 +20,11 @@ interface ImportMetaEnv {
   VITE_KV_COLLECTION_ID: string;
   VITE_ASSETS_BUCKET_ID: string;
   readonly VITE_MAP_TILES_URL: string;
+  readonly VITE_GET_AVAILABLE_CARDS_FUNCTION_ID: string;
+  readonly VITE_SELL_CARDS_FUNCTION_ID: string;
+  readonly VITE_CARDS_COLLECTION_ID: string;
+  readonly VITE_GROUPS_COLLECTION_ID: string;
+  readonly VITE_CARD_DESIGNS_COLLECTION_ID: string;
 
   readonly VITE_STANDARD_REWARD_MIN_STAMPS_REQUIREMENT: string;
   readonly VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT: string;

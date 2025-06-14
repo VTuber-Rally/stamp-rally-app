@@ -3,6 +3,7 @@ import clsx from "clsx";
 import {
   Dices,
   Home,
+  Package,
   QrCode,
   QrCodeIcon,
   Trophy,
@@ -78,7 +79,7 @@ const NavbarElement: FC<NavBarElementProps> = ({
       type="button"
       activeProps={{ className: "bg-secondary-light hover:bg-secondary" }}
       inactiveProps={{ className: "hover:bg-gray-50" }}
-      activeOptions={{ exact: true }}
+      activeOptions={{ exact: true, includeSearch: false }}
       className={clsx(
         "group inline-flex w-4 grow flex-col items-center justify-center",
         disabled && "cursor-not-allowed opacity-50",
@@ -189,6 +190,13 @@ export const StaffNavbar = () => {
         disabled={disabled}
       >
         <Trophy className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
+      </NavbarElement>
+      <NavbarElement
+        to={"/staff/inventory"}
+        label={"Inventaire"}
+        disabled={disabled}
+      >
+        <Package className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
     </Navbar>
   );

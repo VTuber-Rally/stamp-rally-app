@@ -11,6 +11,10 @@ const envSchema = z.object({
   KV_COLLECTION_ID: z.string(),
   CONTEST_PARTICIPANTS_COLLECTION_ID: z.string(),
   BUCKET_ID: z.string(),
+  CARD_DESIGNS_COLLECTION_ID: z.string(),
+  CARDS_COLLECTION_ID: z.string(),
+  GROUPS_COLLECTION_ID: z.string(),
+  CARD_HISTORY_COLLECTION_ID: z.string(),
 });
 
 const getEnv = () => {
@@ -23,6 +27,10 @@ const getEnv = () => {
     KV_COLLECTION_ID,
     CONTEST_PARTICIPANTS_COLLECTION_ID,
     BUCKET_ID,
+    CARD_DESIGNS_COLLECTION_ID,
+    CARDS_COLLECTION_ID,
+    GROUPS_COLLECTION_ID,
+    CARD_HISTORY_COLLECTION_ID,
   } = process.env;
 
   return envSchema.parse({
@@ -34,6 +42,10 @@ const getEnv = () => {
     KV_COLLECTION_ID,
     CONTEST_PARTICIPANTS_COLLECTION_ID,
     BUCKET_ID,
+    CARD_DESIGNS_COLLECTION_ID,
+    CARDS_COLLECTION_ID,
+    GROUPS_COLLECTION_ID,
+    CARD_HISTORY_COLLECTION_ID,
   });
 };
 

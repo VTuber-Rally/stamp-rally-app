@@ -8,7 +8,7 @@ const { BUCKET_ID } = env;
 
 const storage = new sdk.Storage(appwriteClient);
 
-export const deleteUserMedia = async (fileId: string) => {
+export const deleteMedia = async (fileId: string) => {
   if (fileId === "fallback") {
     return;
   }
@@ -20,7 +20,7 @@ export const deleteUserMedia = async (fileId: string) => {
   }
 };
 
-export const uploadUserMedia = async (filePath: string) => {
+export const uploadMedia = async (filePath: string) => {
   const fileContent = fs.readFileSync(filePath);
   const fileName = path.basename(filePath);
   const fileType = fileName.split(".").pop();
