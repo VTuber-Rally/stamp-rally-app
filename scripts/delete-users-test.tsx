@@ -2,24 +2,13 @@ import * as sdk from "node-appwrite";
 
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
-import { getEnv } from "./shared.js";
+import { appwriteClient, getEnv } from "./shared.js";
 import { deleteUserMedia } from "./upload-user-medias.js";
 
-const {
-  APPWRITE_PROJECT_ID,
-  APPWRITE_ENDPOINT,
-  DATABASE_ID,
-  STANDISTS_COLLECTION_ID,
-  APPWRITE_API_KEY,
-} = getEnv();
+const { DATABASE_ID, STANDISTS_COLLECTION_ID } = getEnv();
 
-const client = new sdk.Client()
-  .setEndpoint(APPWRITE_ENDPOINT)
-  .setProject(APPWRITE_PROJECT_ID)
-  .setKey(APPWRITE_API_KEY);
-
-const users = new sdk.Users(client);
-const database = new sdk.Databases(client);
+const users = new sdk.Users(appwriteClient);
+const database = new sdk.Databases(appwriteClient);
 
 const usersExisting = await users.list([sdk.Query.contains("labels", "test")]);
 

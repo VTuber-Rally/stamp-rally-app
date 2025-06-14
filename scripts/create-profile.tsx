@@ -16,26 +16,15 @@ import path from "path";
 
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
-import { debugPrint, getEnv, isProduction } from "./shared.js";
+import { appwriteClient, debugPrint, getEnv, isProduction } from "./shared.js";
 import { uploadUserMedia } from "./upload-user-medias.js";
 
 const generatePassword = () => randomBytes(32).toString("base64").slice(0, 32);
 
-const {
-  APPWRITE_PROJECT_ID,
-  APPWRITE_ENDPOINT,
-  DATABASE_ID,
-  STANDISTS_COLLECTION_ID,
-  APPWRITE_API_KEY,
-} = getEnv();
+const { DATABASE_ID, STANDISTS_COLLECTION_ID } = getEnv();
 
-const client = new sdk.Client()
-  .setEndpoint(APPWRITE_ENDPOINT)
-  .setProject(APPWRITE_PROJECT_ID)
-  .setKey(APPWRITE_API_KEY);
-
-const users = new sdk.Users(client);
-const database = new sdk.Databases(client);
+const users = new sdk.Users(appwriteClient);
+const database = new sdk.Databases(appwriteClient);
 
 // check if arg is set
 if (process.argv.length < 4) {

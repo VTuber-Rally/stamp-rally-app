@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { z } from "zod";
+import * as sdk from "node-appwrite";
 
 const envSchema = z.object({
   APPWRITE_API_KEY: z.string(),
@@ -43,3 +44,10 @@ export const debugPrint = (...args: string[]) => {
     console.log(...args);
   }
 };
+
+export const env = getEnv();
+
+export const appwriteClient = new sdk.Client()
+  .setEndpoint(env.APPWRITE_ENDPOINT)
+  .setProject(env.APPWRITE_PROJECT_ID)
+  .setKey(env.APPWRITE_API_KEY);
