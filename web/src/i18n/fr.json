@@ -236,7 +236,7 @@
   "qrcode": "QR Code",
   "rally.1": "16 artistes participent à ce rally autour des VTubers",
   "rally.2": "Après un achat (minimum 2€) chez un stand participant, scannez le tampon QR Code",
-  "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
+  "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
   "rally.4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
   "rally.5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
   "rally.6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur",
@@ -326,7 +326,8 @@
     "getToStandardCardReward_other": "Plus que {{count}} tampons pour remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
     "getToPremiumCardReward_zero": "Vous avez tout fini ! Vous pouvez dès maintenant tenter votre chance pour obtenir <1><icon/>une carte spéciale holographique</1>.",
     "getToPremiumCardReward_one": "Un dernier tampon pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
-    "getToPremiumCardReward_other": "Plus que {{count}} tampons pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !"
+    "getToPremiumCardReward_other": "Plus que {{count}} tampons pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
+    "scanFromMinorHall": "<strong>Attention</strong>, pour valider votre rally, scannez un tampon d'un stand du hall 5A. <em>Pourquoi ? Pour assurer l'équité entre les deux halls.</em>"
   },
   "stampValidated": "Tampon validé !",
   "stampsCount_one": "{{count}} tampon collecté sur {{maxCount}} !",
@@ -349,9 +350,13 @@
     "submitError": "Désolé, votre rally n'a pas été soumis, merci de vous rapprocher des équipes du stand Arqo & Sedeto.",
     "submitAction": "Soumettre",
     "submitDrawerTitle": "Soumettre votre rally",
-    "submitDrawerDescription": "Envoyez vos tampons au serveur pour pouvoir obtenir vos lots !"
+    "submitDrawerDescription": "Envoyez vos tampons au serveur pour pouvoir obtenir vos lots !",
+    "minorHallInfo": "Pour assurer l'équité entre les halls, un des tampons doit provenir d'un stand situé dans le hall 5A."
   },
-  "submitNotAllowed": "Vous devez scanner au moins {{stamps}} tampons.",
+  "submitNotAllowed": {
+    "count": "Vous devez scanner au moins {{stamps}} tampons.",
+    "minorHall": "Vous devez scanner un tampon du hall 5A."
+  },
   "submitStamps": "Soumettez vos tampons collectés ici !",
   "submitTerms": "Ce code ne périme pas, vous pouvez récupérer votre récompense n'importe quel jour de la convention pour récupérer des cartes qui ne sont plus en stock pour la journée.",
   "submittedAgo": "Soumis {{time}}",
