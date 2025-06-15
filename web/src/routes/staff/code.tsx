@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import QrReader from "@/components/scan/QrReader.tsx";
+import QRScanner from "@/components/scan/QRScanner";
 
 export const Route = createFileRoute("/staff/code")({
   component: CheckCode,
@@ -11,7 +11,7 @@ function CheckCode() {
 
   return (
     <div className="flex grow flex-col items-center justify-center">
-      <QrReader
+      <QRScanner
         onScanSuccess={(result) => {
           const submissionId = result.data;
 
@@ -19,7 +19,6 @@ function CheckCode() {
             to: `/staff/submission/${submissionId}`,
           });
         }}
-        onCameraAccessFail={() => console.log("oh no, no camera :(")}
       />
     </div>
   );

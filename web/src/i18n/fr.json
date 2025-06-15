@@ -309,6 +309,13 @@
     "nativeCameraHint": "En cas de difficultés, vous pouvez utiliser l'application Caméra de votre appareil pour tenter de scanner le QR code.",
     "title": "Scannez un QR Code"
   },
+  "qrScanner": {
+    "loading": "Chargement de la caméra…",
+    "scanFrame": "Cadre de scan QR",
+    "instruction": "Placez le code QR dans le cadre",
+    "noCameraAccess": "Impossible d'accéder à la caméra",
+    "checkPermissions": "Vérifiez les permissions de votre navigateur"
+  },
   "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {
     "title": "Paramètres",
