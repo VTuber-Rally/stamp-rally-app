@@ -78,6 +78,8 @@ export const RewardsAvailabilityList: FC = () => {
           <ul className="mb-2 ml-4 list-disc">{premiumRewards}</ul>
         </p>
       )}
+
+      <p>{t("currentRallyBlock.minorHallInfo")}</p>
     </>
   );
 };

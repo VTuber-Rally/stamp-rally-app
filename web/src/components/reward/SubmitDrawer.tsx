@@ -33,8 +33,12 @@ interface SubmitDrawerProps {
 
 export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
   const { t } = useTranslation();
-  const { isStandardRewardObtainable, isPremiumRewardObtainable } =
-    useRewardAvailability();
+  const {
+    isStandardRewardObtainable,
+    isPremiumRewardObtainable,
+    isAnyStampFromMinorHall,
+    stampCount,
+  } = useRewardAvailability();
   const navigate = useNavigate();
   const {
     isPending,
@@ -102,9 +106,15 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
             <p className="flex items-center gap-2 py-2 font-bold text-red-600">
               <TicketX className="inline-block shrink-0" size={24} />
               <span>
-                {t("submitNotAllowed", {
-                  stamps: standardRewardMinStampsRequirement,
-                })}
+                {stampCount < standardRewardMinStampsRequirement &&
+                  t("submitNotAllowed.count", {
+                    stamps: standardRewardMinStampsRequirement,
+                  })}
+                {!isAnyStampFromMinorHall &&
+                  " " +
+                    t("submitNotAllowed.minorHall", {
+                      stamps: standardRewardMinStampsRequirement,
+                    })}
               </span>
             </p>
           )}

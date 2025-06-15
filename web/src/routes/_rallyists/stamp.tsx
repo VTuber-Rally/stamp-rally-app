@@ -1,6 +1,6 @@
 import { useConfetti } from "@stevent-team/react-party";
 import { createFileRoute } from "@tanstack/react-router";
-import { TicketCheck } from "lucide-react";
+import { MessageSquareWarning, TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -17,8 +17,8 @@ import {
   premiumRewardMinStampsRequirement,
   standardRewardMinStampsRequirement,
 } from "@/lib/consts.ts";
-import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import { useRewardAvailability } from "@/lib/hooks/useRewardAvailability.ts";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 import {
   orangeTriangleEmphasis,
@@ -52,16 +52,16 @@ function Stamp() {
 
   const standist = useStandist(data.standistId);
 
-  const { data: stamps } = useCollectedStamps();
+  const { isAnyStampFromMinorHall, stampCount, isStandardRewardObtainable } =
+    useRewardAvailability();
 
-  const stampCount = stamps?.length ?? 1;
+  const showSubmitButton = isStandardRewardObtainable;
 
-  const showSubmitButton = stampCount >= standardRewardMinStampsRequirement;
-
-  const launchConfetti = [
-    standardRewardMinStampsRequirement,
-    premiumRewardMinStampsRequirement,
-  ].includes(stampCount);
+  const launchConfetti =
+    [
+      standardRewardMinStampsRequirement,
+      premiumRewardMinStampsRequirement,
+    ].includes(stampCount) && isAnyStampFromMinorHall;
 
   const { data: submissions } = useRallySubmissions();
 
@@ -105,18 +105,33 @@ function Stamp() {
         </div>
         <RallyProgressBar />
         <p className="text-gray-700">
-          <Trans
-            t={t}
-            i18nKey="stampGoals.getToStandardCardReward"
-            components={orangeTriangleEmphasis}
-            values={{
-              count: Math.max(
-                standardRewardMinStampsRequirement - stampCount,
-                0,
-              ),
-            }}
-          />
-          <br className="mb-2" />
+          {!isAnyStampFromMinorHall &&
+            stampCount >= standardRewardMinStampsRequirement - 2 && (
+              <span className="mb-2 block border-4 border-amber-700 p-2">
+                <MessageSquareWarning className="mb-2 text-amber-700" />
+                <Trans
+                  t={t}
+                  i18nKey="stampGoals.scanFromMinorHall"
+                  components={{ strong: <strong />, em: <em /> }}
+                />
+              </span>
+            )}
+          {(isAnyStampFromMinorHall || !isStandardRewardObtainable) && (
+            <>
+              <Trans
+                t={t}
+                i18nKey="stampGoals.getToStandardCardReward"
+                components={orangeTriangleEmphasis}
+                values={{
+                  count: Math.max(
+                    standardRewardMinStampsRequirement - stampCount,
+                    0,
+                  ),
+                }}
+              />
+              <br className="mb-2" />
+            </>
+          )}
           <Trans
             t={t}
             i18nKey="stampGoals.getToPremiumCardReward"

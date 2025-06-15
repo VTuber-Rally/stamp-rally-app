@@ -13,6 +13,8 @@ import type { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
 const SUBMISSION_DATABASE_ID = process.env["DATABASE_ID"];
 const SUBMISSION_COLLECTION_ID = process.env["SUBMISSIONS_COLLECTION_ID"];
 const PROFILE_COLLECTION_ID = process.env["STANDISTS_COLLECTION_ID"];
+const STANDARD_REWARD_MIN_STAMPS_REQUIREMENT =
+  process.env["STANDARD_REWARD_MIN_STAMPS_REQUIREMENT"];
 
 const signAlgorithm = {
   name: "ECDSA",
@@ -31,18 +33,34 @@ export default async ({
   if (!SUBMISSION_DATABASE_ID) missingVars.push("DATABASE_ID");
   if (!SUBMISSION_COLLECTION_ID) missingVars.push("SUBMISSIONS_COLLECTION_ID");
   if (!PROFILE_COLLECTION_ID) missingVars.push("STANDISTS_COLLECTION_ID");
+  if (!STANDARD_REWARD_MIN_STAMPS_REQUIREMENT)
+    missingVars.push("STANDARD_REWARD_MIN_STAMPS_REQUIREMENT");
 
   // writing it in a way that the TS compiler will see through
   if (
     !SUBMISSION_DATABASE_ID ||
     !SUBMISSION_COLLECTION_ID ||
-    !PROFILE_COLLECTION_ID
+    !PROFILE_COLLECTION_ID ||
+    !STANDARD_REWARD_MIN_STAMPS_REQUIREMENT
   ) {
-    log(`Missing environment variables: ${missingVars.join(", ")}`);
+    log(`Missing/invalid environment variables: ${missingVars.join(", ")}`);
     log(
       `Available environment variables: ${Object.keys(process.env).join(", ")}`,
     );
     throw new Error(`Missing environment variables: ${missingVars.join(", ")}`);
+  }
+
+  const standardRewardMinStampsRequirement = Number.parseInt(
+    STANDARD_REWARD_MIN_STAMPS_REQUIREMENT,
+    10,
+  );
+  if (
+    !Number.isFinite(standardRewardMinStampsRequirement) ||
+    standardRewardMinStampsRequirement <= 0
+  ) {
+    throw new Error(
+      "STANDARD_REWARD_MIN_STAMPS_REQUIREMENT must be a positive integer",
+    );
   }
 
   log(req.body);
@@ -103,7 +121,13 @@ export default async ({
 
   log(stamps);
 
+  if (stamps.length < standardRewardMinStampsRequirement) {
+    error("Not enough stamps.");
+    return res.json({ status: "error", message: "Not enough stamps." });
+  }
+
   // first, let's check that every signature are valid
+  let isAnyStampFromMinorHall = false;
   for (const stamp of stamps) {
     const standist = standistsList.find(
       (standist) => standist.userId === stamp.standistId,
@@ -132,6 +156,15 @@ export default async ({
     }
 
     log(`Signature is valid for ${stamp.standistId} - ${standist.name}.`);
+
+    if (standist.hall === "5A") {
+      isAnyStampFromMinorHall = true;
+    }
+  }
+
+  if (!isAnyStampFromMinorHall) {
+    error("Minor hall stamp missing.");
+    return res.json({ status: "error", message: "Minor hall stamp missing" });
   }
 
   const stampPromises = stamps.map(async (stamp) => {

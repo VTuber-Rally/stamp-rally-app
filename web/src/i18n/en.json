@@ -242,7 +242,7 @@
   "qrcode": "QR Code",
   "rally.1": "16 artists take part in this rally around VTubers",
   "rally.2": "After making a purchase (minimum 2€) from a participant booth, scan the QR code to get a stamp",
-  "rally.3": "Once you've collected {{minimumStampsCount}} stamps, head over to Sedeto's booth to get a reward!",
+  "rally.3": "Once you've collected {{minimumStampsCount}} stamps and visited both halls, head over to Sedeto's booth to get a reward!",
   "rally.4": "This year, try to win a holographic card by getting all the stamps!",
   "rally.5": "Once you get your reward, enter the draw to win a shikishi from Sedeto!",
   "rally.6": "You can replay as many times as you like while rewards last!",
@@ -332,7 +332,8 @@
     "getToStandardCardReward_other": "Only {{count}} more stamps to win one, two, or three <1><icon/>exclusive cards</1>.",
     "getToPremiumCardReward_zero": "You've finished everything! You can now try your luck to get <1><icon/>a special holographic card</1>.",
     "getToPremiumCardReward_one": "One more stamp for a chance to get <1><icon/>a special holographic card</1>!",
-    "getToPremiumCardReward_other": "Only {{count}} more stamps for a chance to get <1><icon/>a special holographic card</1>!"
+    "getToPremiumCardReward_other": "Only {{count}} more stamps for a chance to get <1><icon/>a special holographic card</1>!",
+    "scanFromMinorHall": "<strong>Warning</strong>: To validate your rally, you have to scan a stamp from a booth located in hall 5A. <em>Why? To ensure equity between both halls.</em>"
   },
   "stampValidated": "Stamp added!",
   "stampsCount_one": "{{count}} stamp collected, go to {{maxCount}}!",
@@ -355,9 +356,13 @@
     "submitError": "Sorry, the submit hasn't gone through, please reach to us at Arqo & Sedeto's booth.",
     "submitAction": "Submit",
     "submitDrawerTitle": "Submit your rally",
-    "submitDrawerDescription": "Send your stamps to the server to claim your rewards!"
+    "submitDrawerDescription": "Send your stamps to the server to claim your rewards!",
+    "minorHallInfo": "To ensure fairness between halls, one of the stamps must come from a booth located in Hall 5A."
   },
-  "submitNotAllowed": "You have to scan at least {{stamps}} stamps.",
+  "submitNotAllowed": {
+    "count": "You have to scan at least {{stamps}} stamps.",
+    "minorHall": "You have to scan a stamp from Hall 5A."
+  },
   "submitStamps": "Submit your collected stamps here!",
   "submitTerms": "This code is valid for the entire duration of the convention, you may get your reward at any day of the convention, if you want to try to get cards that are out-of-stock for the day.",
   "submittedAgo": "Submitted {{time}}",
