@@ -1,7 +1,8 @@
 import { polygon } from "@turf/helpers";
-import { FeatureCollection } from "geojson";
+import { Feature, FeatureCollection } from "geojson";
 import { RasterLayerSpecification, StyleSpecification } from "maplibre-gl";
 
+import { getCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { getStandists } from "@/lib/hooks/useStandists.ts";
 
 const tiles = [
@@ -51,17 +52,32 @@ const tiles = [
   ];
 }[];
 
+const mapColors = {
+  forestGreen: "#024f05",
+  lightGreen: "#9ffe76",
+  blue: "#312783",
+  yellow: "#daa520",
+  white: "white",
+} as const;
+
 export async function getStandistsFeatureCollection() {
   const standists = await getStandists();
+  const stamps = await getCollectedStamps();
+  const stampedStandistsIds = new Set(stamps.map((s) => s.standistId));
 
   return {
     type: "FeatureCollection",
-    features: standists.map((standist) =>
-      polygon(standist.geometry!, {
-        name: standist.name,
-        id: standist.userId,
-      }),
-    ),
+    features: standists.reduce<Feature[]>((polygons, standist) => {
+      if (standist.geometry)
+        polygons.push(
+          polygon(standist.geometry, {
+            name: standist.name,
+            id: standist.userId,
+            stamped: stampedStandistsIds.has(standist.userId),
+          }),
+        );
+      return polygons;
+    }, []),
   } satisfies FeatureCollection;
 }
 
@@ -106,7 +122,12 @@ export function generateStyleSpec() {
         id: "line",
         source: "standists",
         paint: {
-          "line-color": "#312783",
+          "line-color": [
+            "case",
+            ["boolean", ["get", "stamped"], false],
+            mapColors.forestGreen,
+            mapColors.blue,
+          ],
           "line-width": ["interpolate", ["linear"], ["zoom"], 16, 0.2, 19, 8],
         },
       },
@@ -115,7 +136,12 @@ export function generateStyleSpec() {
         id: "fill",
         source: "standists",
         paint: {
-          "fill-color": "#312783",
+          "fill-color": [
+            "case",
+            ["boolean", ["get", "stamped"], false],
+            mapColors.forestGreen,
+            mapColors.blue,
+          ],
           "fill-opacity": [
             "interpolate",
             ["linear"],
@@ -147,12 +173,7 @@ export function generateStyleSpec() {
             0.25,
           ],
           "text-allow-overlap": true,
-          "text-anchor": [
-            "case",
-            ["==", ["get", "name"], "VSKR_"],
-            "top",
-            "bottom",
-          ],
+          "text-anchor": "bottom",
           "text-size": [
             "interpolate",
             ["exponential", 1.5],
@@ -169,8 +190,10 @@ export function generateStyleSpec() {
           "text-color": [
             "case",
             ["==", ["get", "name"], "Sedeto"],
-            "yellow",
-            "white",
+            mapColors.yellow,
+            ["boolean", ["get", "stamped"], false],
+            mapColors.lightGreen,
+            mapColors.white,
           ],
           "text-halo-width": 2,
           "text-halo-color": "#312783",

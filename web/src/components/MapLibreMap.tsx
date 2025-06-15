@@ -24,6 +24,7 @@ export const MapLibreMap: FC<{
   const searchParams = useSearch({ strict: false }) as {
     center?: [number, number];
   };
+
   const container = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<MapLibre | null>(null);
 
@@ -46,6 +47,7 @@ export const MapLibreMap: FC<{
         zoom: searchParams?.center ? 19 : 16,
         maxZoom: 24,
       });
+
       map.addControl(
         new GeolocateControl({
           trackUserLocation: true,
@@ -76,6 +78,7 @@ export const MapLibreMap: FC<{
         const feature = features[0];
         onStandClick(feature.id as string);
       };
+
       map.on("click", "line", handleFeatureClick);
       map.on("click", "fill", handleFeatureClick);
       map.on("click", "symbol", handleFeatureClick);

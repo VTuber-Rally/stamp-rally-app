@@ -187,6 +187,12 @@
     "title": "Logout successful"
   },
   "map": "Map",
+  "mapLegend": {
+    "title": "Legend",
+    "green": "Stamped booths are shown with a <1>green</1> outline.",
+    "blue": "Not visited yet booths are shown with a <1>blue</1> outline.",
+    "yellow": "The booth where you can get rewards is shown with a <1>yellow</1> name."
+  },
   "mapWillSoonBeAvailable": "The map will soon be available!",
   "name": "Name",
   "no": "No",
