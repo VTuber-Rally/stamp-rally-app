@@ -792,6 +792,53 @@
         }
       ],
       "indexes": []
+    },
+    {
+      "$id": "6851cecb0036893ccc9e",
+      "$permissions": ["read(\"label:staff\")"],
+      "databaseId": "6675f377000709b0db07",
+      "name": "prizes",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "probability",
+          "type": "double",
+          "required": true,
+          "array": false,
+          "min": 0,
+          "max": 1,
+          "default": null
+        },
+        {
+          "key": "draw",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "elements": ["standard", "premium"],
+          "format": "enum",
+          "default": null
+        },
+        {
+          "key": "classicCards",
+          "type": "integer",
+          "required": true,
+          "array": false,
+          "min": 0,
+          "max": 9223372036854775807,
+          "default": null
+        },
+        {
+          "key": "holographicCards",
+          "type": "integer",
+          "required": true,
+          "array": false,
+          "min": 0,
+          "max": 9223372036854775807,
+          "default": null
+        }
+      ],
+      "indexes": []
     }
   ],
   "buckets": [

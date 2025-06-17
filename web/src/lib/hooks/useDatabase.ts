@@ -16,6 +16,7 @@ import {
   wheelCollectionId,
 } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
+import { RewardDrawType } from "@/lib/rewards.ts";
 
 type WithDocument<T> = T & Models.Document;
 
@@ -34,10 +35,10 @@ type Submission = {
 };
 
 type WheelEntry = {
-  name: string;
-  order: number;
+  draw: RewardDrawType;
   probability: number;
-  disabled: boolean;
+  classicCards: number;
+  holographicCards: number;
 };
 
 export const useDatabase = () => {
@@ -92,11 +93,11 @@ export const useDatabase = () => {
     return dbSubmissions;
   };
 
-  const getWheelEntries = async () => {
+  const getWheelEntries = async (type: RewardDrawType) => {
     const docs = await databases.listDocuments<WithDocument<WheelEntry>>(
       databaseId,
       wheelCollectionId,
-      [Query.equal("disabled", false)],
+      [Query.equal("draw", type)],
     );
 
     // sort using the order field
@@ -105,7 +106,7 @@ export const useDatabase = () => {
     });
 
     return docs.documents.map((doc) => ({
-      option: doc.name,
+      option: `${doc.classicCards} cards`,
       probability: doc.probability,
     }));
   };
