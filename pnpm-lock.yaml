@@ -24,6 +24,28 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
 
+  functions/modules/get-available-cards:
+    dependencies:
+      node-appwrite:
+        specifier: ^17.0.0
+        version: 17.0.0
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.9
+        version: 20.17.14
+      '@vtube-stamp-rally/linter-configs':
+        specifier: workspace:*
+        version: link:../../../linter-configs
+      '@vtube-stamp-rally/shared-lib':
+        specifier: workspace:*
+        version: link:../../../shared-lib
+      esbuild:
+        specifier: ^0.25.3
+        version: 0.25.3
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+
   functions/modules/get-private-key:
     dependencies:
       node-appwrite:
@@ -4777,6 +4799,9 @@ packages:
 
   node-appwrite@16.0.0:
     resolution: {integrity: sha512-KLC8bNtZ8T2sxiudYNC0V5UwegxE7+FmLo96a5RuSgRRw3B4WSzs3JYy+WG8p+eZJjg1o1JrQeB7ikUc8qZc0Q==}
+
+  node-appwrite@17.0.0:
+    resolution: {integrity: sha512-5Moi5ENPnoAfU1/6CZP9K2NTuB6Nm3dSyhokno+24RDuP7czjXCdwzfeyjmyHieggbrLkN89AYSOv9W1XkCL9w==}
 
   node-fetch-native-with-agent@1.7.2:
     resolution: {integrity: sha512-5MaOOCuJEvcckoz7/tjdx1M6OusOY6Xc5f459IaruGStWnKzlI1qpNgaAwmn4LmFYcsSlj+jBMk84wmmRxfk5g==}
@@ -10904,6 +10929,10 @@ snapshots:
     optional: true
 
   node-appwrite@16.0.0:
+    dependencies:
+      node-fetch-native-with-agent: 1.7.2
+
+  node-appwrite@17.0.0:
     dependencies:
       node-fetch-native-with-agent: 1.7.2
 
