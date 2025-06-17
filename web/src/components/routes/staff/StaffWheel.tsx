@@ -70,10 +70,10 @@ function Wheel() {
   return (
     <>
       <Header>
-        <div className={"flex flex-col"}>
-          <span className="w-full break-words">{tFR("wheelOfFortune")}</span>
+        <div className={"flex w-full flex-col items-center"}>
+          <span className="break-words">{tFR("wheelOfFortune")}</span>
           <hr className="my-2 w-full border-black/30" />
-          <span className="w-full break-words">{tEN("wheelOfFortune")}</span>
+          <span className="break-words">{tEN("wheelOfFortune")}</span>
         </div>
       </Header>
 
