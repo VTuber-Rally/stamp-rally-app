@@ -2,6 +2,8 @@ import * as fs from "fs";
 import * as sdk from "node-appwrite";
 import path from "path";
 
+import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.js";
+
 import { appwriteClient, env } from "./shared.js";
 import { uploadMedia } from "./upload-media.ts";
 
@@ -44,7 +46,9 @@ if (process.argv[2] === "--reset") {
           ),
         ),
       database
-        .listDocuments(DATABASE_ID, CARDS_COLLECTION_ID, [sdk.Query.limit(1000)])
+        .listDocuments(DATABASE_ID, CARDS_COLLECTION_ID, [
+          sdk.Query.limit(1000),
+        ])
         .then((res) =>
           Promise.all(
             res.documents.map((doc) =>
@@ -124,22 +128,47 @@ console.log(groups);
 
 const content = fs.readdirSync(cardsPath, "utf8");
 
-type Card = {
+const standists = await database
+  .listDocuments<StandistDocument>(DATABASE_ID, STANDISTS_COLLECTION_ID)
+  .then((res) => res.documents)
+  .then((docs) =>
+    docs.map((doc) => {
+      return {
+        artistId: doc.$id,
+        artistName: doc.name,
+      };
+    }),
+  );
+
+type CardDesignInternal = {
   name: string;
   author: string;
   fileName: string;
+  standistId: string;
 };
 
-const cards: Card[] = content
-  .filter((fileName) => /.+-by-.+-card.jpg/.test(fileName))
+const cards: CardDesignInternal[] = content
+  .filter((fileName) => /.+-by-.+-.+-card.jpg/.test(fileName))
   .map((fileName) => {
-    const [name, , author] = fileName.split("-");
+    const [name, , author, standName] = fileName.split("-");
     console.log(`${name} by ${author}`);
+
+    // try to find the author in standists
+    const standist = standists.find(
+      (standist) =>
+        standist.artistName.toLowerCase().includes(standName.toLowerCase()) ||
+        standName.toLowerCase().includes(standist.artistName.toLowerCase()),
+    );
+    if (!standist) {
+      console.log(`Standist not found for ${author}`);
+    }
+
     return {
       name,
       author,
       fileName,
-    } satisfies Card;
+      standistId: standist?.artistId,
+    } satisfies CardDesignInternal;
   });
 
 async function createCardDesigns() {
@@ -148,6 +177,7 @@ async function createCardDesigns() {
     name: string;
     author: string;
     image: string;
+    standist?: string;
   }[] = [];
 
   const uploadMediaPromises = cards.map(async (card) => {
@@ -166,6 +196,7 @@ async function createCardDesigns() {
         name: card.name,
         author: card.author,
         image: id,
+        standist: card.standistId,
       },
     );
     designs.push({
