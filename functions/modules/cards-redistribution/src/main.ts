@@ -62,7 +62,7 @@ export default async ({
       ],
       status: "available",
     });
-  }
+  };
 
   // 1. Trouver les groupes à redistribuer
   const groups = await db
@@ -94,7 +94,10 @@ export default async ({
   }
 
   const groupesToRedistributeTo = groups.filter((group) => {
-    return new Date(group.start).getTime() > nowTime || new Date(group.end).getTime() > nowTime;
+    return (
+      new Date(group.start).getTime() > nowTime ||
+      new Date(group.end).getTime() > nowTime
+    );
   });
 
   // 3. Redistribuer les cartes groupe par groupe (on devrait avoir max un seul groupe à redistribuer mais bon)
@@ -107,41 +110,46 @@ export default async ({
       .then((res) => res.documents);
 
     log(
-      `Redistributing ${cards.length} cards from expired group ${group.groupId}`
+      `Redistributing ${cards.length} cards from expired group ${group.groupId}`,
     );
 
     if (cards.length > 0 && groupesToRedistributeTo.length > 0) {
       // Calculer la somme des coefficients des groupes de destination disponibles
       const totalCoefficient = groupesToRedistributeTo.reduce(
         (sum, targetGroup) => sum + targetGroup.coefficient,
-        0
+        0,
       );
 
       log(
-        `Total coefficient of available destination groups: ${totalCoefficient}`
+        `Total coefficient of available destination groups: ${totalCoefficient}`,
       );
 
       // Redistribuer les cartes selon les coefficients normalisés
       let cardIndex = 0;
-      
+
       for (const targetGroup of groupesToRedistributeTo) {
         // Normaliser le coefficient pour qu'il soit sur base 1.0
-        const normalizedCoefficient = targetGroup.coefficient / totalCoefficient;
-        
+        const normalizedCoefficient =
+          targetGroup.coefficient / totalCoefficient;
+
         // Calculer le nombre de cartes pour ce groupe selon son coefficient normalisé
         const cardsForThisGroup = Math.floor(
-          cards.length * normalizedCoefficient
+          cards.length * normalizedCoefficient,
         );
 
         log(
-          `Group ${targetGroup.groupId} (coefficient: ${targetGroup.coefficient}, normalized: ${normalizedCoefficient.toFixed(3)}) will receive ${cardsForThisGroup} cards`
+          `Group ${targetGroup.groupId} (coefficient: ${targetGroup.coefficient}, normalized: ${normalizedCoefficient.toFixed(3)}) will receive ${cardsForThisGroup} cards`,
         );
 
-        for (let j = 0; j < cardsForThisGroup && cardIndex < cards.length; j++) {
+        for (
+          let j = 0;
+          j < cardsForThisGroup && cardIndex < cards.length;
+          j++
+        ) {
           const card = cards[cardIndex];
           await updateCard(card, targetGroup.$id);
           log(
-            `Redistributed card ${card.$id} from group ${group.groupId} to group ${targetGroup.groupId}`
+            `Redistributed card ${card.$id} from group ${group.groupId} to group ${targetGroup.groupId}`,
           );
           cardIndex++;
         }
@@ -149,27 +157,28 @@ export default async ({
 
       // Redistribuer les cartes restantes aux groupes avec les coefficients les plus élevés
       const sortedByCoefficient = [...groupesToRedistributeTo].sort(
-        (a, b) => b.coefficient - a.coefficient
+        (a, b) => b.coefficient - a.coefficient,
       );
 
       let remainingGroupIndex = 0;
       while (cardIndex < cards.length) {
-        const targetGroup = sortedByCoefficient[remainingGroupIndex % sortedByCoefficient.length];
+        const targetGroup =
+          sortedByCoefficient[remainingGroupIndex % sortedByCoefficient.length];
         const card = cards[cardIndex];
         await updateCard(card, targetGroup.$id);
         log(
-          `Redistributed remaining card ${card.$id} from group ${group.groupId} to group ${targetGroup.groupId} (highest coefficient)`
+          `Redistributed remaining card ${card.$id} from group ${group.groupId} to group ${targetGroup.groupId} (highest coefficient)`,
         );
         cardIndex++;
         remainingGroupIndex++;
       }
 
       log(
-        `Successfully redistributed ${cardIndex} cards from group ${group.groupId}`
+        `Successfully redistributed ${cardIndex} cards from group ${group.groupId}`,
       );
     } else {
       log(
-        `No cards to redistribute from group ${group.groupId} or no target groups available`
+        `No cards to redistribute from group ${group.groupId} or no target groups available`,
       );
     }
 
@@ -184,4 +193,3 @@ export default async ({
     message: "Cards redistributed",
   });
 };
-

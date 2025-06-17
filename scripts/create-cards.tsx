@@ -2,11 +2,11 @@ import * as fs from "fs";
 import * as sdk from "node-appwrite";
 import path from "path";
 
+import { Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.js";
 
 import { appwriteClient, env } from "./shared.js";
 import { uploadMedia } from "./upload-media.ts";
-import { Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 
 const { DATABASE_ID, STANDISTS_COLLECTION_ID, BUCKET_ID } = env;
 const CARD_DESIGNS_COLLECTION_ID = "card_designs";
@@ -256,8 +256,8 @@ async function createGroups() {
 const groupsAppwrite = await createGroups();
 console.log(groupsAppwrite);
 
-groupsAppwrite.forEach(async (group) => {
-  designs.forEach(async (design) => {
+for (const group of groupsAppwrite) {
+  for (const design of designs) {
     for (let i = 0; i < group.numberOfCardsPerDesign; i++) {
       const cardId = await database.createDocument(
         DATABASE_ID,
@@ -279,114 +279,5 @@ groupsAppwrite.forEach(async (group) => {
         `Created card ${cardId.$id} for design ${design.$id} in group ${group.$id}`,
       );
     }
-  });
-});
-
-// // prend un design et la liste des groupes et crée les cartes associées
-// async function createCardsByDesign()
-
-// Your booth name	Booth number	Hall	Personal set order	Cost	Artist in the 2024 edition	Promo art	Status	Spoken languages	Has provided promo assets	Comments	"Algorithmic" reward card	"Artistic" / Sedeto's pick reward card	The top 3 Vtubers you wanna draw for the postcard, by priority order (top 1, top 2, top 3)	Final reward card	Please give one link for your promotional purposes	Adresse e-mail	Your artist name	Please describe your Vtuber-related goods available on your booth (kind of goods and characters/agency...).	Horodateur	Profile picture filename	Reward card file
-
-// console.log(`Found ${lines.length} profiles`);
-
-// async function createProfilesAndDocuments() {
-//   const creationPromises = lines.map<Promise<Partial<StandistDocument> | null>>(
-//     async (line) => {
-//       if (
-//         line.email === "Adresse e-mail" ||
-//         line.email === "" ||
-//         line.boothName === ""
-//       ) {
-//         return null; // ligne vide
-//       }
-
-//       // modify email for testing
-//       const emailModified = isProduction
-//         ? line.email
-//         : line.email.replace("@", "+").concat("@fake.email");
-//       const password = generatePassword();
-
-//       try {
-//         const newAccount = await users.create(
-//           sdk.ID.unique(),
-//           emailModified,
-//           undefined,
-//           password,
-//           line.boothName,
-//         );
-
-//         const { privateKey, publicKey } = await crypto.subtle.generateKey(
-//           { name: "ECDSA", namedCurve: "P-384" },
-//           true,
-//           ["sign", "verify"],
-//         );
-
-//         const exportedPrivateKey = await crypto.subtle.exportKey(
-//           "jwk",
-//           privateKey,
-//         );
-//         const exportedPublicKey = await crypto.subtle.exportKey(
-//           "jwk",
-//           publicKey,
-//         );
-
-//         await users.updatePrefs(newAccount.$id, {
-//           privateKey: JSON.stringify(exportedPrivateKey),
-//           publicKey: JSON.stringify(exportedPublicKey),
-//         });
-
-//         await users.updateLabels(newAccount.$id, [
-//           "standist",
-//           ...(isProduction ? [] : ["test"]),
-//         ]);
-//         await users.updateEmailVerification(newAccount.$id, true);
-
-//         console.log(`\`${emailModified}\`:\`${password}\``);
-
-//         let imageId = "fallback";
-//         if (line.filename) {
-//           const imagePath = path.join(userMediasPath, line.filename);
-//           if (!fs.existsSync(imagePath)) {
-//             throw new Error(`Image file not found: ${imagePath}`);
-//           }
-//           console.log(`Uploading image: ${imagePath}`);
-//           imageId = await uploadMedia(imagePath);
-//         }
-
-//         return {
-//           userId: newAccount.$id,
-//           boothNumber: line.boothNumber,
-//           name: line.boothName,
-//           hall: line.hall,
-//           description: line.goodsDescription,
-//           publicKey: JSON.stringify(exportedPublicKey),
-//           image: imageId,
-//           twitch: line.promotionalLink,
-//         } satisfies Partial<StandistDocument>;
-//       } catch (error) {
-//         console.error(`Error creating account for ${emailModified}: ${error}`);
-//         return null;
-//       }
-//     },
-//   );
-
-//   const profiles = await Promise.all(creationPromises);
-//   const documentCreationPromises = profiles
-//     .filter((profile) => profile !== null)
-//     .map((profile) => {
-//       return database.createDocument(
-//         DATABASE_ID,
-//         STANDISTS_COLLECTION_ID,
-//         sdk.ID.unique(),
-//         profile,
-//         [
-//           Permission.read(Role.user(profile.userId)),
-//           Permission.update(Role.user(profile.userId)),
-//         ],
-//       );
-//     });
-
-//   await Promise.all(documentCreationPromises);
-// }
-
-// await createProfilesAndDocuments();
+  }
+}

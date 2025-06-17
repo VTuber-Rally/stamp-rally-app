@@ -61,7 +61,9 @@ export default async ({
   }
 
   const activeGroup = groups.find(
-    (group) => new Date(group.start).getTime() <= nowTime && new Date(group.end).getTime() >= nowTime,
+    (group) =>
+      new Date(group.start).getTime() <= nowTime &&
+      new Date(group.end).getTime() >= nowTime,
   );
 
   if (!activeGroup) {

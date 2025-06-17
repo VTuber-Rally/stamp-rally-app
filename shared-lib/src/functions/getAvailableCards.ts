@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { Card, Group } from "../models/Inventory";
 
 export const GetAvailableCardsFunctionRequestValidator = z.object({});
