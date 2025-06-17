@@ -21,10 +21,11 @@ export interface Group extends Models.Document {
     end: Date;
     numberOfCardsPerDesign: number;
     coefficient: number;
+    redistributed?: boolean;
 }
 
 export interface CardHistory extends Models.Document {
     group: Group;
     timestamp: Date;
-    type: "initial" | "sold";
+    type: "initial" | "sold" | "redistributed";
 }
