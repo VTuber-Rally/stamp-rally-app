@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import type { Models } from "appwrite";
 
+import { CardDesign } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 import { KeyValue } from "@vtube-stamp-rally/shared-lib/models/KeyValue.ts";
 import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 import { Submission as SubmissionIndexedDB } from "@vtube-stamp-rally/shared-lib/models/Submission.ts";
@@ -9,6 +10,7 @@ import { StandistsEditProfileForm } from "@/components/routes/standists/Standist
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { Query, databases } from "@/lib/appwrite.ts";
 import {
+  cardDesignsCollectionId,
   databaseId,
   keyValueCollectionId,
   standistsCollectionId,
@@ -16,6 +18,8 @@ import {
   wheelCollectionId,
 } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
+
+import { getCardDesignImage } from "../images";
 
 type WithDocument<T> = T & Models.Document;
 
@@ -148,11 +152,24 @@ export const useDatabase = () => {
     );
   };
 
+  const getCardDesigns = async () => {
+    const docs = await databases
+      .listDocuments<CardDesign>(databaseId, cardDesignsCollectionId)
+      .then((res) => res.documents);
+
+    // get image's url from their id
+    return docs.map((doc) => ({
+      ...doc,
+      image: getCardDesignImage(doc.image),
+    }));
+  };
+
   return {
     getSubmission,
     getOwnSubmissions,
     getWheelEntries,
     getKeyValue,
     findAndUpdateProfile,
+    getCardDesigns,
   };
 };
