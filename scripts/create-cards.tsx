@@ -6,6 +6,7 @@ import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.
 
 import { appwriteClient, env } from "./shared.js";
 import { uploadMedia } from "./upload-media.ts";
+import { Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 
 const { DATABASE_ID, STANDISTS_COLLECTION_ID, BUCKET_ID } = env;
 const CARD_DESIGNS_COLLECTION_ID = "card_designs";
@@ -223,11 +224,11 @@ async function createGroups() {
     start: Date;
     end: Date;
     numberOfCardsPerDesign: number;
-    coef: number;
+    coefficient: number;
   }[] = [];
 
   for (const group of groups) {
-    const groupId = await database.createDocument(
+    const groupId = await database.createDocument<Group>(
       DATABASE_ID,
       GROUPS_COLLECTION_ID,
       group.group.toString(),
@@ -235,7 +236,8 @@ async function createGroups() {
         groupId: group.group,
         start: group.start,
         end: group.end,
-        coef: group.coefficient,
+        coefficient: group.coefficient,
+        numberOfCardsPerDesign: group.numberOfCardsPerDesign,
       },
     );
     groupsA.push({
@@ -244,7 +246,7 @@ async function createGroups() {
       start: group.start,
       end: group.end,
       numberOfCardsPerDesign: group.numberOfCardsPerDesign,
-      coef: group.coefficient,
+      coefficient: group.coefficient,
     });
   }
 

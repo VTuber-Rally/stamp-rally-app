@@ -23,6 +23,7 @@ import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
 import { Route as StandistsProfileImport } from './routes/standists/profile'
 import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffStampLinksImport } from './routes/staff/stamp-links'
+import { Route as StaffInventoryImport } from './routes/staff/inventory'
 import { Route as StaffContestImport } from './routes/staff/contest'
 import { Route as StaffCodeImport } from './routes/staff/code'
 import { Route as RallyistsStampImport } from './routes/_rallyists/stamp'
@@ -132,6 +133,12 @@ const StaffWheelRoute = StaffWheelImport.update({
 const StaffStampLinksRoute = StaffStampLinksImport.update({
   id: '/stamp-links',
   path: '/stamp-links',
+  getParentRoute: () => StaffRoute,
+} as any)
+
+const StaffInventoryRoute = StaffInventoryImport.update({
+  id: '/inventory',
+  path: '/inventory',
   getParentRoute: () => StaffRoute,
 } as any)
 
@@ -343,6 +350,13 @@ declare module '@tanstack/react-router' {
       path: '/contest'
       fullPath: '/staff/contest'
       preLoaderRoute: typeof StaffContestImport
+      parentRoute: typeof StaffImport
+    }
+    '/staff/inventory': {
+      id: '/staff/inventory'
+      path: '/inventory'
+      fullPath: '/staff/inventory'
+      preLoaderRoute: typeof StaffInventoryImport
       parentRoute: typeof StaffImport
     }
     '/staff/stamp-links': {
@@ -619,6 +633,7 @@ const RallyistsRouteWithChildren = RallyistsRoute._addFileChildren(
 interface StaffRouteChildren {
   StaffCodeRoute: typeof StaffCodeRoute
   StaffContestRoute: typeof StaffContestRoute
+  StaffInventoryRoute: typeof StaffInventoryRoute
   StaffStampLinksRoute: typeof StaffStampLinksRoute
   StaffWheelRoute: typeof StaffWheelRoute
   StaffSigninLazyRoute: typeof StaffSigninLazyRoute
@@ -631,6 +646,7 @@ interface StaffRouteChildren {
 const StaffRouteChildren: StaffRouteChildren = {
   StaffCodeRoute: StaffCodeRoute,
   StaffContestRoute: StaffContestRoute,
+  StaffInventoryRoute: StaffInventoryRoute,
   StaffStampLinksRoute: StaffStampLinksRoute,
   StaffWheelRoute: StaffWheelRoute,
   StaffSigninLazyRoute: StaffSigninLazyRoute,
@@ -668,6 +684,7 @@ export interface FileRoutesByFullPath {
   '/stamp': typeof RallyistsStampRoute
   '/staff/code': typeof StaffCodeRoute
   '/staff/contest': typeof StaffContestRoute
+  '/staff/inventory': typeof StaffInventoryRoute
   '/staff/stamp-links': typeof StaffStampLinksRoute
   '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
@@ -702,6 +719,7 @@ export interface FileRoutesByTo {
   '/stamp': typeof RallyistsStampRoute
   '/staff/code': typeof StaffCodeRoute
   '/staff/contest': typeof StaffContestRoute
+  '/staff/inventory': typeof StaffInventoryRoute
   '/staff/stamp-links': typeof StaffStampLinksRoute
   '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
@@ -741,6 +759,7 @@ export interface FileRoutesById {
   '/_rallyists/stamp': typeof RallyistsStampRoute
   '/staff/code': typeof StaffCodeRoute
   '/staff/contest': typeof StaffContestRoute
+  '/staff/inventory': typeof StaffInventoryRoute
   '/staff/stamp-links': typeof StaffStampLinksRoute
   '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
@@ -779,6 +798,7 @@ export interface FileRouteTypes {
     | '/stamp'
     | '/staff/code'
     | '/staff/contest'
+    | '/staff/inventory'
     | '/staff/stamp-links'
     | '/staff/wheel'
     | '/standists/profile'
@@ -812,6 +832,7 @@ export interface FileRouteTypes {
     | '/stamp'
     | '/staff/code'
     | '/staff/contest'
+    | '/staff/inventory'
     | '/staff/stamp-links'
     | '/staff/wheel'
     | '/standists/profile'
@@ -849,6 +870,7 @@ export interface FileRouteTypes {
     | '/_rallyists/stamp'
     | '/staff/code'
     | '/staff/contest'
+    | '/staff/inventory'
     | '/staff/stamp-links'
     | '/staff/wheel'
     | '/standists/profile'
@@ -923,6 +945,7 @@ export const routeTree = rootRoute
       "children": [
         "/staff/code",
         "/staff/contest",
+        "/staff/inventory",
         "/staff/stamp-links",
         "/staff/wheel",
         "/staff/signin",
@@ -978,6 +1001,10 @@ export const routeTree = rootRoute
     },
     "/staff/contest": {
       "filePath": "staff/contest.tsx",
+      "parent": "/staff"
+    },
+    "/staff/inventory": {
+      "filePath": "staff/inventory.tsx",
       "parent": "/staff"
     },
     "/staff/stamp-links": {

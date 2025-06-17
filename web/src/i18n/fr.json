@@ -376,5 +376,21 @@
     "title": "Une mise à jour est disponible"
   },
   "wheelOfFortune": "Roue de la fortune",
-  "yes": "Oui"
+  "yes": "Oui",
+  "cardDesigns": {
+    "noCardsFound": "Aucun design de carte trouvé",
+    "byAuthor": "{{author}}",
+    "unknownAuthor": "Auteur inconnu",
+    "stand": "Stand: {{standName}}"
+  },
+  "inventory": {
+    "title": "Inventaire",
+    "group": "Groupe #{{groupId}}",
+    "groupDates": "{{start}} - {{end}}",
+    "groupInfo": "{{numberOfCards}} cartes par design • Coefficient: {{coefficient}}",
+    "stock": "Stock:",
+    "available_zero": "{{count}} disponible",
+    "available_one": "{{count}} disponible",
+    "available_other": "{{count}} disponibles"
+  }
 }

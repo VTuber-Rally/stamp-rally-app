@@ -19,7 +19,7 @@ import {
 } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
 
-import { getCardDesignImage } from "../images";
+import { getCardDesignImage, getCardDesignImagePreview } from "../images";
 
 type WithDocument<T> = T & Models.Document;
 
@@ -157,10 +157,26 @@ export const useDatabase = () => {
       .listDocuments<CardDesign>(databaseId, cardDesignsCollectionId)
       .then((res) => res.documents);
 
-    // get image's url from their id
+    // on override l'id de l'image par son URL
     return docs.map((doc) => ({
       ...doc,
       image: getCardDesignImage(doc.image),
+    }));
+  };
+
+  const getCardDesignsPreview = async (
+    width: number = 128,
+    height: number = 128,
+  ) => {
+    const docs = await databases
+      .listDocuments<CardDesign>(databaseId, cardDesignsCollectionId)
+      .then((res) => res.documents);
+
+    // on override l'id de l'image par l'url de son image de preview à la
+    // bonne taille (redimensionnée par Appwrite)
+    return docs.map((doc) => ({
+      ...doc,
+      image: getCardDesignImagePreview(doc.image, width, height),
     }));
   };
 
@@ -171,5 +187,6 @@ export const useDatabase = () => {
     getKeyValue,
     findAndUpdateProfile,
     getCardDesigns,
+    getCardDesignsPreview,
   };
 };

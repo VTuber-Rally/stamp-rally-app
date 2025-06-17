@@ -34,3 +34,17 @@ export const getCardDesignImage = (cardDesignId: string) => {
     return null;
   }
 };
+
+export const getCardDesignImagePreview = (
+  cardDesignId: string,
+  width: number,
+  height: number,
+) => {
+  try {
+    return storage.getFilePreview(assetsBucketId, cardDesignId, width, height);
+  } catch (error) {
+    console.error("Failed to load card design image:", error);
+    Sentry.captureException(error);
+    return null;
+  }
+};
