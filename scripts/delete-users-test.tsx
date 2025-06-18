@@ -3,7 +3,7 @@ import * as sdk from "node-appwrite";
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import { appwriteClient, env } from "./shared.js";
-import { deleteUserMedia } from "./upload-user-medias.js";
+import { deleteMedia } from "./upload-media.ts";
 
 const { DATABASE_ID, STANDISTS_COLLECTION_ID } = env;
 
@@ -29,7 +29,7 @@ const promises = usersExisting.users.map((user) => {
             STANDISTS_COLLECTION_ID,
             document.$id,
           ),
-          deleteUserMedia(document.image),
+          deleteMedia(document.image),
         ]);
       });
       return Promise.all(documentDeletionPromises);

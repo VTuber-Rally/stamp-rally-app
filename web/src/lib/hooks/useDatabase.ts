@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import type { Models } from "appwrite";
 
+import { CardDesign } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 import { KeyValue } from "@vtube-stamp-rally/shared-lib/models/KeyValue.ts";
 import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 import { Submission as SubmissionIndexedDB } from "@vtube-stamp-rally/shared-lib/models/Submission.ts";
@@ -9,6 +10,7 @@ import { StandistsEditProfileForm } from "@/components/routes/standists/Standist
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { Query, databases } from "@/lib/appwrite.ts";
 import {
+  cardDesignsCollectionId,
   databaseId,
   keyValueCollectionId,
   standistsCollectionId,
@@ -16,6 +18,8 @@ import {
   wheelCollectionId,
 } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
+
+import { getCardDesignImage, getCardDesignImagePreview } from "../images";
 
 type WithDocument<T> = T & Models.Document;
 
@@ -148,11 +152,41 @@ export const useDatabase = () => {
     );
   };
 
+  const getCardDesigns = async () => {
+    const docs = await databases
+      .listDocuments<CardDesign>(databaseId, cardDesignsCollectionId)
+      .then((res) => res.documents);
+
+    // on override l'id de l'image par son URL
+    return docs.map((doc) => ({
+      ...doc,
+      image: getCardDesignImage(doc.image),
+    }));
+  };
+
+  const getCardDesignsPreview = async (
+    width: number = 128,
+    height: number = 128,
+  ) => {
+    const docs = await databases
+      .listDocuments<CardDesign>(databaseId, cardDesignsCollectionId)
+      .then((res) => res.documents);
+
+    // on override l'id de l'image par l'url de son image de preview à la
+    // bonne taille (redimensionnée par Appwrite)
+    return docs.map((doc) => ({
+      ...doc,
+      image: getCardDesignImagePreview(doc.image, width, height),
+    }));
+  };
+
   return {
     getSubmission,
     getOwnSubmissions,
     getWheelEntries,
     getKeyValue,
     findAndUpdateProfile,
+    getCardDesigns,
+    getCardDesignsPreview,
   };
 };

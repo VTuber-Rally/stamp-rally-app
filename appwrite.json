@@ -81,6 +81,38 @@
       "entrypoint": "index.js",
       "specification": "s-1vcpu-512mb",
       "path": "functions/artifacts/send-notification"
+    },
+    {
+      "$id": "680e8fc7d0cdd79cff11",
+      "execute": ["label:staff"],
+      "name": "get-available-cards",
+      "enabled": true,
+      "logging": true,
+      "runtime": "node-20.0",
+      "scopes": ["documents.read"],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "entrypoint": "index.js",
+      "specification": "s-1vcpu-512mb",
+      "commands": "ls",
+      "path": "functions/artifacts/get-available-cards"
+    },
+    {
+      "$id": "680e8fc7d0cdd79cff12",
+      "execute": ["label:staff"],
+      "name": "cards-redistribution",
+      "enabled": true,
+      "logging": true,
+      "runtime": "node-20.0",
+      "scopes": ["documents.read", "documents.write"],
+      "events": [],
+      "schedule": "* ",
+      "timeout": 15,
+      "entrypoint": "index.js",
+      "specification": "s-1vcpu-512mb",
+      "commands": "ls",
+      "path": "functions/artifacts/cards-redistribution"
     }
   ],
   "databases": [

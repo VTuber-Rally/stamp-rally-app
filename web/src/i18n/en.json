@@ -165,6 +165,7 @@
   "home": "Home",
   "ignore": "Ignore",
   "instagram": "Instagram",
+  "inventory": "Inventory",
   "language": {
     "description": "Change the application language.",
     "title": "Language"
@@ -376,5 +377,20 @@
     "title": "Update available"
   },
   "wheelOfFortune": "Wheel of fortune",
-  "yes": "Yes"
+  "yes": "Yes",
+  "cardDesigns": {
+    "noCardsFound": "No card designs found",
+    "byAuthor": "By {{author}}",
+    "unknownAuthor": "Unknown author",
+    "stand": "Stand: {{standName}}"
+  },
+  "inventory": {
+    "group": "Group #{{groupId}}",
+    "groupDates": "{{start}} - {{end}}",
+    "groupInfo": "{{numberOfCards}} cards per design • Coefficient: {{coefficient}}",
+    "stock": "Stock:",
+    "available_zero": "{{count}} available",
+    "available_one": "{{count}} available",
+    "available_other": "{{count}} available"
+  }
 }
