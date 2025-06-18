@@ -79,12 +79,13 @@ export default async ({
     .listDocuments<Card>(DATABASE_ID, CARDS_COLLECTION_ID, [
       Query.equal("group", activeGroup.$id),
       Query.equal("status", "available"),
+      Query.limit(250),
     ])
     .then((res) => res.documents);
 
-  console.log("Groups", groups);
-
-  console.log("Active group found", activeGroup);
+  log(
+    `Active group found: ${activeGroup.$id}, returning ${cards.length} cards`,
+  );
 
   return res.json({
     status: "success",

@@ -26,7 +26,7 @@ export interface Group extends Models.Document {
 }
 
 export interface CardHistory extends Models.Document {
-  group: Group;
-  timestamp: Date;
-  type: "initial" | "sold" | "redistributed";
+    group: Group;
+    timestamp: Date;
+    type: "initial" | "sold" | "redistribution";
 }
