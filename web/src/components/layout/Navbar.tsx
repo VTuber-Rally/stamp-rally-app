@@ -1,10 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import clsx from "clsx";
 import {
-  Dices,
   Home,
   QrCode,
   QrCodeIcon,
+  Sparkles,
   Trophy,
   UserPen,
   UsersRound,
@@ -155,11 +155,16 @@ export const StandistsNavbar = () => {
 export const StaffNavbar = () => {
   const { user } = useUser();
   const { t } = useTranslation();
+  const { location } = useRouterState();
 
   const isLoggedIn = !!user;
   const isStaff = user?.labels.includes("staff");
 
   const disabled = !isLoggedIn || !isStaff;
+
+  const hide = location.pathname.startsWith("/staff/reward/");
+
+  if (hide) return null;
 
   return (
     <Navbar>
@@ -173,8 +178,8 @@ export const StaffNavbar = () => {
       >
         <QrCode className="h-5 w-5 text-gray-500 group-hover:text-blue-600 sm:mb-2" />
       </NavbarElement>
-      <NavbarElement to={"/staff/wheel"} label={"Wheel"} disabled={disabled}>
-        <Dices className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
+      <NavbarElement to={"/staff/reward"} label={"Reward"} disabled={disabled}>
+        <Sparkles className="mb-2 h-5 w-5 text-gray-500 group-hover:text-blue-600" />
       </NavbarElement>
       <NavbarElement
         to={"/staff/gen-qrcode"}

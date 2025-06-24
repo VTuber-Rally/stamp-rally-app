@@ -35,6 +35,29 @@
       height: 0;
     }
   }
+
+  --animate-envelope-wiggle: 500ms cubic-bezier(0.55, 0.06, 0.68, 0.19)
+    envelope-wiggle;
+
+  @keyframes envelope-wiggle {
+    from {
+      transform: translateY(-40px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  --animate-envelope-send-to-center: 750ms ease-in-out envelope-send-to-center;
+
+  @keyframes envelope-send-to-center {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-40vh) rotate(45deg);
+    }
+  }
 }
 
 :root {

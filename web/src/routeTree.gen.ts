@@ -21,7 +21,6 @@ import { Route as StaffIndexImport } from './routes/staff/index'
 import { Route as RallyistsIndexImport } from './routes/_rallyists/index'
 import { Route as StandistsQrcodeImport } from './routes/standists/qrcode'
 import { Route as StandistsProfileImport } from './routes/standists/profile'
-import { Route as StaffWheelImport } from './routes/staff/wheel'
 import { Route as StaffStampLinksImport } from './routes/staff/stamp-links'
 import { Route as StaffContestImport } from './routes/staff/contest'
 import { Route as StaffCodeImport } from './routes/staff/code'
@@ -29,9 +28,11 @@ import { Route as RallyistsStampImport } from './routes/_rallyists/stamp'
 import { Route as RallyistsRulesImport } from './routes/_rallyists/rules'
 import { Route as RallyistsWithUserProviderNoAutoAnonymousImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous'
 import { Route as RallyistsWithUserProviderImport } from './routes/_rallyists/_withUserProvider'
+import { Route as StaffRewardIndexImport } from './routes/staff/reward/index'
 import { Route as StaffGenQrcodeIndexImport } from './routes/staff/gen-qrcode/index'
 import { Route as RallyistsArtistsIndexImport } from './routes/_rallyists/artists/index'
 import { Route as StaffSubmissionSubmissionIdImport } from './routes/staff/submission.$submissionId'
+import { Route as StaffRewardDrawTypeImport } from './routes/staff/reward/$drawType'
 import { Route as StaffGenQrcodeUserIdImport } from './routes/staff/gen-qrcode/$userId'
 import { Route as RallyistsCodeTypeImport } from './routes/_rallyists/code.$type'
 import { Route as RallyistsWithUserProviderNoAutoAnonymousSettingsImport } from './routes/_rallyists/_withUserProviderNoAutoAnonymous/settings'
@@ -123,12 +124,6 @@ const StandistsProfileRoute = StandistsProfileImport.update({
   getParentRoute: () => StandistsRoute,
 } as any)
 
-const StaffWheelRoute = StaffWheelImport.update({
-  id: '/wheel',
-  path: '/wheel',
-  getParentRoute: () => StaffRoute,
-} as any)
-
 const StaffStampLinksRoute = StaffStampLinksImport.update({
   id: '/stamp-links',
   path: '/stamp-links',
@@ -170,6 +165,12 @@ const RallyistsWithUserProviderRoute = RallyistsWithUserProviderImport.update({
   getParentRoute: () => RallyistsRoute,
 } as any)
 
+const StaffRewardIndexRoute = StaffRewardIndexImport.update({
+  id: '/reward/',
+  path: '/reward/',
+  getParentRoute: () => StaffRoute,
+} as any)
+
 const StaffGenQrcodeIndexRoute = StaffGenQrcodeIndexImport.update({
   id: '/gen-qrcode/',
   path: '/gen-qrcode/',
@@ -188,6 +189,12 @@ const StaffSubmissionSubmissionIdRoute =
     path: '/submission/$submissionId',
     getParentRoute: () => StaffRoute,
   } as any)
+
+const StaffRewardDrawTypeRoute = StaffRewardDrawTypeImport.update({
+  id: '/reward/$drawType',
+  path: '/reward/$drawType',
+  getParentRoute: () => StaffRoute,
+} as any)
 
 const StaffGenQrcodeUserIdRoute = StaffGenQrcodeUserIdImport.update({
   id: '/gen-qrcode/$userId',
@@ -352,13 +359,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffStampLinksImport
       parentRoute: typeof StaffImport
     }
-    '/staff/wheel': {
-      id: '/staff/wheel'
-      path: '/wheel'
-      fullPath: '/staff/wheel'
-      preLoaderRoute: typeof StaffWheelImport
-      parentRoute: typeof StaffImport
-    }
     '/standists/profile': {
       id: '/standists/profile'
       path: '/profile'
@@ -450,6 +450,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffGenQrcodeUserIdImport
       parentRoute: typeof StaffImport
     }
+    '/staff/reward/$drawType': {
+      id: '/staff/reward/$drawType'
+      path: '/reward/$drawType'
+      fullPath: '/staff/reward/$drawType'
+      preLoaderRoute: typeof StaffRewardDrawTypeImport
+      parentRoute: typeof StaffImport
+    }
     '/staff/submission/$submissionId': {
       id: '/staff/submission/$submissionId'
       path: '/submission/$submissionId'
@@ -469,6 +476,13 @@ declare module '@tanstack/react-router' {
       path: '/gen-qrcode'
       fullPath: '/staff/gen-qrcode'
       preLoaderRoute: typeof StaffGenQrcodeIndexImport
+      parentRoute: typeof StaffImport
+    }
+    '/staff/reward/': {
+      id: '/staff/reward/'
+      path: '/reward'
+      fullPath: '/staff/reward'
+      preLoaderRoute: typeof StaffRewardIndexImport
       parentRoute: typeof StaffImport
     }
     '/_rallyists/_withUserProvider/reward/submissions': {
@@ -620,24 +634,26 @@ interface StaffRouteChildren {
   StaffCodeRoute: typeof StaffCodeRoute
   StaffContestRoute: typeof StaffContestRoute
   StaffStampLinksRoute: typeof StaffStampLinksRoute
-  StaffWheelRoute: typeof StaffWheelRoute
   StaffSigninLazyRoute: typeof StaffSigninLazyRoute
   StaffIndexRoute: typeof StaffIndexRoute
   StaffGenQrcodeUserIdRoute: typeof StaffGenQrcodeUserIdRoute
+  StaffRewardDrawTypeRoute: typeof StaffRewardDrawTypeRoute
   StaffSubmissionSubmissionIdRoute: typeof StaffSubmissionSubmissionIdRoute
   StaffGenQrcodeIndexRoute: typeof StaffGenQrcodeIndexRoute
+  StaffRewardIndexRoute: typeof StaffRewardIndexRoute
 }
 
 const StaffRouteChildren: StaffRouteChildren = {
   StaffCodeRoute: StaffCodeRoute,
   StaffContestRoute: StaffContestRoute,
   StaffStampLinksRoute: StaffStampLinksRoute,
-  StaffWheelRoute: StaffWheelRoute,
   StaffSigninLazyRoute: StaffSigninLazyRoute,
   StaffIndexRoute: StaffIndexRoute,
   StaffGenQrcodeUserIdRoute: StaffGenQrcodeUserIdRoute,
+  StaffRewardDrawTypeRoute: StaffRewardDrawTypeRoute,
   StaffSubmissionSubmissionIdRoute: StaffSubmissionSubmissionIdRoute,
   StaffGenQrcodeIndexRoute: StaffGenQrcodeIndexRoute,
+  StaffRewardIndexRoute: StaffRewardIndexRoute,
 }
 
 const StaffRouteWithChildren = StaffRoute._addFileChildren(StaffRouteChildren)
@@ -669,7 +685,6 @@ export interface FileRoutesByFullPath {
   '/staff/code': typeof StaffCodeRoute
   '/staff/contest': typeof StaffContestRoute
   '/staff/stamp-links': typeof StaffStampLinksRoute
-  '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
   '/map': typeof RallyistsMapLazyRoute
@@ -683,9 +698,11 @@ export interface FileRoutesByFullPath {
   '/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
   '/code/$type': typeof RallyistsCodeTypeRoute
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
+  '/staff/reward/$drawType': typeof StaffRewardDrawTypeRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
+  '/staff/reward': typeof StaffRewardIndexRoute
   '/reward/submissions': typeof RallyistsWithUserProviderRewardSubmissionsRoute
   '/reward': typeof RallyistsWithUserProviderRewardIndexRoute
   '/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
@@ -703,7 +720,6 @@ export interface FileRoutesByTo {
   '/staff/code': typeof StaffCodeRoute
   '/staff/contest': typeof StaffContestRoute
   '/staff/stamp-links': typeof StaffStampLinksRoute
-  '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
   '/map': typeof RallyistsMapLazyRoute
@@ -717,9 +733,11 @@ export interface FileRoutesByTo {
   '/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
   '/code/$type': typeof RallyistsCodeTypeRoute
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
+  '/staff/reward/$drawType': typeof StaffRewardDrawTypeRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/artists': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode': typeof StaffGenQrcodeIndexRoute
+  '/staff/reward': typeof StaffRewardIndexRoute
   '/reward/submissions': typeof RallyistsWithUserProviderRewardSubmissionsRoute
   '/reward': typeof RallyistsWithUserProviderRewardIndexRoute
   '/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
@@ -742,7 +760,6 @@ export interface FileRoutesById {
   '/staff/code': typeof StaffCodeRoute
   '/staff/contest': typeof StaffContestRoute
   '/staff/stamp-links': typeof StaffStampLinksRoute
-  '/staff/wheel': typeof StaffWheelRoute
   '/standists/profile': typeof StandistsProfileRoute
   '/standists/qrcode': typeof StandistsQrcodeRoute
   '/_rallyists/map': typeof RallyistsMapLazyRoute
@@ -756,9 +773,11 @@ export interface FileRoutesById {
   '/_rallyists/_withUserProviderNoAutoAnonymous/settings': typeof RallyistsWithUserProviderNoAutoAnonymousSettingsRoute
   '/_rallyists/code/$type': typeof RallyistsCodeTypeRoute
   '/staff/gen-qrcode/$userId': typeof StaffGenQrcodeUserIdRoute
+  '/staff/reward/$drawType': typeof StaffRewardDrawTypeRoute
   '/staff/submission/$submissionId': typeof StaffSubmissionSubmissionIdRoute
   '/_rallyists/artists/': typeof RallyistsArtistsIndexRoute
   '/staff/gen-qrcode/': typeof StaffGenQrcodeIndexRoute
+  '/staff/reward/': typeof StaffRewardIndexRoute
   '/_rallyists/_withUserProvider/reward/submissions': typeof RallyistsWithUserProviderRewardSubmissionsRoute
   '/_rallyists/_withUserProvider/reward/': typeof RallyistsWithUserProviderRewardIndexRoute
   '/_rallyists/_withUserProvider/reward/contest/code': typeof RallyistsWithUserProviderRewardContestCodeRoute
@@ -780,7 +799,6 @@ export interface FileRouteTypes {
     | '/staff/code'
     | '/staff/contest'
     | '/staff/stamp-links'
-    | '/staff/wheel'
     | '/standists/profile'
     | '/standists/qrcode'
     | '/map'
@@ -794,9 +812,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/code/$type'
     | '/staff/gen-qrcode/$userId'
+    | '/staff/reward/$drawType'
     | '/staff/submission/$submissionId'
     | '/artists'
     | '/staff/gen-qrcode'
+    | '/staff/reward'
     | '/reward/submissions'
     | '/reward'
     | '/reward/contest/code'
@@ -813,7 +833,6 @@ export interface FileRouteTypes {
     | '/staff/code'
     | '/staff/contest'
     | '/staff/stamp-links'
-    | '/staff/wheel'
     | '/standists/profile'
     | '/standists/qrcode'
     | '/map'
@@ -827,9 +846,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/code/$type'
     | '/staff/gen-qrcode/$userId'
+    | '/staff/reward/$drawType'
     | '/staff/submission/$submissionId'
     | '/artists'
     | '/staff/gen-qrcode'
+    | '/staff/reward'
     | '/reward/submissions'
     | '/reward'
     | '/reward/contest/code'
@@ -850,7 +871,6 @@ export interface FileRouteTypes {
     | '/staff/code'
     | '/staff/contest'
     | '/staff/stamp-links'
-    | '/staff/wheel'
     | '/standists/profile'
     | '/standists/qrcode'
     | '/_rallyists/map'
@@ -864,9 +884,11 @@ export interface FileRouteTypes {
     | '/_rallyists/_withUserProviderNoAutoAnonymous/settings'
     | '/_rallyists/code/$type'
     | '/staff/gen-qrcode/$userId'
+    | '/staff/reward/$drawType'
     | '/staff/submission/$submissionId'
     | '/_rallyists/artists/'
     | '/staff/gen-qrcode/'
+    | '/staff/reward/'
     | '/_rallyists/_withUserProvider/reward/submissions'
     | '/_rallyists/_withUserProvider/reward/'
     | '/_rallyists/_withUserProvider/reward/contest/code'
@@ -924,12 +946,13 @@ export const routeTree = rootRoute
         "/staff/code",
         "/staff/contest",
         "/staff/stamp-links",
-        "/staff/wheel",
         "/staff/signin",
         "/staff/",
         "/staff/gen-qrcode/$userId",
+        "/staff/reward/$drawType",
         "/staff/submission/$submissionId",
-        "/staff/gen-qrcode/"
+        "/staff/gen-qrcode/",
+        "/staff/reward/"
       ]
     },
     "/standists": {
@@ -984,10 +1007,6 @@ export const routeTree = rootRoute
       "filePath": "staff/stamp-links.tsx",
       "parent": "/staff"
     },
-    "/staff/wheel": {
-      "filePath": "staff/wheel.tsx",
-      "parent": "/staff"
-    },
     "/standists/profile": {
       "filePath": "standists/profile.tsx",
       "parent": "/standists"
@@ -1040,6 +1059,10 @@ export const routeTree = rootRoute
       "filePath": "staff/gen-qrcode/$userId.tsx",
       "parent": "/staff"
     },
+    "/staff/reward/$drawType": {
+      "filePath": "staff/reward/$drawType.tsx",
+      "parent": "/staff"
+    },
     "/staff/submission/$submissionId": {
       "filePath": "staff/submission.$submissionId.tsx",
       "parent": "/staff"
@@ -1050,6 +1073,10 @@ export const routeTree = rootRoute
     },
     "/staff/gen-qrcode/": {
       "filePath": "staff/gen-qrcode/index.tsx",
+      "parent": "/staff"
+    },
+    "/staff/reward/": {
+      "filePath": "staff/reward/index.tsx",
       "parent": "/staff"
     },
     "/_rallyists/_withUserProvider/reward/submissions": {
