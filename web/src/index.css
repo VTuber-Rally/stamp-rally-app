@@ -35,6 +35,73 @@
       height: 0;
     }
   }
+
+  --animate-envelope-wiggle: 500ms cubic-bezier(0.55, 0.06, 0.68, 0.19)
+    envelope-wiggle;
+
+  @keyframes envelope-wiggle {
+    from {
+      transform: translateY(-40px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  --animate-envelope-send-to-center: 750ms ease-in-out envelope-send-to-center;
+
+  @keyframes envelope-send-to-center {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-40vh) rotate(20deg);
+    }
+  }
+
+  --animate-envelope-shake: 100ms ease-in-out envelope-shake;
+
+  @keyframes envelope-shake {
+    from {
+      transform: translateY(-40vh) rotate(20deg);
+    }
+    to {
+      transform: translateY(-40vh) rotate(23deg);
+    }
+  }
+
+  --animate-cards-swipe: 2000ms ease-in-out cards-swipe;
+
+  @keyframes cards-swipe {
+    from {
+      transform: translateX(-200vw);
+    }
+    to {
+      transform: translateX(200vw);
+    }
+  }
+
+  --animate-disappear: 1ms linear disappear 1000ms;
+
+  @keyframes disappear {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  --animate-appear: 1ms linear appear 1000ms;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 :root {

@@ -5,3 +5,7 @@ export const contestSecretSearchParamsSchema = z.object({
     required_error: "Missing secret",
   }),
 });
+
+export const rewardDrawSearchParamsSchema = z.object({
+  submissionId: z.string().optional(),
+});

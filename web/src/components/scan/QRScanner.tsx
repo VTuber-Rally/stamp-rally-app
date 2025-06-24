@@ -25,6 +25,7 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
       videoRef.current,
       (result) => {
         try {
+          qrScanner.stop();
           onScanSuccess(result);
         } catch (error) {
           console.error("Erreur lors du traitement du scan QR:", error);

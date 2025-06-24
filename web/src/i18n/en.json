@@ -14,9 +14,6 @@
     "optOut": "Do not use my data for statistics.",
     "title": "Analytics"
   },
-  "artistPresentation": {
-    "cardDescription": "{{artistName}} designed {{cardName}} as an exclusive reward card for the rally, get 10 stamps to have it!"
-  },
   "anonymousLogoutButton": "Log out (warning, you will lose your submission history!)",
   "anonymousLogoutWarning": "You are logged in as an <1>anonymous user</1>. You will lose your previous submissions if you log out.",
   "appIsReady": {
@@ -24,6 +21,9 @@
     "title": "The app is ready!"
   },
   "artistList": "Artist List",
+  "artistPresentation": {
+    "cardDescription": "{{artistName}} designed {{cardName}} as an exclusive reward card for the rally, get 10 stamps to have it!"
+  },
   "artists": "Artists",
   "cancel": "Cancel",
   "cardDesigns": {
@@ -174,6 +174,15 @@
     "title": "Ongoing rally"
   },
   "description": "Description",
+  "draw": {
+    "debug": "Type: {{type}} / Phase: {{phase}}<br/>Classic: {{wonClassicCards}} / Holo: {{wonHolographicCards}}",
+    "classicCards_one": "classic card",
+    "classicCards_other": "classic cards",
+    "holographicCards_one": "holographic card",
+    "holographicCards_other": "holographic cards",
+    "drawReward": "Reward inside!",
+    "goToNextPhase": "Click to continue"
+  },
   "email": "Email",
   "error": "An error occurred",
   "errorCreatingAccount": "Error creating account. Is the email already in use?",
@@ -194,7 +203,6 @@
     "cardList": {
       "description": "For each card, press C to add a classic card and H to add a holographic card"
     },
-    "loading": "Loading inventory…",
     "cart": {
       "addToCart": "Add to cart",
       "classic": "Classic",
@@ -230,6 +238,7 @@
     "group": "Group #{{groupId}}",
     "groupDates": "{{start}} - {{end}}",
     "groupInfo": "{{numberOfCards}} classic cards/{{numberOfHoloCards}} holo cards per design • Coefficient: {{coefficient}}",
+    "loading": "Loading inventory…",
     "stock": {
       "classic": "Stock: <1>{{count}}</1>",
       "holo": "Holo: <1>{{count}}</1>"
@@ -310,15 +319,22 @@
     },
     "title": "My profile"
   },
+  "qrScanner": {
+    "checkPermissions": "Check your browser permissions",
+    "instruction": "Place the QR code in the frame",
+    "loading": "Loading camera…",
+    "noCameraAccess": "Unable to access camera",
+    "scanFrame": "QR scan frame"
+  },
   "qrcode": "QR Code",
   "rally": {
-    "welcome": "Welcome to the Rally!",
     "1": "16 artists take part in this rally around VTubers",
     "2": "After making a purchase (minimum 2€) from a participant booth, scan the QR code to get a stamp",
     "3": "Once you've collected {{minimumStampsCount}} stamps and visited both halls, head over to Sedeto's booth to get a reward!",
     "4": "This year, try to win a holographic card by getting all the stamps!",
     "5": "Once you get your reward, enter the draw to win a shikishi from Sedeto!",
-    "6": "You can replay as many times as you like while rewards last!"
+    "6": "You can replay as many times as you like while rewards last!",
+    "welcome": "Welcome to the Rally!"
   },
   "redeemedSubmissions": "Redeemed submissions",
   "requestYourReward": "Request your reward!",
@@ -382,13 +398,6 @@
     "description": "Add a stamp in your collection by scanning the QR code showed to you by the artist!",
     "nativeCameraHint": "If you're experiencing issues, please try using your device's Camera app to scan the QR code.",
     "title": "Scan a QR Code"
-  },
-  "qrScanner": {
-    "loading": "Loading camera…",
-    "scanFrame": "QR scan frame",
-    "instruction": "Place the QR code in the frame",
-    "noCameraAccess": "Unable to access camera",
-    "checkPermissions": "Check your browser permissions"
   },
   "scanThisQR": "Scan this QR code to get the stamp!",
   "settings": {

@@ -11,12 +11,12 @@ import { Query, databases } from "@/lib/appwrite.ts";
 import {
   databaseId,
   keyValueCollectionId,
+  prizesCollectionId,
   standistsCollectionId,
   submissionsCollectionId,
-  wheelCollectionId,
 } from "@/lib/consts.ts";
 import { db } from "@/lib/db.ts";
-import { RewardDrawType } from "@/lib/rewards.ts";
+import { Prize } from "@/lib/rewards.ts";
 
 type WithDocument<T> = T & Models.Document;
 
@@ -27,18 +27,11 @@ type Submission = {
 
   stamps: {
     $id: string;
-    generated: string; // date
+    expiry: string; // date
     scanned: string; // date
     standist: Standist;
     signature: string;
   }[];
-};
-
-type WheelEntry = {
-  draw: RewardDrawType;
-  probability: number;
-  classicCards: number;
-  holographicCards: number;
 };
 
 export const useDatabase = () => {
@@ -93,11 +86,10 @@ export const useDatabase = () => {
     return dbSubmissions;
   };
 
-  const getWheelEntries = async (type: RewardDrawType) => {
-    const docs = await databases.listDocuments<WithDocument<WheelEntry>>(
+  const getPrizes = async () => {
+    const docs = await databases.listDocuments<WithDocument<Prize>>(
       databaseId,
-      wheelCollectionId,
-      [Query.equal("draw", type)],
+      prizesCollectionId,
     );
 
     // sort using the order field
@@ -105,10 +97,7 @@ export const useDatabase = () => {
       return a.order - b.order;
     });
 
-    return docs.documents.map((doc) => ({
-      option: `${doc.classicCards} cards`,
-      probability: doc.probability,
-    }));
+    return docs.documents;
   };
 
   const getKeyValue = async (key: string) => {
@@ -152,7 +141,7 @@ export const useDatabase = () => {
   return {
     getSubmission,
     getOwnSubmissions,
-    getWheelEntries,
+    getPrizes,
     getKeyValue,
     findAndUpdateProfile,
   };

@@ -38,7 +38,7 @@ export default defineConfig({
           VITE_STANDISTS_COLLECTION_ID: Schema.string(),
           VITE_SUBMISSIONS_COLLECTION_ID: Schema.string(),
           VITE_SUBMIT_FUNCTION_ID: Schema.string(),
-          VITE_WHEEL_COLLECTION_ID: Schema.string(),
+          VITE_PRIZES_COLLECTION_ID: Schema.string(),
           VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: Schema.string(),
           VITE_GET_PRIVATE_KEY_FUNCTION_ID: Schema.string(),
           VITE_KV_COLLECTION_ID: Schema.string(),
