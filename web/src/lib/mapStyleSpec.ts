@@ -1,56 +1,10 @@
 import { polygon } from "@turf/helpers";
 import { Feature, FeatureCollection } from "geojson";
-import { RasterLayerSpecification, StyleSpecification } from "maplibre-gl";
+import { StyleSpecification } from "maplibre-gl";
 
+import { mapTilesURL } from "@/lib/consts.ts";
 import { getCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 import { getStandists } from "@/lib/hooks/useStandists.ts";
-
-const tiles = [
-  {
-    url: "/map_tiles/japex_export_1.webp",
-    coordinates: [
-      [2.5141680514198583, 48.97365453111249],
-      [2.520007580674303, 48.97365453111249],
-      [2.520007580674303, 48.97076366749354],
-      [2.5141680514198583, 48.97076366749354],
-    ],
-  },
-  {
-    url: "/map_tiles/japex_export_2_new.webp",
-    coordinates: [
-      [2.516233051419858, 48.97076366749354],
-      [2.520007580674303, 48.97076366749354],
-      [2.520007580674303, 48.9678728038746],
-      [2.516233051419858, 48.9678728038746],
-    ],
-  },
-  {
-    url: "/map_tiles/japex_export_3.webp",
-    coordinates: [
-      [2.520007580674303, 48.97076366749354],
-      [2.5258471099287476, 48.97076366749354],
-      [2.5258471099287476, 48.9678728038746],
-      [2.520007580674303, 48.9678728038746],
-    ],
-  },
-  {
-    url: "/map_tiles/japex_export_4.webp",
-    coordinates: [
-      [2.520007580674303, 48.97365453111249],
-      [2.5258471099287476, 48.97365453111249],
-      [2.5258471099287476, 48.97076366749354],
-      [2.520007580674303, 48.97076366749354],
-    ],
-  },
-] satisfies {
-  url: string;
-  coordinates: [
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-  ];
-}[];
 
 const mapColors = {
   forestGreen: "#024f05",
@@ -86,11 +40,6 @@ export function generateStyleSpec() {
     version: 8,
     glyphs: `${window.location.origin}/glyphs/{fontstack}/{range}.pbf`,
     sources: {
-      ...Object.fromEntries(
-        tiles.map((tile, index) => {
-          return [`japan_expo_${index}`, { type: "image", ...tile }];
-        }),
-      ),
       standists: {
         type: "geojson",
         data: {
@@ -99,12 +48,19 @@ export function generateStyleSpec() {
         },
         promoteId: "id",
       },
+      japex_tiles: {
+        type: "raster",
+        tiles: [mapTilesURL],
+        scheme: "tms",
+        minzoom: 16,
+        maxzoom: 21,
+      },
     },
     layers: [
-      ...tiles.map<RasterLayerSpecification>((_, index) => ({
+      {
         type: "raster",
-        id: `japan_expo_${index}`,
-        source: `japan_expo_${index}`,
+        id: "japan_expo",
+        source: "japex_tiles",
         paint: {
           "raster-opacity": [
             "interpolate",
@@ -116,7 +72,7 @@ export function generateStyleSpec() {
             0.55,
           ],
         },
-      })),
+      },
       {
         type: "line",
         id: "line",
