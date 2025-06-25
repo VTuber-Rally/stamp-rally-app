@@ -43,6 +43,7 @@ export default defineConfig({
           VITE_GET_PRIVATE_KEY_FUNCTION_ID: Schema.string(),
           VITE_KV_COLLECTION_ID: Schema.string(),
           VITE_ASSETS_BUCKET_ID: Schema.string(),
+          VITE_MAP_TILES_URL: Schema.string(),
           VITE_FIREBASE_API_KEY: Schema.string(),
           VITE_FIREBASE_AUTH_DOMAIN: Schema.string(),
           VITE_FIREBASE_PROJECT_ID: Schema.string(),

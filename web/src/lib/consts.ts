@@ -31,6 +31,7 @@ const {
   VITE_SENTRY_DSN: sentryDSN,
   VITE_SENTRY_ENVIRONMENT: sentryEnvironment,
   VITE_INDEXEDDB_NAME: indexedDbName,
+  VITE_MAP_TILES_URL: mapTilesURL,
   DEV: isDev,
   PROD: isProd,
 } = import.meta.env;
@@ -81,6 +82,7 @@ export {
   rallyFinishersFrTopicId,
   indexedDbName,
   mapCenter,
+  mapTilesURL,
   sentryDSN,
   sentryEnvironment,
 };

@@ -43,9 +43,9 @@ export const MapLibreMap: FC<{
         bearing: 69,
         center: searchParams?.center ? searchParams.center : mapCenter,
         maxPitch: 0,
-        minZoom: 14,
+        minZoom: 15.5,
         zoom: searchParams?.center ? 19 : 16,
-        maxZoom: 24,
+        maxZoom: 21,
       });
 
       map.addControl(
