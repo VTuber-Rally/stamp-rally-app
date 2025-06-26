@@ -148,6 +148,22 @@
     },
     "title": "Concours"
   },
+  "currentRallyBlock": {
+    "availableRewardPresentation_one": "En soumettant maintenant, vous aurez droit au lot suivant :",
+    "availableRewardPresentation_other": "En soumettant maintenant, vous aurez droit aux lots suivants :",
+    "evenMoreClassicCards": "Un deuxième tirage spécial pour encore plus de cartes",
+    "holographicCard": "Une chance d'obtenir une carte exclusive dans sa version holographique !",
+    "minorHallInfo": "Pour assurer l'équité entre les halls, un des tampons doit provenir d'un stand situé dans le hall 5A.",
+    "oneOrMoreClassicCards": "Une, deux ou trois cartes exclusives",
+    "premiumCardRewardPresentation": "En continuant jusqu'au <1><icon/>palier suivant</1> à {{stamps}} tampons, débloquez en plus les lots suivants :",
+    "resetDisclaimer": "Une fois les tampons soumis, vous repartez de zéro pour atteindre les paliers.",
+    "standardCardRewardPresentation": "En atteignant le <1><icon/>premier palier</1> à {{stamps}} tampons, vous aurez droit au lot suivant :",
+    "submitAction": "Soumettre",
+    "submitDrawerDescription": "Envoyez vos tampons au serveur pour pouvoir obtenir vos lots !",
+    "submitDrawerTitle": "Soumettre votre rally",
+    "submitError": "Désolé, votre rally n'a pas été soumis, merci de vous rapprocher des équipes du stand Arqo & Sedeto.",
+    "title": "Rally en cours"
+  },
   "description": "Description",
   "email": "Email",
   "error": "Une erreur est survenue",
@@ -188,46 +204,46 @@
   },
   "map": "Carte",
   "mapLegend": {
-    "title": "Légende",
-    "green": "Les stands tamponnés sont affichés avec un contour <1>vert</1>.",
     "blue": "Les stands encore à visiter sont affichés avec un contour <1>bleu</1>.",
+    "green": "Les stands tamponnés sont affichés avec un contour <1>vert</1>.",
+    "title": "Légende",
     "yellow": "Le stand où les récompenses sont obtenables est affiché avec un nom <1>jaune</1>."
   },
   "mapWillSoonBeAvailable": "La carte sera bientôt disponible !",
   "name": "Nom",
   "no": "Non",
   "notImplemented": "Pas encore supporté",
-  "notifications": {
-    "permissionNotGrantedToast": {
-      "title": "Permission pour les notifications",
-      "description": "Accédez aux paramètres du navigateur Internet pour autoriser les notifications."
-    },
-    "notificationSentToast": {
-      "title": "Notification envoyée",
-      "description": "Elle peut mettre plusieurs minutes à arriver vers les appareils."
-    },
-    "fcmError": {
-      "title": "Impossible de modifier le paramètre de notifications",
-      "description": "La connexion au serveur de notifications n'a pas pu être établie."
-    },
-    "nudge": {
-      "title": "Soyez à l'affût",
-      "description": "Si vous êtes d'accord, une gentille notification vous rappellera de vous rendre au concours shikishi du rally. À la clé, une commission aquarelle gratuite de Sedeto !",
-      "button": "Activer les notifications",
-      "done": "Notifications activées !",
-      "reminder": "Vous pouvez désactiver ces notifications dans le menu Paramètres.",
-      "ignore": "Ignorer et ne plus montrer ce message"
-    },
-    "templates": {
-      "contest": {
-        "title": "Le concours du Rally VTuber commence bientôt !",
-        "text": "Rendez-vous au stand de Sedeto (H6, R687) pour tenter votre chance de remporter un shikishi personnalisé de Sedeto."
-      }
-    }
-  },
   "notLoggedIn": "Vous n'êtes pas connecté·e",
   "notRedeemed": "Soumissions non validées",
   "notRedeemedDescription": "Cette soumission n'a pas encore été validée.",
+  "notifications": {
+    "fcmError": {
+      "description": "La connexion au serveur de notifications n'a pas pu être établie.",
+      "title": "Impossible de modifier le paramètre de notifications"
+    },
+    "notificationSentToast": {
+      "description": "Elle peut mettre plusieurs minutes à arriver vers les appareils.",
+      "title": "Notification envoyée"
+    },
+    "nudge": {
+      "button": "Activer les notifications",
+      "description": "Si vous êtes d'accord, une gentille notification vous rappellera de vous rendre au concours shikishi du rally. À la clé, une commission aquarelle gratuite de Sedeto !",
+      "done": "Notifications activées !",
+      "ignore": "Ignorer et ne plus montrer ce message",
+      "reminder": "Vous pouvez désactiver ces notifications dans le menu Paramètres.",
+      "title": "Soyez à l'affût"
+    },
+    "permissionNotGrantedToast": {
+      "description": "Accédez aux paramètres du navigateur Internet pour autoriser les notifications.",
+      "title": "Permission pour les notifications"
+    },
+    "templates": {
+      "contest": {
+        "text": "Rendez-vous au stand de Sedeto (H6, R687) pour tenter votre chance de remporter un shikishi personnalisé de Sedeto.",
+        "title": "Le concours du Rally VTuber commence bientôt !"
+      }
+    }
+  },
   "optionalName": "Nom (optionnel)",
   "password": "Mot de passe",
   "profile": {
@@ -262,34 +278,34 @@
       "title": "Concours à 16h"
     },
     "disclaimer": "Les récompenses sont disponibles dans la limite des stocks disponibles.",
+    "navbarTitle": "Récompense",
+    "pageTitle": "Récompenses",
     "rally": {
-      "collectedStamps_zero": "Aucun tampon enregistré",
+      "button": "Voir mes soumissions",
       "collectedStamps_one": "{{count}} tampon enregistré",
       "collectedStamps_other": "{{count}} tampons enregistrés",
-      "button": "Voir mes soumissions",
+      "collectedStamps_zero": "Aucun tampon enregistré",
       "description": "Collectez des tampons et obtenez des récompenses exclusives.",
-      "title": "Stamp Rally",
       "faq": {
+        "replay": {
+          "description": "Vous pouvez rejouer autant de fois que vous voulez ! Il est néanmoins interdit de jouer avec plusieurs appareils en simultané.",
+          "title": "Peut-on refaire un rally ?"
+        },
         "rewards": {
           "title": "Qu'est-ce que je peux gagner ?"
         },
-        "submissions": {
-          "title": "Comment récupérer les lots ?",
-          "description.1": "Pour obtenir un ou des lots selon le palier atteint, soumettez votre rally à l'aide du bouton ci-dessous.",
-          "description.2": "Après envoi, rendez-vous au stand organisateur (Arqo & Sedeto, Hall 6, R687) pour récupérer sur place le lot !"
-        },
         "stamps": {
-          "title": "Comment obtenir des tampons ?",
-          "description": "Pour obtenir un tampon, achetez un produit sur un stand participant et demandez le QR code du rally. Scannez-le à l'aide du bouton situé en bas à droite de l'application ! <em>Le montant minimum d'achat est de 2€. Un tampon par artiste maximum.</em>"
+          "description": "Pour obtenir un tampon, achetez un produit sur un stand participant et demandez le QR code du rally. Scannez-le à l'aide du bouton situé en bas à droite de l'application ! <em>Le montant minimum d'achat est de 2€. Un tampon par artiste maximum.</em>",
+          "title": "Comment obtenir des tampons ?"
         },
-        "replay": {
-          "title": "Peut-on refaire un rally ?",
-          "description": "Vous pouvez rejouer autant de fois que vous voulez ! Il est néanmoins interdit de jouer avec plusieurs appareils en simultané."
+        "submissions": {
+          "description.1": "Pour obtenir un ou des lots selon le palier atteint, soumettez votre rally à l'aide du bouton ci-dessous.",
+          "description.2": "Après envoi, rendez-vous au stand organisateur (Arqo & Sedeto, Hall 6, R687) pour récupérer sur place le lot !",
+          "title": "Comment récupérer les lots ?"
         }
-      }
-    },
-    "pageTitle": "Récompenses",
-    "navbarTitle": "Récompense"
+      },
+      "title": "Stamp Rally"
+    }
   },
   "rules": "Règles",
   "rules.1": "Le rally est entièrement numérique et accessible depuis votre smartphone, la page ne nécessite plus d'internet une fois qu'elle a été chargée une fois. Il sera accessible depuis ce site et depuis un QR code sur le stand de Sedeto (Hall 6, R687).",
@@ -327,38 +343,23 @@
     "summary": "Détails du tampon"
   },
   "stampGoals": {
-    "getToStandardCardReward_zero": "Bravo ! Vous pouvez dès maintenant remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
-    "getToStandardCardReward_one": "Un dernier tampon avant de remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
-    "getToStandardCardReward_other": "Plus que {{count}} tampons pour remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
-    "getToPremiumCardReward_zero": "Vous avez tout fini ! Vous pouvez dès maintenant tenter votre chance pour obtenir <1><icon/>une carte spéciale holographique</1>.",
     "getToPremiumCardReward_one": "Un dernier tampon pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
     "getToPremiumCardReward_other": "Plus que {{count}} tampons pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
+    "getToPremiumCardReward_zero": "Vous avez tout fini ! Vous pouvez dès maintenant tenter votre chance pour obtenir <1><icon/>une carte spéciale holographique</1>.",
+    "getToStandardCardReward_one": "Un dernier tampon avant de remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
+    "getToStandardCardReward_other": "Plus que {{count}} tampons pour remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
+    "getToStandardCardReward_zero": "Bravo ! Vous pouvez dès maintenant remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
     "scanFromMinorHall": "<strong>Attention</strong>, pour valider votre rally, scannez un tampon d'un stand du hall 5A. <em>Pourquoi ? Pour assurer l'équité entre les deux halls.</em>"
   },
   "stampValidated": "Tampon validé !",
   "stampsCount_one": "{{count}} tampon collecté sur {{maxCount}} !",
   "stampsCount_other": "{{count}} tampons collectés sur {{maxCount}} !",
   "stand": "Stand de {{name}}",
+  "standName": "Nom du stand",
   "standistSpace": "Espace standistes",
   "submission": "Soumission {{id}}",
   "submissions": "Soumissions",
   "submissionsGoesHere": "Quand vous aurez terminé votre rally, vous pourrez trouver des informations pour récupérer vos lots !",
-  "currentRallyBlock": {
-    "title": "Rally en cours",
-    "availableRewardPresentation_one": "En soumettant maintenant, vous aurez droit au lot suivant :",
-    "availableRewardPresentation_other": "En soumettant maintenant, vous aurez droit aux lots suivants :",
-    "standardCardRewardPresentation": "En atteignant le <1><icon/>premier palier</1> à {{stamps}} tampons, vous aurez droit au lot suivant :",
-    "premiumCardRewardPresentation": "En continuant jusqu'au <1><icon/>palier suivant</1> à {{stamps}} tampons, débloquez en plus les lots suivants :",
-    "oneOrMoreClassicCards": "Une, deux ou trois cartes exclusives",
-    "evenMoreClassicCards": "Un deuxième tirage spécial pour encore plus de cartes",
-    "holographicCard": "Une chance d'obtenir une carte exclusive dans sa version holographique !",
-    "resetDisclaimer": "Une fois les tampons soumis, vous repartez de zéro pour atteindre les paliers.",
-    "submitError": "Désolé, votre rally n'a pas été soumis, merci de vous rapprocher des équipes du stand Arqo & Sedeto.",
-    "submitAction": "Soumettre",
-    "submitDrawerTitle": "Soumettre votre rally",
-    "submitDrawerDescription": "Envoyez vos tampons au serveur pour pouvoir obtenir vos lots !",
-    "minorHallInfo": "Pour assurer l'équité entre les halls, un des tampons doit provenir d'un stand situé dans le hall 5A."
-  },
   "submitNotAllowed": {
     "count": "Vous devez scanner au moins {{stamps}} tampons.",
     "minorHall": "Vous devez scanner un tampon du hall 5A."

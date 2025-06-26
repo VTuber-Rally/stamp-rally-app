@@ -34,6 +34,7 @@ const importStandists = async (): Promise<Standist[]> => {
         twitter,
         instagram,
         twitch,
+        website,
         geometry,
       } = document;
       return {
@@ -47,6 +48,7 @@ const importStandists = async (): Promise<Standist[]> => {
         twitter,
         instagram,
         twitch,
+        website,
         geometry: geometry
           ? (JSON.parse(geometry) as Polygon["coordinates"])
           : undefined,

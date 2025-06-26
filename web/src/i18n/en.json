@@ -148,6 +148,22 @@
     },
     "title": "Contest"
   },
+  "currentRallyBlock": {
+    "availableRewardPresentation_one": "By submitting now, you will be entitled to the following reward:",
+    "availableRewardPresentation_other": "By submitting now, you will be entitled to the following rewards:",
+    "evenMoreClassicCards": "A second special draw for even more exclusive cards",
+    "holographicCard": "A chance to get an exclusive card in its holographic version!",
+    "minorHallInfo": "To ensure fairness between halls, one of the stamps must come from a booth located in Hall 5A.",
+    "oneOrMoreClassicCards": "One, two, or three exclusive cards",
+    "premiumCardRewardPresentation": "By continuing to the <1><icon/>next tier</1> at {{stamps}} stamps, you also unlock the following rewards:",
+    "resetDisclaimer": "Once the stamps are submitted, you'll start from scratch to reach the tiers.",
+    "standardCardRewardPresentation": "By reaching the <1><icon/>first tier</1> at {{stamps}} stamps, you will be entitled to the following reward:",
+    "submitAction": "Submit",
+    "submitDrawerDescription": "Send your stamps to the server to claim your rewards!",
+    "submitDrawerTitle": "Submit your rally",
+    "submitError": "Sorry, the submit hasn't gone through, please reach to us at Arqo & Sedeto's booth.",
+    "title": "Ongoing rally"
+  },
   "description": "Description",
   "email": "Email",
   "error": "An error occurred",
@@ -188,46 +204,46 @@
   },
   "map": "Map",
   "mapLegend": {
-    "title": "Legend",
-    "green": "Stamped booths are shown with a <1>green</1> outline.",
     "blue": "Not visited yet booths are shown with a <1>blue</1> outline.",
+    "green": "Stamped booths are shown with a <1>green</1> outline.",
+    "title": "Legend",
     "yellow": "The booth where you can get rewards is shown with a <1>yellow</1> name."
   },
   "mapWillSoonBeAvailable": "The map will soon be available!",
   "name": "Name",
   "no": "No",
-  "notifications": {
-    "permissionNotGrantedToast": {
-      "title": "Notification permission",
-      "description": "Go to the web browser settings to allow notifications."
-    },
-    "notificationSentToast": {
-      "title": "Notification sent",
-      "description": "It may take a few minutes to reach all users."
-    },
-    "fcmError": {
-      "title": "Cannot toggle notifications",
-      "description": "A connection to the notification backend could not be established."
-    },
-    "nudge": {
-      "title": "Stay informed",
-      "description": "If you agree, a friendly notification will remind you to go to the rally's shikishi contest. The prize is a free watercolor commission from Sedeto!",
-      "button": "Enable notifications",
-      "done": "Notifications enabled!",
-      "reminder": "You can disable them later in the Settings menu.",
-      "ignore": "Ignore and don't show this again"
-    },
-    "templates": {
-      "contest": {
-        "title": "VTuber Rally contest begins soon!",
-        "text": "Head to Sedeto's booth (H6, R687) to register for a chance to win a commission from Sedeto."
-      }
-    }
-  },
   "notImplemented": "Not implemented yet",
   "notLoggedIn": "You're not logged in",
   "notRedeemed": "Unredeemed submissions",
   "notRedeemedDescription": "This submission has not been redeemed yet.",
+  "notifications": {
+    "fcmError": {
+      "description": "A connection to the notification backend could not be established.",
+      "title": "Cannot toggle notifications"
+    },
+    "notificationSentToast": {
+      "description": "It may take a few minutes to reach all users.",
+      "title": "Notification sent"
+    },
+    "nudge": {
+      "button": "Enable notifications",
+      "description": "If you agree, a friendly notification will remind you to go to the rally's shikishi contest. The prize is a free watercolor commission from Sedeto!",
+      "done": "Notifications enabled!",
+      "ignore": "Ignore and don't show this again",
+      "reminder": "You can disable them later in the Settings menu.",
+      "title": "Stay informed"
+    },
+    "permissionNotGrantedToast": {
+      "description": "Go to the web browser settings to allow notifications.",
+      "title": "Notification permission"
+    },
+    "templates": {
+      "contest": {
+        "text": "Head to Sedeto's booth (H6, R687) to register for a chance to win a commission from Sedeto.",
+        "title": "VTuber Rally contest begins soon!"
+      }
+    }
+  },
   "optionalName": "Name (optional)",
   "password": "Password",
   "profile": {
@@ -262,34 +278,34 @@
       "title": "4pm Exclusive Contest"
     },
     "disclaimer": "Rewards are available while supplies last.",
+    "navbarTitle": "Rewards",
+    "pageTitle": "Rewards",
     "rally": {
-      "collectedStamps_zero": "No stamps collected",
+      "button": "View my submissions",
       "collectedStamps_one": "{{count}} stamp collected",
       "collectedStamps_other": "{{count}} stamps collected",
-      "button": "View my submissions",
+      "collectedStamps_zero": "No stamps collected",
       "description": "Collect stamps to get one or more exclusive rewards.",
-      "title": "Stamp Rally",
       "faq": {
+        "replay": {
+          "description": "You can play as many times as you want! However, it is forbidden to play with multiple devices simultaneously.",
+          "title": "Can you do a rally again?"
+        },
         "rewards": {
           "title": "What are the rewards?"
         },
-        "submissions": {
-          "title": "How do I claim the prizes?",
-          "description.1": "To get one or more prizes depending on the tier reached, submit your rally using the button below.",
-          "description.2": "After submission, go to the organizer's booth (Arqo & Sedeto, Hall 6, R687) to collect your prize on site!"
-        },
         "stamps": {
-          "title": "How do I get stamps?",
-          "description": "To get a stamp, buy a product at a participating booth and ask for the rally's QR code. Scan it using the button at the bottom right of the application! <em>The minimum purchase amount is 2€. Maximum one stamp per artist.</em>"
+          "description": "To get a stamp, buy a product at a participating booth and ask for the rally's QR code. Scan it using the button at the bottom right of the application! <em>The minimum purchase amount is 2€. Maximum one stamp per artist.</em>",
+          "title": "How do I get stamps?"
         },
-        "replay": {
-          "title": "Can you do a rally again?",
-          "description": "You can play as many times as you want! However, it is forbidden to play with multiple devices simultaneously."
+        "submissions": {
+          "description.1": "To get one or more prizes depending on the tier reached, submit your rally using the button below.",
+          "description.2": "After submission, go to the organizer's booth (Arqo & Sedeto, Hall 6, R687) to collect your prize on site!",
+          "title": "How do I claim the prizes?"
         }
-      }
-    },
-    "pageTitle": "Rewards",
-    "navbarTitle": "Rewards"
+      },
+      "title": "Stamp Rally"
+    }
   },
   "rules": "Rules",
   "rules.1": "The rally will be completely digital and won't need any 4G, since you loaded it once. The access link will be there and on the booth.",
@@ -327,38 +343,23 @@
     "summary": "Stamp details"
   },
   "stampGoals": {
-    "getToStandardCardReward_zero": "Congrats! You can now win one, two, or three <1><icon/>exclusive cards</1>.",
-    "getToStandardCardReward_one": "One more stamp before you win one, two, or three <1><icon/>exclusive cards</1>.",
-    "getToStandardCardReward_other": "Only {{count}} more stamps to win one, two, or three <1><icon/>exclusive cards</1>.",
-    "getToPremiumCardReward_zero": "You've finished everything! You can now try your luck to get <1><icon/>a special holographic card</1>.",
     "getToPremiumCardReward_one": "One more stamp for a chance to get <1><icon/>a special holographic card</1>!",
     "getToPremiumCardReward_other": "Only {{count}} more stamps for a chance to get <1><icon/>a special holographic card</1>!",
+    "getToPremiumCardReward_zero": "You've finished everything! You can now try your luck to get <1><icon/>a special holographic card</1>.",
+    "getToStandardCardReward_one": "One more stamp before you win one, two, or three <1><icon/>exclusive cards</1>.",
+    "getToStandardCardReward_other": "Only {{count}} more stamps to win one, two, or three <1><icon/>exclusive cards</1>.",
+    "getToStandardCardReward_zero": "Congrats! You can now win one, two, or three <1><icon/>exclusive cards</1>.",
     "scanFromMinorHall": "<strong>Warning</strong>: To validate your rally, you have to scan a stamp from a booth located in hall 5A. <em>Why? To ensure equity between both halls.</em>"
   },
   "stampValidated": "Stamp added!",
   "stampsCount_one": "{{count}} stamp collected, go to {{maxCount}}!",
   "stampsCount_other": "{{count}} stamps collected, go to {{maxCount}}!",
   "stand": "{{name}}'s stand",
+  "standName": "Booth name",
   "standistSpace": "Standist space",
   "submission": "Submission {{id}}",
   "submissions": "Submissions",
   "submissionsGoesHere": "When you finish the rally, you will find information here about claiming your rewards!",
-  "currentRallyBlock": {
-    "title": "Ongoing rally",
-    "availableRewardPresentation_one": "By submitting now, you will be entitled to the following reward:",
-    "availableRewardPresentation_other": "By submitting now, you will be entitled to the following rewards:",
-    "standardCardRewardPresentation": "By reaching the <1><icon/>first tier</1> at {{stamps}} stamps, you will be entitled to the following reward:",
-    "premiumCardRewardPresentation": "By continuing to the <1><icon/>next tier</1> at {{stamps}} stamps, you also unlock the following rewards:",
-    "oneOrMoreClassicCards": "One, two, or three exclusive cards",
-    "evenMoreClassicCards": "A second special draw for even more exclusive cards",
-    "holographicCard": "A chance to get an exclusive card in its holographic version!",
-    "resetDisclaimer": "Once the stamps are submitted, you'll start from scratch to reach the tiers.",
-    "submitError": "Sorry, the submit hasn't gone through, please reach to us at Arqo & Sedeto's booth.",
-    "submitAction": "Submit",
-    "submitDrawerTitle": "Submit your rally",
-    "submitDrawerDescription": "Send your stamps to the server to claim your rewards!",
-    "minorHallInfo": "To ensure fairness between halls, one of the stamps must come from a booth located in Hall 5A."
-  },
   "submitNotAllowed": {
     "count": "You have to scan at least {{stamps}} stamps.",
     "minorHall": "You have to scan a stamp from Hall 5A."
