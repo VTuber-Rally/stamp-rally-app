@@ -108,8 +108,8 @@ export function InventoryCard({
               <span className="ml-1 text-base text-green-600">
                 {Array.from({
                   length: cartCard?.classicQuantity ?? 0,
-                }).map(() => (
-                  <Vote className="inline-block" />
+                }).map((_, i) => (
+                  <Vote key={i} className="inline-block" />
                 ))}
               </span>
             )}
@@ -128,8 +128,8 @@ export function InventoryCard({
               <span className="ml-1 text-base text-yellow-500">
                 {Array.from({
                   length: cartCard?.holoQuantity ?? 0,
-                }).map(() => (
-                  <Sparkles className="inline-block" />
+                }).map((_, i) => (
+                  <Sparkles key={i} className="inline-block" />
                 ))}
               </span>
             )}

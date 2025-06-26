@@ -191,6 +191,7 @@
     "cardList": {
       "description": "For each card, press C to add a classic card and H to add a holographic card"
     },
+    "loading": "Loading inventory…",
     "cart": {
       "addToCart": "Add to cart",
       "classic": "Classic",

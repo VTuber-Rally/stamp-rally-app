@@ -1,7 +1,7 @@
+import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import Loader from "@/components/Loader";
 import { InventoryCartBar } from "@/components/inventory/InventoryCartBar";
 import { Header } from "@/components/layout/Header";
 import { useInventoryDrawerContext } from "@/contexts/useInventoryDrawerContext";
@@ -39,8 +39,9 @@ export function InventoryPage({
     return (
       <div className="flex grow flex-col">
         <Header>{t("inventory.title")}</Header>
-        <div className="flex grow items-center justify-center">
-          <Loader />
+        <div className="flex grow flex-col items-center justify-center gap-2">
+          <Loader2 className="h-12 w-12 animate-spin" />
+          <p className="text-gray-500">{t("inventory.loading")}</p>
         </div>
       </div>
     );

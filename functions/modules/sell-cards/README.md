@@ -1,6 +1,6 @@
 # sell-cards
 
-Marque les cartes demandées comme vendues, ou retourne une erreur s'il manque un carte parmis celles demandées.
+Marque les cartes demandées comme vendues, ou retourne une erreur s'il manque une carte parmi celles demandées.
 
 ## ⚙️ Configuration
 

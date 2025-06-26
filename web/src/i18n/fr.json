@@ -191,6 +191,7 @@
     "cardList": {
       "description": "Pour chaque carte, appuyez sur C pour ajouter une carte classique et sur H pour ajouter une carte holographique"
     },
+    "loading": "Chargement de l'inventaire…",
     "cart": {
       "addToCart": "Ajouter au panier",
       "classic": "Classique",
