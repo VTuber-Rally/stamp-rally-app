@@ -29,6 +29,7 @@ export const QRCodeDrawer = () => {
       }
       return false;
     },
+    enableBeforeUnload: open,
   });
 
   return (
