@@ -14,7 +14,8 @@
     "storybook": "STORYBOOK=true storybook dev -p 6006 --https --ssl-cert ./certs/cert.pem --ssl-key ./certs/dev.pem",
     "build-storybook": "STORYBOOK=true storybook build",
     "prettier:write": "prettier --write src/ '!src/routeTree.gen.ts' *.{mjs,ts}",
-    "prettier:check": "prettier -c src/ '!src/routeTree.gen.ts' *.{mjs,ts}"
+    "prettier:check": "prettier -c src/ '!src/routeTree.gen.ts' *.{mjs,ts}",
+    "check": "pnpm prettier:check && pnpm check-types & pnpm lint"
   },
   "dependencies": {
     "@fontsource-variable/comfortaa": "^5.1.1",
