@@ -1,8 +1,9 @@
+import cliProgress from "cli-progress";
 import * as fs from "fs";
 import * as sdk from "node-appwrite";
 import path from "path";
 
-import { Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
+import { Card, Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 import { StandistDocument } from "@vtube-stamp-rally/shared-lib/models/Standist.js";
 
 import { appwriteClient, env } from "./shared.js";
@@ -249,10 +250,14 @@ async function createGroups() {
 const groupsAppwrite = await createGroups();
 console.log(groupsAppwrite);
 
+// Créer toutes les promesses de cartes d'abord
+const cardCreationPromises: Promise<Card>[] = [];
+
 for (const group of groupsAppwrite) {
   for (const design of designs) {
+    // Cartes classiques
     for (let i = 0; i < group.numberOfCardsPerDesign; i++) {
-      const cardId = await database.createDocument(
+      const promise = database.createDocument<Card>(
         DATABASE_ID,
         CARDS_COLLECTION_ID,
         sdk.ID.unique(),
@@ -269,12 +274,12 @@ for (const group of groupsAppwrite) {
           ],
         },
       );
-      console.log(
-        `Created card ${cardId.$id} for design ${design.$id} in group ${group.$id}`,
-      );
+      cardCreationPromises.push(promise);
     }
+
+    // Cartes holo
     for (let i = 0; i < group.numberOfHoloCardsPerDesign; i++) {
-      const cardId = await database.createDocument(
+      const promise = database.createDocument<Card>(
         DATABASE_ID,
         CARDS_COLLECTION_ID,
         sdk.ID.unique(),
@@ -291,9 +296,28 @@ for (const group of groupsAppwrite) {
           ],
         },
       );
-      console.log(
-        `Created holo card ${cardId.$id} for design ${design.$id} in group ${group.$id}`,
-      );
+      cardCreationPromises.push(promise);
     }
   }
 }
+
+console.log(`Création de ${cardCreationPromises.length} cartes...`);
+const progressBar = new cliProgress.SingleBar({
+  format:
+    "Création des cartes |{bar}| {percentage}% | {value}/{total} cartes | ETA: {eta}s",
+});
+
+progressBar.start(cardCreationPromises.length, 0);
+
+let completedCount = 0;
+const createdCards = await Promise.all(
+  cardCreationPromises.map(async (promise) => {
+    const result = await promise;
+    completedCount++;
+    progressBar.update(completedCount);
+    return result;
+  }),
+);
+
+progressBar.stop();
+console.log(`\n${createdCards.length} cartes créées avec succès !`);
