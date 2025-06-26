@@ -208,6 +208,10 @@
       },
       "noCards": "Aucune carte dans le panier",
       "open": "Ouvrir",
+      "orderError": {
+        "description": "Une erreur s'est produite lors de la distribution des cartes. Est-ce qu'une des cartes demandées est en rupture de stock?",
+        "title": "Erreur de distribution"
+      },
       "orderSuccess": {
         "description": "Toutes les cartes ont bien été distribuées. Le stock a été mis à jour.",
         "title": "Cartes distribuées avec succès"

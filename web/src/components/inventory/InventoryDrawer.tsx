@@ -170,6 +170,10 @@ export const InventoryDrawer = () => {
         },
         onError: (error) => {
           console.error("Error ordering cards:", error);
+          toast({
+            title: t("inventory.cart.orderError.title"),
+            description: t("inventory.cart.orderError.description"),
+          });
         },
       },
     );

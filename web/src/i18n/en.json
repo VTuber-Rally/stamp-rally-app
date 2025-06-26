@@ -208,6 +208,10 @@
       },
       "noCards": "No cards in cart",
       "open": "Open cart",
+      "orderError": {
+        "description": "An error occurred while distributing cards. Is one of the requested cards out of stock?",
+        "title": "Distribution Error"
+      },
       "orderSuccess": {
         "description": "All cards have been distributed. The stock has been updated.",
         "title": "Cards successfully distributed"
