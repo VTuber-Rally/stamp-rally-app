@@ -14,7 +14,7 @@ import { useUser } from "@/lib/hooks/useUser.ts";
 
 export type StandistsEditProfileForm = Pick<
   Standist,
-  "description" | "twitch" | "twitter" | "instagram"
+  "description" | "twitch" | "twitter" | "instagram" | "website" | "name"
 >;
 
 const StandistsProfilePage = () => {
@@ -27,10 +27,12 @@ const StandistsProfilePage = () => {
 
   const methods = useForm<StandistsEditProfileForm>({
     defaultValues: {
+      name: artist?.name,
       description: artist?.description,
       twitter: artist?.twitter,
       instagram: artist?.instagram,
       twitch: artist?.twitch,
+      website: artist?.website,
     },
   });
 
@@ -83,6 +85,17 @@ const StandistsProfilePage = () => {
       <Header>{t("profile.title")}</Header>
       <form className={"flex flex-col gap-4"} onSubmit={handleSubmit(onSubmit)}>
         <div className={"flex flex-col"}>
+          <label htmlFor={"name"}>{t("standName")}</label>
+          <InputField
+            type={"text"}
+            name={"name"}
+            placeholder={"Stand"}
+            required={true}
+            register={register}
+            errors={errors["name"]}
+          />
+        </div>
+        <div className={"flex flex-col"}>
           <label htmlFor={"description"}>{t("description")}</label>
           <InputField
             inputType={"textarea"}
@@ -134,6 +147,18 @@ const StandistsProfilePage = () => {
             required={false}
             register={register}
             errors={errors["twitch"]}
+          />
+        </div>
+
+        <div className={"flex flex-col"}>
+          <label htmlFor={"website"}>{t("website")}</label>
+          <InputField
+            type={"url"}
+            name={"website"}
+            placeholder={"https://stand.com"}
+            required={false}
+            register={register}
+            errors={errors["website"]}
           />
         </div>
 

@@ -17,6 +17,7 @@ export const StandistsFromAppwrite = {
       image: "luyluc.jpg",
       twitter: "@luyluc",
       twitch: null,
+      website: null,
       userId: "66873ba10035780190de",
       geometry:
         "[[[2.521072948439695,48.97144179806506],[2.5210574073065573,48.971419525560094],[2.5210788572159686,48.97141284232384],[2.5210942777049183,48.97143514976122],[2.521072948439695,48.97144179806506]]]",
@@ -39,6 +40,7 @@ export const StandistsFromAppwrite = {
       image: "ElfBoi.jpg",
       twitter: "@elfboi_",
       twitch: "https://www.twitch.tv/elfboiii",
+      website: null,
       userId: "66873ba1003576128a68",
       geometry:
         "[[[2.5204964645312202,48.97143330331653],[2.5204749677508005,48.9714397783159],[2.5204588027131365,48.97141707341959],[2.520479640911759,48.971410478660175],[2.5204964645312202,48.97143330331653]]]",
@@ -61,6 +63,7 @@ export const StandistsFromAppwrite = {
       image: "kea.jpg",
       twitter: "@keaworks",
       twitch: null,
+      website: null,
       userId: "66873ba100357ec09fab",
       geometry:
         "[[[2.5173207024616886,48.96889655740071],[2.5172925099055306,48.96888945302581],[2.517302583234539,48.9688723218666],[2.5173302825651547,48.968879397605434],[2.5173207024616886,48.96889655740071]]]",
@@ -83,6 +86,7 @@ export const StandistsFromAppwrite = {
       image: "minyaa.jpg",
       twitter: "@minyaart",
       twitch: null,
+      website: null,
       userId: "66873ba10035769b944d",
       geometry:
         "[[[2.517192053301926,48.969288533912334],[2.5171665249891078,48.9692821991753],[2.517177308021161,48.96926398778788],[2.5172022509685235,48.969270202172254],[2.517192053301926,48.969288533912334]]]",
@@ -105,6 +109,7 @@ export const StandistsFromAppwrite = {
       image: "asu.jpg",
       twitter: "@Asuinui",
       twitch: null,
+      website: null,
       userId: "66873ba1003566799f36",
       geometry:
         "[[[2.5175230066036534,48.96871010656599],[2.5174881900075263,48.968701461873394],[2.517480358095156,48.968715863429736],[2.5175142530440837,48.96872440480783],[2.5175230066036534,48.96871010656599]]]",
@@ -127,6 +132,7 @@ export const StandistsFromAppwrite = {
       image: "fude.jpg",
       twitter: "@FudepenBrushpen",
       twitch: null,
+      website: null,
       userId: "66873ba100357221ce45",
       geometry:
         "[[[2.517403200412673,48.9690567239692],[2.5173753495575113,48.96904990244249],[2.5173850999965453,48.969033562936005],[2.5174126503814023,48.96904020036618],[2.517403200412673,48.9690567239692]]]",
@@ -149,6 +155,7 @@ export const StandistsFromAppwrite = {
       image: "Elmi.jpg",
       twitter: "@elmi_hikaribi",
       twitch: "https://elmihikaribi.carrd.co/",
+      website: null,
       userId: "66873ba100357fcd48f0",
       geometry:
         "[[[2.517210183234454,48.9695200890458],[2.5172198853155123,48.969503389974506],[2.517191764518202,48.969496314094755],[2.5171819266344073,48.96951260078745],[2.517210183234454,48.9695200890458]]]",
@@ -171,6 +178,7 @@ export const StandistsFromAppwrite = {
       image: "Kawasoft.jpg",
       twitter: "@kawa_soft",
       twitch: null,
+      website: null,
       userId: "66873ba100357c59f3bf",
       geometry:
         "[[[2.5204020705069183,48.9714609695676],[2.5203805755816973,48.97146703120552],[2.520364915203743,48.9714448265957],[2.5203854965097605,48.97143869460862],[2.5204020705069183,48.9714609695676]]]",
@@ -193,6 +201,7 @@ export const StandistsFromAppwrite = {
       image: "VSKR.jpg",
       twitter: "@vskr_art",
       twitch: null,
+      website: null,
       userId: "66873ba100357e9d64bb",
       geometry:
         "[[[2.517231370507858,48.969483691021225],[2.517203056573379,48.969476926156034],[2.517193266218925,48.969493402355795],[2.5172215680844943,48.96950036006055],[2.517231370507858,48.969483691021225]]]",
@@ -215,6 +224,7 @@ export const StandistsFromAppwrite = {
       image: "chisa.jpg",
       twitter: "@littlechisa",
       twitch: null,
+      website: null,
       userId: "66873ba100357a6693e4",
       geometry:
         "[[[2.517332679232595,48.96917969989531],[2.5173052776088127,48.96917279089652],[2.517314928136841,48.96915590164909],[2.5173420759867895,48.96916291523442],[2.517332679232595,48.96917969989531]]]",
@@ -237,6 +247,7 @@ export const StandistsFromAppwrite = {
       image: "cyclic_redundancy.jpg",
       twitter: "@cyclic_red",
       twitch: "https://twitter.com/Ninamo_lcr",
+      website: null,
       userId: "66873ba10035758953e9",
       geometry:
         "[[[2.520436717079974,48.971512647921855],[2.520415278476179,48.97151945871653],[2.5204315961647694,48.971541600264146],[2.5204522717165503,48.971535162033234],[2.520436717079974,48.971512647921855]]]",
@@ -259,6 +270,7 @@ export const StandistsFromAppwrite = {
       image: "sedeto.jpg",
       twitter: "sedeto",
       twitch: null,
+      website: null,
       userId: "66873ba100358581d426",
       geometry:
         "[[[2.517258291549325,48.969373060850785],[2.5172303612801556,48.96936591056877],[2.5172207299427782,48.96938240468438],[2.517248204811011,48.969389339382815],[2.517258291549325,48.969373060850785]]]",
@@ -272,10 +284,14 @@ export const StandistsFromAppwrite = {
   ],
 } satisfies Models.DocumentList<
   Models.Document &
-    Omit<Standist, "publicKey" | "twitch" | "instagram" | "geometry"> & {
+    Omit<
+      Standist,
+      "publicKey" | "twitch" | "instagram" | "website" | "geometry"
+    > & {
       publicKey: string;
       twitch: string | null;
       instagram: string | null;
+      website: string | null;
       geometry: string;
     }
 >;

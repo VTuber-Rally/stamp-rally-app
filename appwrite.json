@@ -126,6 +126,14 @@
           "default": null
         },
         {
+          "key": "website",
+          "type": "string",
+          "required": false,
+          "array": false,
+          "size": 256,
+          "default": null
+        },
+        {
           "key": "boothNumber",
           "type": "string",
           "required": true,

@@ -71,6 +71,11 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
         {artist.twitch && (
           <ExternalLink href={artist.twitch}>Twitch</ExternalLink>
         )}
+        {artist.website && (
+          <ExternalLink href={artist.website}>
+            {URL.parse(artist.website)?.hostname}
+          </ExternalLink>
+        )}
       </div>
       <QRCodeLink />
     </div>

@@ -16,6 +16,7 @@ export interface Standist {
   twitter?: string;
   instagram?: string;
   twitch?: string;
+  website?: string;
 
   geometry?: Polygon["coordinates"];
 }
@@ -28,4 +29,4 @@ export interface StandistDocument
 }
 
 export const standistIndexes =
-  "&userId, name, hall, boothNumber, description, image, twitter, instagram, twitch";
+  "&userId, name, hall, boothNumber, description, image, twitter, instagram, twitch, website";
