@@ -1,6 +1,7 @@
 import { Models } from "appwrite";
 
 import { StandistDocument } from "./Standist";
+import { Submission } from "./Submission";
 
 export interface Card extends Models.Document {
   cardDesign: CardDesign;
@@ -31,6 +32,7 @@ export interface CardHistory extends Models.Document {
   group: Group;
   timestamp: Date;
   type: "initial" | "sold" | "redistribution";
+  submission?: Submission & Models.Document;
 }
 
 export interface CardAvailable extends CardDesign {

@@ -10,6 +10,7 @@ import { InventoryDrawerContextProvider } from "@/contexts/InventoryDrawerContex
 const inventorySearchSchema = z.object({
   maxClassicCards: z.coerce.number().default(3).catch(3),
   maxHoloCards: z.coerce.number().default(3).catch(3),
+  submissionId: z.string().optional(),
 });
 
 export const Route = createFileRoute("/staff/inventory")({
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/staff/inventory")({
 });
 
 function RouteComponent() {
-  const { maxClassicCards, maxHoloCards } = Route.useSearch();
+  const { maxClassicCards, maxHoloCards, submissionId } = Route.useSearch();
 
   return (
     <InventoryDrawerContextProvider>
@@ -26,7 +27,7 @@ function RouteComponent() {
         maxClassicCards={maxClassicCards}
         maxHoloCards={maxHoloCards}
       />
-      <InventoryDrawer />
+      <InventoryDrawer submissionId={submissionId} />
     </InventoryDrawerContextProvider>
   );
 }

@@ -1,3 +1,4 @@
+import { useSearch } from "@tanstack/react-router";
 import clsx from "clsx";
 import { Loader2, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -128,7 +129,11 @@ function CartCardLine({
   );
 }
 
-export const InventoryDrawer = () => {
+export const InventoryDrawer = ({
+  submissionId,
+}: {
+  submissionId?: string;
+}) => {
   const { t } = useTranslation();
   const { open, setOpen, cartCards, clearCart } = useInventoryDrawerContext();
 
@@ -159,7 +164,7 @@ export const InventoryDrawer = () => {
     );
 
     orderCards(
-      { orderedCards },
+      { orderedCards, submissionId } satisfies SellCardsFunctionRequest,
       {
         onSuccess: () => {
           toast({

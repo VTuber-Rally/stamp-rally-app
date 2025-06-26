@@ -65,7 +65,8 @@ export default async ({
     );
   }
 
-  const { orderedCards } = inputData;
+  const { submissionId, orderedCards } = inputData;
+  log(`Received submissionId: ${submissionId}`);
   // cardDesigns: {     type: "classic" | "holo"     cardDesignId: string     quantity: number   }[]
 
   const client = new Client()
@@ -144,6 +145,7 @@ export default async ({
                 group: activeGroup,
                 timestamp: now,
                 type: "sold",
+                submission: submissionId,
               },
             ],
           },

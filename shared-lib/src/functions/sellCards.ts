@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const SellCardsFunctionRequestValidator = z.object({
+  submissionId: z.string().optional(),
   orderedCards: z.array(
     z.object({
       cardDesignId: z.string(),
