@@ -129,7 +129,23 @@ export function generateStyleSpec() {
             0.25,
           ],
           "text-allow-overlap": true,
-          "text-anchor": "bottom",
+          "text-anchor": [
+            "case",
+            [
+              "in",
+              ["get", "id"],
+              [
+                "literal",
+                [
+                  "684c89dd00181d7d5bf5",
+                  "684c89dd00180d89ed69",
+                  "684c89dd00180e837b6c",
+                ],
+              ],
+            ],
+            "top",
+            "bottom",
+          ],
           "text-size": [
             "interpolate",
             ["exponential", 1.5],
