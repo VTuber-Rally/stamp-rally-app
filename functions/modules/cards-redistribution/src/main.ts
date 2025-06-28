@@ -1,4 +1,4 @@
-import { Client, Databases, Query } from "node-appwrite";
+import { Client, Databases, Graphql, Query } from "node-appwrite";
 
 import { Card, Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 import { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
@@ -43,12 +43,14 @@ export default async ({
     .setKey(req.headers["x-appwrite-key"]);
 
   const db = new Databases(client);
+  const graphql = new Graphql(client);
 
   const now = new Date().toISOString();
   const nowDate = new Date(now);
   const nowTime = nowDate.getTime();
 
   const updateCard = async (card: Card, newGroupId: string) => {
+    // log(`Updating card ${card.$id} to group ${newGroupId}`);
     await db.updateDocument(DATABASE_ID, CARDS_COLLECTION_ID, card.$id, {
       group: newGroupId,
       cardHistory: [
@@ -66,7 +68,6 @@ export default async ({
   // 1. Trouver les groupes à redistribuer
   const groups = await db
     .listDocuments<Group>(DATABASE_ID, GROUPS_COLLECTION_ID, [
-      Query.equal("redistributed", false),
       Query.orderAsc("end"),
     ])
     .then((res) => res.documents);
@@ -103,7 +104,7 @@ export default async ({
       .listDocuments<Card>(DATABASE_ID, CARDS_COLLECTION_ID, [
         Query.equal("group", group.$id),
         Query.equal("status", "available"),
-        Query.limit(250),
+        Query.limit(1500),
       ])
       .then((res) => res.documents);
 
@@ -139,12 +140,15 @@ export default async ({
         log(
           `Redistributing cards for design ${cards[0].cardDesign.name} (${designId}))`,
         );
+        const updatePromises: Promise<void>[] = [];
         for (let i = 0; i < cards.length; i++) {
           const card = cards[i];
           const groupId =
             groupsToRedistributeTo[i % groupsToRedistributeTo.length].$id;
-          await updateCard(card, groupId);
+          updatePromises.push(updateCard(card, groupId));
         }
+        log(`Updating ${updatePromises.length} cards`);
+        await Promise.all(updatePromises);
       }
     }
 

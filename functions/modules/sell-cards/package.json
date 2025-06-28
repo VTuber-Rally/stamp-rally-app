@@ -12,7 +12,7 @@
     "prettier:check": "prettier -c src/ eslint.config.mjs"
   },
   "dependencies": {
-    "node-appwrite": "^17.0.0"
+    "node-appwrite": "^16.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.32",

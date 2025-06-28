@@ -28,8 +28,8 @@ importers:
   functions/modules/cards-redistribution:
     dependencies:
       node-appwrite:
-        specifier: ^17.0.0
-        version: 17.0.0
+        specifier: ^16.0.0
+        version: 16.0.0
     devDependencies:
       '@types/node':
         specifier: ^22.15.32
@@ -50,8 +50,8 @@ importers:
   functions/modules/get-available-cards:
     dependencies:
       node-appwrite:
-        specifier: ^17.0.0
-        version: 17.0.0
+        specifier: ^16.0.0
+        version: 16.0.0
     devDependencies:
       '@types/node':
         specifier: ^22.15.32
@@ -116,8 +116,8 @@ importers:
   functions/modules/sell-cards:
     dependencies:
       node-appwrite:
-        specifier: ^17.0.0
-        version: 17.0.0
+        specifier: ^16.0.0
+        version: 16.0.0
     devDependencies:
       '@types/node':
         specifier: ^22.15.32
@@ -4865,9 +4865,6 @@ packages:
 
   node-appwrite@16.0.0:
     resolution: {integrity: sha512-KLC8bNtZ8T2sxiudYNC0V5UwegxE7+FmLo96a5RuSgRRw3B4WSzs3JYy+WG8p+eZJjg1o1JrQeB7ikUc8qZc0Q==}
-
-  node-appwrite@17.0.0:
-    resolution: {integrity: sha512-5Moi5ENPnoAfU1/6CZP9K2NTuB6Nm3dSyhokno+24RDuP7czjXCdwzfeyjmyHieggbrLkN89AYSOv9W1XkCL9w==}
 
   node-fetch-native-with-agent@1.7.2:
     resolution: {integrity: sha512-5MaOOCuJEvcckoz7/tjdx1M6OusOY6Xc5f459IaruGStWnKzlI1qpNgaAwmn4LmFYcsSlj+jBMk84wmmRxfk5g==}
@@ -11072,10 +11069,6 @@ snapshots:
     optional: true
 
   node-appwrite@16.0.0:
-    dependencies:
-      node-fetch-native-with-agent: 1.7.2
-
-  node-appwrite@17.0.0:
     dependencies:
       node-fetch-native-with-agent: 1.7.2
 

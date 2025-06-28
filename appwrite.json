@@ -116,10 +116,10 @@
         "documents.write"
       ],
       "events": [],
-      "schedule": "*/15 * * * *",
-      "timeout": 30,
+      "schedule": "*/5 * * * *",
+      "timeout": 300,
       "entrypoint": "index.js",
-      "specification": "s-1vcpu-512mb",
+      "specification": "s-2vcpu-2gb",
       "commands": "ls",
       "path": "functions/artifacts/cards-redistribution"
     },

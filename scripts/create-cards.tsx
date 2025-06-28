@@ -15,7 +15,6 @@ const {
   BUCKET_ID,
   CARDS_COLLECTION_ID,
   CARD_DESIGNS_COLLECTION_ID,
-  CARD_HISTORY_COLLECTION_ID,
   GROUPS_COLLECTION_ID,
 } = env;
 
@@ -33,19 +32,6 @@ if (process.argv[2] === "--reset") {
               database.deleteDocument(
                 DATABASE_ID,
                 CARD_DESIGNS_COLLECTION_ID,
-                doc.$id,
-              ),
-            ),
-          ),
-        ),
-      database
-        .listDocuments(DATABASE_ID, CARD_HISTORY_COLLECTION_ID)
-        .then((res) =>
-          Promise.all(
-            res.documents.map((doc) =>
-              database.deleteDocument(
-                DATABASE_ID,
-                CARD_HISTORY_COLLECTION_ID,
                 doc.$id,
               ),
             ),
