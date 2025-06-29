@@ -81,7 +81,7 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
           </ExternalLink>
         )}
       </div>
-      {cardDesign && cardDesign.image && (
+      {cardDesign?.image && cardDesign.image !== null && (
         <div className="mx-auto flex max-w-lg items-center gap-2 rounded-xl bg-gray-100 p-4 shadow-md">
           <p className="w-1/2 text-lg">
             {t("artistPresentation.cardDescription", {
