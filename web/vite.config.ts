@@ -54,6 +54,11 @@ export default defineConfig({
           VITE_SENTRY_DSN: Schema.string(),
           VITE_SENTRY_ENVIRONMENT: Schema.string(),
           VITE_INDEXEDDB_NAME: Schema.string(),
+          VITE_GET_AVAILABLE_CARDS_FUNCTION_ID: Schema.string(),
+          VITE_CARDS_COLLECTION_ID: Schema.string(),
+          VITE_GROUPS_COLLECTION_ID: Schema.string(),
+          VITE_CARD_DESIGNS_COLLECTION_ID: Schema.string(),
+          VITE_SELL_CARDS_FUNCTION_ID: Schema.string(),
         },
       }),
     // This plugin is disabled in Storybook

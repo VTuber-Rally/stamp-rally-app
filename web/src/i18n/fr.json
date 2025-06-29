@@ -23,6 +23,12 @@
   "artistList": "Liste des artistes",
   "artists": "Artistes",
   "cancel": "Annuler",
+  "cardDesigns": {
+    "byAuthor": "{{author}}",
+    "noCardsFound": "Aucun design de carte trouvé",
+    "stand": "Stand: {{standName}}",
+    "unknownAuthor": "Auteur inconnu"
+  },
   "checkSubmit": "Vérifier un rally",
   "close": "Fermer",
   "consent": {
@@ -181,6 +187,52 @@
   "home": "Accueil",
   "ignore": "Ignorer",
   "instagram": "Instagram",
+  "inventory": {
+    "cardList": {
+      "description": "Pour chaque carte, appuyez sur C pour ajouter une carte classique et sur H pour ajouter une carte holographique"
+    },
+    "loading": "Chargement de l'inventaire…",
+    "cart": {
+      "addToCart": "Ajouter au panier",
+      "classic": "Classique",
+      "clear": "Vider le panier",
+      "clearShort": "Vider",
+      "description_one": "{{count}} carte dans le panier",
+      "description_other": "{{count}} cartes dans le panier",
+      "description_zero": "Le panier est vide",
+      "empty": "Le panier est vide",
+      "holo": "Holographique",
+      "limitReached": {
+        "classic_description": "Vous ne pouvez pas ajouter plus de {{count}} cartes classiques.",
+        "holo_description": "Vous ne pouvez pas ajouter plus de {{count}} cartes holographiques.",
+        "title": "Limite atteinte"
+      },
+      "noCards": "Aucune carte dans le panier",
+      "open": "Ouvrir",
+      "orderError": {
+        "description": "Une erreur s'est produite lors de la distribution des cartes. Est-ce qu'une des cartes demandées est en rupture de stock?",
+        "title": "Erreur de distribution"
+      },
+      "orderSuccess": {
+        "description": "Toutes les cartes ont bien été distribuées. Le stock a été mis à jour.",
+        "title": "Cartes distribuées avec succès"
+      },
+      "stockLimit": {
+        "description": "Vous ne pouvez pas ajouter plus de cartes que le stock disponible.",
+        "maxCards": "Tirage: <b>{{classic}} classiques</b>, <b>{{holo}} holographiques</b>",
+        "title": "Stock insuffisant"
+      },
+      "title": "Panier"
+    },
+    "group": "Groupe #{{groupId}}",
+    "groupDates": "{{start}} - {{end}}",
+    "groupInfo": "{{numberOfCards}} cartes classiques/{{numberOfHoloCards}} cartes holo par design • Coefficient: {{coefficient}}",
+    "stock": {
+      "classic": "C: <1>{{count}}</1>",
+      "holo": "H: <1>{{count}}</1>"
+    },
+    "title": "Inventaire"
+  },
   "language": {
     "description": "Changez la langue de l'application.",
     "title": "Langue"
@@ -383,6 +435,7 @@
     "description": "Une mise à jour a été téléchargée. Veuillez rafraichir la page pour l'appliquer.",
     "title": "Une mise à jour est disponible"
   },
+  "validate": "Valider",
   "wheelOfFortune": "Roue de la fortune",
   "yes": "Oui"
 }

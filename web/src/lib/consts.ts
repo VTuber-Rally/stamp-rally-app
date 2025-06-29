@@ -32,6 +32,11 @@ const {
   VITE_SENTRY_ENVIRONMENT: sentryEnvironment,
   VITE_INDEXEDDB_NAME: indexedDbName,
   VITE_MAP_TILES_URL: mapTilesURL,
+  VITE_CARDS_COLLECTION_ID: cardsCollectionId,
+  VITE_GROUPS_COLLECTION_ID: groupsCollectionId,
+  VITE_CARD_DESIGNS_COLLECTION_ID: cardDesignsCollectionId,
+  VITE_GET_AVAILABLE_CARDS_FUNCTION_ID: getAvailableCardsFunctionId,
+  VITE_SELL_CARDS_FUNCTION_ID: sellCardsFunctionId,
   DEV: isDev,
   PROD: isProd,
 } = import.meta.env;
@@ -85,4 +90,9 @@ export {
   mapTilesURL,
   sentryDSN,
   sentryEnvironment,
+  cardsCollectionId,
+  groupsCollectionId,
+  sellCardsFunctionId,
+  cardDesignsCollectionId,
+  getAvailableCardsFunctionId,
 };

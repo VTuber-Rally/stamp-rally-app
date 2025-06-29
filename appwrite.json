@@ -81,6 +81,68 @@
       "entrypoint": "index.js",
       "specification": "s-1vcpu-512mb",
       "path": "functions/artifacts/send-notification"
+    },
+    {
+      "$id": "680e8fc7d0cdd79cff11",
+      "execute": [
+        "label:staff"
+      ],
+      "name": "get-available-cards",
+      "enabled": true,
+      "logging": true,
+      "runtime": "node-22",
+      "scopes": [
+        "documents.read"
+      ],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "entrypoint": "index.js",
+      "specification": "s-1vcpu-512mb",
+      "commands": "ls",
+      "path": "functions/artifacts/get-available-cards"
+    },
+    {
+      "$id": "680e8fc7d0cdd79cff12",
+      "execute": [
+        "label:staff"
+      ],
+      "name": "cards-redistribution",
+      "enabled": true,
+      "logging": true,
+      "runtime": "node-22",
+      "scopes": [
+        "documents.read",
+        "documents.write"
+      ],
+      "events": [],
+      "schedule": "*/5 * * * *",
+      "timeout": 280,
+      "entrypoint": "index.js",
+      "specification": "s-2vcpu-2gb",
+      "commands": "ls",
+      "path": "functions/artifacts/cards-redistribution"
+    },
+    {
+      "$id": "680e8fc7d0cdd79cff13",
+      "execute": [
+        "label:staff"
+      ],
+      "name": "sell-cards",
+      "enabled": true,
+      "logging": true,
+      "runtime": "node-22",
+      "scopes": [
+        "documents.read",
+        "documents.write"
+      ],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "entrypoint": "index.js",
+      "specification": "s-1vcpu-512mb",
+      "commands": "ls",
+      "path": "functions/artifacts/sell-cards"
     }
   ],
   "databases": [
@@ -479,6 +541,254 @@
           "array": false,
           "format": "",
           "default": null
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "card_history",
+      "$permissions": [],
+      "databaseId": "6675f377000709b0db07",
+      "name": "card_history",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "group",
+          "type": "relationship",
+          "required": false,
+          "array": false,
+          "relatedCollection": "groups",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "684d06e7003212663790",
+          "onDelete": "setNull",
+          "side": "parent"
+        },
+        {
+          "key": "type",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "elements": [
+            "initial",
+            "redistribution",
+            "sold"
+          ],
+          "format": "enum",
+          "default": null
+        },
+        {
+          "key": "timestamp",
+          "type": "datetime",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "groups",
+      "$permissions": [],
+      "databaseId": "6675f377000709b0db07",
+      "name": "Groups",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "groupId",
+          "type": "integer",
+          "required": true,
+          "array": false,
+          "min": -9223372036854775808,
+          "max": 9223372036854775807,
+          "default": null
+        },
+        {
+          "key": "coefficient",
+          "type": "double",
+          "required": true,
+          "array": false,
+          "min": -1.7976931348623157e+308,
+          "max": 1.7976931348623157e+308,
+          "default": null
+        },
+        {
+          "key": "start",
+          "type": "datetime",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        },
+        {
+          "key": "end",
+          "type": "datetime",
+          "required": true,
+          "array": false,
+          "format": "",
+          "default": null
+        },
+        {
+          "key": "numberOfCardsPerDesign",
+          "type": "integer",
+          "required": true,
+          "array": false,
+          "min": 0,
+          "max": 9223372036854775807,
+          "default": null
+        },
+        {
+          "key": "redistributed",
+          "type": "boolean",
+          "required": false,
+          "array": false,
+          "default": false
+        },
+        {
+          "key": "numberOfHoloCardsPerDesign",
+          "type": "integer",
+          "required": true,
+          "array": false,
+          "min": -9223372036854775808,
+          "max": 9223372036854775807,
+          "default": null
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "cards",
+      "$permissions": [
+        "read(\"label:staff\")"
+      ],
+      "databaseId": "6675f377000709b0db07",
+      "name": "Cards",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "cardDesign",
+          "type": "relationship",
+          "required": false,
+          "array": false,
+          "relatedCollection": "card_designs",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "684d046b0021b3e6a8d3",
+          "onDelete": "setNull",
+          "side": "parent"
+        },
+        {
+          "key": "group",
+          "type": "relationship",
+          "required": false,
+          "array": false,
+          "relatedCollection": "groups",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "684d048700122b729a8c",
+          "onDelete": "setNull",
+          "side": "parent"
+        },
+        {
+          "key": "status",
+          "type": "string",
+          "required": false,
+          "array": false,
+          "elements": [
+            "available",
+            "sold"
+          ],
+          "format": "enum",
+          "default": "available"
+        },
+        {
+          "key": "cardHistory",
+          "type": "relationship",
+          "required": false,
+          "array": false,
+          "relatedCollection": "card_history",
+          "relationType": "oneToMany",
+          "twoWay": false,
+          "twoWayKey": "cards",
+          "onDelete": "cascade",
+          "side": "parent"
+        },
+        {
+          "key": "type",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "elements": [
+            "classic",
+            "holo"
+          ],
+          "format": "enum",
+          "default": null
+        }
+      ],
+      "indexes": [
+        {
+          "key": "byStatus",
+          "type": "key",
+          "status": "available",
+          "attributes": [
+            "status"
+          ],
+          "orders": [
+            "ASC"
+          ]
+        }
+      ]
+    },
+    {
+      "$id": "card_designs",
+      "$permissions": [
+        "read(\"any\")"
+      ],
+      "databaseId": "6675f377000709b0db07",
+      "name": "Card Designs",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "name",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "size": 64,
+          "default": null
+        },
+        {
+          "key": "author",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "size": 512,
+          "default": null
+        },
+        {
+          "key": "image",
+          "type": "string",
+          "required": true,
+          "array": false,
+          "size": 1024,
+          "default": null
+        },
+        {
+          "key": "standist",
+          "type": "relationship",
+          "required": false,
+          "array": false,
+          "relatedCollection": "6675f3a2000e52a39b67",
+          "relationType": "oneToOne",
+          "twoWay": false,
+          "twoWayKey": "684f321a002696f8445d",
+          "onDelete": "setNull",
+          "side": "parent"
         }
       ],
       "indexes": []

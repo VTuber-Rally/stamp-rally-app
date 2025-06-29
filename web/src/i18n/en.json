@@ -23,6 +23,12 @@
   "artistList": "Artist List",
   "artists": "Artists",
   "cancel": "Cancel",
+  "cardDesigns": {
+    "byAuthor": "By {{author}}",
+    "noCardsFound": "No card designs found",
+    "stand": "Stand: {{standName}}",
+    "unknownAuthor": "Unknown author"
+  },
   "checkSubmit": "Verify a submission",
   "close": "Close",
   "consent": {
@@ -181,6 +187,52 @@
   "home": "Home",
   "ignore": "Ignore",
   "instagram": "Instagram",
+  "inventory": {
+    "cardList": {
+      "description": "For each card, press C to add a classic card and H to add a holographic card"
+    },
+    "loading": "Loading inventory…",
+    "cart": {
+      "addToCart": "Add to cart",
+      "classic": "Classic",
+      "clear": "Clear cart",
+      "clearShort": "Clear",
+      "description_one": "{{count}} card in your cart",
+      "description_other": "{{count}} cards in your cart",
+      "description_zero": "Your cart is empty",
+      "empty": "Your cart is empty",
+      "holo": "Holographic",
+      "limitReached": {
+        "classic_description": "You cannot add more than {{count}} classic cards.",
+        "holo_description": "You cannot add more than {{count}} holographic cards.",
+        "title": "Limit reached"
+      },
+      "noCards": "No cards in cart",
+      "open": "Open cart",
+      "orderError": {
+        "description": "An error occurred while distributing cards. Is one of the requested cards out of stock?",
+        "title": "Distribution Error"
+      },
+      "orderSuccess": {
+        "description": "All cards have been distributed. The stock has been updated.",
+        "title": "Cards successfully distributed"
+      },
+      "stockLimit": {
+        "description": "You cannot add more cards than available in stock.",
+        "maxCards": "Draw: <b>{{classic}} classic</b>, <b>{{holo}} holo</b>",
+        "title": "Insufficient stock"
+      },
+      "title": "Sales Cart"
+    },
+    "group": "Group #{{groupId}}",
+    "groupDates": "{{start}} - {{end}}",
+    "groupInfo": "{{numberOfCards}} classic cards/{{numberOfHoloCards}} holo cards per design • Coefficient: {{coefficient}}",
+    "stock": {
+      "classic": "Stock: <1>{{count}}</1>",
+      "holo": "Holo: <1>{{count}}</1>"
+    },
+    "title": "Inventory"
+  },
   "language": {
     "description": "Change the application language.",
     "title": "Language"
@@ -383,6 +435,7 @@
     "description": "An update was downloaded, please refresh the page to apply it.",
     "title": "Update available"
   },
+  "validate": "Validate",
   "wheelOfFortune": "Wheel of fortune",
   "yes": "Yes"
 }
