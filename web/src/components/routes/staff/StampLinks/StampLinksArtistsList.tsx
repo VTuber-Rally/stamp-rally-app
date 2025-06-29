@@ -98,6 +98,7 @@ const StampLinksArtistRow = ({
       <TableCell>
         {showQR ? (
           <>
+            <p className={"text-center text-lg font-bold"}>{doc.name}</p>
             <QRCode
               className="rounded-lg border-4 border-tertiary p-2 dark:bg-white"
               value={qrValue.codeData}
