@@ -308,12 +308,15 @@
     "title": "Mon profil"
   },
   "qrcode": "QR Code",
-  "rally.1": "16 artistes participent à ce rally autour des VTubers",
-  "rally.2": "Après un achat (minimum 2€) chez un stand participant, scannez le tampon QR Code",
-  "rally.3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
-  "rally.4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
-  "rally.5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
-  "rally.6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur",
+  "rally": {
+    "welcome": "Bienvenue sur le Rally !",
+    "1": "16 artistes participent à ce rally autour des VTubers",
+    "2": "Après un achat (minimum 2€) chez un stand participant, scannez le tampon QR Code",
+    "3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
+    "4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
+    "5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
+    "6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur"
+  },
   "redeemedSubmissions": "Soumissions déjà validées",
   "requestYourReward": "Demandez votre récompense !",
   "reward": {
