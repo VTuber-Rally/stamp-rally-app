@@ -14,6 +14,9 @@
     "optOut": "Do not use my data for statistics.",
     "title": "Analytics"
   },
+  "artistPresentation": {
+    "cardDescription": "{{artistName}} designed {{cardName}} as an exclusive reward card for the rally, get 10 stamps to have it!"
+  },
   "anonymousLogoutButton": "Log out (warning, you will lose your submission history!)",
   "anonymousLogoutWarning": "You are logged in as an <1>anonymous user</1>. You will lose your previous submissions if you log out.",
   "appIsReady": {
@@ -308,12 +311,15 @@
     "title": "My profile"
   },
   "qrcode": "QR Code",
-  "rally.1": "16 artists take part in this rally around VTubers",
-  "rally.2": "After making a purchase (minimum 2€) from a participant booth, scan the QR code to get a stamp",
-  "rally.3": "Once you've collected {{minimumStampsCount}} stamps and visited both halls, head over to Sedeto's booth to get a reward!",
-  "rally.4": "This year, try to win a holographic card by getting all the stamps!",
-  "rally.5": "Once you get your reward, enter the draw to win a shikishi from Sedeto!",
-  "rally.6": "You can replay as many times as you like while rewards last!",
+  "rally": {
+    "welcome": "Welcome to the Rally!",
+    "1": "16 artists take part in this rally around VTubers",
+    "2": "After making a purchase (minimum 2€) from a participant booth, scan the QR code to get a stamp",
+    "3": "Once you've collected {{minimumStampsCount}} stamps and visited both halls, head over to Sedeto's booth to get a reward!",
+    "4": "This year, try to win a holographic card by getting all the stamps!",
+    "5": "Once you get your reward, enter the draw to win a shikishi from Sedeto!",
+    "6": "You can replay as many times as you like while rewards last!"
+  },
   "redeemedSubmissions": "Redeemed submissions",
   "requestYourReward": "Request your reward!",
   "reward": {

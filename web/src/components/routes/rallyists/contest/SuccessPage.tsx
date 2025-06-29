@@ -20,7 +20,7 @@ export function SuccessPage() {
   } = useFollowParticipation();
 
   const { createConfetti, canvasProps } = useConfetti({
-    count: 700,
+    count: 200,
     duration: 3000,
   });
 

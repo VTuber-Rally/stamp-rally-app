@@ -95,6 +95,10 @@ export const useFollowParticipation = () => {
     queryKey: [QUERY_KEYS.CONTEST_CURRENT_PARTICIPATION, user?.$id],
     queryFn: user
       ? async () => {
+          if (user.email === "") {
+            return null;
+          }
+
           const participationId =
             await synchroniseAndGetCurrentParticipationId();
 

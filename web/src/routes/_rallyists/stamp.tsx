@@ -66,7 +66,7 @@ function Stamp() {
   const { data: submissions } = useRallySubmissions();
 
   const { createConfetti, canvasProps } = useConfetti({
-    count: 700,
+    count: 200,
     duration: 2000,
   });
 

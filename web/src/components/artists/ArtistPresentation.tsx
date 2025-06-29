@@ -4,17 +4,21 @@ import { polygon } from "@turf/helpers";
 import { ArrowUpRightFromSquare, MapPinned } from "lucide-react";
 import type { FC, ReactNode } from "react";
 import { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
 import { DrawerDescription, DrawerTitle } from "@/components/layout/Drawer.tsx";
 import { Header } from "@/components/layout/Header.tsx";
+import { useCardDesignByStandistId } from "@/lib/hooks/inventory/useCardDesigns";
 import { useStandist } from "@/lib/hooks/useStandist.ts";
 
 import { ArtistImage } from "./ArtistImage";
 
 export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
+  const { t } = useTranslation();
   const artist = useStandist(artistId);
+  const cardDesign = useCardDesignByStandistId(artistId);
 
   if (!artist) return null;
 
@@ -77,6 +81,21 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
           </ExternalLink>
         )}
       </div>
+      {cardDesign?.image && cardDesign.image !== null && (
+        <div className="mx-auto flex max-w-lg items-center gap-2 rounded-xl bg-gray-100 p-4 shadow-md">
+          <p className="w-1/2 text-lg">
+            {t("artistPresentation.cardDescription", {
+              artistName: artist.name,
+              cardName: cardDesign.name,
+            })}
+          </p>
+          <img
+            src={cardDesign.image}
+            alt={cardDesign.name}
+            className="w-1/2 rounded"
+          />
+        </div>
+      )}
       <QRCodeLink />
     </div>
   );
