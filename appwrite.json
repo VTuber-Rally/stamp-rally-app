@@ -117,7 +117,7 @@
       ],
       "events": [],
       "schedule": "*/5 * * * *",
-      "timeout": 300,
+      "timeout": 280,
       "entrypoint": "index.js",
       "specification": "s-2vcpu-2gb",
       "commands": "ls",

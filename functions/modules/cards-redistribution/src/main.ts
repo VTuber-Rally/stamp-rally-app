@@ -1,4 +1,4 @@
-import { Client, Databases, Graphql, Query } from "node-appwrite";
+import { Client, Databases, Query } from "node-appwrite";
 
 import { Card, Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
 import { Context } from "@vtube-stamp-rally/shared-lib/types.ts";
@@ -43,7 +43,6 @@ export default async ({
     .setKey(req.headers["x-appwrite-key"]);
 
   const db = new Databases(client);
-  const graphql = new Graphql(client);
 
   const now = new Date().toISOString();
   const nowDate = new Date(now);
