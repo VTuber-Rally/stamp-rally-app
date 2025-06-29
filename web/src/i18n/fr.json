@@ -14,6 +14,9 @@
     "optOut": "Ne pas utiliser mes données pour des statistiques.",
     "title": "Analytiques"
   },
+  "artistPresentation": {
+    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 10 tampons pour l'avoir !"
+  },
   "anonymousLogoutButton": "Se déconnecter (attention, vous perdrez votre historique de soumissions !)",
   "anonymousLogoutWarning": "Vous êtes connecté·e en tant qu'<1>utilisateur anonyme</1>. Vous perdrez vos anciennes soumissions si vous vous déconnectez.",
   "appIsReady": {
