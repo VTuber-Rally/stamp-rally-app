@@ -1,4 +1,3 @@
-import { useSearch } from "@tanstack/react-router";
 import clsx from "clsx";
 import { Loader2, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
