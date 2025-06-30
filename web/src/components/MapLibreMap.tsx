@@ -56,7 +56,7 @@ export const MapLibreMap: FC<{
         }),
       );
 
-      map.addControl(new NavigationControl());
+      map.addControl(new NavigationControl(), "bottom-left");
 
       getStandistsFeatureCollection().then(
         (featureCollection) => {
