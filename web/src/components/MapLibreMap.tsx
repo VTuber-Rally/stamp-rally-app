@@ -5,6 +5,7 @@ import {
   GeolocateControl,
   MapGeoJSONFeature,
   Map as MapLibre,
+  NavigationControl,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
@@ -54,6 +55,9 @@ export const MapLibreMap: FC<{
           positionOptions: { enableHighAccuracy: true, timeout: 6000 },
         }),
       );
+
+      map.addControl(new NavigationControl(), "bottom-left");
+
       getStandistsFeatureCollection().then(
         (featureCollection) => {
           const writeStandists = () =>
