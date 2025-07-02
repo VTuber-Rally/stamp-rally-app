@@ -65,6 +65,12 @@ const useRallySubmit = ({ onSuccess }: { onSuccess?: () => void } = {}) => {
         ],
       });
 
+      window.plausible("Rally Submitted", {
+        props: {
+          stampCount: (stamps?.length ?? 0).toString(),
+        },
+      });
+
       onSuccess?.();
     },
   });

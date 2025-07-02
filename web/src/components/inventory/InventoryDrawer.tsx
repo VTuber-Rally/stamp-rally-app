@@ -171,6 +171,7 @@ export const InventoryDrawer = ({
             description: t("inventory.cart.orderSuccess.description"),
           });
           clearCart();
+          setOpen(false);
         },
         onError: (error) => {
           console.error("Error ordering cards:", error);

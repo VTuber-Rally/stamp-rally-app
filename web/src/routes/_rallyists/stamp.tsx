@@ -74,10 +74,17 @@ function Stamp() {
     if (launchConfetti) {
       setTimeout(() => {
         void createConfetti();
-        window.plausible("Rally Completed");
+        window.plausible("Goal obtained", {
+          props: {
+            rallyGoal:
+              stampCount === standardRewardMinStampsRequirement
+                ? "standard"
+                : "premium",
+          },
+        });
       }, 1000);
     }
-  }, [launchConfetti, createConfetti]);
+  }, [launchConfetti, createConfetti, stampCount]);
 
   const showIntro =
     stampCount === 1 && (!submissions || submissions.length === 0);

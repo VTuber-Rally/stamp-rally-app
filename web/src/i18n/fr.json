@@ -14,9 +14,6 @@
     "optOut": "Ne pas utiliser mes données pour des statistiques.",
     "title": "Analytiques"
   },
-  "artistPresentation": {
-    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 10 tampons pour l'avoir !"
-  },
   "anonymousLogoutButton": "Se déconnecter (attention, vous perdrez votre historique de soumissions !)",
   "anonymousLogoutWarning": "Vous êtes connecté·e en tant qu'<1>utilisateur anonyme</1>. Vous perdrez vos anciennes soumissions si vous vous déconnectez.",
   "appIsReady": {
@@ -24,6 +21,9 @@
     "title": "Application prête !"
   },
   "artistList": "Liste des artistes",
+  "artistPresentation": {
+    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 10 tampons pour l'avoir !"
+  },
   "artists": "Artistes",
   "cancel": "Annuler",
   "cardDesigns": {
@@ -174,6 +174,15 @@
     "title": "Rally en cours"
   },
   "description": "Description",
+  "draw": {
+    "debug": "Type: {{type}} / Phase: {{phase}}<br/>Classic: {{wonClassicCards}} / Holo: {{wonHolographicCards}}",
+    "classicCards_one": "carte classique",
+    "classicCards_other": "cartes classiques",
+    "holographicCards_one": "carte holographique",
+    "holographicCards_other": "cartes holographiques",
+    "drawReward": "Récompense ici !",
+    "goToNextPhase": "Cliquez pour continuer"
+  },
   "email": "Email",
   "error": "Une erreur est survenue",
   "errorCreatingAccount": "Erreur lors de la création du compte. Est-ce que l'email est déjà utilisé ?",
@@ -194,7 +203,6 @@
     "cardList": {
       "description": "Pour chaque carte, appuyez sur C pour ajouter une carte classique et sur H pour ajouter une carte holographique"
     },
-    "loading": "Chargement de l'inventaire…",
     "cart": {
       "addToCart": "Ajouter au panier",
       "classic": "Classique",
@@ -230,6 +238,7 @@
     "group": "Groupe #{{groupId}}",
     "groupDates": "{{start}} - {{end}}",
     "groupInfo": "{{numberOfCards}} cartes classiques/{{numberOfHoloCards}} cartes holo par design • Coefficient: {{coefficient}}",
+    "loading": "Chargement de l'inventaire…",
     "stock": {
       "classic": "C: <1>{{count}}</1>",
       "holo": "H: <1>{{count}}</1>"
@@ -310,15 +319,22 @@
     },
     "title": "Mon profil"
   },
+  "qrScanner": {
+    "checkPermissions": "Vérifiez les permissions de votre navigateur",
+    "instruction": "Placez le code QR dans le cadre",
+    "loading": "Chargement de la caméra…",
+    "noCameraAccess": "Impossible d'accéder à la caméra",
+    "scanFrame": "Cadre de scan QR"
+  },
   "qrcode": "QR Code",
   "rally": {
-    "welcome": "Bienvenue sur le Rally !",
     "1": "16 artistes participent à ce rally autour des VTubers",
     "2": "Après un achat (minimum 2€) chez un stand participant, scannez le tampon QR Code",
     "3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
     "4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
     "5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
-    "6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur"
+    "6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur",
+    "welcome": "Bienvenue sur le Rally !"
   },
   "redeemedSubmissions": "Soumissions déjà validées",
   "requestYourReward": "Demandez votre récompense !",
@@ -382,13 +398,6 @@
     "description": "Ajoutez un tampon dans votre collection en scannant le code fourni par l'artiste !",
     "nativeCameraHint": "En cas de difficultés, vous pouvez utiliser l'application Caméra de votre appareil pour tenter de scanner le QR code.",
     "title": "Scannez un QR Code"
-  },
-  "qrScanner": {
-    "loading": "Chargement de la caméra…",
-    "scanFrame": "Cadre de scan QR",
-    "instruction": "Placez le code QR dans le cadre",
-    "noCameraAccess": "Impossible d'accéder à la caméra",
-    "checkPermissions": "Vérifiez les permissions de votre navigateur"
   },
   "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {

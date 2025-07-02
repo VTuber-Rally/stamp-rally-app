@@ -19,7 +19,11 @@ import {
 } from "@/components/layout/Table.tsx";
 import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
 import { databases } from "@/lib/appwrite.ts";
-import { databaseId, submissionsCollectionId } from "@/lib/consts.ts";
+import {
+  databaseId,
+  premiumRewardMinStampsRequirement,
+  submissionsCollectionId,
+} from "@/lib/consts.ts";
 import { useRallySubmission } from "@/lib/hooks/useRallySubmission.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { queryClient } from "@/lib/queryClient.ts";
@@ -47,7 +51,18 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
       queryKey: [QUERY_KEYS.SUBMISSION, submissionId],
     });
 
-    await navigate({ to: "/staff/wheel" });
+    await navigate({
+      to: "/staff/reward/$drawType",
+      params: {
+        drawType:
+          (data?.stamps.length ?? 0) > premiumRewardMinStampsRequirement
+            ? "premium"
+            : "standard",
+      },
+      search: {
+        submissionId,
+      },
+    });
   };
 
   if (isLoading) {
@@ -99,7 +114,6 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
           <TableCaption>{data.stamps.length} stamps</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>⏱ ⚡</TableHead>
               <TableHead>⏱&nbsp;📲&nbsp;⏮️</TableHead>
               <TableHead className="text-right">Stand</TableHead>
             </TableRow>
@@ -107,11 +121,6 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
           <TableBody>
             {data.stamps.map((stamp, i) => (
               <TableRow key={stamp.$id}>
-                <TableCell>
-                  {new Date(stamp.scanned).getTime() -
-                    new Date(stamp.generated).getTime()}
-                  &nbsp;ms
-                </TableCell>
                 <TableCell>
                   <div className={"flex"}>
                     {i !== 0 && (
@@ -136,7 +145,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
           disabled={data.redeemed}
           onClick={() => markAsRedeemed(submissionId)}
         >
-          Valider et aller vers la roue de la fortune !
+          Valider et passer au reward
         </ButtonLink>
       </div>
     </>
