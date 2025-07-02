@@ -48,7 +48,9 @@ function RouteComponent() {
       return;
     }
     const reward = drawReward(phase);
-    console.log(reward);
+    if (!reward) {
+      throw new Error("Can't find any reward");
+    }
     setWonReward(reward);
     setAnimationStep(1);
   };

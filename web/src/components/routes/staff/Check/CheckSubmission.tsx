@@ -55,7 +55,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
       to: "/staff/reward/$drawType",
       params: {
         drawType:
-          (data?.stamps.length ?? 0) > premiumRewardMinStampsRequirement
+          (data?.stamps.length ?? 0) >= premiumRewardMinStampsRequirement
             ? "premium"
             : "standard",
       },
