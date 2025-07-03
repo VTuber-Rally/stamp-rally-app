@@ -113,7 +113,7 @@ export function ContactPage() {
           <div className={"flex items-center"}>
             <Checkbox {...register("consent")} id={"consent"} />
             <label className={"ml-2"} htmlFor={"consent"}>
-              {t("consentToSaveEmail")}
+              {t("consent.email")}
             </label>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import { useBlocker, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -48,11 +49,18 @@ export const QRCodeDrawer = () => {
               const { type, hash } = retrieveInfosFromQRCode(result.data);
 
               setOpen(false);
-              void navigate({
+              navigate({
                 to: "/code/$type",
                 params: { type },
                 hash,
-              });
+              }).then(
+                () => {
+                  window.plausible("QR scanned");
+                },
+                (error) => {
+                  captureException(error);
+                },
+              );
             } catch (e) {
               if (e instanceof Error) setError(e);
             }

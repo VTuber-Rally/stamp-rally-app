@@ -14,15 +14,15 @@
     "optOut": "Ne pas utiliser mes données pour des statistiques.",
     "title": "Analytiques"
   },
-  "anonymousLogoutButton": "Se déconnecter (attention, vous perdrez votre historique de soumissions !)",
+  "anonymousLogoutButton": "Se déconnecter (attention, vous perdrez votre historique de soumissions !)",
   "anonymousLogoutWarning": "Vous êtes connecté·e en tant qu'<1>utilisateur anonyme</1>. Vous perdrez vos anciennes soumissions si vous vous déconnectez.",
   "appIsReady": {
     "description": "Vous pouvez désormais scanner les QR même en cas de panne Internet. <em>Une connexion à Internet sera requise pour valider votre parcours auprès des équipes du rally.</em>",
-    "title": "Application prête !"
+    "title": "Application prête !"
   },
   "artistList": "Liste des artistes",
   "artistPresentation": {
-    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 10 tampons pour l'avoir !"
+    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 10 tampons pour l'avoir !"
   },
   "artists": "Artistes",
   "cancel": "Annuler",
@@ -35,7 +35,7 @@
   "checkSubmit": "Vérifier un rally",
   "close": "Fermer",
   "consent": {
-    "email": "Je veux être au courant des prochains rallys !",
+    "email": "Je veux être au courant des prochains rallys !",
     "pushNotifications": "Notifications pendant l'événement"
   },
   "contest": {
@@ -52,7 +52,7 @@
       "submitting": "Enregistrement en cours…",
       "title": "Vos coordonnées"
     },
-    "description": "Participez à notre concours et tentez de gagner un shikishi de Sedeto !",
+    "description": "Participez à notre concours et tentez de gagner un shikishi de Sedeto !",
     "entry": {
       "confirm": "Confirmez votre inscription",
       "email": "Email : {{email}}",
@@ -73,13 +73,13 @@
       },
       "title": "Concours - Non éligible",
       "whatToDo": {
-        "step1": "Il est probablement trop tard pour terminer le rally avant le tirage au sort, mais vous pouvez toujours le compléter pour pouvoir participer demain !",
+        "step1": "Il est probablement trop tard pour terminer le rally avant le tirage au sort, mais vous pouvez toujours le compléter pour pouvoir participer demain !",
         "step2": "Revenez demain pour participer au prochain tirage",
         "title": "Que faire maintenant ?"
       }
     },
     "registration": {
-      "alreadyRegistered": "Vous êtes déjà inscrit à ce concours !",
+      "alreadyRegistered": "Vous êtes déjà inscrit à ce concours !",
       "error": "Erreur lors de l'inscription",
       "invalidSecret": "Secret incorrect",
       "localSaveError": "Votre inscription a réussi, mais nous n'avons pas pu sauvegarder votre participation localement.",
@@ -133,26 +133,26 @@
       "lost": "Vous avez perdu.",
       "registeredThe": "Vous vous êtes inscrit·e le {{date}}.",
       "waiting": "En attente du tirage au sort.",
-      "win": "Vous avez gagné !"
+      "win": "Vous avez gagné !"
     },
     "success": {
       "backToRewards": "Retour aux récompenses",
       "checking": "Vérification du résultat…",
       "notWinner": {
-        "description": "Vous n'avez pas gagné cette fois-ci, mais vous pourrez retenter votre chance !"
+        "description": "Vous n'avez pas gagné cette fois-ci, mais vous pourrez retenter votre chance !"
       },
       "pending": {
-        "description": "Le tirage au sort aura lieu d'ici quelques minutes !",
+        "description": "Le tirage au sort aura lieu d'ici quelques minutes !",
         "title": "En attente du tirage au sort"
       },
       "registered": "Votre inscription au concours a bien été enregistrée.",
       "title": "Inscription réussie",
       "winner": {
         "additionalInformation": "Inscrit·e le {{registeredAt}}, tiré·e le {{drawnAt}}. Gagnant·e : {{isWinner}}. Nom : {{name}}",
-        "description": "Vous avez gagné !",
+        "description": "Vous avez gagné !",
         "instructions": "Présentez cet écran au stand de Sedeto pour continuer",
         "technicalInstructions": "Détails techniques",
-        "title": "Félicitations !"
+        "title": "Félicitations !"
       }
     },
     "title": "Concours"
@@ -161,14 +161,14 @@
     "availableRewardPresentation_one": "En soumettant maintenant, vous aurez droit au lot suivant :",
     "availableRewardPresentation_other": "En soumettant maintenant, vous aurez droit aux lots suivants :",
     "evenMoreClassicCards": "Un deuxième tirage spécial pour encore plus de cartes",
-    "holographicCard": "Une chance d'obtenir une carte exclusive dans sa version holographique !",
+    "holographicCard": "Une chance d'obtenir une carte exclusive dans sa version holographique !",
     "minorHallInfo": "Pour assurer l'équité entre les halls, un des tampons doit provenir d'un stand situé dans le hall 5A.",
     "oneOrMoreClassicCards": "Une, deux ou trois cartes exclusives",
     "premiumCardRewardPresentation": "En continuant jusqu'au <1><icon/>palier suivant</1> à {{stamps}} tampons, débloquez en plus les lots suivants :",
     "resetDisclaimer": "Une fois les tampons soumis, vous repartez de zéro pour atteindre les paliers.",
     "standardCardRewardPresentation": "En atteignant le <1><icon/>premier palier</1> à {{stamps}} tampons, vous aurez droit au lot suivant :",
     "submitAction": "Soumettre",
-    "submitDrawerDescription": "Envoyez vos tampons au serveur pour pouvoir obtenir vos lots !",
+    "submitDrawerDescription": "Envoyez vos tampons au serveur pour pouvoir obtenir vos lots !",
     "submitDrawerTitle": "Soumettre votre rally",
     "submitError": "Désolé, votre rally n'a pas été soumis, merci de vous rapprocher des équipes du stand Arqo & Sedeto.",
     "title": "Rally en cours"
@@ -180,7 +180,7 @@
     "classicCards_other": "cartes classiques",
     "holographicCards_one": "carte holographique",
     "holographicCards_other": "cartes holographiques",
-    "drawReward": "Récompense ici !",
+    "drawReward": "Récompense ici !",
     "goToNextPhase": "Cliquez pour continuer"
   },
   "email": "Email",
@@ -188,14 +188,14 @@
   "errorCreatingAccount": "Erreur lors de la création du compte. Est-ce que l'email est déjà utilisé ?",
   "errors": {
     "dataFetchFailed": "Erreur lors de la récupération des données",
-    "notAStandist": "Vous ne semblez pas être standiste. Si vous l'êtes, cela signifie qu'il y a une erreur quelque part. Contactez le staff si c'est le cas !"
+    "notAStandist": "Vous ne semblez pas être standiste. Si vous l'êtes, cela signifie qu'il y a une erreur quelque part. Contactez le staff si c'est le cas !"
   },
   "eventIsFinished": {
-    "description": "Merci d'avoir participé !",
+    "description": "Merci d'avoir participé !",
     "title": "🎉 L'événement est terminé"
   },
   "generateQRCode": "Générer un QR Code",
-  "hi_username": "Salut {{name}} !",
+  "hi_username": "Salut {{name}} !",
   "home": "Accueil",
   "ignore": "Ignorer",
   "instagram": "Instagram",
@@ -273,7 +273,7 @@
     "title": "Légende",
     "yellow": "Le stand où les récompenses sont obtenables est affiché avec un nom <1>jaune</1>."
   },
-  "mapWillSoonBeAvailable": "La carte sera bientôt disponible !",
+  "mapWillSoonBeAvailable": "La carte sera bientôt disponible !",
   "name": "Nom",
   "no": "Non",
   "notImplemented": "Pas encore supporté",
@@ -291,8 +291,8 @@
     },
     "nudge": {
       "button": "Activer les notifications",
-      "description": "Si vous êtes d'accord, une gentille notification vous rappellera de vous rendre au concours shikishi du rally. À la clé, une commission aquarelle gratuite de Sedeto !",
-      "done": "Notifications activées !",
+      "description": "Si vous êtes d'accord, une gentille notification vous rappellera de vous rendre au concours shikishi du rally. À la clé, une commission aquarelle gratuite de Sedeto !",
+      "done": "Notifications activées !",
       "ignore": "Ignorer et ne plus montrer ce message",
       "reminder": "Vous pouvez désactiver ces notifications dans le menu Paramètres.",
       "title": "Soyez à l'affût"
@@ -304,7 +304,7 @@
     "templates": {
       "contest": {
         "text": "Rendez-vous au stand de Sedeto (H6, R687) pour tenter votre chance de remporter un shikishi personnalisé de Sedeto.",
-        "title": "Le concours du Rally VTuber commence bientôt !"
+        "title": "Le concours du Rally VTuber commence bientôt !"
       }
     }
   },
@@ -312,7 +312,7 @@
   "password": "Mot de passe",
   "profile": {
     "label": "Profil",
-    "profileUpdated": "Votre profil a bien été mis à jour !",
+    "profileUpdated": "Votre profil a bien été mis à jour !",
     "socialNetworks": {
       "label": "Réseaux sociaux",
       "subtext": "Vous pouvez vider les champs que vous ne souhaitez pas afficher sur votre profil."
@@ -330,19 +330,19 @@
   "rally": {
     "1": "16 artistes participent à ce rally autour des VTubers",
     "2": "Après un achat (minimum 2€) chez un stand participant, scannez le tampon QR Code",
-    "3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
-    "4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
-    "5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
-    "6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur",
-    "welcome": "Bienvenue sur le Rally !"
+    "3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
+    "4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
+    "5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
+    "6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur",
+    "welcome": "Bienvenue sur le Rally !"
   },
   "redeemedSubmissions": "Soumissions déjà validées",
-  "requestYourReward": "Demandez votre récompense !",
+  "requestYourReward": "Demandez votre récompense !",
   "reward": {
     "contest": {
       "alreadyRegistered": "Vous êtes déjà inscrit(e) au concours",
       "button": "Participer au concours",
-      "description": "Nous organisons un concours à 16h chaque jour sur le stand de Sedeto. Vous pourrez gagner un shikishi réalisé par Sedeto !",
+      "description": "Nous organisons un concours à 16h chaque jour sur le stand de Sedeto. Vous pourrez gagner un shikishi réalisé par Sedeto !",
       "registerNow": "S'inscrire maintenant",
       "requirements": {
         "OK": "Vous êtes éligible",
@@ -362,7 +362,7 @@
       "description": "Collectez des tampons et obtenez des récompenses exclusives.",
       "faq": {
         "replay": {
-          "description": "Vous pouvez rejouer autant de fois que vous voulez ! Il est néanmoins interdit de jouer avec plusieurs appareils en simultané.",
+          "description": "Vous pouvez rejouer autant de fois que vous voulez ! Il est néanmoins interdit de jouer avec plusieurs appareils en simultané.",
           "title": "Peut-on refaire un rally ?"
         },
         "rewards": {
@@ -385,9 +385,9 @@
   "rules.1": "Un rally est organisé par Sedeto (Hall 6, R687) lors de la Japan Expo 2025, il est sur le thème des VTubers (Hololive et au-delà). 16 artistes y participent, tous les stands participants ont une signalétique et sont indiqués sur la carte du rally.",
   "rules.2": "Toutes les informations utiles sont présentes sur l’application Web du rally. Cette application est également utilisée pour tamponner numériquement tous les stands par lesquels les joueurs passent.",
   "rules.3": "Pour obtenir un tampon sur un stand participant, il faut y dépenser 2€ minimum. Il faut 10 tampons minimum pour obtenir une récompense. Obtenir les 16 tampons donne droit à un tirage supplémentaire spécifique. Le rally peut être recommencé autant de fois que souhaité. Il est nécessaire d’avoir au minimum un tampon d’un stand du Hall 5A, pour assurer l’équité entre les différentes zones artistes.",
-  "rules.4": "Pour récupérer ses récompenses, il faut se rendre sur le stand du rally (ARQO SEDETO & THE VTUBE RALLY, Hall 6, R687) et un tirage au sort aura lieu pour déterminer un lot (tout tirage es) qui correspond à un nombre de cartes à choisir parmi un jeu de cartes de récompense illustrés par les artistes participant au rally. Il y a 17 cartes disponibles, imitant un shikishi signé de l’artiste ! Un tirage au sort supplémentaire obtenu à l’aide d’un rally avec 16 tampons offre une chance d’obtenir une version holographique des cartes de récompense. Les lots seront visibles sur le stand.",
+  "rules.4": "Pour récupérer ses récompenses, il faut se rendre sur le stand du rally (ARQO SEDETO & THE VTUBE RALLY, Hall 6, R687) et un tirage au sort aura lieu pour déterminer un lot (tout tirage es) qui correspond à un nombre de cartes à choisir parmi un jeu de cartes de récompense illustrés par les artistes participant au rally. Il y a 17 cartes disponibles, imitant un shikishi signé de l’artiste ! Un tirage au sort supplémentaire obtenu à l’aide d’un rally avec 16 tampons offre une chance d’obtenir une version holographique des cartes de récompense. Les lots seront visibles sur le stand.",
   "rules.5": "Les lots sont distribués dans la limite des stocks disponibles. Pour garantir un accès équitable aux lots tous les jours du salon, des réassorts sont organisés périodiquement.",
-  "rules.6": "Toute participation validée donne droit à participer à un concours sur le stand du rally à 16h tous les jours du salon. Un participant du concours sera tiré au sort et aura la possibilité de commissionner gratuitement auprès de Sedeto un petit shikishi original du personnage de son choix ! Un rally validé ne peut être utilisé pour participer à un seul des concours. Un nouveau rally sera nécessaire pour participer à un autre concours shikishi.",
+  "rules.6": "Toute participation validée donne droit à participer à un concours sur le stand du rally à 16h tous les jours du salon. Un participant du concours sera tiré au sort et aura la possibilité de commissionner gratuitement auprès de Sedeto un petit shikishi original du personnage de son choix ! Un rally validé ne peut être utilisé pour participer à un seul des concours. Un nouveau rally sera nécessaire pour participer à un autre concours shikishi.",
   "rules.7": "Ces règles sont amenées à être modifiées légèrement pour assurer un jeu équitable sur toute la durée de l’événement. L’équipe fera de son mieux pour le communiquer via les canaux de communication à sa disposition.",
   "rules.8": "Ce rally n’est pas endossé par ou affilié à une agence de VTuber. Ni Cover Corporation (Hololive), ni VShojo, ni Nijisanji sont partenaires ou affiliés de l’opération.",
   "rules.9": "Si nous rencontrons de gros soucis, ces règles peuvent être ajustées pour que le rally puisse continuer de fonctionner de la façon la plus plaisante et équitable pour toustes.",
@@ -395,11 +395,11 @@
   "saveSubmissionQuestion": "Souhaitez-vous sauvegarder vos soumissions ?",
   "scanQRCode": "Scanner un QR code",
   "scanQRDrawer": {
-    "description": "Ajoutez un tampon dans votre collection en scannant le code fourni par l'artiste !",
+    "description": "Ajoutez un tampon dans votre collection en scannant le code fourni par l'artiste !",
     "nativeCameraHint": "En cas de difficultés, vous pouvez utiliser l'application Caméra de votre appareil pour tenter de scanner le QR code.",
     "title": "Scannez un QR Code"
   },
-  "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
+  "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {
     "title": "Paramètres",
     "usernameEmpty": "Votre nom d'utilisateur ne peut pas être vide",
@@ -407,7 +407,7 @@
     "usernameUpdateFailed": "Le changement de nom d'utilisateur a échoué",
     "usernameUpdated": "Votre nom d'utilisateur a été mis à jour avec succès"
   },
-  "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, R687) pour pouvoir récupérer votre récompense !",
+  "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, R687) pour pouvoir récupérer votre récompense !",
   "staffSpace": "Espace staff",
   "stampDetails": {
     "generatedAt": "Tampon numérique généré le {{dateTime}}",
@@ -417,28 +417,28 @@
     "summary": "Détails du tampon"
   },
   "stampGoals": {
-    "getToPremiumCardReward_one": "Un dernier tampon pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
-    "getToPremiumCardReward_other": "Plus que {{count}} tampons pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
-    "getToPremiumCardReward_zero": "Vous avez tout fini ! Vous pouvez dès maintenant tenter votre chance pour obtenir <1><icon/>une carte spéciale holographique</1>.",
+    "getToPremiumCardReward_one": "Un dernier tampon pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
+    "getToPremiumCardReward_other": "Plus que {{count}} tampons pour une chance d'obtenir <1><icon/>une carte spéciale holographique</1> !",
+    "getToPremiumCardReward_zero": "Vous avez tout fini ! Vous pouvez dès maintenant tenter votre chance pour obtenir <1><icon/>une carte spéciale holographique</1>.",
     "getToStandardCardReward_one": "Un dernier tampon avant de remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
     "getToStandardCardReward_other": "Plus que {{count}} tampons pour remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
-    "getToStandardCardReward_zero": "Bravo ! Vous pouvez dès maintenant remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
+    "getToStandardCardReward_zero": "Bravo ! Vous pouvez dès maintenant remporter une, deux ou trois <1><icon/>cartes exclusives</1>.",
     "scanFromMinorHall": "<strong>Attention</strong>, pour valider votre rally, scannez un tampon d'un stand du hall 5A. <em>Pourquoi ? Pour assurer l'équité entre les deux halls.</em>"
   },
-  "stampValidated": "Tampon validé !",
-  "stampsCount_one": "{{count}} tampon collecté sur {{maxCount}} !",
-  "stampsCount_other": "{{count}} tampons collectés sur {{maxCount}} !",
+  "stampValidated": "Tampon validé !",
+  "stampsCount_one": "{{count}} tampon collecté sur {{maxCount}} !",
+  "stampsCount_other": "{{count}} tampons collectés sur {{maxCount}} !",
   "stand": "Stand de {{name}}",
   "standName": "Nom du stand",
   "standistSpace": "Espace standistes",
   "submission": "Soumission {{id}}",
   "submissions": "Soumissions",
-  "submissionsGoesHere": "Quand vous aurez terminé votre rally, vous pourrez trouver des informations pour récupérer vos lots !",
+  "submissionsGoesHere": "Quand vous aurez terminé votre rally, vous pourrez trouver des informations pour récupérer vos lots !",
   "submitNotAllowed": {
     "count": "Vous devez scanner au moins {{stamps}} tampons.",
     "minorHall": "Vous devez scanner un tampon du hall 5A."
   },
-  "submitStamps": "Soumettez vos tampons collectés ici !",
+  "submitStamps": "Soumettez vos tampons collectés ici !",
   "submitTerms": "Ce code ne périme pas, vous pouvez récupérer votre récompense n'importe quel jour de la convention pour récupérer des cartes qui ne sont plus en stock pour la journée.",
   "submittedAgo": "Soumis {{time}}",
   "submitting": "Soumission en cours…",

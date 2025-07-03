@@ -38,6 +38,7 @@ const QRScanner = ({ onScanSuccess, onCameraAccessFail }: QRScannerProps) => {
         preferredCamera: "environment",
         highlightScanRegion: false,
         highlightCodeOutline: false,
+        maxScansPerSecond: 2,
       },
     );
 
