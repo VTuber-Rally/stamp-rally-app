@@ -71,14 +71,16 @@ export const useAvailableCards = () => {
 
       return {
         ...data,
-        cards: data.cards.map(
-          (card) =>
-            ({
-              ...card,
-              // On ajoute l'URL de l'image pour chaque carte
-              image: getCardDesignImagePreview(card.image, 128, 192),
-            }) as CardAvailable,
-        ),
+        cards: data.cards
+          .map(
+            (card) =>
+              ({
+                ...card,
+                // On ajoute l'URL de l'image pour chaque carte
+                image: getCardDesignImagePreview(card.image, 128, 192),
+              }) as CardAvailable,
+          )
+          .sort((a, b) => a.name.localeCompare(b.name)),
       };
     },
     staleTime: 1000 * 60 * 5,

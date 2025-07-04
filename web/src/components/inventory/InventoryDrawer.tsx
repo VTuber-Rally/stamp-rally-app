@@ -214,7 +214,7 @@ export const InventoryDrawer = ({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
-        <div className="mx-auto w-full max-w-lg">
+        <div className="mx-auto w-full max-w-lg overflow-y-auto">
           <DrawerHeader>
             <DrawerTitle>{t("inventory.cart.title")}</DrawerTitle>
             <DrawerDescription>
