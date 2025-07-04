@@ -72,11 +72,11 @@ export const useFollowParticipation = () => {
         return null;
       }
 
-      // Récupérer la participation la plus ancienne par date de soumission
+      // Récupérer la participation la plus récente par date d'inscription
       return participationsAppwrite.documents.sort(
         (a, b) =>
-          new Date(a.registeredAt).getTime() -
-          new Date(b.registeredAt).getTime(),
+          new Date(b.registeredAt).getTime() -
+          new Date(a.registeredAt).getTime(),
       )[0].$id;
     } catch (error) {
       console.error(
