@@ -74,6 +74,10 @@ function RouteComponent() {
   const canGoToNextPhase = phase === "standard" && drawType === "premium";
 
   const goToNextPhase = () => {
+    if (animationStep !== 3) {
+      return;
+    }
+
     if (canGoToNextPhase) {
       setPhase("premium");
       setAnimationStep(0);
@@ -185,8 +189,8 @@ function RouteComponent() {
             )}
             <img className={clsx("max-w-[80vw]")} src={envelopeOpen} />
             {canGoToNextPhase && (
-              <p className="text-center text-xs text-gray-600">
-                {tFR("draw.goToNextPhase")} / {tEN("draw.goToNextPhase")}
+              <p className="text-center text-xl text-gray-600">
+                {tFR("draw.goToNextPhase")} <br /> {tEN("draw.goToNextPhase")}
               </p>
             )}
           </div>
