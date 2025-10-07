@@ -401,7 +401,7 @@
   },
   "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {
-    "title": "Paramètres",
+    "title": "Réglages",
     "usernameEmpty": "Votre nom d'utilisateur ne peut pas être vide",
     "usernameTooLong": "Votre nom d'utilisateur ne peut pas faire plus de 50 caractères",
     "usernameUpdateFailed": "Le changement de nom d'utilisateur a échoué",
