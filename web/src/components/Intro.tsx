@@ -1,14 +1,7 @@
-import {
-  Dices,
-  QrCode,
-  Repeat,
-  Sparkles,
-  TicketCheck,
-  Users,
-} from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { QrCode, TicketCheck } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
-import { standardRewardMinStampsRequirement } from "@/lib/consts.ts";
+import { standardRewardMinStampsRequirement } from "@/lib/consts";
 
 const Intro = () => {
   const { t } = useTranslation();
@@ -19,32 +12,23 @@ const Intro = () => {
       </div>
       <ul className={"space-y-2 py-2"}>
         <li className={"flex items-center"}>
-          <Users size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.1")}</span>
-        </li>
-        <li className={"flex items-center"}>
           <QrCode size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.2")}</span>
+          <span>{t("rally.1")}</span>
         </li>
         <li className={"flex items-center"}>
           <TicketCheck size={36} className={"mr-2 shrink-0"} />
           <span>
-            {t("rally.3", {
-              minimumStampsCount: standardRewardMinStampsRequirement,
-            })}
+            <Trans
+              t={t}
+              i18nKey="rally.2"
+              components={{
+                1: <strong />,
+              }}
+              values={{
+                minimumStampsCount: standardRewardMinStampsRequirement,
+              }}
+            />
           </span>
-        </li>
-        <li className={"flex items-center"}>
-          <Sparkles size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.4")}</span>
-        </li>
-        <li className={"flex items-center"}>
-          <Dices size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.5")}</span>
-        </li>
-        <li className={"flex items-center"}>
-          <Repeat size={36} className={"mr-2 shrink-0"} />
-          <span>{t("rally.6")}</span>
         </li>
       </ul>
     </div>
