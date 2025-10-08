@@ -328,7 +328,7 @@
   },
   "qrcode": "QR Code",
   "rally": {
-    "1": "Get a stamp by making a purchase (minimum 2€) from one of the 16 artists participating",
+    "1": "Get a stamp by making a purchase (minimum 2€) from one of the 16 participating artists",
     "2": "Once <1>{{minimumStampsCount}} stamps</1> collected, head over to Sedeto's booth to get a reward!",
     "welcome": "Welcome to the Rally!"
   },
