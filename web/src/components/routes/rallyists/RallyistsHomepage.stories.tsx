@@ -14,8 +14,8 @@ const meta = {
   component: RallyistsHomepage,
   decorators: [
     TanStackQueryDecorator,
-    RouterDecorator,
     QRDrawerContextProviderDecorator,
+    RouterDecorator,
   ],
 } satisfies Meta<typeof RallyistsHomepage>;
 

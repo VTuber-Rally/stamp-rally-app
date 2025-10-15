@@ -328,12 +328,8 @@
   },
   "qrcode": "QR Code",
   "rally": {
-    "1": "16 artists take part in this rally around VTubers",
-    "2": "After making a purchase (minimum 2€) from a participant booth, scan the QR code to get a stamp",
-    "3": "Once you've collected {{minimumStampsCount}} stamps and visited both halls, head over to Sedeto's booth to get a reward!",
-    "4": "This year, try to win a holographic card by getting all the stamps!",
-    "5": "Once you get your reward, enter the draw to win a shikishi from Sedeto!",
-    "6": "You can replay as many times as you like while rewards last!",
+    "1": "Get a stamp by making a purchase (minimum 2€) from one of the 16 participating artists",
+    "2": "Once <1>{{minimumStampsCount}} stamps</1> are collected, head over to Sedeto's booth to get a reward!",
     "welcome": "Welcome to the Rally!"
   },
   "redeemedSubmissions": "Redeemed submissions",

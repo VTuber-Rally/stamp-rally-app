@@ -16,7 +16,7 @@ describe("Rallyists Rules", () => {
 
     const texts = lists.map((list) => list.querySelectorAll("li"));
 
-    expect(texts[0].length).toBe(6);
+    expect(texts[0].length).toBe(2);
 
     expect(texts[1].length).toBe(9);
   });

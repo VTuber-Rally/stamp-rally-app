@@ -328,12 +328,8 @@
   },
   "qrcode": "QR Code",
   "rally": {
-    "1": "16 artistes participent à ce rally autour des VTubers",
-    "2": "Après un achat (minimum 2€) chez un stand participant, scannez le tampon QR Code",
-    "3": "Une fois {{minimumStampsCount}} tampons obtenus en ayant visité les deux halls, rendez-vous au stand de Sedeto pour récupérer une récompense !",
-    "4": "Cette année, tentez votre chance pour une carte holographique en obtenant tous les tampons !",
-    "5": "Après avoir récupéré une récompense, participez au concours pour gagner un shikishi de Sedeto !",
-    "6": "Vous pouvez rejouer autant de fois que vous le souhaitez ! Dans la limite des stocks disponibles et dans la bonne humeur",
+    "1": "Obtenez un tampon en faisant un achat (minimum 2€) chez un des 16 artistes participant",
+    "2": "Une fois <1>{{minimumStampsCount}} tampons</1> obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
     "welcome": "Bienvenue sur le Rally !"
   },
   "redeemedSubmissions": "Soumissions déjà validées",
@@ -401,7 +397,7 @@
   },
   "scanThisQR": "Scannez ce QR pour récupérer le tampon !",
   "settings": {
-    "title": "Paramètres",
+    "title": "Réglages",
     "usernameEmpty": "Votre nom d'utilisateur ne peut pas être vide",
     "usernameTooLong": "Votre nom d'utilisateur ne peut pas faire plus de 50 caractères",
     "usernameUpdateFailed": "Le changement de nom d'utilisateur a échoué",
