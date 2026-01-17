@@ -59,6 +59,7 @@ export default defineConfig({
           VITE_GROUPS_COLLECTION_ID: Schema.string(),
           VITE_CARD_DESIGNS_COLLECTION_ID: Schema.string(),
           VITE_SELL_CARDS_FUNCTION_ID: Schema.string(),
+          VITE_CONVEX_URL: Schema.string(),
         },
       }),
     // This plugin is disabled in Storybook

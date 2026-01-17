@@ -1,18 +1,18 @@
 import { StampTuple } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 
-import { publicUrl } from "@/lib/consts.ts";
+import { siteUrl } from "@/lib/consts.ts";
 
 export function encodeStampToQRCode(stamp: StampTuple) {
   const stringifiedStamp = JSON.stringify(stamp);
 
-  const url = new URL(publicUrl);
+  const url = new URL(siteUrl);
   url.pathname += (url.pathname.endsWith("/") ? "" : "/") + "code/s";
   url.hash = encodeURIComponent(stringifiedStamp);
   return url.toString();
 }
 
 export function encodeContestSecretToQRCode(secret: string) {
-  const url = new URL(publicUrl);
+  const url = new URL(siteUrl);
   url.pathname += (url.pathname.endsWith("/") ? "" : "/") + "code/c";
   url.hash = encodeURIComponent(secret);
   return url.toString();

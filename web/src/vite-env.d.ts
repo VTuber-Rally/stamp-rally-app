@@ -5,7 +5,6 @@ interface ImportMetaEnv {
   VITE_APPWRITE_ENDPOINT: string;
   VITE_APPWRITE_PROJECT_ID: string;
   readonly VITE_APPWRITE_NOTIFICATION_PROVIDER_ID: string;
-  VITE_PUBLIC_URL: string;
   VITE_COMMIT_REF: string;
   VITE_BUILD_ID: string;
   VITE_DATABASE_ID: string;
@@ -44,6 +43,10 @@ interface ImportMetaEnv {
 
   readonly VITE_SENTRY_DSN: string;
   readonly VITE_SENTRY_ENVIRONMENT: string;
+
+  readonly VITE_CONVEX_URL: string;
+  readonly VITE_CONVEX_SITE_URL: string;
+  readonly VITE_SITE_URL: string;
 }
 
 interface ImportMeta {

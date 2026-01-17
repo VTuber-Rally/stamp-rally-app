@@ -1,7 +1,6 @@
 const {
   VITE_BUILD_ID: buildId,
   VITE_COMMIT_REF: commitRef,
-  VITE_PUBLIC_URL: publicUrl,
   VITE_APPWRITE_ENDPOINT: appwriteEndpoint,
   VITE_APPWRITE_PROJECT_ID: appwriteProjectId,
   VITE_APPWRITE_NOTIFICATION_PROVIDER_ID: appwriteNotificationProviderId,
@@ -37,6 +36,9 @@ const {
   VITE_CARD_DESIGNS_COLLECTION_ID: cardDesignsCollectionId,
   VITE_GET_AVAILABLE_CARDS_FUNCTION_ID: getAvailableCardsFunctionId,
   VITE_SELL_CARDS_FUNCTION_ID: sellCardsFunctionId,
+  VITE_CONVEX_URL: convexURL,
+  VITE_CONVEX_SITE_URL: convexSiteURL,
+  VITE_SITE_URL: siteUrl,
   DEV: isDev,
   PROD: isProd,
 } = import.meta.env;
@@ -62,7 +64,9 @@ const mapCenter = [2.518988, 48.970091] as [number, number];
 export {
   buildId,
   commitRef,
-  publicUrl,
+  convexURL,
+  convexSiteURL,
+  siteUrl,
   appwriteEndpoint,
   appwriteProjectId,
   appwriteNotificationProviderId,
