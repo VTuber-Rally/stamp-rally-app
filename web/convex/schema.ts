@@ -26,10 +26,7 @@ export default defineSchema({
     publicKey: jsonWebKey,
     privateKey: jsonWebKey,
     links: v.record(v.string(), v.string()),
-    userId,
-  })
-    .index("by_name", ["name"])
-    .index("by_user_id", ["userId"]),
+  }).index("by_name", ["name"]),
 
   flags: defineTable({
     key: v.string(),
@@ -98,4 +95,13 @@ export default defineSchema({
     ),
     timestamp: v.number(),
   }),
+
+  // User
+  userInfo: defineTable({
+    userId,
+    role: v.union(v.literal("user"), v.literal("standist"), v.literal("staff")),
+    boothId: v.optional(v.id("booths")),
+    language: v.string(),
+    emailConsent: v.boolean(),
+  }).index("by_user_id", ["userId"]),
 });

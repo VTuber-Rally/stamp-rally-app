@@ -19,88 +19,79 @@ import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
 import { AnalyticsOptOut } from "@/components/routes/AnalyticsOptOut.tsx";
 import { getPrefs, setPref } from "@/lib/appwrite.ts";
 import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
+import { useCurrentUser } from "@/lib/betterauth";
 import { useLogout } from "@/lib/hooks/useLogout.ts";
 import { useUpdateUsername } from "@/lib/hooks/useUpdateUsername";
-import { useUser } from "@/lib/hooks/useUser.ts";
 import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
 import {
   disablePushNotifications,
   enablePushNotifications,
 } from "@/lib/pushNotifications.ts";
 
-export const Route = createFileRoute(
-  "/_rallyists/_withUserProviderNoAutoAnonymous/settings",
-)({
+export const Route = createFileRoute("/_rallyists/settings")({
   component: SettingsPage,
-  loader: async () => {
-    let emailConsent: boolean;
-    let pushNotificationsConsent: boolean;
-    try {
-      const prefs = await getPrefs();
-      emailConsent = prefs[APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT] === true;
-      pushNotificationsConsent =
-        window.localStorage.getItem(
-          LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
-        ) === "true";
-    } catch {
-      emailConsent = false;
-      pushNotificationsConsent = false;
-    }
-    return {
-      emailConsent,
-      pushNotificationsConsent,
-    };
-  },
+  // loader: async () => {
+  //   let emailConsent: boolean;
+  //   let pushNotificationsConsent: boolean;
+  //   try {
+  //     const prefs = await getPrefs();
+  //     emailConsent = prefs[APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT] === true;
+  //     pushNotificationsConsent =
+  //       window.localStorage.getItem(
+  //         LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
+  //       ) === "true";
+  //   } catch {
+  //     emailConsent = false;
+  //     pushNotificationsConsent = false;
+  //   }
+  //   return {
+  //     emailConsent,
+  //     pushNotificationsConsent,
+  //   };
+  // },
 });
 
 function SettingsPage() {
-  const { user } = useUser();
-  const { mutate } = useLogout();
+  const user = useCurrentUser();
   const { t } = useTranslation();
-  const { updateUsername, isPending } = useUpdateUsername();
 
-  const { emailConsent, pushNotificationsConsent } = Route.useLoaderData();
+  // const toggleEmailConsent = useCallback(() => {
+  //   setEmailConsentChecked(!emailConsentChecked);
+  //   setPref(
+  //     APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT,
+  //     !emailConsentChecked,
+  //   ).catch((error) => {
+  //     captureException(error);
+  //     setEmailConsentChecked(emailConsentChecked);
+  //   });
+  // }, [emailConsentChecked]);
 
-  const [emailConsentChecked, setEmailConsentChecked] = useState(emailConsent);
+  // // This setting is per-device
+  // const [pushNotificationsConsentChecked, setPushNotificationsConsentChecked] =
+  //   useState(pushNotificationsConsent);
+  // const [isPushNotificationsLoading, setIsPushNotificationsLoading] =
+  //   useState(false);
 
-  const toggleEmailConsent = useCallback(() => {
-    setEmailConsentChecked(!emailConsentChecked);
-    setPref(
-      APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT,
-      !emailConsentChecked,
-    ).catch((error) => {
-      captureException(error);
-      setEmailConsentChecked(emailConsentChecked);
-    });
-  }, [emailConsentChecked]);
+  // const togglePushNotificationsConsent = useCallback(async () => {
+  //   setIsPushNotificationsLoading(true);
+  //   setPushNotificationsConsentChecked(!pushNotificationsConsentChecked);
+  //   try {
+  //     if (pushNotificationsConsentChecked) {
+  //       const pushNotificationsDisabled = await disablePushNotifications();
+  //       setPushNotificationsConsentChecked(!pushNotificationsDisabled);
+  //     } else {
+  //       const pushNotificationsEnabled = await enablePushNotifications();
+  //       setPushNotificationsConsentChecked(pushNotificationsEnabled);
+  //     }
+  //   } catch (error) {
+  //     captureException(error);
+  //     setPushNotificationsConsentChecked(pushNotificationsConsentChecked);
+  //   } finally {
+  //     setIsPushNotificationsLoading(false);
+  //   }
+  // }, [pushNotificationsConsentChecked]);
 
-  // This setting is per-device
-  const [pushNotificationsConsentChecked, setPushNotificationsConsentChecked] =
-    useState(pushNotificationsConsent);
-  const [isPushNotificationsLoading, setIsPushNotificationsLoading] =
-    useState(false);
-
-  const togglePushNotificationsConsent = useCallback(async () => {
-    setIsPushNotificationsLoading(true);
-    setPushNotificationsConsentChecked(!pushNotificationsConsentChecked);
-    try {
-      if (pushNotificationsConsentChecked) {
-        const pushNotificationsDisabled = await disablePushNotifications();
-        setPushNotificationsConsentChecked(!pushNotificationsDisabled);
-      } else {
-        const pushNotificationsEnabled = await enablePushNotifications();
-        setPushNotificationsConsentChecked(pushNotificationsEnabled);
-      }
-    } catch (error) {
-      captureException(error);
-      setPushNotificationsConsentChecked(pushNotificationsConsentChecked);
-    } finally {
-      setIsPushNotificationsLoading(false);
-    }
-  }, [pushNotificationsConsentChecked]);
-
-  const isUserLoggedIn =
-    user !== null && user?.email !== undefined && user?.email !== "";
+  const isUserLoggedIn = user && !user.isAnonymous;
 
   function changeLanguage(language: string) {
     if (language === i18n.language) return;
@@ -111,35 +102,35 @@ function SettingsPage() {
   const i18nKeyButton = isUserLoggedIn
     ? "loggedLogoutButton"
     : "anonymousLogoutButton";
-  const isStaff = user?.labels.includes("staff");
-  const isStandist = user?.labels.includes("standist");
+  // const isStaff = user?.labels.includes("staff");
+  // const isStandist = user?.labels.includes("standist");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      username: user?.name ?? "",
-    },
-    resolver: zodResolver(
-      z.object({
-        username: z
-          .string()
-          .trim()
-          .min(1, t("settings.usernameEmpty"))
-          .max(50, t("settings.usernameTooLong")),
-      }),
-    ),
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm({
+  //   defaultValues: {
+  //     username: user?.name ?? "",
+  //   },
+  //   resolver: zodResolver(
+  //     z.object({
+  //       username: z
+  //         .string()
+  //         .trim()
+  //         .min(1, t("settings.usernameEmpty"))
+  //         .max(50, t("settings.usernameTooLong")),
+  //     }),
+  //   ),
+  // });
 
-  function onSubmit({ username }: { username: string }) {
-    if (!user) {
-      throw new Error("Error is not logged in");
-    }
+  // function onSubmit({ username }: { username: string }) {
+  //   if (!user) {
+  //     throw new Error("User is not logged in");
+  //   }
 
-    updateUsername(username);
-  }
+  //   updateUsername(username);
+  // }
 
   return (
     <div className={"flex grow flex-col items-center gap-2"}>
@@ -148,7 +139,8 @@ function SettingsPage() {
         <>
           <ShadowBox>
             <h1 className="mb-4 text-2xl">{t("account")}</h1>
-            <form
+            {JSON.stringify(user, null, 2)}
+            {/*<form
               onSubmit={handleSubmit(onSubmit)}
               className="flex w-full flex-col gap-2"
             >
@@ -205,9 +197,9 @@ function SettingsPage() {
               >
                 {isPending ? <Loader /> : t("save")}
               </ButtonLink>
-            </form>
+            </form>*/}
 
-            {isStaff && (
+            {/*{isStaff && (
               <ButtonLink size={"small"} href="/staff" className="mt-4">
                 {t("staffSpace")}
               </ButtonLink>
@@ -217,9 +209,9 @@ function SettingsPage() {
               <ButtonLink size={"small"} href="/standists" className="mt-4">
                 {t("standistSpace")}
               </ButtonLink>
-            )}
+            )}*/}
 
-            <ButtonLink
+            {/*<ButtonLink
               type={"button"}
               size={"small"}
               bg={"dangerous"}
@@ -227,7 +219,7 @@ function SettingsPage() {
               className={"mt-4 text-lg"}
             >
               {t(i18nKeyButton)}
-            </ButtonLink>
+            </ButtonLink>*/}
           </ShadowBox>
         </>
       ) : (

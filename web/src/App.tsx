@@ -17,9 +17,6 @@ import { router } from "@/router.tsx";
 const AppWrapped = () => {
   const { t } = useTranslation();
   const { value: eventEndDate } = useKeyValue(KEY_VALUES.eventEndDate);
-  const hello = authClient;
-  const session = authClient.useSession();
-  console.log(hello);
 
   useRegisterAppSW();
 

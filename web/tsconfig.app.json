@@ -24,8 +24,9 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+      "~/*": ["./convex/*"],
+    },
   },
-  "include": ["src", ".storybook/*.ts"]
+  "include": ["src", ".storybook/*.ts"],
 }

@@ -1,11 +1,10 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@/components/inputs/Checkbox.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
-import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
+import { signUpWithEmail, useCurrentUser } from "@/lib/betterauth";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
 
 type EmailNameFormType = {
   name: string;
@@ -14,8 +13,8 @@ type EmailNameFormType = {
 };
 
 export const CreateAccountForm = () => {
+  const user = useCurrentUser();
   const { t } = useTranslation();
-  const { user, setName, setEmail, setPref, loginAnonymous } = useUser();
   const { toast } = useToast();
 
   const {
@@ -24,22 +23,18 @@ export const CreateAccountForm = () => {
     handleSubmit,
   } = useForm<EmailNameFormType>();
 
-  const onSubmit = async (data: EmailNameFormType) => {
-    if (!user) {
-      // create anonymous user
-      await loginAnonymous();
-    }
+  const onSubmit: SubmitHandler<EmailNameFormType> = async (data) => {
     try {
-      if (data.email) {
-        await setEmail(data.email);
-        if (data.emailConsent) {
-          await setPref(APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT, true);
-        }
-      }
-
-      console.log(data);
-      if (data.name) {
-        await setName(data.name);
+      const { data: response, error } = await signUpWithEmail(
+        data.email,
+        data.name,
+      );
+      if (error) {
+        // TODO: customize by error (email already used, etc.)
+        toast({
+          title: t("error"),
+          description: t("errorCreatingAccount"),
+        });
       }
     } catch {
       toast({
@@ -57,35 +52,29 @@ export const CreateAccountForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           className={"flex flex-col items-center"}
         >
-          {!user?.name && (
-            <InputField
-              type={"text"}
-              name={"name"}
-              placeholder={t("optionalName")}
-              register={register}
-              errors={errors["name"]}
-              required={false}
-            />
-          )}
+          <InputField
+            type={"text"}
+            name={"name"}
+            placeholder={t("optionalName")}
+            register={register}
+            errors={errors["name"]}
+            required={false}
+          />
 
-          {!user?.email && (
-            <>
-              <InputField
-                type={"email"}
-                name={"email"}
-                placeholder={t("email")}
-                register={register}
-                errors={errors["name"]}
-              />
+          <InputField
+            type={"email"}
+            name={"email"}
+            placeholder={t("email")}
+            register={register}
+            errors={errors["name"]}
+          />
 
-              <div className={"flex items-center"}>
-                <Checkbox {...register("emailConsent")} id={"emailConsent"} />
-                <label className={"ml-2"} htmlFor={"emailConsent"}>
-                  {t("consent.email")}
-                </label>
-              </div>
-            </>
-          )}
+          <div className={"flex items-center"}>
+            <Checkbox {...register("emailConsent")} id={"emailConsent"} />
+            <label className={"ml-2"} htmlFor={"emailConsent"}>
+              {t("consent.email")}
+            </label>
+          </div>
 
           <button
             className={
