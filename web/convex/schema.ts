@@ -1,3 +1,4 @@
+import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
@@ -12,10 +13,10 @@ const jsonWebKey = v.object({
 
 const polygonGeometry = v.array(v.array(v.array(v.float64())));
 
-// Since Convex doesn't allow inter-component keys, we fall back to single string usage
-const userId = v.string();
+const userId = v.id("users");
 
 export default defineSchema({
+  ...authTables,
   booths: defineTable({
     name: v.string(),
     description: v.string(),
@@ -99,9 +100,22 @@ export default defineSchema({
   // User
   userInfo: defineTable({
     userId,
-    role: v.union(v.literal("user"), v.literal("standist"), v.literal("staff")),
-    boothId: v.optional(v.id("booths")),
-    language: v.string(),
-    emailConsent: v.boolean(),
   }).index("by_user_id", ["userId"]),
+
+  users: defineTable({
+    name: v.optional(v.string()),
+    image: v.optional(v.string()),
+    email: v.optional(v.string()),
+    emailVerificationTime: v.optional(v.number()),
+    phone: v.optional(v.string()),
+    phoneVerificationTime: v.optional(v.number()),
+    isAnonymous: v.optional(v.boolean()),
+    role: v.optional(
+      v.union(v.literal("user"), v.literal("standist"), v.literal("staff")),
+    ),
+    boothId: v.optional(v.id("booths")),
+    language: v.optional(v.string()),
+    emailConsent: v.optional(v.boolean()),
+    // other "users" fields...
+  }).index("email", ["email"]),
 });

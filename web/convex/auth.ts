@@ -1,111 +1,194 @@
+import { Anonymous } from "@convex-dev/auth/providers/Anonymous";
+import { ConvexCredentials } from "@convex-dev/auth/providers/ConvexCredentials";
+import { Email } from "@convex-dev/auth/providers/Email";
+import { Password } from "@convex-dev/auth/providers/Password";
 import {
-  type AuthFunctions,
-  type GenericCtx,
-  createClient,
-} from "@convex-dev/better-auth";
-import { convex, crossDomain } from "@convex-dev/better-auth/plugins";
-import { requireRunMutationCtx } from "@convex-dev/better-auth/utils";
-import { betterAuth } from "better-auth/minimal";
-import { anonymous, magicLink } from "better-auth/plugins";
-import { v } from "convex/values";
+  GenericDoc,
+  convexAuth,
+  createAccount,
+  getAuthUserId,
+  retrieveAccount,
+  signInViaProvider,
+} from "@convex-dev/auth/server";
+import { ConvexError, v } from "convex/values";
+import { z } from "zod";
 
-import { components, internal } from "./_generated/api";
-import { DataModel } from "./_generated/dataModel";
-import { internalMutation, mutation, query } from "./_generated/server";
-import authConfig from "./auth.config";
+import { internal } from "./_generated/api";
+import type { DataModel } from "./_generated/dataModel.d.ts";
+import { internalAction, internalMutation } from "./_generated/server";
 import { brevo } from "./email";
 
-const siteUrl = process.env.SITE_URL!;
+const emailProvider = Email({
+  authorize: undefined,
+  async sendVerificationRequest({ identifier: email, url }) {
+    await brevo.transactionalEmails.sendTransacEmail({
+      templateId: Number.parseInt(process.env.BREVO_LOGIN_TEMPLATE_ID!),
+      to: [{ email }],
+      params: { signInLink: url },
+    });
+  },
+});
 
-const authFunctions: AuthFunctions = internal.auth;
+function createRallyistProvider() {
+  const provider = "rallyist";
 
-// The component client has methods needed for integrating Convex with Better Auth,
-// as well as helper methods for general use.
-export const authComponent = createClient<DataModel>(components.betterAuth, {
-  authFunctions,
-  triggers: {
-    user: {
-      onCreate: async (ctx, doc) => {
-        await ctx.db.insert("userInfo", {
-          userId: doc._id,
-          role: "user",
-          language: "en",
-          emailConsent: false,
+  const options = z.discriminatedUnion("flow", [
+    z.object({
+      flow: z.literal("signUp"),
+      email: z.string().email(),
+      name: z.string().optional(),
+      language: z.string().default("en"),
+      emailConsent: z.boolean().default(false),
+    }),
+    z.object({
+      flow: z.literal("sendMagicLink"),
+      email: z.string().email(),
+    }),
+  ]);
+
+  return ConvexCredentials<DataModel>({
+    id: provider,
+    authorize: async (suppliedParams, ctx) => {
+      const { error, data: params } = options.safeParse(suppliedParams);
+      if (error) {
+        throw new ConvexError(error.message);
+      }
+      let user: GenericDoc<DataModel, "users">;
+      if (params.flow === "signUp") {
+        const isAlreadyRegistered = await retrieveAccount(ctx, {
+          provider,
+          account: { id: params.email },
+        }).then(
+          () => true,
+          () => false,
+        );
+        if (isAlreadyRegistered) {
+          throw new ConvexError("Email already used");
+        }
+
+        const userId = await getAuthUserId(ctx);
+        if (userId) {
+          console.info("Migrating anonymous user", userId);
+          await ctx.runMutation(internal.auth.prepareAnonymousUserMigration, {
+            email: params.email,
+            params: {
+              name: params.name,
+              emailConsent: params.emailConsent,
+              language: params.language,
+            },
+          });
+        }
+
+        const created = await createAccount<DataModel>(ctx, {
+          provider,
+          account: { id: params.email },
+          profile: {
+            name: params.name,
+            email: params.email,
+            emailConsent: params.emailConsent,
+            language: params.language,
+            role: "user",
+          },
+          shouldLinkViaEmail: false,
+          shouldLinkViaPhone: false,
         });
-      },
+        ({ user } = created);
+      } else if (params.flow === "sendMagicLink") {
+        const { account } = await retrieveAccount(ctx, {
+          provider,
+          account: { id: params.email },
+        });
+        return await signInViaProvider(ctx, emailProvider, {
+          accountId: account._id,
+          params,
+        });
+      } else {
+        throw new Error("Unknown flow");
+      }
+      return { userId: user._id };
     },
-  },
-});
-
-export const createAuth = (ctx: GenericCtx<DataModel>) => {
-  return betterAuth({
-    trustedOrigins: ["localhost:5173", siteUrl],
-    rateLimit: {
-      enabled: false,
-    },
-    baseURL: process.env.CONVEX_SITE_URL,
-    database: authComponent.adapter(ctx),
-    secret: process.env.BETTER_AUTH_SECRET,
-    emailAndPassword: {
-      enabled: true,
-      disableSignUp: false,
-    },
-    plugins: [
-      crossDomain({ siteUrl }),
-      convex({ authConfig }),
-      anonymous({
-        onLinkAccount: async ({ anonymousUser, newUser }) => {
-          console.log(anonymousUser, newUser);
-          const mutationCtx = requireRunMutationCtx(ctx);
-          await mutationCtx.runMutation(internal.auth.migrateAnonymousUser, {
-            anonymousUid: anonymousUser.user.id,
-            newUid: newUser.user.id,
-          });
-        },
-      }),
-      magicLink({
-        async sendMagicLink({ email, url }) {
-          await brevo.transactionalEmails.sendTransacEmail({
-            templateId: Number.parseInt(process.env.BREVO_LOGIN_TEMPLATE_ID!),
-            to: [{ email }],
-            params: { signInLink: url },
-          });
-        },
-      }),
-    ],
   });
-};
+}
 
-// Example function for getting the current user
-// Feel free to edit, omit, etc.
-export const getCurrentUser = query({
-  args: {},
-  handler: async (ctx) => {
-    const user = authComponent.getAuthUser(ctx).then(
-      (u) => u,
-      () => null,
-    );
+export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
+  providers: [
+    emailProvider,
+    createRallyistProvider(),
+    Password({
+      profile(params) {
+        if (params.flow === "signUp") {
+          throw new ConvexError("Password sign-ups are not allowed");
+        }
+        return {
+          email: params.email as string,
+        };
+      },
+    }),
+    Anonymous({
+      profile(params) {
+        return {
+          language: params.language ?? "en",
+          role: "user",
+          isAnonymous: true,
+        };
+      },
+    }),
+  ],
+});
 
-    // TODO : get profile
+export const prepareAnonymousUserMigration = internalMutation({
+  args: {
+    email: v.string(),
+    params: v.object({
+      emailConsent: v.boolean(),
+      name: v.optional(v.string()),
+      language: v.string(),
+    }),
+  },
+  handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      throw new ConvexError("Unauthenticated");
+    }
 
-    return user;
+    // Assert this account is anon
+    const user = await ctx.db.get("users", userId);
+    if (!user?.isAnonymous) {
+      throw new ConvexError("Cannot migrate a non-anon user");
+    }
+
+    await ctx.db.insert("authAccounts", {
+      providerAccountId: args.email,
+      provider: "rallyist",
+      userId,
+    });
+    await ctx.db.patch("users", userId, {
+      ...args.params,
+      isAnonymous: false,
+      role: "user",
+    });
   },
 });
 
-export const migrateAnonymousUser = internalMutation({
-  args: { anonymousUid: v.string(), newUid: v.string() },
-  handler: async (ctx, { anonymousUid, newUid }) => {
-    const anonymousUserInfo = await ctx.db
-      .query("userInfo")
-      .withIndex("by_user_id", (q) => q.eq("userId", anonymousUid))
-      .unique();
-    const newUserInfo = await ctx.db
-      .query("userInfo")
-      .withIndex("by_user_id", (q) => q.eq("userId", newUid))
-      .unique();
-
-    console.log(anonymousUserInfo, newUserInfo);
+export const createUserWithEmailPassword = internalAction({
+  args: {
+    email: v.string(),
+    password: v.string(),
+    role: v.union(v.literal("standist"), v.literal("staff")),
+    name: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await createAccount<DataModel>(ctx, {
+      provider: "password",
+      account: { id: args.email, secret: args.password },
+      profile: {
+        name: args.name,
+        email: args.email,
+        role: args.role,
+      },
+      shouldLinkViaEmail: false,
+      shouldLinkViaPhone: false,
+    });
+    return true;
   },
 });
-
-export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();

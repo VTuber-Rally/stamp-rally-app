@@ -1,4 +1,4 @@
-import { ConvexBetterAuthProvider } from "@convex-dev/better-auth/react";
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "@tanstack/react-router";
@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 
 import { QRDrawerContextProvider } from "@/contexts/QRDrawerContextProvider.tsx";
 import { KEY_VALUES } from "@/lib/KeyValues.ts";
-import { authClient } from "@/lib/betterauth.ts";
 import { convex } from "@/lib/convexClient.ts";
 import { useKeyValue } from "@/lib/hooks/useKeyValue";
 import { useRegisterAppSW } from "@/lib/hooks/useRegisterAppSW.tsx";
@@ -59,14 +58,14 @@ const AppWrapped = () => {
 export function App() {
   return (
     <StrictMode>
-      <ConvexBetterAuthProvider client={convex} authClient={authClient}>
+      <ConvexAuthProvider client={convex}>
         <QueryClientProvider client={queryClient}>
           <QRDrawerContextProvider>
             <AppWrapped />
             <ReactQueryDevtools initialIsOpen={false} />
           </QRDrawerContextProvider>
         </QueryClientProvider>
-      </ConvexBetterAuthProvider>
+      </ConvexAuthProvider>
     </StrictMode>
   );
 }
