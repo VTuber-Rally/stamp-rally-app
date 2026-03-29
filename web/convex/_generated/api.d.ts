@@ -10,7 +10,10 @@
 
 import type * as auth from "../auth.js";
 import type * as email from "../email.js";
+import type * as fcm from "../fcm.js";
 import type * as http from "../http.js";
+import type * as notifications from "../notifications.js";
+import type * as users from "../users.js";
 
 import type {
   ApiFromModules,
@@ -21,7 +24,10 @@ import type {
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   email: typeof email;
+  fcm: typeof fcm;
   http: typeof http;
+  notifications: typeof notifications;
+  users: typeof users;
 }>;
 
 /**

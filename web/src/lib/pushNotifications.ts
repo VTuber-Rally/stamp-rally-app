@@ -6,6 +6,8 @@ import {
   rallyFinishersEnTopicId,
   rallyFinishersFrTopicId,
 } from "@/lib/consts.ts";
+import { convexPublicApi } from "@/lib/convex.ts";
+import { convex } from "@/lib/convexClient.ts";
 import { registerToFCM } from "@/lib/fcm.ts";
 import { toast } from "@/lib/hooks/useToast.ts";
 import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
@@ -43,19 +45,22 @@ export const enablePushNotifications = async () => {
     return false;
   }
   try {
-    await registerToFCM();
+    const token = await registerToFCM();
     window.localStorage.setItem(
       LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
       "true",
     );
     const activeLanguage = i18next.resolvedLanguage;
-    await subscribeToTopic(
-      activeLanguage?.includes("fr")
-        ? rallyFinishersFrTopicId
-        : rallyFinishersEnTopicId,
+    await convex.action(
+      convexPublicApi.notifications.subscribeToNotifications,
+      {
+        language: activeLanguage?.includes("fr") ? "fr" : "en",
+        token,
+      },
     );
     return true;
   } catch (error) {
+    console.error(error);
     captureException(error);
     window.localStorage.setItem(
       LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
@@ -71,13 +76,26 @@ export const enablePushNotifications = async () => {
 
 export const disablePushNotifications = async () => {
   try {
-    await unregisterPushTarget();
+    const token = window.localStorage.getItem(
+      LOCAL_STORAGE_KEYS.FCM_REGISTRATION_TOKEN,
+    );
+    if (!token) {
+      // User never registered successfully for notifications
+      return true;
+    }
+    await convex.action(
+      convexPublicApi.notifications.unsubscribeFromNotifications,
+      {
+        token,
+      },
+    );
     window.localStorage.setItem(
       LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,
       "false",
     );
     return true;
   } catch (error) {
+    console.error(error);
     captureException(error);
     window.localStorage.setItem(
       LOCAL_STORAGE_KEYS.PUSH_NOTIFICATIONS_CONSENT,

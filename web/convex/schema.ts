@@ -97,11 +97,6 @@ export default defineSchema({
     timestamp: v.number(),
   }),
 
-  // User
-  userInfo: defineTable({
-    userId,
-  }).index("by_user_id", ["userId"]),
-
   users: defineTable({
     name: v.optional(v.string()),
     image: v.optional(v.string()),
@@ -110,12 +105,19 @@ export default defineSchema({
     phone: v.optional(v.string()),
     phoneVerificationTime: v.optional(v.number()),
     isAnonymous: v.optional(v.boolean()),
+    // other "users" fields...
     role: v.optional(
       v.union(v.literal("user"), v.literal("standist"), v.literal("staff")),
     ),
     boothId: v.optional(v.id("booths")),
     language: v.optional(v.string()),
     emailConsent: v.optional(v.boolean()),
-    // other "users" fields...
   }).index("email", ["email"]),
+
+  pushTargets: defineTable({
+    fcmToken: v.string(),
+    topic: v.union(v.literal("fr"), v.literal("en")),
+  })
+    .index("by_fcm_token", ["fcmToken"])
+    .index("by_fcm_token_and_topic", ["fcmToken", "topic"]),
 });

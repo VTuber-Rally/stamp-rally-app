@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-import { registerPushTarget } from "@/lib/appwrite.ts";
 import { firebaseConfig, firebaseVapidPublicKey, isDev } from "@/lib/consts.ts";
+import { convexPublicApi } from "@/lib/convex.ts";
+import { convex } from "@/lib/convexClient.ts";
 import { toast } from "@/lib/hooks/useToast.ts";
+import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
 
 const firebaseApp = initializeApp(firebaseConfig);
 
@@ -23,7 +25,7 @@ export const registerToFCM = async () => {
   });
 
   if (isDev) {
-    console.log("FCM registration token:", token);
+    console.info("FCM registration token:", token);
   }
 
   onMessage(messaging, (payload) => {
@@ -33,5 +35,18 @@ export const registerToFCM = async () => {
     });
   });
 
-  await registerPushTarget(token).catch(console.error);
+  const previousToken = window.localStorage.getItem(
+    LOCAL_STORAGE_KEYS.FCM_REGISTRATION_TOKEN,
+  );
+  if (previousToken && previousToken !== token) {
+    void convex.action(
+      convexPublicApi.notifications.unsubscribeFromNotifications,
+      {
+        token: previousToken,
+      },
+    );
+  }
+
+  window.localStorage.setItem(LOCAL_STORAGE_KEYS.FCM_REGISTRATION_TOKEN, token);
+  return token;
 };

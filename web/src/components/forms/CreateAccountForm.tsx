@@ -1,9 +1,10 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useAuthActions } from "@convex-dev/auth/react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@/components/inputs/Checkbox.tsx";
+import { Checkbox, RHFCheckbox } from "@/components/inputs/Checkbox.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
-import { signUpWithEmail, useCurrentUser } from "@/lib/betterauth";
+import { registerWithEmail } from "@/lib/auth.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 
 type EmailNameFormType = {
@@ -13,29 +14,30 @@ type EmailNameFormType = {
 };
 
 export const CreateAccountForm = () => {
-  const user = useCurrentUser();
+  const { signIn } = useAuthActions();
   const { t } = useTranslation();
   const { toast } = useToast();
 
   const {
     register,
+    control,
     formState: { errors },
     handleSubmit,
-  } = useForm<EmailNameFormType>();
+  } = useForm<EmailNameFormType>({
+    defaultValues: {
+      emailConsent: false,
+    },
+  });
 
   const onSubmit: SubmitHandler<EmailNameFormType> = async (data) => {
     try {
-      const { data: response, error } = await signUpWithEmail(
-        data.email,
-        data.name,
+      console.log(data);
+      await signIn(
+        ...registerWithEmail(data.email, {
+          name: data.name,
+          emailConsent: data.emailConsent,
+        }),
       );
-      if (error) {
-        // TODO: customize by error (email already used, etc.)
-        toast({
-          title: t("error"),
-          description: t("errorCreatingAccount"),
-        });
-      }
     } catch {
       toast({
         title: t("error"),
@@ -66,11 +68,17 @@ export const CreateAccountForm = () => {
             name={"email"}
             placeholder={t("email")}
             register={register}
-            errors={errors["name"]}
+            errors={errors["email"]}
           />
 
           <div className={"flex items-center"}>
-            <Checkbox {...register("emailConsent")} id={"emailConsent"} />
+            <Controller
+              control={control}
+              name="emailConsent"
+              render={({ field }) => (
+                <RHFCheckbox {...field} id={"emailConsent"} />
+              )}
+            />
             <label className={"ml-2"} htmlFor={"emailConsent"}>
               {t("consent.email")}
             </label>

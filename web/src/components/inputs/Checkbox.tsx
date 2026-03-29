@@ -3,11 +3,12 @@
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
 import * as React from "react";
+import { ControllerRenderProps } from "react-hook-form";
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ ...props }, ref) => (
+>((props, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
     className={
@@ -24,4 +25,16 @@ const Checkbox = React.forwardRef<
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
-export { Checkbox };
+const RHFCheckbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  ControllerRenderProps & { id?: string }
+>(({ onChange, value, ...props }, ref) => (
+  <Checkbox
+    ref={ref}
+    onCheckedChange={onChange}
+    checked={value as CheckboxPrimitive.CheckedState}
+    {...props}
+  ></Checkbox>
+));
+
+export { Checkbox, RHFCheckbox };
