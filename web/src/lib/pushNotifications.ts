@@ -1,11 +1,6 @@
 import { captureException } from "@sentry/react";
 import i18next, { t } from "i18next";
 
-import { subscribeToTopic, unregisterPushTarget } from "@/lib/appwrite.ts";
-import {
-  rallyFinishersEnTopicId,
-  rallyFinishersFrTopicId,
-} from "@/lib/consts.ts";
 import { convexPublicApi } from "@/lib/convex.ts";
 import { convex } from "@/lib/convexClient.ts";
 import { registerToFCM } from "@/lib/fcm.ts";

@@ -1,9 +1,10 @@
+import { useAuthActions } from "@convex-dev/auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { captureException } from "@sentry/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useMutation } from "convex/react";
+import { Authenticated, useMutation } from "convex/react";
 import { useCallback, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
@@ -17,8 +18,6 @@ import InputField from "@/components/inputs/InputField";
 import { Header } from "@/components/layout/Header.tsx";
 import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
 import { AnalyticsOptOut } from "@/components/routes/AnalyticsOptOut.tsx";
-import { getPrefs, setPref } from "@/lib/appwrite.ts";
-import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
 import { useCurrentUser } from "@/lib/auth.ts";
 import {
   AuthUserLoading,
@@ -26,10 +25,7 @@ import {
   UnauthenticatedOrAnonymous,
 } from "@/lib/authHelpers.tsx";
 import { User, convexPublicApi, useDLEMutation } from "@/lib/convex.ts";
-import { useLogout } from "@/lib/hooks/useLogout.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { useUpdateUsername } from "@/lib/hooks/useUpdateUsername";
-import { LOCAL_STORAGE_KEYS } from "@/lib/localStorageKeys.ts";
 import {
   arePushNotificationsEnabled,
   disablePushNotifications,
@@ -44,6 +40,7 @@ function SettingsPage() {
   const user = useCurrentUser();
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
+  const { signOut } = useAuthActions();
 
   const { isLoading, mutate: updateMyProfile } = useDLEMutation(
     useMutation(convexPublicApi.users.updateMyProfile),
@@ -94,6 +91,10 @@ function SettingsPage() {
       }),
     ),
   });
+
+  const i18nLogoutButtonKey = !user?.isAnonymous
+    ? "loggedLogoutButton"
+    : "anonymousLogoutButton";
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = (data) => {
     updateMyProfile(data).then(
@@ -181,16 +182,6 @@ function SettingsPage() {
               {t("standistSpace")}
             </ButtonLink>
           )}
-
-          {/*<ButtonLink
-              type={"button"}
-              size={"small"}
-              bg={"dangerous"}
-              onClick={() => mutate()}
-              className={"mt-4 text-lg"}
-            >
-              {t(i18nKeyButton)}
-            </ButtonLink>*/}
         </AuthenticatedNonAnonymously>
         <UnauthenticatedOrAnonymous>
           <CreateAccountForm />
@@ -199,6 +190,17 @@ function SettingsPage() {
             {t("loginThere")}
           </ButtonLink>
         </UnauthenticatedOrAnonymous>
+        <Authenticated>
+          <ButtonLink
+            type={"button"}
+            size={"small"}
+            bg={"dangerous"}
+            onClick={() => signOut()}
+            className={"mt-4 text-lg"}
+          >
+            {t(i18nLogoutButtonKey)}
+          </ButtonLink>
+        </Authenticated>
       </ShadowBox>
 
       <ShadowBox>
