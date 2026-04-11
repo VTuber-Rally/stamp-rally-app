@@ -2,7 +2,7 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { captureException } from "@sentry/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Authenticated, useMutation } from "convex/react";
+import { useMutation } from "convex/react";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -182,15 +182,7 @@ function SettingsPage() {
               {t("standistSpace")}
             </ButtonLink>
           )}
-        </AuthenticatedNonAnonymously>
-        <UnauthenticatedOrAnonymous>
-          <CreateAccountForm />
-          <p className="mt-4">{t("alreadyHaveAccount")}</p>
-          <ButtonLink size={"small"} href="/login" className="mt-2">
-            {t("loginThere")}
-          </ButtonLink>
-        </UnauthenticatedOrAnonymous>
-        <Authenticated>
+
           <ButtonLink
             type={"button"}
             size={"small"}
@@ -200,7 +192,14 @@ function SettingsPage() {
           >
             {t(i18nLogoutButtonKey)}
           </ButtonLink>
-        </Authenticated>
+        </AuthenticatedNonAnonymously>
+        <UnauthenticatedOrAnonymous>
+          <CreateAccountForm />
+          <p className="mt-4">{t("alreadyHaveAccount")}</p>
+          <ButtonLink size={"small"} href="/login" className="mt-2">
+            {t("loginThere")}
+          </ButtonLink>
+        </UnauthenticatedOrAnonymous>
       </ShadowBox>
 
       <ShadowBox>

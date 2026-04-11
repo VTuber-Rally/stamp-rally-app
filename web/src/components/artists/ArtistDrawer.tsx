@@ -11,7 +11,7 @@ export const ArtistDrawer: FC<{
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
-        {activeStandistId && <ArtistPresentation artistId={activeStandistId} />}
+        {activeStandistId && <ArtistPresentation boothId={activeStandistId} />}
       </DrawerContent>
     </Drawer>
   );

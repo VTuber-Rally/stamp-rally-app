@@ -12,7 +12,7 @@ import { FC, MouseEventHandler, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useQRDrawerContext } from "@/contexts/useQRDrawerContext.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
+import { useCurrentUser } from "@/lib/auth.ts";
 
 const Navbar = ({ children }: { children: ReactNode }) => {
   return (
@@ -120,13 +120,12 @@ export const RallyistNavbar = () => {
 };
 
 export const StandistsNavbar = () => {
-  const { user } = useUser();
+  const user = useCurrentUser();
   const { t } = useTranslation();
 
-  const isLoggedIn = !!user;
-  const isStandist = user?.labels.includes("standist");
+  const isStandist = user?.role === "standist" || user?.role === "staff";
 
-  const disabled = !isLoggedIn || !isStandist;
+  const disabled = !isStandist;
 
   return (
     <Navbar>
@@ -152,14 +151,13 @@ export const StandistsNavbar = () => {
 };
 
 export const StaffNavbar = () => {
-  const { user } = useUser();
+  const user = useCurrentUser();
   const { t } = useTranslation();
   const { location } = useRouterState();
 
-  const isLoggedIn = !!user;
-  const isStaff = user?.labels.includes("staff");
+  const isStandist = user?.role === "standist" || user?.role === "staff";
 
-  const disabled = !isLoggedIn || !isStaff;
+  const disabled = !isStandist;
 
   const hide = location.pathname.startsWith("/staff/reward/");
 

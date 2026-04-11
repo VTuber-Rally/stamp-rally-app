@@ -1,15 +1,16 @@
-import { ReactMutation, useMutation } from "convex/react";
+import { ReactMutation } from "convex/react";
 import type { FunctionReference, OptionalRestArgs } from "convex/server";
 import { useState } from "react";
-import type { DataModel as ConvexDataModel } from "~/_generated/dataModel";
-
-export { api as convexPublicApi } from "~/_generated/api";
+import { api } from "~/_generated/api";
+import type { DataModel as ConvexDataModel, Id } from "~/_generated/dataModel";
 
 export type User = ConvexDataModel["users"]["document"];
+export type Booth = ConvexDataModel["booths"]["document"];
+export type PublicBooth = (typeof api.booths.listBooths._returnType)[number];
+export type { Id as ConvexId };
+export { api as convexPublicApi };
 
 export { type ConvexDataModel };
-
-type Mutation = Parameters<typeof useMutation>[0];
 
 export const useDLEMutation = <Mutation extends FunctionReference<"mutation">>(
   mutateFn: ReactMutation<Mutation>,

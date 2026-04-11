@@ -9,6 +9,7 @@
  */
 
 import type * as auth from "../auth.js";
+import type * as booths from "../booths.js";
 import type * as email from "../email.js";
 import type * as fcm from "../fcm.js";
 import type * as http from "../http.js";
@@ -23,6 +24,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
+  booths: typeof booths;
   email: typeof email;
   fcm: typeof fcm;
   http: typeof http;

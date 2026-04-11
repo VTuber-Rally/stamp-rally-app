@@ -2,8 +2,6 @@ import { ArrowUpRightFromSquare } from "lucide-react";
 import { useState } from "react";
 import QRCode from "react-qr-code";
 
-import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
-
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Switch } from "@/components/inputs/Switch.tsx";
 import { Header } from "@/components/layout/Header.tsx";
@@ -16,11 +14,12 @@ import {
   TableRow,
 } from "@/components/layout/Table";
 import { QRCodeSettings } from "@/components/routes/staff/QRCodeGen/QRCodeSettings.tsx";
+import { PublicBooth } from "@/lib/convex.ts";
+import { useBooths } from "@/lib/hooks/useBooths.ts";
 import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
-import { useStandists } from "@/lib/hooks/useStandists.ts";
 
 function StampLinksArtistsList() {
-  const { data: standistsList } = useStandists();
+  const { data: booths } = useBooths();
 
   const [perpetual, setPerpetual] = useState(false);
   const [showQR, setShowQR] = useState(false);
@@ -42,7 +41,7 @@ function StampLinksArtistsList() {
         <Switch id="show-qr" checked={showQR} onCheckedChange={setShowQR} />
         <label htmlFor="show-qr">Show QR codes</label>
       </div>
-      {standistsList && (
+      {booths && (
         <Table className={"gap-4 overflow-x-scroll"}>
           <TableHeader>
             <TableRow>
@@ -51,10 +50,10 @@ function StampLinksArtistsList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {standistsList.map((doc) => (
+            {booths.map((booth) => (
               <StampLinksArtistRow
-                key={doc.userId}
-                doc={doc}
+                key={booth._id}
+                booth={booth}
                 expiry={expiryDate}
                 showQR={showQR}
               />
@@ -67,21 +66,21 @@ function StampLinksArtistsList() {
 }
 
 const StampLinksArtistRow = ({
-  doc,
+  booth,
   expiry,
   showQR,
 }: {
-  doc: Standist;
+  booth: PublicBooth;
   expiry: Date | null;
   showQR: boolean;
 }) => {
-  const { data: qrValue } = useStaffQRCode(doc.userId, false, expiry);
+  const { data: qrValue } = useStaffQRCode(booth.userId, false, expiry);
 
   if (!qrValue?.codeData) {
     return (
-      <TableRow key={doc.userId}>
+      <TableRow key={booth.userId}>
         <TableCell>
-          <p>{doc.name}</p>
+          <p>{booth.name}</p>
         </TableCell>
         <TableCell>
           <div className="mt-2 h-12 w-48 animate-pulse rounded-2xl bg-primary/50"></div>
@@ -91,14 +90,14 @@ const StampLinksArtistRow = ({
   }
 
   return (
-    <TableRow key={doc.userId}>
+    <TableRow key={booth.userId}>
       <TableCell>
-        <p>{doc.name}</p>
+        <p>{booth.name}</p>
       </TableCell>
       <TableCell>
         {showQR ? (
           <>
-            <p className={"text-center text-lg font-bold"}>{doc.name}</p>
+            <p className={"text-center text-lg font-bold"}>{booth.name}</p>
             <QRCode
               className="rounded-lg border-4 border-tertiary p-2 dark:bg-white"
               value={qrValue.codeData}

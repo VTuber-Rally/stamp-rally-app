@@ -1,9 +1,11 @@
+import { useAuthActions } from "@convex-dev/auth/react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { Header } from "@/components/layout/Header.tsx";
-import { useUser } from "@/lib/hooks/useUser.ts";
+import { useCurrentUser } from "@/lib/auth.ts";
 
 type StandistsHomeProps = {
   headerKey: string;
@@ -16,7 +18,8 @@ const StandistsHome: FC<StandistsHomeProps> = ({
   loginTo,
   children,
 }) => {
-  const { user, logout } = useUser();
+  const { signOut } = useAuthActions();
+  const user = useCurrentUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -32,19 +35,16 @@ const StandistsHome: FC<StandistsHomeProps> = ({
 
             {children}
 
-            <button
-              className="rounded-xl bg-secondary p-2 text-black"
-              type="button"
-              onClick={() => logout()}
-            >
+            <ButtonLink size="small" type="button" onClick={() => signOut()}>
               {t("logout")}
-            </button>
+            </ButtonLink>
           </div>
         ) : (
           <div className={"flex flex-col items-center"}>
             <h2 className={"text-2xl"}>{t("notLoggedIn")}</h2>
-            <button
-              className="mt-2 rounded-xl bg-tertiary p-3 text-2xl text-black"
+            <ButtonLink
+              size="small"
+              bg="tertiary"
               type="button"
               onClick={() =>
                 navigate({
@@ -53,7 +53,7 @@ const StandistsHome: FC<StandistsHomeProps> = ({
               }
             >
               {t("login")}
-            </button>
+            </ButtonLink>
           </div>
         )}
         <div>

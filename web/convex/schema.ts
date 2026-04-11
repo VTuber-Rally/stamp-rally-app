@@ -16,14 +16,13 @@ const polygonGeometry = v.array(v.array(v.array(v.float64())));
 const userId = v.id("users");
 
 export default defineSchema({
-  ...authTables,
   booths: defineTable({
     name: v.string(),
     description: v.string(),
     hall: v.string(),
     boothNumber: v.string(),
     geometry: polygonGeometry,
-    image: v.string(),
+    image: v.id("_storage"),
     publicKey: jsonWebKey,
     privateKey: jsonWebKey,
     links: v.record(v.string(), v.string()),
@@ -41,6 +40,7 @@ export default defineSchema({
     signature: v.string(),
     submission: v.id("submission"),
   }).index("by_submisssion", ["submission"]),
+
   submissions: defineTable({
     redeemed: v.boolean(),
     submittedAt: v.number(),
@@ -69,6 +69,7 @@ export default defineSchema({
     image: v.id("_storage"),
     booth: v.id("booths"),
   }),
+
   groups: defineTable({
     indexNumber: v.number(),
     coefficient: v.number(),
@@ -78,12 +79,14 @@ export default defineSchema({
     holographicCardsPerDesign: v.number(),
     redistributed: v.boolean(),
   }),
+
   cards: defineTable({
     cardDesign: v.id("cardDesigns"),
     isAvailable: v.boolean(),
     type: v.union(v.literal("classic"), v.literal("holographic")),
     group: v.id("groups"),
   }).index("by_group", ["group"]),
+
   cardHistory: defineTable({
     card: v.id("cards"),
     submission: v.optional(v.id("submission")),
@@ -96,6 +99,8 @@ export default defineSchema({
     ),
     timestamp: v.number(),
   }),
+
+  ...authTables,
 
   users: defineTable({
     name: v.optional(v.string()),

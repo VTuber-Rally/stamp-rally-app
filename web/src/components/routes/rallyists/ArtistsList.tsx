@@ -10,7 +10,7 @@ import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";
 import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
-import { useStandists } from "@/lib/hooks/useStandists.ts";
+import { useBooths } from "@/lib/hooks/useBooths.ts";
 
 type ArtistsListProps = {
   stamps: StampWithId[];
@@ -18,7 +18,7 @@ type ArtistsListProps = {
 
 const ArtistsList = ({ stamps }: ArtistsListProps) => {
   const { t } = useTranslation();
-  const { data: standistsList } = useStandists();
+  const { data: booths } = useBooths();
   const [artistDrawerOpen, setArtistDrawerOpen] = useState(false);
   const [activeStandistId, setActiveStandistId] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -48,23 +48,22 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
           </div>
         </Header>
         <RallyProgressBar hideMarker />
-        {standistsList && (
+        {booths && (
           <div className={"grid grid-cols-2 gap-4 overflow-x-clip"}>
-            {standistsList.map((doc) => {
+            {booths.map((booth) => {
               const isStamped =
-                stamps.findIndex((stamp) => stamp.standistId === doc.userId) !==
+                stamps.findIndex((stamp) => stamp.standistId === booth._id) !==
                 -1;
               return (
                 <button
-                  key={doc.userId}
+                  key={booth._id}
                   className={clsx(
                     "flex flex-col items-center gap-2",
                     !isStamped && "opacity-45",
                   )}
                   onClick={() => {
                     setArtistDrawerOpen(true);
-
-                    setActiveStandistId(doc.userId);
+                    setActiveStandistId(booth._id);
                   }}
                 >
                   <Suspense
@@ -72,13 +71,13 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
                       <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
                     }
                   >
-                    <ArtistImage userId={doc.userId} name={doc.name} />
+                    <ArtistImage imageUrl={booth.imageUrl} name={booth.name} />
                   </Suspense>
 
                   <div className="relative w-40 rounded-xl bg-secondary py-1 text-center">
-                    <div>{doc.name}</div>
+                    <div>{booth.name}</div>
                     <div>
-                      H{doc.hall} {doc.boothNumber}
+                      H{booth.hall} {booth.boothNumber}
                     </div>
                     {isStamped && (
                       <div className="absolute -top-1 -right-1 rotate-12 drop-shadow-sm">

@@ -1,3 +1,4 @@
 storybook-static
 
-.env.local
+.env.*
+!.env.sample

@@ -13,7 +13,7 @@ const meta = {
   component: ArtistPresentation,
   decorators: [TanStackQueryDecorator, RouterDecorator, DialogDecorator],
   args: {
-    artistId: "66873ba100357c59f3bf",
+    boothId: "66873ba100357c59f3bf",
   },
 } satisfies Meta<typeof ArtistPresentation>;
 

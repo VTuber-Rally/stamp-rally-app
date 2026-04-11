@@ -4,24 +4,25 @@ import {
   premiumRewardMinStampsRequirement,
   standardRewardMinStampsRequirement,
 } from "@/lib/consts.ts";
+import { ConvexId } from "@/lib/convex.ts";
+import { useBooths } from "@/lib/hooks/useBooths.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import { useStandists } from "@/lib/hooks/useStandists.ts";
 
 export const useRewardAvailability = () => {
   const { data: stamps } = useCollectedStamps();
-  const { data: standists } = useStandists();
+  const { data: booths } = useBooths();
 
-  const minorHallStandistsIds = useMemo(() => {
-    const minorHallStandists = standists.filter((standist) => {
+  const minorHallBoothsIds = useMemo<Set<ConvexId<"booths">>>(() => {
+    if (!booths) return new Set();
+    const minorHallBooths = booths.filter((standist) => {
       return standist.hall === "5A";
     });
-    return new Set(minorHallStandists.map((standist) => standist.userId));
-  }, [standists]);
+    return new Set(minorHallBooths.map((booth) => booth._id));
+  }, [booths]);
 
   const stampCount = stamps?.length ?? 0;
   const isAnyStampFromMinorHall =
-    stamps?.some((stamp) => minorHallStandistsIds.has(stamp.standistId)) ??
-    false;
+    stamps?.some((stamp) => minorHallBoothsIds.has(stamp.standistId)) ?? false;
   const isStandardRewardObtainable =
     isAnyStampFromMinorHall && stampCount >= standardRewardMinStampsRequirement;
   const isPremiumRewardObtainable =
