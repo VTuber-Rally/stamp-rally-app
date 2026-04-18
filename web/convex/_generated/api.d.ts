@@ -15,6 +15,8 @@ import type * as fcm from "../fcm.js";
 import type * as http from "../http.js";
 import type * as notifications from "../notifications.js";
 import type * as users from "../users.js";
+import type * as utils from "../utils.js";
+import type * as validators from "../validators.js";
 
 import type {
   ApiFromModules,
@@ -30,6 +32,8 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   notifications: typeof notifications;
   users: typeof users;
+  utils: typeof utils;
+  validators: typeof validators;
 }>;
 
 /**

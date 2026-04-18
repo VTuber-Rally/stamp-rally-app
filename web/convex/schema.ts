@@ -2,16 +2,7 @@ import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
-const jsonWebKey = v.object({
-  crv: v.string(),
-  ext: v.boolean(),
-  key_ops: v.array(v.string()),
-  kty: v.string(),
-  x: v.string(),
-  y: v.string(),
-});
-
-const polygonGeometry = v.array(v.array(v.array(v.float64())));
+import { jsonWebKey, polygonGeometry } from "./validators.js";
 
 const userId = v.id("users");
 
