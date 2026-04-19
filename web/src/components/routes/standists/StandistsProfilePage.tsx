@@ -1,38 +1,41 @@
 import { captureException } from "@sentry/react";
+import { useMutation } from "convex/react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
-import { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
 
 import Loader from "@/components/Loader.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
 import { Header } from "@/components/layout/Header.tsx";
-import { useStandist } from "@/lib/hooks/useStandist.ts";
+import { useCurrentUser } from "@/lib/auth.ts";
+import { convexPublicApi, useDLEMutation } from "@/lib/convex.ts";
+import { useBooth } from "@/lib/hooks/useBooth.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { useUpdateStandistProfile } from "@/lib/hooks/useUpdateStandistProfile.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
 
-export type StandistsEditProfileForm = Pick<
-  Standist,
-  "description" | "twitch" | "twitter" | "instagram" | "website" | "name"
->;
+export type StandistsEditProfileForm = {
+  name: string;
+  description: string;
+  twitter?: string;
+  instagram?: string;
+  twitch?: string;
+  website?: string;
+};
 
 const StandistsProfilePage = () => {
   const { t } = useTranslation();
-  const { user } = useUser();
-  const { $id } = user || {};
-  const artist = useStandist($id);
+  const user = useCurrentUser();
+  const booth = useBooth(user?.boothId);
 
-  const { mutate: updateProfile, isPending } = useUpdateStandistProfile();
+  const updateBoothProfile = useMutation(convexPublicApi.booths.updateBoothProfile);
+  const { mutate: updateProfile, isLoading: isPending } = useDLEMutation(updateBoothProfile);
 
   const methods = useForm<StandistsEditProfileForm>({
     defaultValues: {
-      name: artist?.name,
-      description: artist?.description,
-      twitter: artist?.twitter,
-      instagram: artist?.instagram,
-      twitch: artist?.twitch,
-      website: artist?.website,
+      name: booth?.name,
+      description: booth?.description,
+      twitter: booth?.links.twitter,
+      instagram: booth?.links.instagram,
+      twitch: booth?.links.twitch,
+      website: booth?.links.website,
     },
   });
 
@@ -41,7 +44,7 @@ const StandistsProfilePage = () => {
 
   const { toast } = useToast();
 
-  if (!$id)
+  if (!user)
     return (
       <>
         <Header>{t("profile.title")}</Header>
@@ -52,7 +55,7 @@ const StandistsProfilePage = () => {
       </>
     );
 
-  if (!artist)
+  if (!booth)
     return (
       <>
         <Header>{t("profile.title")}</Header>
@@ -61,21 +64,19 @@ const StandistsProfilePage = () => {
     );
 
   const onSubmit = (data: StandistsEditProfileForm) => {
-    updateProfile(
-      { ...data, userId: $id },
-      {
-        onSuccess: () => {
-          toast({
-            title: t("profile.profileUpdated"),
-          });
-        },
-        onError: (error) => {
-          console.error(error);
-          captureException(error);
-          toast({
-            title: t("error"),
-          });
-        },
+    const { name, description, twitter, instagram, twitch, website } = data;
+    updateProfile({
+      name,
+      description,
+      links: { twitter, instagram, twitch, website },
+    }).then(
+      () => {
+        toast({ title: t("profile.profileUpdated") });
+      },
+      (error) => {
+        console.error(error);
+        captureException(error);
+        toast({ title: t("error") });
       },
     );
   };
