@@ -60,6 +60,11 @@ const firebaseConfig = {
 };
 
 const mapCenter = [2.518988, 48.970091] as [number, number];
+const jwkAlgorithm = { name: "ECDSA", namedCurve: "P-384" } as const;
+const signAlgorithm = {
+  name: "ECDSA",
+  hash: { name: "SHA-384" },
+} as const;
 
 export {
   buildId,
@@ -82,6 +87,8 @@ export {
   premiumRewardMinStampsRequirement,
   isDev,
   isProd,
+  jwkAlgorithm,
+  signAlgorithm,
   contestParticipantsCollectionId,
   registerContestParticipantFunctionId,
   sendNotificationFunctionId,
