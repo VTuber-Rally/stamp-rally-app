@@ -1,8 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-
-import { QUERY_KEYS } from "@/lib/QueryKeys";
-import { getArtistImage } from "@/lib/images";
-
 export const ArtistImage = ({
   imageUrl,
   name,

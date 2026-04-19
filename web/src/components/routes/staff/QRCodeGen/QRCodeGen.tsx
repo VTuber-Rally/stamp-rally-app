@@ -5,15 +5,15 @@ import QRCode from "react-qr-code";
 
 import { Header } from "@/components/layout/Header.tsx";
 import { QRCodeSettings } from "@/components/routes/staff/QRCodeGen/QRCodeSettings.tsx";
+import { ConvexId } from "@/lib/convex.ts";
+import { useBooth } from "@/lib/hooks/useBooth.ts";
 import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
-import { useStandists } from "@/lib/hooks/useStandists.ts";
 
-const QRCodeGenPage = ({ userId }: { userId: string }) => {
+const QRCodeGenPage = ({ boothId }: { boothId: ConvexId<"booths"> }) => {
   const { t } = useTranslation();
   const { t: tFR } = useTranslation("", { lng: "fr" });
   const { t: tEN } = useTranslation("", { lng: "en" });
-  const { data: standists } = useStandists();
-  const standist = standists.find((s) => s.userId === userId);
+  const booth = useBooth(boothId);
 
   const [perpetual, setPerpetual] = useState(false);
   const [expiryDate, setExpiryDate] = useState<Date | null>(null);
@@ -22,17 +22,17 @@ const QRCodeGenPage = ({ userId }: { userId: string }) => {
     isLoading,
     error,
     data: qrValue,
-  } = useStaffQRCode(userId, perpetual, expiryDate);
+  } = useStaffQRCode(boothId, perpetual, expiryDate);
 
   return (
     <div className={"flex flex-col items-center"}>
       <Header className="flex flex-col items-center gap-2">
         <span className="w-full break-words">
-          {tFR("stand", { name: standist?.name })}
+          {tFR("stand", { name: booth?.name })}
         </span>
         <hr className="w-1/2 border-black/30" />
         <span className="w-full break-words">
-          {tEN("stand", { name: standist?.name })}
+          {tEN("stand", { name: booth?.name })}
         </span>
       </Header>
       <div className="flex flex-col items-center justify-center gap-2">

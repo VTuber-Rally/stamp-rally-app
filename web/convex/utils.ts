@@ -7,6 +7,7 @@ import { internalAction, internalMutation } from "./_generated/server";
 import { jsonWebKey } from "./validators.js";
 
 export const getUploadUrl = internalMutation({
+  args: {},
   handler: async (ctx) => {
     return await ctx.storage.generateUploadUrl();
   },

@@ -4,15 +4,9 @@ import { createRoot } from "react-dom/client";
 
 import { App } from "@/App.tsx";
 import { isProd, sentryDSN, sentryEnvironment } from "@/lib/consts.ts";
-import { prefetchCardDesigns } from "@/lib/hooks/inventory/useCardDesigns.ts";
-// prefetch les standists
-import { prefetchStandists } from "@/lib/hooks/useStandists.ts";
 import "@/lib/i18n.ts";
 
 import "./index.css";
-
-void prefetchStandists();
-void prefetchCardDesigns();
 
 if (isProd) {
   Sentry.init({

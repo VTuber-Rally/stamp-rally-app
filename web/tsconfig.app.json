@@ -28,5 +28,5 @@
       "~/*": ["./convex/*"],
     },
   },
-  "include": ["src", ".storybook/*.ts"],
+  "include": ["src", "convex", ".storybook/*.ts"],
 }

@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react";
 import clsx from "clsx";
 import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -6,17 +5,13 @@ import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
-import { sendNotification } from "@/lib/appwrite.ts";
-import {
-  rallyFinishersEnTopicId,
-  rallyFinishersFrTopicId,
-} from "@/lib/consts.ts";
 import { useContestDrawWinner } from "@/lib/hooks/contest/useContestDrawWinner";
 import { useContestParticipants } from "@/lib/hooks/contest/useContestParticipants";
 import { useContestQRCode } from "@/lib/hooks/contest/useContestQRCode";
 import { useContestSecret } from "@/lib/hooks/contest/useContestSecret";
 import { useContestWinners } from "@/lib/hooks/contest/useContestWinners";
 import { useToast } from "@/lib/hooks/useToast.ts";
+import { sendPushNotification } from "@/lib/pushNotifications.ts";
 
 export default function Contest() {
   const {
@@ -61,26 +56,12 @@ export default function Contest() {
 
   const onSendNotificationClick = async () => {
     setIsSendingNotifications(true);
-    const [englishNotification, frenchNotification] = await Promise.allSettled([
-      sendNotification(
-        tEN("notifications.templates.contest.title"),
-        tEN("notifications.templates.contest.text"),
-        rallyFinishersEnTopicId,
-      ),
-      sendNotification(
-        tFR("notifications.templates.contest.title"),
-        tFR("notifications.templates.contest.text"),
-        rallyFinishersFrTopicId,
-      ),
-    ]);
-    if (englishNotification.status === "rejected") {
-      console.warn("Could not send English notification");
-      captureException(englishNotification.reason);
-    }
-    if (frenchNotification.status === "rejected") {
-      console.warn("Could not send French notification");
-      captureException(frenchNotification.reason);
-    }
+    await sendPushNotification(
+      tFR("notifications.templates.contest.title"),
+      tFR("notifications.templates.contest.text"),
+      tEN("notifications.templates.contest.title"),
+      tEN("notifications.templates.contest.text"),
+    );
     toast({
       title: t("notifications.notificationSentToast.title"),
       description: t("notifications.notificationSentToast.description"),

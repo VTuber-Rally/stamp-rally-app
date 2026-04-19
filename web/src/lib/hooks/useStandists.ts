@@ -77,8 +77,6 @@ const standistQuery = {
   queryFn: importStandists,
 };
 
-export const prefetchStandists = () => queryClient.prefetchQuery(standistQuery);
-
 export const useStandists = () => {
   const { isLoading, isError, data } = useQuery(standistQuery);
 

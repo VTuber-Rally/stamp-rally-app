@@ -26,6 +26,18 @@ export const arePushNotificationsEnabled = () => {
   );
 };
 
+export const sendPushNotification = async (
+  frTitle: string,
+  frMessage: string,
+  enTitle: string,
+  enMessage: string,
+) => {
+  await convex.action(convexPublicApi.fcm.sendNotification, {
+    frMessage: { title: frTitle, body: frMessage },
+    enMessage: { title: enTitle, body: enMessage },
+  });
+};
+
 export const enablePushNotifications = async () => {
   const permissionStatus = await Notification.requestPermission();
   if (permissionStatus !== "granted") {

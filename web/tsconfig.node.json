@@ -19,6 +19,7 @@
     "vitest.config.ts",
     "vitest.setup.crypto.ts",
     "vitest.setup.ts",
+    "convex/",
     "scripts/",
   ],
 }

@@ -330,9 +330,6 @@ importers:
       '@vtube-stamp-rally/linter-configs':
         specifier: workspace:*
         version: link:../linter-configs
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
       googleapis:
         specifier: ^171.4.0
         version: 171.4.0
@@ -9604,7 +9601,7 @@ snapshots:
       sirv: 3.0.1
       tinyglobby: 0.2.12
       tinyrainbow: 2.0.0
-      vitest: 3.0.8(@types/node@20.17.14)(@vitest/ui@3.0.8)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.1)(msw@2.7.0(@types/node@20.17.14)(typescript@5.8.3))(terser@5.37.0)(tsx@4.21.0)(yaml@2.7.0)
+      vitest: 3.0.8(@types/node@22.15.32)(@vitest/ui@3.0.8)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.1)(msw@2.7.0(@types/node@22.15.32)(typescript@5.8.3))(terser@5.37.0)(tsx@4.21.0)(yaml@2.7.0)
 
   '@vitest/utils@2.0.5':
     dependencies:
