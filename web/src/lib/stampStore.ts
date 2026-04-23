@@ -1,8 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { ConvexId } from "@/lib/convex.ts";
+
 export interface Stamp {
-  boothId: string;
+  boothId: ConvexId<"booths">;
   expiryTimestamp: number;
   scanTimestamp: number;
   signature: string;
@@ -12,12 +14,24 @@ export interface Stamp {
 interface StampStore {
   stamps: Stamp[];
   upsertStamp: (stamp: Stamp) => void;
+  submitAllStamps: () => void;
 }
 
 export const useStampStore = create<StampStore>()(
   persist(
     (set) => ({
       stamps: [],
+      submitAllStamps: () => {
+        set((state) => ({
+          stamps: state.stamps.map((stamp) => {
+            if (stamp.submitted) return stamp;
+            return {
+              ...stamp,
+              submitted: true,
+            };
+          }),
+        }));
+      },
       upsertStamp: (stamp) =>
         set((state) => {
           const alreadyExistingStampIndex = state.stamps.findIndex(

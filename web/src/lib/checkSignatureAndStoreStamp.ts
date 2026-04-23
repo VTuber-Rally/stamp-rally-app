@@ -1,18 +1,9 @@
-import { StampTuple } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-import { verifyData } from "@vtube-stamp-rally/shared-lib/signatures.ts";
-
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { jwkAlgorithm } from "@/lib/consts.ts";
+import { ConvexId } from "@/lib/convex.ts";
 import { IntegrityError } from "@/lib/errors.ts";
 import { getBooths } from "@/lib/hooks/useBooths.ts";
-import { queryClient } from "@/lib/queryClient.ts";
+import { verifyData } from "@/lib/jwkSignatures.ts";
 import { Stamp, useStampStore } from "@/lib/stampStore.ts";
-
-function invalidateStamps() {
-  queryClient.invalidateQueries({
-    queryKey: [QUERY_KEYS.STAMPS],
-  });
-}
+import { StampTuple } from "@/lib/stampTuple.ts";
 
 export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
   const [boothId, expiryTimestamp, signature] = stamp;
@@ -21,19 +12,11 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
 
   if (!booth) throw new Error("Standist not found");
 
-  const publicKey = await window.crypto.subtle.importKey(
-    "jwk",
-    booth.publicKey,
-    jwkAlgorithm,
-    false,
-    ["verify"],
-  );
-
-  const isSignatureValid = await verifyData(publicKey, stamp);
+  const isSignatureValid = await verifyData(booth.publicKey, stamp);
   if (!isSignatureValid) throw new IntegrityError("Signature is not valid");
 
   const stampRecord = {
-    boothId,
+    boothId: boothId as ConvexId<"booths">,
     expiryTimestamp,
     signature,
     submitted: false,
