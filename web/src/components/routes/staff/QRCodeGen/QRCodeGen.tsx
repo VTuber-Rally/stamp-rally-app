@@ -7,7 +7,7 @@ import { Header } from "@/components/layout/Header.tsx";
 import { QRCodeSettings } from "@/components/routes/staff/QRCodeGen/QRCodeSettings.tsx";
 import { ConvexId } from "@/lib/convex.ts";
 import { useBooth } from "@/lib/hooks/useBooth.ts";
-import { useStaffQRCode } from "@/lib/hooks/useStaffQRCode.ts";
+import { useBoothQrCode } from "@/lib/hooks/useBoothQrCode.ts";
 
 const QRCodeGenPage = ({ boothId }: { boothId: ConvexId<"booths"> }) => {
   const { t } = useTranslation();
@@ -18,11 +18,10 @@ const QRCodeGenPage = ({ boothId }: { boothId: ConvexId<"booths"> }) => {
   const [perpetual, setPerpetual] = useState(false);
   const [expiryDate, setExpiryDate] = useState<Date | null>(null);
 
-  const {
-    isLoading,
-    error,
-    data: qrValue,
-  } = useStaffQRCode(boothId, perpetual, expiryDate);
+  const { isLoading, error, qrCodeData } = useBoothQrCode(
+    boothId,
+    perpetual ? -1 : expiryDate?.getTime(),
+  );
 
   return (
     <div className={"flex flex-col items-center"}>
@@ -36,10 +35,10 @@ const QRCodeGenPage = ({ boothId }: { boothId: ConvexId<"booths"> }) => {
         </span>
       </Header>
       <div className="flex flex-col items-center justify-center gap-2">
-        {qrValue?.codeData && (
+        {qrCodeData && (
           <QRCode
             className="rounded-lg border-4 border-tertiary p-2"
-            value={qrValue.codeData}
+            value={qrCodeData}
           />
         )}
         {isLoading && <p>{t("loading")}</p>}

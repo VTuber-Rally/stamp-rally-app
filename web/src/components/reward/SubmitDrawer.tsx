@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { useMutation } from "convex/react";
 import {
   CircleAlert,
   Loader2,
@@ -23,6 +24,7 @@ import {
 import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
 import { RewardsAvailabilityList } from "@/components/reward/RewardsAvailabilityList.tsx";
 import { standardRewardMinStampsRequirement } from "@/lib/consts.ts";
+import { convexPublicApi, useDLEMutation } from "@/lib/convex.ts";
 import { useRallySubmit } from "@/lib/hooks/useRallySubmit.ts";
 import { useRewardAvailability } from "@/lib/hooks/useRewardAvailability.ts";
 
@@ -40,23 +42,29 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
     stampCount,
   } = useRewardAvailability();
   const navigate = useNavigate();
+  // const {
+  //   isPending,
+  //   isSuccess,
+  //   isError,
+  //   error,
+  //   mutate: submitRally,
+  // } = useRallySubmit({
+  //   onSuccess() {
+  //     void navigate({ to: "/reward/submissions" });
+  //   },
+  // });
+
   const {
-    isPending,
-    isSuccess,
-    isError,
-    error,
     mutate: submitRally,
-  } = useRallySubmit({
-    onSuccess() {
-      void navigate({ to: "/reward/submissions" });
-    },
-  });
+    error,
+    isLoading,
+  } = useDLEMutation(useMutation(convexPublicApi.submissions.submitRally));
 
   const handleSubmit = () => {
     submitRally();
   };
 
-  const canSubmit = isStandardRewardObtainable && !isSuccess && !isError;
+  const canSubmit = isStandardRewardObtainable && !error;
 
   return (
     <Drawer open={open} onOpenChange={setOpen} dismissible={!isPending}>
@@ -76,7 +84,7 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
               <span>{t("currentRallyBlock.resetDisclaimer")}</span>
             </p>
           )}
-          {isError && (
+          {error && (
             <>
               <p className="flex items-center gap-2 py-2 font-bold text-red-600">
                 <CircleAlert className="inline-block shrink-0" size={24} />

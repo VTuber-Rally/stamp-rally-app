@@ -4,8 +4,6 @@ import { MessageSquareWarning, TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { StampTupleSerializer } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-
 import Intro from "@/components/Intro.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
@@ -20,6 +18,7 @@ import {
 import { useBooth } from "@/lib/hooks/useBooth.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useRewardAvailability } from "@/lib/hooks/useRewardAvailability.ts";
+import { StampTupleSerializer } from "@/lib/stampTuple.ts";
 import {
   orangeTriangleEmphasis,
   pinkSquareEmphasis,

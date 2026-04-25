@@ -28,9 +28,11 @@ export default defineSchema({
     booth: v.id("booths"),
     scannedAt: v.number(),
     expiredAt: v.number(),
-    signature: v.string(),
-    submission: v.id("submission"),
-  }).index("by_submisssion", ["submission"]),
+    signature: v.bytes(),
+    submission: v.id("submissions"),
+  })
+    .index("by_submisssion", ["submission"])
+    .index("by_booth_and_scanned_at", ["booth", "scannedAt"]),
 
   submissions: defineTable({
     redeemed: v.boolean(),

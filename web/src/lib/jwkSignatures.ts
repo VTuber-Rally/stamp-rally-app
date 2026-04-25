@@ -1,4 +1,3 @@
-import { bytesToBase64DataUrl, dataUrlToBytes } from "@/lib/base64.ts";
 import { jwkAlgorithm, signAlgorithm } from "@/lib/consts.ts";
 import { StampTuple } from "@/lib/stampTuple.ts";
 
@@ -18,13 +17,13 @@ export async function signData(
   payload: readonly (string | number)[],
 ) {
   const signatureKey = await importJWK(signatureJsonKey, true);
-  return bytesToBase64DataUrl(
+  return new Uint8Array(
     await window.crypto.subtle.sign(
       signAlgorithm,
       signatureKey,
       textEncoder.encode(payload.join(":")),
     ),
-  );
+  ).toBase64({ alphabet: "base64url" });
 }
 
 export async function verifyData(
@@ -32,13 +31,15 @@ export async function verifyData(
   payload: StampTuple,
 ) {
   const [standistId, expiryTimestamp, signature] = payload;
-  const signatureBuffer = await dataUrlToBytes(signature);
+  const signatureBuffer = Uint8Array.fromBase64(signature, {
+    alphabet: "base64url",
+  });
   const verificationKey = await importJWK(verificationJsonKey);
   return window.crypto.subtle.verify(
     signAlgorithm,
     verificationKey,
     // we have to convert the ArrayBuffer to a Uint8Array because of a bug in JSDOM (somehow)
-    new Uint8Array(signatureBuffer),
+    signatureBuffer,
     textEncoder.encode([standistId, expiryTimestamp].join(":")),
   );
 }
