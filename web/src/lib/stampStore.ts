@@ -32,7 +32,7 @@ export const useStampStore = create<StampStore>()(
           }),
         }));
       },
-      upsertStamp: (stamp) =>
+      upsertStamp: (stamp) => {
         set((state) => {
           const alreadyExistingStampIndex = state.stamps.findIndex(
             (searchedStamp) =>
@@ -49,10 +49,18 @@ export const useStampStore = create<StampStore>()(
             };
           }
           return { stamps: [...state.stamps, stamp] };
-        }),
+        });
+      },
     }),
     {
       name: "stamps",
+      version: 1,
     },
   ),
 );
+
+window.addEventListener("storage", (event) => {
+  if (event.key === useStampStore.persist.getOptions().name) {
+    void useStampStore.persist.rehydrate();
+  }
+});

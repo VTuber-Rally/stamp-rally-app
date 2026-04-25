@@ -21,7 +21,7 @@ export default defineSchema({
 
   flags: defineTable({
     key: v.string(),
-    value: v.boolean(),
+    value: v.string(),
   }).index("by_key", ["key"]),
 
   stamps: defineTable({

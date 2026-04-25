@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_rallyists/artists/")({
 });
 
 function ArtistsList() {
-  const { data = [] } = useCollectedStamps();
+  const stamps = useCollectedStamps();
 
-  return <ArtistsListComponent stamps={data} />;
+  return <ArtistsListComponent stamps={stamps} />;
 }

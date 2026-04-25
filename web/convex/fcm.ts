@@ -18,7 +18,7 @@ const messaging = getMessagingApp();
 
 export const addTokenToFCM = internalAction({
   args: { token: v.string(), topic: v.union(v.literal("en"), v.literal("fr")) },
-  handler: async (ctx, args) => {
+  handler: async (_ctx, args) => {
     const response = await messaging.subscribeToTopic([args.token], args.topic);
     return !!response.successCount;
   },
@@ -26,7 +26,7 @@ export const addTokenToFCM = internalAction({
 
 export const removeTokenFromFCM = internalAction({
   args: { token: v.string() },
-  handler: async (ctx, args) => {
+  handler: async (_ctx, args) => {
     const enResponse = await messaging.unsubscribeFromTopic([args.token], "en");
     const frResponse = await messaging.unsubscribeFromTopic([args.token], "fr");
     return !!enResponse.successCount || !!frResponse.successCount;

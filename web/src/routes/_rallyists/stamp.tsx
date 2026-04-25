@@ -167,7 +167,7 @@ function Stamp() {
         </div>
       )}
 
-      <StampDetails stamp={data} standist={booth} />
+      <StampDetails stamp={data} booth={booth} />
     </>
   );
 }

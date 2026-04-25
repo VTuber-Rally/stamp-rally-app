@@ -4,19 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import Loader from "@/components/Loader.tsx";
 
-import {
-  account,
-  login,
-  loginAnonymous,
-  loginUserIdSecret,
-  logout,
-  register,
-  sendMagicLink,
-  setEmail,
-  setName,
-  setPref,
-} from "./appwrite";
-
 const NOT_INITIALIZED = undefined;
 
 const notInitialized = () => {

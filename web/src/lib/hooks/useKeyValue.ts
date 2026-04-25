@@ -1,21 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "convex/react";
 
 import type { KeyValueEntry } from "@vtube-stamp-rally/shared-lib/models/KeyValue.ts";
 
-import { QUERY_KEYS } from "../QueryKeys";
-import { useDatabase } from "./useDatabase";
+import { convexPublicApi } from "@/lib/convex.ts";
 
 export const useKeyValue = <T>(keyValueEntry: KeyValueEntry<T>) => {
-  const { getKeyValue } = useDatabase();
-
-  const { data: value, isPending } = useQuery({
-    queryKey: [QUERY_KEYS.KV, keyValueEntry.key],
-    queryFn: () =>
-      getKeyValue(keyValueEntry.key).then((data) =>
-        keyValueEntry.transform(data.value),
-      ),
-    staleTime: Infinity,
+  const rawValue = useQuery(convexPublicApi.flags.getFlag, {
+    key: keyValueEntry.key,
   });
-
-  return { value, isPending };
+  if (typeof rawValue === "string") {
+    return keyValueEntry.transform(rawValue);
+  }
+  return undefined;
 };

@@ -1,59 +1,21 @@
 import { RefreshCcw, TicketCheck } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import Loader from "@/components/Loader.tsx";
 import { Header } from "@/components/layout/Header.tsx";
-import { encodeStampToQRCode } from "@/lib/StampQRCodes.ts";
 import { useCurrentUser } from "@/lib/auth.ts";
-import { useBoothWithPrivateKey } from "@/lib/hooks/useBoothWithPrivateKey.ts";
-import { signData } from "@/lib/jwkSignatures.ts";
-
-const getExpiryTimestamp = () => Date.now() + 2 * 60 * 1000; // 2 minutes comme avant
+import { useBooth } from "@/lib/hooks/useBooth.ts";
+import { useBoothQrCode } from "@/lib/hooks/useBoothQrCode.ts";
 
 const StandistsQRCodeGeneratorPage = () => {
   const { t } = useTranslation();
   const { t: tFR } = useTranslation("", { lng: "fr" });
   const { t: tEN } = useTranslation("", { lng: "en" });
   const user = useCurrentUser();
-  const booth = useBoothWithPrivateKey(user?.boothId);
-  const [expiryTimestamp, setExpiryTimestamp] = useState(getExpiryTimestamp);
-  const [isLoading, setIsLoading] = useState(true);
-  const [qrCodeData, setQrCodeData] = useState("");
-  const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    if (!booth?._id) return;
-    let ignore = false;
-    const data = [booth._id, expiryTimestamp] as const;
-    signData(booth.privateKey, data)
-      .then(
-        (signature) => {
-          if (ignore) return;
-          setQrCodeData(encodeStampToQRCode([...data, signature]));
-        },
-        (err: Error) => {
-          if (ignore) return;
-          setError(err);
-        },
-      )
-      .finally(() => setIsLoading(false));
-
-    return () => {
-      ignore = true;
-    };
-  }, [expiryTimestamp, booth?.privateKey, booth?._id]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setExpiryTimestamp(getExpiryTimestamp());
-    }, 60 * 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const booth = useBooth(user?.boothId);
+  const { qrCodeData, error, isLoading } = useBoothQrCode(user?.boothId);
 
   if (isLoading || !user)
     return (

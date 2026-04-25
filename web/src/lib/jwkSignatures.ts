@@ -17,7 +17,7 @@ export async function signData(
   signatureJsonKey: JsonWebKey,
   payload: readonly (string | number)[],
 ) {
-  const signatureKey = await importJWK(signatureJsonKey);
+  const signatureKey = await importJWK(signatureJsonKey, true);
   return bytesToBase64DataUrl(
     await window.crypto.subtle.sign(
       signAlgorithm,

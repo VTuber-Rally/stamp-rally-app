@@ -1,12 +1,12 @@
-import type { StampWithId } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
 import type { SubmissionWithId } from "@vtube-stamp-rally/shared-lib/models/Submission.ts";
 
 import Logo from "@/assets/logo.png";
 import HomepageLaunchpad from "@/components/HomepageLaunchpad.tsx";
 import Intro from "@/components/Intro.tsx";
+import { Stamp } from "@/lib/stampStore.ts";
 
 type RallyistsHomepageProps = {
-  stamps?: StampWithId[];
+  stamps?: Stamp[];
   submissions?: SubmissionWithId[];
 };
 

@@ -19,13 +19,13 @@ type Story = StoryObj<typeof meta>;
 export const PaperStamp: Story = {
   args: {
     stamp: NotSubmittedStamp,
-    standist: StandistsFromAppwrite.documents[0] as unknown as Standist, // TODO: Fix this
+    booth: StandistsFromAppwrite.documents[0] as unknown as Standist, // TODO: Fix this
   },
 };
 
 export const DigitalStamp: Story = {
   args: {
     stamp: OtherStamps[6],
-    standist: StandistsFromAppwrite.documents[11] as unknown as Standist, // TODO: Fix this
+    booth: StandistsFromAppwrite.documents[11] as unknown as Standist, // TODO: Fix this
   },
 };

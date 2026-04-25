@@ -9,7 +9,7 @@ import { useBooths } from "@/lib/hooks/useBooths.ts";
 import { useCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 
 export const useRewardAvailability = () => {
-  const { data: stamps } = useCollectedStamps();
+  const stamps = useCollectedStamps();
   const { data: booths } = useBooths();
 
   const minorHallBoothsIds = useMemo<Set<ConvexId<"booths">>>(() => {
@@ -22,7 +22,7 @@ export const useRewardAvailability = () => {
 
   const stampCount = stamps?.length ?? 0;
   const isAnyStampFromMinorHall =
-    stamps?.some((stamp) => minorHallBoothsIds.has(stamp.standistId)) ?? false;
+    stamps?.some((stamp) => minorHallBoothsIds.has(stamp.boothId)) ?? false;
   const isStandardRewardObtainable =
     isAnyStampFromMinorHall && stampCount >= standardRewardMinStampsRequirement;
   const isPremiumRewardObtainable =

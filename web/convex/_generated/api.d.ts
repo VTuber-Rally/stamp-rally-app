@@ -12,6 +12,7 @@ import type * as auth from "../auth.js";
 import type * as booths from "../booths.js";
 import type * as email from "../email.js";
 import type * as fcm from "../fcm.js";
+import type * as flags from "../flags.js";
 import type * as http from "../http.js";
 import type * as notifications from "../notifications.js";
 import type * as users from "../users.js";
@@ -29,6 +30,7 @@ declare const fullApi: ApiFromModules<{
   booths: typeof booths;
   email: typeof email;
   fcm: typeof fcm;
+  flags: typeof flags;
   http: typeof http;
   notifications: typeof notifications;
   users: typeof users;

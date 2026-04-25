@@ -14,7 +14,7 @@ import { MapContextProvider } from "@/contexts/MapContextProvider";
 import { mapCenter } from "@/lib/consts.ts";
 import {
   generateStyleSpec,
-  getStandistsFeatureCollection,
+  getBoothsFeatureCollection,
 } from "@/lib/mapStyleSpec.ts";
 
 export const MapLibreMap: FC<{
@@ -58,7 +58,7 @@ export const MapLibreMap: FC<{
 
       map.addControl(new NavigationControl(), "bottom-left");
 
-      getStandistsFeatureCollection().then(
+      getBoothsFeatureCollection().then(
         (featureCollection) => {
           const writeStandists = () =>
             (map.getSource("standists") as GeoJSONSource).setData(

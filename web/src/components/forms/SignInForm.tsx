@@ -1,12 +1,13 @@
+import { useAuthActions } from "@convex-dev/auth/react";
 import { useNavigate } from "@tanstack/react-router";
+import { useConvexAuth } from "convex/react";
 import { useEffect } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import Loader from "@/components/Loader.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
-import { useLogin } from "@/lib/hooks/useLogin.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
 
 type SigninForm = {
   email: string;
@@ -18,19 +19,20 @@ type SigninPageProps = {
 };
 
 function SignInForm({ navigateTo }: SigninPageProps) {
-  const { user } = useUser();
+  const { isAuthenticated } = useConvexAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutate, isPending, isError, error } = useLogin(navigateTo);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { signIn } = useAuthActions();
 
   useEffect(() => {
     const redirect = async () => {
-      if (user) {
+      if (isAuthenticated) {
         await navigate({ to: navigateTo });
       }
     };
     void redirect();
-  }, [user, navigate, navigateTo]);
+  }, [isAuthenticated, navigate, navigateTo]);
 
   const {
     register,
@@ -39,27 +41,24 @@ function SignInForm({ navigateTo }: SigninPageProps) {
     setError,
     clearErrors,
   } = useForm<SigninForm>();
-  const onSubmitRegister: SubmitHandler<SigninForm> = (data) => {
+  const onSubmitRegister: SubmitHandler<SigninForm> = async (data) => {
     try {
+      setIsSubmitting(true);
       clearErrors();
-      mutate(data);
+      await signIn("password", {
+        flow: "signIn",
+        ...data,
+      });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError("email", {
         type: "manual",
         message: "Invalid email or password",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    if (isError) {
-      setError("password", {
-        type: "manual",
-        message: `${error.message}`,
-      });
-    }
-  }, [isError, error, setError]);
 
   return (
     <div className={"flex grow flex-col justify-center"}>
@@ -84,7 +83,7 @@ function SignInForm({ navigateTo }: SigninPageProps) {
           errors={errors["password"]}
         />
 
-        {isPending ? (
+        {isSubmitting ? (
           <button
             disabled={true}
             className={

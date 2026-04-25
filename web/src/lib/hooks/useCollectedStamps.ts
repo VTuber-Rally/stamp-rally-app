@@ -1,20 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
-import { db } from "@/lib/db.ts";
+import { Stamp, useStampStore } from "@/lib/stampStore.ts";
 
-import { QUERY_KEYS } from "../QueryKeys.ts";
+const onlyNonSubmittedStamps = (stamp: Stamp) => !stamp.submitted;
 
 export const getCollectedStamps = () =>
-  db.stamps
-    .toArray()
-    .then((stamps) => stamps.filter((stamp) => !stamp.submitted));
+  useStampStore.getState().stamps.filter(onlyNonSubmittedStamps);
 
 export const useCollectedStamps = () => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: [QUERY_KEYS.STAMPS],
-    queryFn: getCollectedStamps,
-    networkMode: "always",
-  });
-
-  return { isLoading, error, data };
+  const stampStore = useStampStore();
+  const collectedStamps = useMemo(
+    () => stampStore.stamps.filter(onlyNonSubmittedStamps),
+    [stampStore.stamps],
+  );
+  return collectedStamps;
 };

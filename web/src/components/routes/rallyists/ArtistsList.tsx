@@ -10,17 +10,20 @@ import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";
 import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
+import { ConvexId } from "@/lib/convex.ts";
 import { useBooths } from "@/lib/hooks/useBooths.ts";
+import { Stamp } from "@/lib/stampStore.ts";
 
 type ArtistsListProps = {
-  stamps: StampWithId[];
+  stamps: Stamp[];
 };
 
 const ArtistsList = ({ stamps }: ArtistsListProps) => {
   const { t } = useTranslation();
   const { data: booths } = useBooths();
   const [artistDrawerOpen, setArtistDrawerOpen] = useState(false);
-  const [activeStandistId, setActiveStandistId] = useState<string | null>(null);
+  const [activeStandistId, setActiveStandistId] =
+    useState<ConvexId<"booths"> | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -52,8 +55,7 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
           <div className={"grid grid-cols-2 gap-4 overflow-x-clip"}>
             {booths.map((booth) => {
               const isStamped =
-                stamps.findIndex((stamp) => stamp.standistId === booth._id) !==
-                -1;
+                stamps.findIndex((stamp) => stamp.boothId === booth._id) !== -1;
               return (
                 <button
                   key={booth._id}
