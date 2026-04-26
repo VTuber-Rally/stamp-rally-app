@@ -1,5 +1,4 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useMutation } from "convex/react";
 import {
   CircleAlert,
   Loader2,
@@ -24,9 +23,8 @@ import {
 import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
 import { RewardsAvailabilityList } from "@/components/reward/RewardsAvailabilityList.tsx";
 import { standardRewardMinStampsRequirement } from "@/lib/consts.ts";
-import { convexPublicApi, useDLEMutation } from "@/lib/convex.ts";
-import { useRallySubmit } from "@/lib/hooks/useRallySubmit.ts";
 import { useRewardAvailability } from "@/lib/hooks/useRewardAvailability.ts";
+import { useSubmitRally } from "@/lib/hooks/useSubmitRally.ts";
 
 interface SubmitDrawerProps {
   open: boolean;
@@ -42,32 +40,17 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
     stampCount,
   } = useRewardAvailability();
   const navigate = useNavigate();
-  // const {
-  //   isPending,
-  //   isSuccess,
-  //   isError,
-  //   error,
-  //   mutate: submitRally,
-  // } = useRallySubmit({
-  //   onSuccess() {
-  //     void navigate({ to: "/reward/submissions" });
-  //   },
-  // });
 
-  const {
-    mutate: submitRally,
-    error,
-    isLoading,
-  } = useDLEMutation(useMutation(convexPublicApi.submissions.submitRally));
+  const { submitRally, error, isLoading } = useSubmitRally();
 
   const handleSubmit = () => {
-    submitRally();
+    void submitRally().then(() => navigate({ to: "/reward/submissions" }));
   };
 
   const canSubmit = isStandardRewardObtainable && !error;
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} dismissible={!isPending}>
+    <Drawer open={open} onOpenChange={setOpen} dismissible={!isLoading}>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>{t("currentRallyBlock.submitDrawerTitle")}</DrawerTitle>
@@ -99,10 +82,10 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
             <ButtonLink
               type="button"
               onClick={handleSubmit}
-              disabled={isPending}
+              disabled={isLoading}
               size="medium"
             >
-              {isPending ? (
+              {isLoading ? (
                 <Loader2 className="mr-2 animate-spin" />
               ) : (
                 <Upload className="mr-2" />
@@ -110,7 +93,7 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
               {t("currentRallyBlock.submitAction")}
             </ButtonLink>
           )}
-          {!isStandardRewardObtainable && !isSuccess && (
+          {!isStandardRewardObtainable && (
             <p className="flex items-center gap-2 py-2 font-bold text-red-600">
               <TicketX className="inline-block shrink-0" size={24} />
               <span>

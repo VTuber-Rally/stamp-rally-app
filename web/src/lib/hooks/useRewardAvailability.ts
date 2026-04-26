@@ -14,8 +14,8 @@ export const useRewardAvailability = () => {
 
   const minorHallBoothsIds = useMemo<Set<ConvexId<"booths">>>(() => {
     if (!booths) return new Set();
-    const minorHallBooths = booths.filter((standist) => {
-      return standist.hall === "5A";
+    const minorHallBooths = booths.filter((booth) => {
+      return booth.hall === "5A";
     });
     return new Set(minorHallBooths.map((booth) => booth._id));
   }, [booths]);
