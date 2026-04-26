@@ -36,6 +36,7 @@ export default defineConfig({
           VITE_EVENT_END_DATE: Schema.string(),
           VITE_STANDARD_REWARD_MIN_STAMPS_REQUIREMENT: Schema.number(),
           VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT: Schema.number(),
+          VITE_IS_MINOR_HALL_REQUIRED: Schema.boolean(),
           VITE_STANDISTS_COLLECTION_ID: Schema.string(),
           VITE_SUBMISSIONS_COLLECTION_ID: Schema.string(),
           VITE_SUBMIT_FUNCTION_ID: Schema.string(),

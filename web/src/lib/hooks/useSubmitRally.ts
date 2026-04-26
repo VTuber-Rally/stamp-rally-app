@@ -19,7 +19,7 @@ export const useSubmitRally = () => {
           boothId: stamp.boothId,
           signature: Uint8Array.fromBase64(stamp.signature, {
             alphabet: "base64url",
-          }),
+          }).buffer,
         })),
     [stampStore.stamps],
   );

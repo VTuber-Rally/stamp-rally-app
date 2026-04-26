@@ -7,6 +7,7 @@ import type { DataModel as ConvexDataModel, Id } from "~/_generated/dataModel";
 export type User = ConvexDataModel["users"]["document"];
 export type Booth = ConvexDataModel["booths"]["document"];
 export type PublicBooth = (typeof api.booths.listBooths._returnType)[number];
+export type Submission = ConvexDataModel["submissions"]["document"];
 export type { Id as ConvexId };
 export { api as convexPublicApi };
 

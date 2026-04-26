@@ -1,7 +1,7 @@
 import { ConvexError, v } from "convex/values";
 
 import { DataModel, Id } from "./_generated/dataModel.js";
-import { mutation } from "./_generated/server.js";
+import { mutation, query } from "./_generated/server.js";
 import { getLoggedInUser } from "./users.js";
 
 const textEncoder = new TextEncoder();
@@ -67,7 +67,7 @@ export const submitRally = mutation({
         };
       }
 
-      const isSignatureValid = await window.crypto.subtle.verify(
+      const isSignatureValid = await crypto.subtle.verify(
         signAlgorithm,
         await importJWK(booth.publicKey),
         stamp.signature,
@@ -107,6 +107,7 @@ export const submitRally = mutation({
       redeemed: false,
       submittedAt: Date.now(),
       userId: user._id,
+      stampsCount: stamps.length,
     });
 
     for (const stamp of stamps) {
@@ -117,5 +118,20 @@ export const submitRally = mutation({
     }
 
     return { status: "success", submissionId };
+  },
+});
+
+export const getMySubmissions = query({
+  args: {},
+  handler: async (ctx) => {
+    const user = await getLoggedInUser(ctx);
+    if (!user) return [];
+
+    const submissions = await ctx.db
+      .query("submissions")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .collect();
+
+    return submissions;
   },
 });

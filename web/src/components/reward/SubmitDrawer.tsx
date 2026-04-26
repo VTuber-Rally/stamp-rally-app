@@ -2,7 +2,6 @@ import { useNavigate } from "@tanstack/react-router";
 import {
   CircleAlert,
   Loader2,
-  MessageSquare,
   TicketX,
   TriangleAlert,
   Upload,
@@ -68,15 +67,10 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
             </p>
           )}
           {error && (
-            <>
-              <p className="flex items-center gap-2 py-2 font-bold text-red-600">
-                <CircleAlert className="inline-block shrink-0" size={24} />
-                <span>{error?.message ?? String(error)}</span>
-              </p>
-              <p className="flex items-center gap-2 py-2 text-red-600">
-                <MessageSquare className="inline-block shrink-0" size={24} />
-              </p>
-            </>
+            <p className="flex items-center gap-2 py-2 font-bold text-red-600">
+              <CircleAlert className="inline-block shrink-0" size={24} />
+              <span>{error?.message ?? String(error)}</span>
+            </p>
           )}
           {canSubmit && (
             <ButtonLink

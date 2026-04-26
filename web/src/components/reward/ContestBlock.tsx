@@ -13,8 +13,7 @@ import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions";
 
 export const ContestBlock = () => {
   const { t } = useTranslation();
-  const { data: submissions, isPending: areSubmissionsPending } =
-    useRallySubmissions();
+  const submissions = useRallySubmissions();
   const { eligibilityData, isPending: isEligibilityPending } =
     useIsEligibleForContest();
   const { currentParticipation, isCurrentParticipationPending } =
@@ -23,9 +22,7 @@ export const ContestBlock = () => {
   const isEligibleForContest = eligibilityData?.eligible ?? false;
 
   const isContestBlockLoading =
-    isCurrentParticipationPending ||
-    areSubmissionsPending ||
-    isEligibilityPending;
+    isCurrentParticipationPending || !submissions || isEligibilityPending;
 
   const getParticipationStatus = (participation: ContestParticipant) => {
     if (participation.drawnDate) {

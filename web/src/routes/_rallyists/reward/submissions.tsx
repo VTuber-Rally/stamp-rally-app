@@ -1,26 +1,27 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
+import { createFileRoute } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
-import { CreateAccountForm } from '@/components/forms/CreateAccountForm.tsx'
-import { Header } from '@/components/layout/Header.tsx'
-import { ShadowBox } from '@/components/layout/ShadowBox.tsx'
-import { EnableNotificationNudge } from '@/components/reward/EnableNotificationNudge.tsx'
-import { SubmissionsList } from '@/components/reward/SubmissionsList.tsx'
-import { useRallySubmissions } from '@/lib/hooks/useRallySubmissions.ts'
-import { useUser } from '@/lib/hooks/useUser.ts'
+import { CreateAccountForm } from "@/components/forms/CreateAccountForm.tsx";
+import { Header } from "@/components/layout/Header.tsx";
+import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
+import { EnableNotificationNudge } from "@/components/reward/EnableNotificationNudge.tsx";
+import { SubmissionsList } from "@/components/reward/SubmissionsList.tsx";
+import { useCurrentUser } from "@/lib/auth.ts";
+import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import { useUser } from "@/lib/hooks/useUser.ts";
 
-export const Route = createFileRoute('/_rallyists/reward/submissions')({
+export const Route = createFileRoute("/_rallyists/reward/submissions")({
   component: Submissions,
-})
+});
 
 function Submissions() {
-  const { user } = useUser()
-  const { data: submissions } = useRallySubmissions()
-  const { t } = useTranslation()
+  const user = useCurrentUser();
+  const submissions = useRallySubmissions();
+  const { t } = useTranslation();
 
   return (
-    <div className={'flex grow flex-col items-center'}>
-      <Header>{t('submissions')}</Header>
+    <div className={"flex grow flex-col items-center"}>
+      <Header>{t("submissions")}</Header>
 
       <div className="flex flex-col gap-3">
         {!!submissions?.length && <EnableNotificationNudge />}
@@ -32,5 +33,5 @@ function Submissions() {
         )}
       </div>
     </div>
-  )
+  );
 }

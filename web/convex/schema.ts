@@ -38,6 +38,7 @@ export default defineSchema({
     redeemed: v.boolean(),
     submittedAt: v.number(),
     userId,
+    stampsCount: v.number(),
   }).index("by_user", ["userId"]),
 
   prizes: defineTable({

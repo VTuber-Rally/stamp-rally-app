@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_rallyists/")({
 
 function Home() {
   const stamps = useCollectedStamps();
-  const { data: submissions } = useRallySubmissions();
+  const submissions = useRallySubmissions();
 
   return <RallyistsHomepage stamps={stamps} submissions={submissions} />;
 }

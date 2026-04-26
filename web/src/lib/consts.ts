@@ -14,6 +14,7 @@ const {
   VITE_ASSETS_BUCKET_ID: assetsBucketId,
   VITE_STANDARD_REWARD_MIN_STAMPS_REQUIREMENT,
   VITE_PREMIUM_REWARD_MIN_STAMPS_REQUIREMENT,
+  VITE_IS_MINOR_HALL_REQUIRED: isMinorHallRequired,
   VITE_CONTEST_PARTICIPANTS_COLLECTION_ID: contestParticipantsCollectionId,
   VITE_REGISTER_CONTEST_PARTICIPANT_FUNCTION_ID:
     registerContestParticipantFunctionId,
@@ -85,6 +86,7 @@ export {
   assetsBucketId,
   standardRewardMinStampsRequirement,
   premiumRewardMinStampsRequirement,
+  isMinorHallRequired,
   isDev,
   isProd,
   jwkAlgorithm,

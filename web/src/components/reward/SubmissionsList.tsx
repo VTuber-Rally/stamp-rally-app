@@ -14,11 +14,9 @@ import {
 
 export const SubmissionsList: FC = () => {
   const { t, i18n } = useTranslation();
-  const { data: submissions, isPending } = useRallySubmissions();
+  const submissions = useRallySubmissions();
 
-  if (isPending) return <ShadowBox>{t("loading")}</ShadowBox>;
-
-  if (!submissions) return <ShadowBox>{t("error")}</ShadowBox>;
+  if (!submissions) return <ShadowBox>{t("loading")}</ShadowBox>;
 
   const pendingSubmissions = submissions.filter((e) => !e.redeemed);
   const redeemedSubmissions = submissions.filter((e) => e.redeemed);
@@ -37,21 +35,24 @@ export const SubmissionsList: FC = () => {
             {pendingSubmissions.map((submission) => (
               <div
                 className="flex grow flex-col items-center justify-center gap-4 py-2"
-                key={submission.submissionId}
+                key={submission._id}
               >
                 <p className="text-center">
                   <Trans
                     t={t}
                     i18nKey="alreadySubmitted"
                     values={{
-                      date: submission.submitted.toLocaleString(i18n.language, {
-                        dateStyle: "full",
-                        timeStyle: "short",
-                      }),
-                      count: submission.stamps.length,
+                      date: new Date(submission._creationTime).toLocaleString(
+                        i18n.language,
+                        {
+                          dateStyle: "full",
+                          timeStyle: "short",
+                        },
+                      ),
+                      count: submission.stampsCount,
                     }}
                     components={{
-                      ...(submission.stamps.length >=
+                      ...(submission.stampsCount >=
                       premiumRewardMinStampsRequirement
                         ? pinkSquareEmphasis
                         : orangeTriangleEmphasis),
@@ -63,13 +64,13 @@ export const SubmissionsList: FC = () => {
                 <QRCode
                   className={clsx(
                     "rounded-lg border-4 p-2 dark:bg-white",
-                    submission.stamps.length >=
+                    submission.stampsCount >=
                       premiumRewardMinStampsRequirement && "border-tertiary",
-                    submission.stamps.length <
+                    submission.stampsCount <
                       premiumRewardMinStampsRequirement &&
                       "border-success-orange",
                   )}
-                  value={submission.submissionId}
+                  value={submission._id}
                 />
 
                 <p className={"text-center font-semibold"}>
@@ -95,8 +96,8 @@ export const SubmissionsList: FC = () => {
           </h2>
           <ol className={"flex list-disc flex-col items-center"}>
             {redeemedSubmissions.map((submission) => (
-              <li key={submission.id}>
-                {submission.submitted.toLocaleString()}
+              <li key={submission._id}>
+                {new Date(submission._creationTime).toLocaleString()}
               </li>
             ))}
           </ol>

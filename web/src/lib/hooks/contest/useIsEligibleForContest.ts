@@ -25,14 +25,14 @@ export const getContestEligibility = (
 };
 
 export const useIsEligibleForContest = () => {
-  const { data: submissions = [] } = useRallySubmissions();
+  const submissions = useRallySubmissions();
 
   const { data, isPending } = useQuery({
     queryKey: [
       QUERY_KEYS.CONTEST_ELIGIBILITY,
-      ...submissions.map((submission) => submission.id),
+      ...(submissions?.map((submission) => submission._id) ?? []),
     ],
-    queryFn: submissions.length
+    queryFn: submissions?.length
       ? async () => {
           const numberOfContestParticipations =
             await db.contestParticipations.count();

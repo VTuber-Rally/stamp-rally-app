@@ -1,6 +1,8 @@
 import { useMemo } from "react";
+import { useDebugValue } from "react";
 
 import {
+  isMinorHallRequired,
   premiumRewardMinStampsRequirement,
   standardRewardMinStampsRequirement,
 } from "@/lib/consts.ts";
@@ -22,11 +24,21 @@ export const useRewardAvailability = () => {
 
   const stampCount = stamps?.length ?? 0;
   const isAnyStampFromMinorHall =
-    stamps?.some((stamp) => minorHallBoothsIds.has(stamp.boothId)) ?? false;
+    !isMinorHallRequired ||
+    (stamps?.some((stamp) => minorHallBoothsIds.has(stamp.boothId)) ?? false);
   const isStandardRewardObtainable =
-    isAnyStampFromMinorHall && stampCount >= standardRewardMinStampsRequirement;
+    (!isMinorHallRequired || isAnyStampFromMinorHall) &&
+    stampCount >= standardRewardMinStampsRequirement;
   const isPremiumRewardObtainable =
-    isAnyStampFromMinorHall && stampCount >= premiumRewardMinStampsRequirement;
+    (!isMinorHallRequired || isAnyStampFromMinorHall) &&
+    stampCount >= premiumRewardMinStampsRequirement;
+
+  useDebugValue({
+    stampCount,
+    isAnyStampFromMinorHall,
+    isStandardRewardObtainable,
+    isPremiumRewardObtainable,
+  });
 
   return {
     stampCount,

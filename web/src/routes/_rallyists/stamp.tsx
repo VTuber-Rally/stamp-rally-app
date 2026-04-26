@@ -62,7 +62,7 @@ function Stamp() {
       premiumRewardMinStampsRequirement,
     ].includes(stampCount) && isAnyStampFromMinorHall;
 
-  const { data: submissions } = useRallySubmissions();
+  const submissions = useRallySubmissions();
 
   const { createConfetti, canvasProps } = useConfetti({
     count: 200,
