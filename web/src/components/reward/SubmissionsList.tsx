@@ -3,9 +3,10 @@ import { FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
+import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import { HorizontalBar } from "@/components/layout/HorizontalBar.tsx";
 import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
-import { premiumRewardMinStampsRequirement } from "@/lib/consts.ts";
+import { isDev, premiumRewardMinStampsRequirement } from "@/lib/consts.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import {
   orangeTriangleEmphasis,
@@ -72,6 +73,16 @@ export const SubmissionsList: FC = () => {
                   )}
                   value={submission._id}
                 />
+
+                {isDev ? (
+                  <ButtonLink
+                    href={`/staff/submission/${submission._id}`}
+                    type="link"
+                    size="small"
+                  >
+                    Go to check
+                  </ButtonLink>
+                ) : null}
 
                 <p className={"text-center font-semibold"}>
                   {t("showThisQRCodeToSubmit")}

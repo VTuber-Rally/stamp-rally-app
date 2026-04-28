@@ -8,7 +8,6 @@ import { EnableNotificationNudge } from "@/components/reward/EnableNotificationN
 import { SubmissionsList } from "@/components/reward/SubmissionsList.tsx";
 import { useCurrentUser } from "@/lib/auth.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute("/_rallyists/reward/submissions")({
   component: Submissions,

@@ -22,6 +22,12 @@ export async function getStandistOrStaffLoggedInUser(ctx: QueryCtx) {
   return user;
 }
 
+export async function getStaffLoggedInUser(ctx: QueryCtx) {
+  const user = await getNonAnonymousLoggedInUser(ctx);
+  if (user.role !== "staff") throw new ConvexError("Insufficient permissions");
+  return user;
+}
+
 export const loggedInUser = query({
   args: {},
   handler: getLoggedInUser,

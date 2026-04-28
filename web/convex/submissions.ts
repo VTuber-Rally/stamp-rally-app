@@ -2,7 +2,7 @@ import { ConvexError, v } from "convex/values";
 
 import { DataModel, Id } from "./_generated/dataModel.js";
 import { mutation, query } from "./_generated/server.js";
-import { getLoggedInUser } from "./users.js";
+import { getLoggedInUser, getStaffLoggedInUser } from "./users.js";
 
 const textEncoder = new TextEncoder();
 
@@ -133,5 +133,26 @@ export const getMySubmissions = query({
       .collect();
 
     return submissions;
+  },
+});
+
+export const getSubmissionWithStamps = query({
+  args: { submissionId: v.id("submissions") },
+  handler: async (ctx, args) => {
+    await getStaffLoggedInUser(ctx);
+    const submission = await ctx.db.get("submissions", args.submissionId);
+    if (!submission) {
+      return false;
+    }
+    return {
+      ...submission,
+      stamps: await ctx.db
+        .query("stamps")
+        .withIndex("by_submisssion", (q) =>
+          q.eq("submission", args.submissionId),
+        )
+        .order("asc")
+        .collect(),
+    };
   },
 });

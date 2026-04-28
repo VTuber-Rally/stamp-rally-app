@@ -24,12 +24,17 @@ import {
   premiumRewardMinStampsRequirement,
   submissionsCollectionId,
 } from "@/lib/consts.ts";
+import { ConvexId } from "@/lib/convex.ts";
+import { useBooths } from "@/lib/hooks/useBooths.ts";
 import { useRallySubmission } from "@/lib/hooks/useRallySubmission.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { queryClient } from "@/lib/queryClient.ts";
 
 const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
-  const { data, isLoading } = useRallySubmission(submissionId);
+  const { data: booths } = useBooths();
+  const submission = useRallySubmission(
+    submissionId as ConvexId<"submissions">,
+  );
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -55,7 +60,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
       to: "/staff/reward/$drawType",
       params: {
         drawType:
-          (data?.stamps.length ?? 0) >= premiumRewardMinStampsRequirement
+          (submission?.stampsCount ?? 0) >= premiumRewardMinStampsRequirement
             ? "premium"
             : "standard",
       },
@@ -65,7 +70,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
     });
   };
 
-  if (isLoading) {
+  if (typeof submission === "undefined") {
     return (
       <div className={"flex flex-col items-center"}>
         <Loader size={4} />
@@ -74,7 +79,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
     );
   }
 
-  if (!data) {
+  if (!submission) {
     return (
       <div className={"flex flex-col items-center"}>
         <h1>Submission not found</h1>
@@ -82,22 +87,20 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
     );
   }
 
-  const submissionInterval = () => {
-    const submittedAt = new Date(data.submitted);
+  const submittedAt = new Date(submission._creationTime);
 
-    const now = new Date();
+  const now = new Date();
 
-    return formatDistance(submittedAt, now, {
-      locale: currentLanguage.includes("fr") ? fr : undefined,
-      addSuffix: true,
-    });
-  };
+  const submissionInterval = formatDistance(submittedAt, now, {
+    locale: currentLanguage.includes("fr") ? fr : undefined,
+    addSuffix: true,
+  });
 
   return (
     <>
-      <Header>{t("submission", { id: submissionId })}</Header>
+      <Header>{t("submission", { id: submissionId.slice(-10) })}</Header>
       <div className="flex grow flex-col items-center justify-center">
-        {data.redeemed && (
+        {submission.redeemed && (
           <div className="flex flex-col items-center justify-center rounded-xl bg-red-300 p-4">
             <h1 className={"flex text-2xl font-bold"}>
               <TriangleAlert size={32} className={"mr-2"} />
@@ -107,11 +110,11 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
         )}
 
         <h2 className={"text-2xl"}>
-          {t("submittedAgo", { time: submissionInterval() })}
+          {t("submittedAgo", { time: submissionInterval })}
         </h2>
 
         <Table>
-          <TableCaption>{data.stamps.length} stamps</TableCaption>
+          <TableCaption>{submission.stampsCount} stamps</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>⏱&nbsp;📲&nbsp;⏮️</TableHead>
@@ -119,20 +122,20 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.stamps.map((stamp, i) => (
-              <TableRow key={stamp.$id}>
+            {submission.stamps.map((stamp, i, stamps) => (
+              <TableRow key={stamp._id}>
                 <TableCell>
                   <div className={"flex"}>
                     {i !== 0 && (
                       <SymbolIndicator
-                        date1={stamp.scanned}
-                        date2={data.stamps[i - 1].scanned}
+                        date1={stamp.scannedAt}
+                        date2={stamps[i - 1].scannedAt}
                       />
                     )}
                   </div>
                 </TableCell>
                 <TableCell className="text-right">
-                  {stamp.standist.name}
+                  {booths?.find((booth) => booth._id === stamp.booth)?.name}
                 </TableCell>
               </TableRow>
             ))}
@@ -142,7 +145,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
         <ButtonLink
           type={"button"}
           size={"big"}
-          disabled={data.redeemed}
+          disabled={submission.redeemed}
           onClick={() => markAsRedeemed(submissionId)}
         >
           Valider et passer au reward
@@ -153,12 +156,12 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
 };
 
 interface SymbolIndicatorProps {
-  date1: string;
-  date2: string;
+  date1: number;
+  date2: number;
 }
 
-const calculateDifference = (date1: string, date2: string) => {
-  const diff = new Date(date1).getTime() - new Date(date2).getTime();
+const calculateDifference = (date1: number, date2: number) => {
+  const diff = date2 - date1;
 
   const duration = intervalToDuration({ start: 0, end: diff });
 
@@ -175,7 +178,7 @@ const calculateDifference = (date1: string, date2: string) => {
 const SymbolIndicator: FC<SymbolIndicatorProps> = ({ date1, date2 }) => {
   const { toast } = useToast();
 
-  const diff = new Date(date1).getTime() - new Date(date2).getTime();
+  const diff = date2 - date1;
   const diffString = calculateDifference(date1, date2);
 
   const showTime = () => {
