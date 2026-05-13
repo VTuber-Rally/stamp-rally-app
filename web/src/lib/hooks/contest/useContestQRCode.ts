@@ -1,19 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-
-import { QUERY_KEYS } from "@/lib/QueryKeys";
+import { KEY_VALUES } from "@/lib/KeyValues.ts";
 import { encodeContestSecretToQRCode } from "@/lib/StampQRCodes";
-import { useDatabase } from "@/lib/hooks/useDatabase";
+import { useKeyValue } from "@/lib/hooks/useKeyValue.ts";
 
 export function useContestQRCode() {
-  const { getKeyValue } = useDatabase();
+  const secret = useKeyValue(KEY_VALUES.contestRegistrationSecret);
 
-  const { data, isLoading } = useQuery({
-    queryKey: [QUERY_KEYS.CONTEST_SECRET],
-    queryFn: async () => {
-      const secret = await getKeyValue("contestRegistrationSecret");
-      return encodeContestSecretToQRCode(secret.value);
-    },
-  });
+  const isLoading = secret === undefined;
+  const data = secret ? encodeContestSecretToQRCode(secret) : undefined;
 
   return { data, isLoading };
 }

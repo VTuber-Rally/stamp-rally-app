@@ -39,6 +39,7 @@ function createRallyistProvider() {
       name: z.string().optional(),
       language: z.string().default("en"),
       emailConsent: z.boolean().default(false),
+      enforceAnonymousUpgrade: z.boolean(),
     }),
     z.object({
       flow: z.literal("sendMagicLink"),
@@ -77,6 +78,8 @@ function createRallyistProvider() {
               language: params.language,
             },
           });
+        } else if (params.enforceAnonymousUpgrade) {
+          throw new ConvexError("No anonymous account to link");
         }
 
         const created = await createAccount<DataModel>(ctx, {
@@ -165,6 +168,7 @@ export const prepareAnonymousUserMigration = internalMutation({
     await ctx.db.patch("users", userId, {
       ...args.params,
       isAnonymous: false,
+      email: args.email,
       role: "user",
     });
   },

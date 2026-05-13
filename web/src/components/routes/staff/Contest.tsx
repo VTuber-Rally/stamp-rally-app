@@ -14,11 +14,8 @@ import { useToast } from "@/lib/hooks/useToast.ts";
 import { sendPushNotification } from "@/lib/pushNotifications.ts";
 
 export default function Contest() {
-  const {
-    data: participants,
-    isLoading: areParticipantsLoading,
-    error,
-  } = useContestParticipants();
+  const { data: participants, isLoading: areParticipantsLoading } =
+    useContestParticipants();
   const {
     drawWinner,
     resetDraw,
@@ -80,15 +77,15 @@ export default function Contest() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-lg text-red-600">
-          {t("contest.staff.participants.loadingError")}
-        </div>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex h-screen items-center justify-center">
+  //       <div className="text-lg text-red-600">
+  //         {t("contest.staff.participants.loadingError")}
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -228,7 +225,7 @@ export default function Contest() {
                 <ul className="max-h-96 space-y-0.5 overflow-y-auto">
                   {participants.map((participant) => (
                     <li
-                      key={participant.$id}
+                      key={participant._id}
                       className="rounded text-gray-700 hover:bg-gray-50"
                     >
                       {participant.name}
@@ -270,13 +267,13 @@ export default function Contest() {
               <ul className="space-y-2">
                 {winners.map((winner) => (
                   <li
-                    key={winner.$id}
+                    key={winner._id}
                     className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
                   >
                     <span className="font-medium">{winner.name}</span>
                     <span className="text-sm text-gray-500">
-                      {winner.drawnDate &&
-                        new Date(winner.drawnDate).toLocaleDateString()}
+                      {winner.drawnAt &&
+                        new Date(winner.drawnAt).toLocaleDateString()}
                     </span>
                   </li>
                 ))}

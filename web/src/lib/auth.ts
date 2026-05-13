@@ -22,7 +22,12 @@ export const getAnonymousAccount = () =>
 export const registerWithEmail = (
   email: string,
   data: Pick<User, "name" | "language" | "emailConsent">,
-) => ["rallyist", { flow: "signUp", email, ...data }] satisfies SignInParam;
+  enforceAnonymousUpgrade = false,
+) =>
+  [
+    "rallyist",
+    { flow: "signUp", email, enforceAnonymousUpgrade, ...data },
+  ] satisfies SignInParam;
 
 export const withMagicLink = (email: string) =>
   ["rallyist", { flow: "sendMagicLink", email }] satisfies SignInParam;

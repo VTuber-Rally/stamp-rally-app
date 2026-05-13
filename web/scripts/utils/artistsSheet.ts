@@ -13,7 +13,6 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: "v4", auth });
 const drive = google.drive({ version: "v3", auth });
 const spreadsheetId = scriptEnv.ARTISTS_SPREADSHEET_ID;
-const profilePicturesFolderId = scriptEnv.IMAGES_FOLDER_ID;
 
 export interface SheetBooth {
   email: string;
@@ -33,26 +32,22 @@ export interface SheetBooth {
 export async function getArtistsFromSheet() {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: "Artists!B2:P",
+    range: "Artists!B2:W",
   });
-
-  const images = (
-    await drive.files.list({
-      q: `'${profilePicturesFolderId}' in parents and trashed = false`,
-      fields: "files(id, name, mimeType)",
-    })
-  ).data.files!;
 
   const booths: SheetBooth[] = [];
 
   for (const line of response.data.values!) {
     /* eslint-disable @typescript-eslint/no-unused-vars */
     const [
-      email,
       artistName,
+      email,
       boothName,
       boothNumber,
       hall,
+      talentName,
+      talentAlreadyPresent,
+      sentFile,
       alreadyPresent,
       description,
       showcase,
@@ -63,13 +58,14 @@ export async function getArtistsFromSheet() {
       profilePicture,
       promoArtwork,
       boothRegistration,
+      profilePictureURL,
+      profilePictureId,
+      promoArtworkURL,
+      promoArtworkId,
     ] = line as string[];
     /* eslint-enable @typescript-eslint/no-unused-vars */
 
-    const profilePictureDriveFile = images.find(
-      (image) => image.name === profilePicture,
-    )?.id;
-    if (!profilePictureDriveFile) {
+    if (!profilePictureId) {
       console.warn(
         "Artist",
         artistName,
@@ -78,9 +74,11 @@ export async function getArtistsFromSheet() {
       continue;
     }
 
+    console.log(line);
+
     const file = await drive.files.get(
       {
-        fileId: profilePictureDriveFile,
+        fileId: profilePictureId,
         alt: "media",
       },
       { responseType: "blob" },

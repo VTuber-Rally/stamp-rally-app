@@ -10,6 +10,7 @@
 
 import type * as auth from "../auth.js";
 import type * as booths from "../booths.js";
+import type * as contest from "../contest.js";
 import type * as email from "../email.js";
 import type * as fcm from "../fcm.js";
 import type * as flags from "../flags.js";
@@ -29,6 +30,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   booths: typeof booths;
+  contest: typeof contest;
   email: typeof email;
   fcm: typeof fcm;
   flags: typeof flags;

@@ -22,7 +22,8 @@ export default defineSchema({
   flags: defineTable({
     key: v.string(),
     value: v.string(),
-  }).index("by_key", ["key"]),
+    public: v.boolean(),
+  }).index("by_key_and_public", ["key", "public"]),
 
   stamps: defineTable({
     booth: v.id("booths"),
@@ -39,7 +40,9 @@ export default defineSchema({
     submittedAt: v.number(),
     userId,
     stampsCount: v.number(),
-  }).index("by_user", ["userId"]),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_redeemed", ["userId", "redeemed"]),
 
   prizes: defineTable({
     probability: v.number(),
@@ -52,9 +55,13 @@ export default defineSchema({
     userId,
     name: v.string(),
     registeredAt: v.number(),
-    drawnAt: v.number(),
+    drawnAt: v.optional(v.number()),
     isWinner: v.boolean(),
-  }),
+    isDrawn: v.boolean(),
+  })
+    .index("by_user", ["userId"])
+    .index("by_is_drawn_registered_at", ["isDrawn", "registeredAt"])
+    .index("by_is_winner_drawn_at", ["isWinner", "drawnAt"]),
 
   // Stock
   cardDesigns: defineTable({

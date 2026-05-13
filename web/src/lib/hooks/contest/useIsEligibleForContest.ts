@@ -1,21 +1,12 @@
-import { skipToken, useQuery } from "@tanstack/react-query";
-
-import { SubmissionWithId } from "@vtube-stamp-rally/shared-lib/models/Submission.ts";
-
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { db } from "@/lib/db.ts";
-import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
+import { useFollowParticipation } from "@/lib/hooks/contest/useFollowParticipation.ts";
+import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions";
 
 export const getContestEligibility = (
-  submissions: SubmissionWithId[],
-  numbersOfContestParticipations: number,
+  redeemedSubmissionsCount: number,
+  existingParticipationsCount: number,
 ): { eligible: true } | { eligible: false; reason: string } => {
-  const numbersOfValidatedSubmissions = submissions.filter(
-    (x) => x.redeemed,
-  ).length;
-
   const hasEnoughSubmissions =
-    numbersOfValidatedSubmissions > numbersOfContestParticipations;
+    redeemedSubmissionsCount > existingParticipationsCount;
 
   if (!hasEnoughSubmissions) {
     return { eligible: false, reason: "not_submitted" };
@@ -26,23 +17,21 @@ export const getContestEligibility = (
 
 export const useIsEligibleForContest = () => {
   const submissions = useRallySubmissions();
+  const { currentParticipation } = useFollowParticipation();
 
-  const { data, isPending } = useQuery({
-    queryKey: [
-      QUERY_KEYS.CONTEST_ELIGIBILITY,
-      ...(submissions?.map((submission) => submission._id) ?? []),
-    ],
-    queryFn: submissions?.length
-      ? async () => {
-          const numberOfContestParticipations =
-            await db.contestParticipations.count();
-          return getContestEligibility(
-            submissions,
-            numberOfContestParticipations,
-          );
-        }
-      : skipToken,
-  });
+  // While either is loading, return pending
+  if (submissions === undefined || currentParticipation === undefined) {
+    return { eligibilityData: undefined, isPending: true };
+  }
 
-  return { eligibilityData: data, isPending };
+  const validSubmissionsCount = submissions.length;
+  // If user has no current (undrawn) participation, count is 0; otherwise 1
+  const existingParticipationsCount = currentParticipation !== null ? 1 : 0;
+
+  const eligibilityData = getContestEligibility(
+    validSubmissionsCount,
+    existingParticipationsCount,
+  );
+
+  return { eligibilityData, isPending: false };
 };

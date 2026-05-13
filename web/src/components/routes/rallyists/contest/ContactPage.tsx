@@ -1,25 +1,31 @@
+import { useAuthActions } from "@convex-dev/auth/react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { useMutation } from "convex/react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
-import { Checkbox } from "@/components/inputs/Checkbox";
+import { RHFCheckbox } from "@/components/inputs/Checkbox";
 import InputField from "@/components/inputs/InputField";
 import { Header } from "@/components/layout/Header";
+import { registerWithEmail, useCurrentUser } from "@/lib/auth";
+import { convexPublicApi } from "@/lib/convex.ts";
 import { useToast } from "@/lib/hooks/useToast";
-import { useUser } from "@/lib/hooks/useUser";
 
 export function ContactPage() {
   const { t } = useTranslation();
-  const { user, setName, setEmail, setPref } = useUser();
+  const user = useCurrentUser();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { secret } = useSearch({
-    from: "/_rallyists/_withUserProvider/reward/contest/contact",
+    from: "/_rallyists/reward/contest/contact",
   });
+  const { signIn } = useAuthActions();
+  const updateMyProfile = useMutation(convexPublicApi.users.updateMyProfile);
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
@@ -44,14 +50,30 @@ export function ContactPage() {
       });
       return;
     }
+    if (!user) {
+      toast({
+        title: t("contest.contact.error"),
+      });
+      return;
+    }
 
     try {
-      await setName(data.name);
-      if (!isEmailAlreadyInAccount) {
-        await setEmail(data.email);
-      }
-      if (data.consent) {
-        await setPref("consent", true);
+      if (user.isAnonymous) {
+        await signIn(
+          ...registerWithEmail(
+            data.email,
+            {
+              name: data.name,
+              emailConsent: data.consent || false,
+            },
+            true,
+          ),
+        );
+      } else {
+        await updateMyProfile({
+          name: data.name,
+          emailConsent: data.consent || false,
+        });
       }
       return navigate({
         to: "/reward/contest/entry",
@@ -59,11 +81,14 @@ export function ContactPage() {
       });
     } catch (error) {
       console.error("Error updating profile:", error);
+      // TODO: maybe add custom messages for common scenarios (already used e-mail)
       toast({
         title: t("contest.contact.error"),
       });
     }
   };
+
+  if (!user) return <></>;
 
   return (
     <>
@@ -111,7 +136,13 @@ export function ContactPage() {
 
         <div>
           <div className={"flex items-center"}>
-            <Checkbox {...register("consent")} id={"consent"} />
+            <Controller
+              control={control}
+              name="consent"
+              render={({ field }) => (
+                <RHFCheckbox {...field} id={"emailConsent"} />
+              )}
+            />
             <label className={"ml-2"} htmlFor={"consent"}>
               {t("consent.email")}
             </label>

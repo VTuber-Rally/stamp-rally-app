@@ -2,7 +2,7 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox, RHFCheckbox } from "@/components/inputs/Checkbox.tsx";
+import { RHFCheckbox } from "@/components/inputs/Checkbox.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
 import { registerWithEmail } from "@/lib/auth.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";

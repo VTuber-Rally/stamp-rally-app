@@ -39,7 +39,7 @@ function LoginPage() {
     },
   });
 
-  const onSubmitRegister: SubmitHandler<SigninForm> = async (data) => {
+  const onSubmit: SubmitHandler<SigninForm> = async (data) => {
     try {
       setIsSigningIn(true);
       clearErrors();
@@ -110,10 +110,7 @@ function LoginPage() {
       <Header>{t("login")}</Header>
       <div className={"flex grow flex-col justify-center"}>
         <h1 className={"mb-4 text-3xl"}>{t("login")}</h1>
-        <form
-          className={"flex flex-col"}
-          onSubmit={handleSubmit(onSubmitRegister)}
-        >
+        <form className={"flex flex-col"} onSubmit={handleSubmit(onSubmit)}>
           <InputField
             type={"email"}
             name={"email"}

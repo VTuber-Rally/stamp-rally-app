@@ -3,16 +3,16 @@ import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { Header } from "@/components/layout/Header";
+import { useCurrentUser } from "@/lib/auth";
 import { useRegisterContestParticipant } from "@/lib/hooks/contest/useRegisterContestParticipant";
 import { useToast } from "@/lib/hooks/useToast";
-import { useUser } from "@/lib/hooks/useUser";
 
 export function EntryPage() {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const { user } = useUser();
+  const user = useCurrentUser();
   const { secret } = useSearch({
-    from: "/_rallyists/_withUserProvider/reward/contest/entry",
+    from: "/_rallyists/reward/contest/entry",
   });
 
   const { mutate: registerContestParticipant, isPending } =
@@ -27,7 +27,7 @@ export function EntryPage() {
       return;
     }
 
-    registerContestParticipant(secret);
+    void registerContestParticipant(secret);
   };
 
   return (

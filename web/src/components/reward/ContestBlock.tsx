@@ -1,22 +1,25 @@
 import clsx from "clsx";
+import { Authenticated } from "convex/react";
 import { Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-import { ContestParticipant } from "@vtube-stamp-rally/shared-lib/models/ContestParticipant.ts";
 
 import Loader from "@/components/Loader";
 import { ButtonLink } from "@/components/controls/ButtonLink";
 import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
+import { type ConvexDataModel } from "@/lib/convex";
 import { useFollowParticipation } from "@/lib/hooks/contest/useFollowParticipation";
 import { useIsEligibleForContest } from "@/lib/hooks/contest/useIsEligibleForContest";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions";
+
+type ContestParticipation =
+  ConvexDataModel["contestParticipations"]["document"];
 
 export const ContestBlock = () => {
   const { t } = useTranslation();
   const submissions = useRallySubmissions();
   const { eligibilityData, isPending: isEligibilityPending } =
     useIsEligibleForContest();
-  const { currentParticipation, isCurrentParticipationPending } =
+  const { currentParticipation, isPending: isCurrentParticipationPending } =
     useFollowParticipation();
 
   const isEligibleForContest = eligibilityData?.eligible ?? false;
@@ -24,8 +27,8 @@ export const ContestBlock = () => {
   const isContestBlockLoading =
     isCurrentParticipationPending || !submissions || isEligibilityPending;
 
-  const getParticipationStatus = (participation: ContestParticipant) => {
-    if (participation.drawnDate) {
+  const getParticipationStatus = (participation: ContestParticipation) => {
+    if (participation.drawnAt) {
       return participation.isWinner
         ? t("contest.status.win")
         : t("contest.status.lost");
@@ -50,7 +53,7 @@ export const ContestBlock = () => {
 
   const ContestButton = () => {
     const isWaitingForDraw = Boolean(
-      currentParticipation && !currentParticipation.drawnDate,
+      currentParticipation && !currentParticipation.drawnAt,
     );
     const isDisabled = !isEligibleForContest || isWaitingForDraw;
     const buttonSize = isWaitingForDraw ? "small" : "medium";
@@ -75,40 +78,42 @@ export const ContestBlock = () => {
       </div>
       <p className="mb-4 text-gray-700">{t("reward.contest.description")}</p>
 
-      {currentParticipation && (
-        <div className="mb-4 rounded-lg bg-gray-50 p-3">
-          <p className="text-sm text-gray-600">
-            {t("contest.status.registeredThe", {
-              date: new Date(
-                currentParticipation.registeredAt,
-              ).toLocaleDateString(undefined, {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              }),
-            })}
-            <br />
-            {getParticipationStatus(currentParticipation)}
-          </p>
+      <Authenticated>
+        {currentParticipation && (
+          <div className="mb-4 rounded-lg bg-gray-50 p-3">
+            <p className="text-sm text-gray-600">
+              {t("contest.status.registeredThe", {
+                date: new Date(
+                  currentParticipation.registeredAt,
+                ).toLocaleDateString(undefined, {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                }),
+              })}
+              <br />
+              {getParticipationStatus(currentParticipation)}
+            </p>
 
-          {!currentParticipation.drawnDate && (
-            <ButtonLink
-              type="link"
-              href="/reward/contest/success"
-              size="medium"
-            >
-              {t("contest.status.followParticipation")}
-            </ButtonLink>
-          )}
-        </div>
-      )}
+            {!currentParticipation.drawnAt && (
+              <ButtonLink
+                type="link"
+                href="/reward/contest/success"
+                size="medium"
+              >
+                {t("contest.status.followParticipation")}
+              </ButtonLink>
+            )}
+          </div>
+        )}
 
-      {isContestBlockLoading && (
-        <div className="flex flex-col items-center justify-center gap-2">
-          <Loader />
-          <p className="text-gray-600">{t("loading")}</p>
-        </div>
-      )}
+        {isContestBlockLoading && (
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Loader />
+            <p className="text-gray-600">{t("loading")}</p>
+          </div>
+        )}
+      </Authenticated>
 
       {submissions && eligibilityData !== undefined && (
         <>
