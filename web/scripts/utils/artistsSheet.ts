@@ -74,7 +74,14 @@ export async function getArtistsFromSheet() {
       continue;
     }
 
-    console.log(line);
+    if (!boothName) {
+      console.warn(
+        "Artist",
+        artistName,
+        "was ignored because no booth name is written.",
+      );
+      continue;
+    }
 
     const file = await drive.files.get(
       {

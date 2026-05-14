@@ -1,20 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "convex/react";
 import { useMemo } from "react";
 
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { useDatabase } from "@/lib/hooks/useDatabase.ts";
+import { convexPublicApi } from "@/lib/convex.ts";
 import { RewardDrawType } from "@/lib/rewards.ts";
 
 export const useDrawReward = () => {
-  const { getPrizes } = useDatabase();
+  const prizes = useQuery(convexPublicApi.prizes.getPrizes);
 
-  const { data: prizes = [], isLoading } = useQuery({
-    queryKey: [QUERY_KEYS.PRIZES],
-    queryFn: () => getPrizes(),
-  });
+  const isLoading = prizes === undefined;
 
   const standardPrizes = useMemo(
-    () => prizes.filter((prize) => prize.draw == "standard"),
+    () => prizes?.filter((prize) => prize.draw == "standard") ?? [],
     [prizes],
   );
   const standardPrizesProbabilitySum = useMemo(
@@ -23,7 +19,7 @@ export const useDrawReward = () => {
   );
 
   const premiumPrizes = useMemo(
-    () => prizes.filter((prize) => prize.draw == "premium"),
+    () => prizes?.filter((prize) => prize.draw == "premium") ?? [],
     [prizes],
   );
   const premiumPrizesProbabilitySum = useMemo(

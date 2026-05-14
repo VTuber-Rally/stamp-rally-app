@@ -16,6 +16,7 @@ import type * as fcm from "../fcm.js";
 import type * as flags from "../flags.js";
 import type * as http from "../http.js";
 import type * as notifications from "../notifications.js";
+import type * as prizes from "../prizes.js";
 import type * as submissions from "../submissions.js";
 import type * as users from "../users.js";
 import type * as utils from "../utils.js";
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   flags: typeof flags;
   http: typeof http;
   notifications: typeof notifications;
+  prizes: typeof prizes;
   submissions: typeof submissions;
   users: typeof users;
   utils: typeof utils;

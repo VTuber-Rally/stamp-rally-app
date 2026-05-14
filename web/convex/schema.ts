@@ -17,6 +17,7 @@ export default defineSchema({
     publicKey: jsonWebKey,
     privateKey: jsonWebKey,
     links: v.record(v.string(), v.string()),
+    cardDesign: v.optional(v.id("cardDesigns")),
   }).index("by_name", ["name"]),
 
   flags: defineTable({
@@ -68,7 +69,6 @@ export default defineSchema({
     name: v.string(),
     artist: v.string(),
     image: v.id("_storage"),
-    booth: v.id("booths"),
   }),
 
   groups: defineTable({

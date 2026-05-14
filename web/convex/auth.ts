@@ -180,6 +180,7 @@ export const createUserWithEmailPassword = internalAction({
     password: v.string(),
     role: v.union(v.literal("standist"), v.literal("staff")),
     name: v.string(),
+    boothId: v.optional(v.id("booths")),
   },
   handler: async (ctx, args) => {
     await createAccount<DataModel>(ctx, {
@@ -189,6 +190,7 @@ export const createUserWithEmailPassword = internalAction({
         name: args.name,
         email: args.email,
         role: args.role,
+        boothId: args.boothId,
       },
       shouldLinkViaEmail: false,
       shouldLinkViaPhone: false,
