@@ -44,7 +44,7 @@
     "@vtube-stamp-rally/shared-lib": "workspace:*",
     "appwrite": "^16.1.0",
     "clsx": "^2.1.1",
-    "convex": "^1.37.0",
+    "convex": "^1.40.0",
     "convex-helpers": "^0.1.115",
     "date-fns": "^4.1.0",
     "dexie": "^4.0.11",

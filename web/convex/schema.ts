@@ -86,12 +86,12 @@ export default defineSchema({
     isAvailable: v.boolean(),
     type: v.union(v.literal("classic"), v.literal("holographic")),
     group: v.id("groups"),
-  }).index("by_group", ["group"]),
+  }).index("by_group_available", ["group", "isAvailable"]),
 
   cardHistory: defineTable({
     card: v.id("cards"),
-    submission: v.optional(v.id("submission")),
-    group: v.optional(v.id("group")),
+    submission: v.optional(v.id("submissions")),
+    group: v.optional(v.id("groups")),
     type: v.union(
       v.literal("initial"),
       v.literal("redistributed"),
