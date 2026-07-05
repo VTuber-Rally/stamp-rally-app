@@ -8,9 +8,8 @@ import Loader from "@/components/Loader.tsx";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
 import { Header } from "@/components/layout/Header.tsx";
-import { withMagicLink } from "@/lib/auth.ts";
+import { useCurrentUser, withMagicLink } from "@/lib/auth.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
 
 export const Route = createFileRoute("/_rallyists/login")({
   component: LoginPage,
@@ -21,7 +20,7 @@ type SigninForm = {
 };
 
 function LoginPage() {
-  const { user } = useUser();
+  const user = useCurrentUser();
   const { signOut, signIn } = useAuthActions();
   const { t } = useTranslation();
   const [isSigningIn, setIsSigningIn] = useState(false);
@@ -62,8 +61,8 @@ function LoginPage() {
     }
   };
 
-  // const isLoggedInAnonymous = user?.email === undefined;
-  if (user) {
+  const isLoggedInAnonymous = user?.isAnonymous;
+  if (isLoggedInAnonymous) {
     const i18nKeyWarning =
       user.email === "" || user.email === undefined
         ? "anonymousLogoutWarning"
