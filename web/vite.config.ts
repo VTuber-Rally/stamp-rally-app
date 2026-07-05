@@ -44,6 +44,9 @@ export default defineConfig({
           VITE_SENTRY_ENVIRONMENT: Schema.string(),
           VITE_INDEXEDDB_NAME: Schema.string(),
           VITE_CONVEX_URL: Schema.string(),
+          VITE_CONVEX_SITE_URL: Schema.string(),
+          VITE_SITE_URL: Schema.string(),
+          VITE_PAGE_TITLE: Schema.string(),
         },
       }),
     // This plugin is disabled in Storybook
