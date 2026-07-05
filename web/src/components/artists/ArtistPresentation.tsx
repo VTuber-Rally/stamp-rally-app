@@ -76,7 +76,9 @@ export const ArtistPresentation: FC<{ boothId: ConvexId<"booths"> }> = ({
           </ExternalLink>
         )}
         {booth.links.twitch && (
-          <ExternalLink href={booth.links.twitch}>Twitch</ExternalLink>
+          <ExternalLink href={`https://twitch.tv/${booth.links.twitch}`}>
+            Twitch
+          </ExternalLink>
         )}
         {booth.links.website && (
           <ExternalLink href={booth.links.website}>

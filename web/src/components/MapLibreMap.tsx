@@ -13,6 +13,7 @@ import { FC, ReactNode, useEffect, useRef, useState } from "react";
 import { MapContextProvider } from "@/contexts/MapContextProvider";
 import { mapCenter } from "@/lib/consts.ts";
 import { ConvexId } from "@/lib/convex.ts";
+import { useBooths } from "@/lib/hooks/useBooths.ts";
 import {
   generateStyleSpec,
   getBoothsFeatureCollection,
@@ -26,6 +27,8 @@ export const MapLibreMap: FC<{
   const searchParams = useSearch({ strict: false }) as {
     center?: [number, number];
   };
+
+  const booths = useBooths();
 
   const container = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<MapLibre | null>(null);
@@ -59,21 +62,6 @@ export const MapLibreMap: FC<{
 
       map.addControl(new NavigationControl(), "bottom-left");
 
-      getBoothsFeatureCollection().then(
-        (featureCollection) => {
-          const writeStandists = () =>
-            (map.getSource("standists") as GeoJSONSource).setData(
-              featureCollection,
-            );
-          if (!map.isStyleLoaded()) {
-            void map.once("styledata", writeStandists);
-            void map.once("load", writeStandists);
-          } else writeStandists();
-        },
-        (error) => {
-          captureException(error);
-        },
-      );
       const handleFeatureClick = ({
         features,
       }: {
@@ -96,6 +84,21 @@ export const MapLibreMap: FC<{
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onStandClick]);
+
+  useEffect(() => {
+    if (!booths.data || !mapInstance) {
+      return;
+    }
+    const featureCollection = getBoothsFeatureCollection(booths.data);
+    const writeStandists = () =>
+      (mapInstance.getSource("standists") as GeoJSONSource).setData(
+        featureCollection,
+      );
+    if (!mapInstance.isStyleLoaded()) {
+      void mapInstance.once("styledata", writeStandists);
+      void mapInstance.once("load", writeStandists);
+    } else writeStandists();
+  }, [booths.data, mapInstance]);
 
   return (
     <MapContextProvider mapInstance={mapInstance}>

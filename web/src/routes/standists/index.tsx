@@ -23,9 +23,14 @@ function StandistsHome() {
       loginTo={"/standists/signin"}
     >
       {isStandist ? (
-        <ButtonLink size={"small"} href="/standists/qrcode">
-          {t("generateQRCode")}
-        </ButtonLink>
+        <>
+          <ButtonLink size={"small"} href="/standists/qrcode">
+            {t("generateQRCode")}
+          </ButtonLink>
+          <ButtonLink size={"small"} href="/standists/profile">
+            {t("profile.label")}
+          </ButtonLink>
+        </>
       ) : (
         <div>
           <h2>You're not a standist, are you?</h2>

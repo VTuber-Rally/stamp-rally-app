@@ -25,8 +25,11 @@ const StandistsProfilePage = () => {
   const user = useCurrentUser();
   const booth = useBooth(user?.boothId);
 
-  const updateBoothProfile = useMutation(convexPublicApi.booths.updateBoothProfile);
-  const { mutate: updateProfile, isLoading: isPending } = useDLEMutation(updateBoothProfile);
+  const updateBoothProfile = useMutation(
+    convexPublicApi.booths.updateBoothProfile,
+  );
+  const { mutate: updateProfile, isLoading: isPending } =
+    useDLEMutation(updateBoothProfile);
 
   const methods = useForm<StandistsEditProfileForm>({
     defaultValues: {
@@ -120,7 +123,7 @@ const StandistsProfilePage = () => {
           <InputField
             type={"text"}
             name={"twitter"}
-            placeholder={"@japexvtuberally"}
+            placeholder={"SuperArts_twt"}
             required={false}
             register={register}
             errors={errors["twitter"]}
@@ -132,7 +135,7 @@ const StandistsProfilePage = () => {
           <InputField
             type={"text"}
             name={"instagram"}
-            placeholder={"japexvtubestamprally"}
+            placeholder={"SuperArts"}
             required={false}
             register={register}
             errors={errors["instagram"]}
@@ -144,7 +147,7 @@ const StandistsProfilePage = () => {
           <InputField
             type={"text"}
             name={"twitch"}
-            placeholder={"https://twitch.tv/sedeto"}
+            placeholder={"MyTwitchChannel"}
             required={false}
             register={register}
             errors={errors["twitch"]}
@@ -152,7 +155,7 @@ const StandistsProfilePage = () => {
         </div>
 
         <div className={"flex flex-col"}>
-          <label htmlFor={"website"}>{t("website")}</label>
+          <label htmlFor={"website"}>{t("Website")}</label>
           <InputField
             type={"url"}
             name={"website"}

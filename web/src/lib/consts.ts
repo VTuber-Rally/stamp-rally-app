@@ -38,7 +38,7 @@ const firebaseConfig = {
   appId: firebaseAppId,
 };
 
-const mapCenter = [2.518988, 48.970091] as [number, number];
+const mapCenter = [2.5191618272698406, 48.96983303992434] as [number, number];
 const jwkAlgorithm = { name: "ECDSA", namedCurve: "P-384" } as const;
 const signAlgorithm = {
   name: "ECDSA",

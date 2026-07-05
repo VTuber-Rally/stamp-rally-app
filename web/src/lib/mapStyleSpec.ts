@@ -3,7 +3,7 @@ import { Feature, FeatureCollection } from "geojson";
 import { StyleSpecification } from "maplibre-gl";
 
 import { mapTilesURL } from "@/lib/consts.ts";
-import { getBooths } from "@/lib/hooks/useBooths.ts";
+import { PublicBooth } from "@/lib/convex.ts";
 import { getCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
 
 const mapColors = {
@@ -14,8 +14,7 @@ const mapColors = {
   white: "white",
 } as const;
 
-export async function getBoothsFeatureCollection() {
-  const booths = await getBooths();
+export function getBoothsFeatureCollection(booths: PublicBooth[]) {
   const stamps = getCollectedStamps();
   const stampedStandistsIds = new Set(stamps.map((s) => s.boothId));
 
