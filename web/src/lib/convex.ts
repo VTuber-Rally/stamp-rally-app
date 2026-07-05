@@ -1,4 +1,4 @@
-import { ReactMutation } from "convex/react";
+import { ReactMutation, useQuery_experimental } from "convex/react";
 import type { FunctionReference, OptionalRestArgs } from "convex/server";
 import { useState } from "react";
 import { api } from "~/_generated/api";
@@ -9,10 +9,17 @@ export type Booth = ConvexDataModel["booths"]["document"];
 export type PublicBooth = (typeof api.booths.listBooths._returnType)[number];
 export type Submission = ConvexDataModel["submissions"]["document"];
 export type Prize = ConvexDataModel["prizes"]["document"];
+export type CardDesign = (typeof api.cards.listCardDesigns._returnType)[number];
+export type GroupWithCardCount =
+  (typeof api.cards.listAvailableCards._returnType)["activeGroup"];
+export type CardDesignWithAvailability =
+  (typeof api.cards.listAvailableCards._returnType)["cards"][number];
 export type { Id as ConvexId };
 export { api as convexPublicApi };
 
 export { type ConvexDataModel };
+
+export { useQuery_experimental as useDLEQuery };
 
 export const useDLEMutation = <Mutation extends FunctionReference<"mutation">>(
   mutateFn: ReactMutation<Mutation>,

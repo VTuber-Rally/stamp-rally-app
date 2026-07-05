@@ -12,13 +12,14 @@ import { FC, ReactNode, useEffect, useRef, useState } from "react";
 
 import { MapContextProvider } from "@/contexts/MapContextProvider";
 import { mapCenter } from "@/lib/consts.ts";
+import { ConvexId } from "@/lib/convex.ts";
 import {
   generateStyleSpec,
   getBoothsFeatureCollection,
 } from "@/lib/mapStyleSpec.ts";
 
 export const MapLibreMap: FC<{
-  onStandClick: (standId: string) => void;
+  onStandClick: (standId: ConvexId<"booths">) => void;
   children?: ReactNode;
 }> = ({ onStandClick, children }) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -80,7 +81,7 @@ export const MapLibreMap: FC<{
       }) => {
         if (!features || !features[0]) return;
         const feature = features[0];
-        onStandClick(feature.id as string);
+        onStandClick(feature.id as ConvexId<"booths">);
       };
 
       map.on("click", "line", handleFeatureClick);

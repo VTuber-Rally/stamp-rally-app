@@ -4,8 +4,6 @@ import { MapIcon, TicketCheck } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { StampWithId } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-
 import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { Header } from "@/components/layout/Header.tsx";

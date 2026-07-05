@@ -11,7 +11,7 @@ import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
 import { DrawerDescription, DrawerTitle } from "@/components/layout/Drawer.tsx";
 import { Header } from "@/components/layout/Header.tsx";
 import { ConvexId } from "@/lib/convex.ts";
-import { useCardDesignByStandistId } from "@/lib/hooks/inventory/useCardDesigns";
+import { useCardDesignById } from "@/lib/hooks/inventory/useCardDesigns";
 import { useBooth } from "@/lib/hooks/useBooth.ts";
 
 import { ArtistImage } from "./ArtistImage";
@@ -21,7 +21,7 @@ export const ArtistPresentation: FC<{ boothId: ConvexId<"booths"> }> = ({
 }) => {
   const { t } = useTranslation();
   const booth = useBooth(boothId);
-  const cardDesign = useCardDesignByStandistId(boothId);
+  const cardDesign = useCardDesignById(booth?.cardDesign);
 
   if (!booth) return null;
 
@@ -84,17 +84,17 @@ export const ArtistPresentation: FC<{ boothId: ConvexId<"booths"> }> = ({
           </ExternalLink>
         )}
       </div>
-      {cardDesign?.image && cardDesign.image !== null && (
+      {cardDesign.status === "success" && !!cardDesign.data && (
         <div className="mx-auto flex max-w-lg items-center gap-2 rounded-xl bg-gray-100 p-4 shadow-md">
           <p className="w-1/2 text-lg">
             {t("artistPresentation.cardDescription", {
-              artistName: booth.name,
-              cardName: cardDesign.name,
+              artistName: cardDesign.data.artist,
+              cardName: cardDesign.data.name,
             })}
           </p>
           <img
-            src={cardDesign.image}
-            alt={cardDesign.name}
+            src={cardDesign.data.imageUrl}
+            alt={cardDesign.data.name}
             className="w-1/2 rounded"
           />
         </div>

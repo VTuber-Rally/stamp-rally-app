@@ -1,15 +1,14 @@
 import { useTranslation } from "react-i18next";
 
-import { CardAvailable } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
-
 import type { CartCard } from "@/contexts/InventoryDrawerContext.ts";
+import { CardDesign, CardDesignWithAvailability } from "@/lib/convex.ts";
 
 import { InventoryCard } from "./InventoryCard.tsx";
 
 interface InventoryCardListProps {
-  cardDesignWithStock: CardAvailable[];
+  cardDesignWithStock: CardDesignWithAvailability[];
   cartCards: CartCard[];
-  addToCart: (card: CardAvailable, type: "classic" | "holo") => void;
+  addToCart: (card: CardDesign, type: "classic" | "holo") => void;
 }
 
 export function InventoryCardList({
@@ -27,10 +26,10 @@ export function InventoryCardList({
 
       <div className="grid grid-cols-2 gap-4">
         {cardDesignWithStock.map((design) => {
-          const cartCard = cartCards.find((card) => card.$id === design.$id);
+          const cartCard = cartCards.find((card) => card._id === design._id);
           return (
             <InventoryCard
-              key={design.$id}
+              key={design._id}
               design={design}
               cartCard={cartCard}
               addToCart={addToCart}

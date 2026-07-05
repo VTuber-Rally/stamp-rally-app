@@ -19,6 +19,7 @@ export interface SheetBooth {
   artistName: string;
   boothName: string;
   boothNumber: string;
+  talentName: string;
   hall: string;
   description: string;
   showcase: string;
@@ -27,12 +28,13 @@ export interface SheetBooth {
   pronouns: string;
   alreadyPresent: boolean;
   profilePicture: Blob;
+  rewardCard: Blob;
 }
 
 export async function getArtistsFromSheet() {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: "Artists!B2:W",
+    range: "Artists!B2:Y",
   });
 
   const booths: SheetBooth[] = [];
@@ -62,41 +64,35 @@ export async function getArtistsFromSheet() {
       profilePictureId,
       promoArtworkURL,
       promoArtworkId,
+      rewardCardURL,
+      rewardCardId,
     ] = line as string[];
     /* eslint-enable @typescript-eslint/no-unused-vars */
 
-    if (!profilePictureId) {
-      console.warn(
-        "Artist",
-        artistName,
-        "was ignored, please add profile picture",
-      );
-      continue;
-    }
-
-    if (!boothName) {
-      console.warn(
-        "Artist",
-        artistName,
-        "was ignored because no booth name is written.",
-      );
-      continue;
-    }
-
-    const file = await drive.files.get(
+    const profileFile = await drive.files.get(
       {
         fileId: profilePictureId,
         alt: "media",
       },
       { responseType: "blob" },
     );
-    const imageBlob = file.data as unknown as Blob;
+    const profilePictureBlob = profileFile.data as unknown as Blob;
+
+    const rewardFile = await drive.files.get(
+      {
+        fileId: rewardCardId,
+        alt: "media",
+      },
+      { responseType: "blob" },
+    );
+    const rewardCardBlob = rewardFile.data as unknown as Blob;
 
     const booth = {
       email,
       artistName,
       boothName,
       boothNumber,
+      talentName,
       hall,
       description,
       showcase,
@@ -104,7 +100,8 @@ export async function getArtistsFromSheet() {
       talents,
       pronouns,
       alreadyPresent: alreadyPresent === "TRUE",
-      profilePicture: imageBlob,
+      profilePicture: profilePictureBlob,
+      rewardCard: rewardCardBlob,
     };
 
     booths.push(booth);

@@ -156,3 +156,16 @@ export const getSubmissionWithStamps = query({
     };
   },
 });
+
+export const markSubmissionAsRedeemed = mutation({
+  args: { submissionId: v.id("submissions") },
+  handler: async (ctx, args) => {
+    await getStaffLoggedInUser(ctx);
+    const submission = await ctx.db.get("submissions", args.submissionId);
+    if (!submission) {
+      return false;
+    }
+    await ctx.db.patch("submissions", args.submissionId, { redeemed: true });
+    return true;
+  },
+});

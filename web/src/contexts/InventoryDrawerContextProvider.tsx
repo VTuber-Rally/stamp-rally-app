@@ -1,13 +1,12 @@
 import { FC, PropsWithChildren, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { CardAvailable } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
-
 import {
   CartCard,
   InventoryDrawerContext,
   InventoryDrawerContextType,
 } from "@/contexts/InventoryDrawerContext";
+import { CardDesign } from "@/lib/convex.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 
 export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
@@ -27,7 +26,7 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
   );
 
   const addToCart = useCallback(
-    (card: CardAvailable, type: "classic" | "holo") => {
+    (card: CardDesign, type: "classic" | "holo") => {
       const totalInCart = cartCards.reduce(
         (sum, i) =>
           sum + (type === "classic" ? i.classicQuantity : i.holoQuantity),
@@ -51,7 +50,7 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
 
       setCartCards((prev) => {
         const existingCardIndex = prev.findIndex(
-          (cartCard) => cartCard.$id === card.$id,
+          (cartCard) => cartCard._id === card._id,
         );
 
         if (existingCardIndex >= 0) {
@@ -89,7 +88,7 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
       setCartCards((prev) => {
         return prev
           .map((card) => {
-            if (card.$id === cardId) {
+            if (card._id === cardId) {
               const updatedCard = { ...card };
 
               if (type === "classic") {

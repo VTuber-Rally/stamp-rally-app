@@ -1,8 +1,9 @@
-import { useQuery } from "convex/react";
-
-import { ConvexId, convexPublicApi } from "@/lib/convex.ts";
+import { ConvexId, convexPublicApi, useDLEQuery } from "@/lib/convex.ts";
 
 export const useRallySubmission = (submissionId: ConvexId<"submissions">) =>
-  useQuery(convexPublicApi.submissions.getSubmissionWithStamps, {
-    submissionId,
+  useDLEQuery({
+    query: convexPublicApi.submissions.getSubmissionWithStamps,
+    args: {
+      submissionId,
+    },
   });

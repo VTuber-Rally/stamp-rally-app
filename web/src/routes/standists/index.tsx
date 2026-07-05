@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import StandistStaffHomePage from "@/components/routes/standists/StandistStaffHomePage.tsx";
 import { useCurrentUser } from "@/lib/auth.ts";
+import { User } from "@/lib/convex.ts";
 
 export const Route = createFileRoute("/standists/")({
   component: StandistsHome,

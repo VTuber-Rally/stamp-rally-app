@@ -2,15 +2,15 @@ import clsx from "clsx";
 import { Sparkles, Vote } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { CardAvailable } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
-
 import type { CartCard } from "@/contexts/InventoryDrawerContext.ts";
+import { CardDesign, CardDesignWithAvailability } from "@/lib/convex.ts";
+import { useBooths } from "@/lib/hooks/useBooths.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 
 interface InventoryCardProps {
-  design: CardAvailable;
+  design: CardDesignWithAvailability;
   cartCard: CartCard | undefined;
-  addToCart: (card: CardAvailable, type: "classic" | "holo") => void;
+  addToCart: (card: CardDesign, type: "classic" | "holo") => void;
 }
 
 export function InventoryCard({
@@ -21,8 +21,12 @@ export function InventoryCard({
   const { t } = useTranslation();
   const { toast } = useToast();
 
+  const { data: booths = [] } = useBooths();
+
   const hasClassic = !!cartCard && cartCard.classicQuantity > 0;
   const hasHolo = !!cartCard && cartCard.holoQuantity > 0;
+
+  const boothOfDesign = booths.find((booth) => booth.cardDesign === design._id);
 
   const handleStockClick = (type: "classic" | "holo") => {
     const currentQuantity =
@@ -75,7 +79,7 @@ export function InventoryCard({
     <div className="rounded-lg border border-gray-200 bg-white p-2 shadow-md">
       <div className="flex flex-col items-center">
         <img
-          src={design.image}
+          src={design.imageUrl}
           alt={design.name}
           className="mb-3 rounded-lg object-cover"
         />
@@ -83,13 +87,13 @@ export function InventoryCard({
         <h3 className="text-lg font-semibold text-gray-800">{design.name}</h3>
         <p className="text-sm text-gray-600">
           {t("cardDesigns.byAuthor", {
-            author: design.author,
+            author: design.artist,
           })}
         </p>
-        {design.standist && design.standist.name !== design.author && (
+        {boothOfDesign && boothOfDesign.name !== design.artist && (
           <p className="mt-2 text-xs text-gray-500">
             {t("cardDesigns.stand", {
-              standName: design.standist.name,
+              standName: boothOfDesign.name,
             })}
           </p>
         )}

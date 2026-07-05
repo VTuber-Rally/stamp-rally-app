@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
-import { unregisterPushTarget } from "@/lib/appwrite.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 import { useUser } from "@/lib/hooks/useUser.ts";
+import { disablePushNotifications } from "@/lib/pushNotifications.ts";
 
 export const useLogout = () => {
   const { logout } = useUser();
@@ -12,7 +12,7 @@ export const useLogout = () => {
 
   return useMutation({
     mutationFn: async () => {
-      await unregisterPushTarget();
+      await disablePushNotifications();
       await logout();
     },
     onSuccess: () => {

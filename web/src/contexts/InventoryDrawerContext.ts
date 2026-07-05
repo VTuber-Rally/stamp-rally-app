@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, createContext } from "react";
 
-import type { CardAvailable } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
+import { CardDesign } from "@/lib/convex.ts";
 
-export interface CartCard extends CardAvailable {
+export interface CartCard extends CardDesign {
   classicQuantity: number;
   holoQuantity: number;
 }
@@ -12,7 +12,7 @@ export interface InventoryDrawerContextType {
   setOpen: Dispatch<SetStateAction<boolean>>;
   cartCards: CartCard[];
   setCartCards: Dispatch<SetStateAction<CartCard[]>>;
-  addToCart: (card: CardAvailable, type: "classic" | "holo") => void;
+  addToCart: (card: CardDesign, type: "classic" | "holo") => void;
   removeFromCart: (cardId: string, type: "classic" | "holo") => void;
   clearCart: () => void;
   maxClassicCards: number;

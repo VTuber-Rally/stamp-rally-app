@@ -5,6 +5,7 @@ import { z } from "zod";
 import { InventoryDrawer } from "@/components/inventory/InventoryDrawer.tsx";
 import { InventoryPage } from "@/components/routes/staff/inventory/InventoryPage.tsx";
 import { InventoryDrawerContextProvider } from "@/contexts/InventoryDrawerContextProvider.tsx";
+import { ConvexId } from "@/lib/convex.ts";
 
 // normalement ça devrait être 3 max mais bon, sait-on jamais pas de max
 const inventorySearchSchema = z.object({
@@ -27,7 +28,7 @@ function RouteComponent() {
         maxClassicCards={maxClassicCards}
         maxHoloCards={maxHoloCards}
       />
-      <InventoryDrawer submissionId={submissionId} />
+      <InventoryDrawer submissionId={submissionId as ConvexId<"submissions">} />
     </InventoryDrawerContextProvider>
   );
 }

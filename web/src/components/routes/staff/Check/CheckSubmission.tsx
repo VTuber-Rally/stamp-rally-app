@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { useMutation } from "convex/react";
 import { formatDistance, formatDuration, intervalToDuration } from "date-fns";
 import { fr } from "date-fns/locale";
 import { TriangleAlert } from "lucide-react";
@@ -17,23 +18,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/layout/Table.tsx";
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { databases } from "@/lib/appwrite.ts";
-import {
-  databaseId,
-  premiumRewardMinStampsRequirement,
-  submissionsCollectionId,
-} from "@/lib/consts.ts";
-import { ConvexId } from "@/lib/convex.ts";
+import { premiumRewardMinStampsRequirement } from "@/lib/consts.ts";
+import { ConvexId, convexPublicApi, useDLEMutation } from "@/lib/convex.ts";
 import { useBooths } from "@/lib/hooks/useBooths.ts";
 import { useRallySubmission } from "@/lib/hooks/useRallySubmission.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { queryClient } from "@/lib/queryClient.ts";
 
-const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
+const CheckSubmission = ({
+  submissionId,
+}: {
+  submissionId: ConvexId<"submissions">;
+}) => {
   const { data: booths } = useBooths();
-  const submission = useRallySubmission(
-    submissionId as ConvexId<"submissions">,
+  const submissionQuery = useRallySubmission(submissionId);
+  const { mutate: markRedeemed } = useDLEMutation(
+    useMutation(convexPublicApi.submissions.markSubmissionAsRedeemed),
   );
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -42,35 +41,7 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
   const i18n = useTranslation();
   const currentLanguage = i18n.i18n.language;
 
-  const markAsRedeemed = async (submissionId: string) => {
-    await databases.updateDocument(
-      databaseId,
-      submissionsCollectionId,
-      submissionId,
-      {
-        redeemed: true,
-      },
-    );
-
-    queryClient.invalidateQueries({
-      queryKey: [QUERY_KEYS.SUBMISSION, submissionId],
-    });
-
-    await navigate({
-      to: "/staff/reward/$drawType",
-      params: {
-        drawType:
-          (submission?.stampsCount ?? 0) >= premiumRewardMinStampsRequirement
-            ? "premium"
-            : "standard",
-      },
-      search: {
-        submissionId,
-      },
-    });
-  };
-
-  if (typeof submission === "undefined") {
+  if (submissionQuery.status === "pending") {
     return (
       <div className={"flex flex-col items-center"}>
         <Loader size={4} />
@@ -79,6 +50,16 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
     );
   }
 
+  if (submissionQuery.status === "error") {
+    return (
+      <div className={"flex flex-col items-center"}>
+        <p>{submissionQuery.error.message}</p>
+      </div>
+    );
+  }
+
+  const submission = submissionQuery.data;
+
   if (!submission) {
     return (
       <div className={"flex flex-col items-center"}>
@@ -86,6 +67,22 @@ const CheckSubmission = ({ submissionId }: { submissionId: string }) => {
       </div>
     );
   }
+
+  const markAsRedeemed = async (submissionId: ConvexId<"submissions">) => {
+    await markRedeemed({ submissionId });
+    await navigate({
+      to: "/staff/reward/$drawType",
+      params: {
+        drawType:
+          (submission.stampsCount ?? 0) >= premiumRewardMinStampsRequirement
+            ? "premium"
+            : "standard",
+      },
+      search: {
+        submissionId,
+      },
+    });
+  };
 
   const submittedAt = new Date(submission._creationTime);
 

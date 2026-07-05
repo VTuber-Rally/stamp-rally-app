@@ -24,6 +24,7 @@ export const insertBooth = internalMutation({
     links: v.record(v.string(), v.string()),
     privateKey: jsonWebKey,
     publicKey: jsonWebKey,
+    cardDesign: v.id("cardDesigns"),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("booths", {
@@ -36,7 +37,32 @@ export const insertBooth = internalMutation({
       links: args.links,
       privateKey: args.privateKey,
       publicKey: args.publicKey,
+      cardDesign: args.cardDesign,
     });
+  },
+});
+
+export const importCardDesigns = internalMutation({
+  args: {
+    designs: v.array(
+      v.object({
+        talent: v.string(),
+        artist: v.string(),
+        image: v.id("_storage"),
+      }),
+    ),
+  },
+  handler: async (ctx, args) => {
+    const createdDesigns: Record<string, Id<"cardDesigns">> = {};
+    for (const design of args.designs) {
+      const createdId = await ctx.db.insert("cardDesigns", {
+        artist: design.artist,
+        image: design.image,
+        name: design.talent,
+      });
+      createdDesigns[design.talent] = createdId;
+    }
+    return createdDesigns;
   },
 });
 
@@ -51,6 +77,7 @@ export const importBooths = internalAction({
         boothNumber: v.string(),
         image: v.id("_storage"),
         links: v.record(v.string(), v.string()),
+        cardDesign: v.id("cardDesigns"),
       }),
     ),
   },
