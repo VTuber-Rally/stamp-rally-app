@@ -1,6 +1,5 @@
-import { StampTuple } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-
 import { siteUrl } from "@/lib/consts.ts";
+import { StampTuple } from "@/lib/stampTuple.ts";
 
 export function encodeStampToQRCode(stamp: StampTuple) {
   const stringifiedStamp = JSON.stringify(stamp);
