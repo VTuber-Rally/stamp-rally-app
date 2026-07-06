@@ -16,8 +16,8 @@ type SignInParam = [string, Record<string, Value>];
 export const withEmailAndPassword = (email: string, password: string) =>
   ["signIn", { flow: "signIn", email, password }] satisfies SignInParam;
 
-export const getAnonymousAccount = () =>
-  ["anonymous", {}] satisfies SignInParam;
+export const getAnonymousAccount = (param: { language?: string } = {}) =>
+  ["anonymous", param] satisfies SignInParam;
 
 export const registerWithEmail = (
   email: string,

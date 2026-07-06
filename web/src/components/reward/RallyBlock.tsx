@@ -1,5 +1,7 @@
+import { useAuthActions } from "@convex-dev/auth/react";
 import { Link } from "@tanstack/react-router";
-import { ExternalLink, Gift } from "lucide-react";
+import { useConvexAuth } from "convex/react";
+import { ExternalLink, Gift, Loader2, Upload } from "lucide-react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -9,13 +11,23 @@ import { ShadowBox } from "@/components/layout/ShadowBox.tsx";
 import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
 import { RewardsAvailabilityList } from "@/components/reward/RewardsAvailabilityList.tsx";
 import { SubmitDrawer } from "@/components/reward/SubmitDrawer.tsx";
+import { getAnonymousAccount } from "@/lib/auth.ts";
 
 export const RallyBlock = () => {
   const { t } = useTranslation();
+  const { isAuthenticated } = useConvexAuth();
+  const { signIn } = useAuthActions();
+  const { i18n } = useTranslation();
 
   const [isSubmitDrawerOpen, setIsSubmitDrawerOpen] = useState(false);
-  const openSubmitDrawer = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const openSubmitDrawer = async () => {
+    setIsLoading(true);
+    if (!isAuthenticated) {
+      await signIn(...getAnonymousAccount({ language: i18n.language }));
+    }
     setIsSubmitDrawerOpen(true);
+    setIsLoading(false);
   };
 
   return (
@@ -75,7 +87,17 @@ export const RallyBlock = () => {
             </p>
           </AccordionItem>
         </Accordion>
-        <ButtonLink type="button" onClick={openSubmitDrawer} size="medium">
+        <ButtonLink
+          type="button"
+          onClick={openSubmitDrawer}
+          disabled={isLoading}
+          size="medium"
+        >
+          {isLoading ? (
+            <Loader2 className="mr-2 animate-spin" />
+          ) : (
+            <Upload className="mr-2" />
+          )}
           {t("currentRallyBlock.submitAction")}
         </ButtonLink>
         <div className="mt-2 text-center">

@@ -2,13 +2,11 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { useConvexAuth, useMutation } from "convex/react";
 import { useMemo } from "react";
 
-import { getAnonymousAccount } from "@/lib/auth.ts";
 import { convexPublicApi, useDLEMutation } from "@/lib/convex.ts";
 import { useStampStore } from "@/lib/stampStore.ts";
 
 export const useSubmitRally = () => {
   const { isAuthenticated } = useConvexAuth();
-  const { signIn } = useAuthActions();
   const { mutate, error, isLoading } = useDLEMutation(
     useMutation(convexPublicApi.submissions.submitRally),
   );
@@ -30,7 +28,7 @@ export const useSubmitRally = () => {
 
   const submitRally = async () => {
     if (!isAuthenticated) {
-      await signIn(...getAnonymousAccount());
+      return;
     }
 
     return mutate({ stamps: submittableStamps }).then((data) => {

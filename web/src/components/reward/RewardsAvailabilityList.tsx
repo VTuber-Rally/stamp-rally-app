@@ -20,11 +20,11 @@ export const RewardsAvailabilityList: FC = () => {
     useRewardAvailability();
 
   const standardRewards = [
-    <li key="standard-reward">
+    <li key="standard-reward-rare">
       <Sparkles className="inline-block" />{" "}
       {t("currentRallyBlock.rareHolographicCard")}
     </li>,
-    <li key="standard-reward">
+    <li key="standard-reward-card">
       <Vote className="inline-block" />{" "}
       {t("currentRallyBlock.oneOrMoreClassicCards")}
     </li>,
