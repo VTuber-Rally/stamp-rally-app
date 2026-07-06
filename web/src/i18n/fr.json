@@ -22,7 +22,7 @@
   },
   "artistList": "Liste des artistes",
   "artistPresentation": {
-    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 10 tampons pour l'avoir !"
+    "cardDescription": "{{artistName}} a dessiné {{cardName}} comme carte de récompense exclusive pour le rally, obtenez 8 tampons pour l'avoir !"
   },
   "artists": "Artistes",
   "cancel": "Annuler",
@@ -161,9 +161,10 @@
     "availableRewardPresentation_one": "En soumettant maintenant, vous aurez droit au lot suivant :",
     "availableRewardPresentation_other": "En soumettant maintenant, vous aurez droit aux lots suivants :",
     "evenMoreClassicCards": "Un deuxième tirage spécial pour encore plus de cartes",
-    "holographicCard": "Une chance d'obtenir une carte exclusive dans sa version holographique !",
+    "rareHolographicCard": "Une (petite) chance d'obtenir une carte exclusive dans sa version holographique !",
+    "holographicCard": "50% de chance d'obtenir une carte exclusive dans sa version holographique !",
     "minorHallInfo": "Pour assurer l'équité entre les halls, un des tampons doit provenir d'un stand situé dans le hall 5A.",
-    "oneOrMoreClassicCards": "Une, deux ou trois cartes exclusives",
+    "oneOrMoreClassicCards": "Une ou deux cartes exclusives",
     "premiumCardRewardPresentation": "En continuant jusqu'au <1><icon/>palier suivant</1> à {{stamps}} tampons, débloquez en plus les lots suivants :",
     "resetDisclaimer": "Une fois les tampons soumis, vous repartez de zéro pour atteindre les paliers.",
     "standardCardRewardPresentation": "En atteignant le <1><icon/>premier palier</1> à {{stamps}} tampons, vous aurez droit au lot suivant :",
@@ -303,7 +304,7 @@
     },
     "templates": {
       "contest": {
-        "text": "Rendez-vous au stand de Sedeto (H6, R687) pour tenter votre chance de remporter un shikishi personnalisé de Sedeto.",
+        "text": "Rendez-vous au stand de Sedeto (H6, Q762) pour tenter votre chance de remporter un shikishi personnalisé de Sedeto.",
         "title": "Le concours du Rally VTuber commence bientôt !"
       }
     }
@@ -328,7 +329,7 @@
   },
   "qrcode": "QR Code",
   "rally": {
-    "1": "Obtenez un tampon en faisant un achat (minimum 2€) chez un des 16 artistes participant",
+    "1": "Obtenez un tampon en faisant un achat (minimum 2€) chez un des 13 artistes participants",
     "2": "Une fois <1>{{minimumStampsCount}} tampons</1> obtenus, rendez-vous au stand de Sedeto pour récupérer une récompense !",
     "welcome": "Bienvenue sur le Rally !"
   },
@@ -370,7 +371,7 @@
         },
         "submissions": {
           "description.1": "Pour obtenir un ou des lots selon le palier atteint, soumettez votre rally à l'aide du bouton ci-dessous.",
-          "description.2": "Après envoi, rendez-vous au stand organisateur (Arqo & Sedeto, Hall 6, R687) pour récupérer sur place le lot !",
+          "description.2": "Après envoi, rendez-vous au stand organisateur (Arqo & Sedeto, Hall 6, Q762) pour récupérer sur place le lot !",
           "title": "Comment récupérer les lots ?"
         }
       },
@@ -378,10 +379,10 @@
     }
   },
   "rules": "Règles",
-  "rules.1": "Un rally est organisé par Sedeto (Hall 6, R687) lors de la Japan Expo 2025, il est sur le thème des VTubers (Hololive et au-delà). 16 artistes y participent, tous les stands participants ont une signalétique et sont indiqués sur la carte du rally.",
+  "rules.1": "Un rally est organisé par Sedeto (Hall 6, Q762) lors de la Japan Expo 2025, il est sur le thème des VTubers (Hololive et au-delà). 13 artistes y participent, tous les stands participants ont une signalétique et sont indiqués sur la carte du rally.",
   "rules.2": "Toutes les informations utiles sont présentes sur l’application Web du rally. Cette application est également utilisée pour tamponner numériquement tous les stands par lesquels les joueurs passent.",
-  "rules.3": "Pour obtenir un tampon sur un stand participant, il faut y dépenser 2€ minimum. Il faut 10 tampons minimum pour obtenir une récompense. Obtenir les 16 tampons donne droit à un tirage supplémentaire spécifique. Le rally peut être recommencé autant de fois que souhaité. Il est nécessaire d’avoir au minimum un tampon d’un stand du Hall 5A, pour assurer l’équité entre les différentes zones artistes.",
-  "rules.4": "Pour récupérer ses récompenses, il faut se rendre sur le stand du rally (ARQO SEDETO & THE VTUBE RALLY, Hall 6, R687) et un tirage au sort aura lieu pour déterminer un lot (tout tirage es) qui correspond à un nombre de cartes à choisir parmi un jeu de cartes de récompense illustrés par les artistes participant au rally. Il y a 17 cartes disponibles, imitant un shikishi signé de l’artiste ! Un tirage au sort supplémentaire obtenu à l’aide d’un rally avec 16 tampons offre une chance d’obtenir une version holographique des cartes de récompense. Les lots seront visibles sur le stand.",
+  "rules.3": "Pour obtenir un tampon sur un stand participant, il faut y dépenser 2€ minimum. Il faut 8 tampons minimum pour obtenir une récompense. Obtenir les 13 tampons donne droit à un tirage supplémentaire spécifique. Le rally peut être recommencé autant de fois que souhaité. Il est nécessaire d’avoir au minimum un tampon d’un stand du Hall 5A, pour assurer l’équité entre les différentes zones artistes.",
+  "rules.4": "Pour récupérer ses récompenses, il faut se rendre sur le stand du rally (ARQO SEDETO & THE VTUBE RALLY, Hall 6, Q762) et un tirage au sort aura lieu pour déterminer un lot (tout tirage es) qui correspond à un nombre de cartes à choisir parmi un jeu de cartes de récompense illustrés par les artistes participant au rally. Il y a 15 cartes disponibles, imitant un shikishi signé de l’artiste ! Un tirage au sort supplémentaire obtenu à l’aide d’un rally avec 13 tampons offre une chance d’obtenir une version holographique des cartes de récompense. Les lots seront visibles sur le stand.",
   "rules.5": "Les lots sont distribués dans la limite des stocks disponibles. Pour garantir un accès équitable aux lots tous les jours du salon, des réassorts sont organisés périodiquement.",
   "rules.6": "Toute participation validée donne droit à participer à un concours sur le stand du rally à 16h tous les jours du salon. Un participant du concours sera tiré au sort et aura la possibilité de commissionner gratuitement auprès de Sedeto un petit shikishi original du personnage de son choix ! Un rally validé ne peut être utilisé pour participer à un seul des concours. Un nouveau rally sera nécessaire pour participer à un autre concours shikishi.",
   "rules.7": "Ces règles sont amenées à être modifiées légèrement pour assurer un jeu équitable sur toute la durée de l’événement. L’équipe fera de son mieux pour le communiquer via les canaux de communication à sa disposition.",
@@ -403,7 +404,7 @@
     "usernameUpdateFailed": "Le changement de nom d'utilisateur a échoué",
     "usernameUpdated": "Votre nom d'utilisateur a été mis à jour avec succès"
   },
-  "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, R687) pour pouvoir récupérer votre récompense !",
+  "showThisQRCodeToSubmit": "Montrez ce QR code au staff du stand de Sedeto (dans le Hall 6, Q762) pour pouvoir récupérer votre récompense !",
   "staffSpace": "Espace staff",
   "stampDetails": {
     "generatedAt": "Tampon numérique généré le {{dateTime}}",

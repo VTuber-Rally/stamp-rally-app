@@ -161,9 +161,10 @@
     "availableRewardPresentation_one": "By submitting now, you will be entitled to the following reward:",
     "availableRewardPresentation_other": "By submitting now, you will be entitled to the following rewards:",
     "evenMoreClassicCards": "A second special draw for even more exclusive cards",
+    "rareHolographicCard": "Une (petite) chance d'obtenir une carte exclusive dans sa version holographique !",
     "holographicCard": "A chance to get an exclusive card in its holographic version!",
     "minorHallInfo": "To ensure fairness between halls, one of the stamps must come from a booth located in Hall 5A.",
-    "oneOrMoreClassicCards": "One, two, or three exclusive cards",
+    "oneOrMoreClassicCards": "One or two exclusive cards",
     "premiumCardRewardPresentation": "By continuing to the <1><icon/>next tier</1> at {{stamps}} stamps, you also unlock the following rewards:",
     "resetDisclaimer": "Once the stamps are submitted, you'll start from scratch to reach the tiers.",
     "standardCardRewardPresentation": "By reaching the <1><icon/>first tier</1> at {{stamps}} stamps, you will be entitled to the following reward:",
@@ -303,7 +304,7 @@
     },
     "templates": {
       "contest": {
-        "text": "Head to Sedeto's booth (H6, R687) to register for a chance to win a commission from Sedeto.",
+        "text": "Head to Sedeto's booth (H6, Q762) to register for a chance to win a commission from Sedeto.",
         "title": "VTuber Rally contest begins soon!"
       }
     }
@@ -328,7 +329,7 @@
   },
   "qrcode": "QR Code",
   "rally": {
-    "1": "Get a stamp by making a purchase (minimum 2€) from one of the 16 participating artists",
+    "1": "Get a stamp by making a purchase (minimum 2€) from one of the 13 participating artists",
     "2": "Once <1>{{minimumStampsCount}} stamps</1> are collected, head over to Sedeto's booth to get a reward!",
     "welcome": "Welcome to the Rally!"
   },
@@ -370,7 +371,7 @@
         },
         "submissions": {
           "description.1": "To get one or more prizes depending on the tier reached, submit your rally using the button below.",
-          "description.2": "After submission, go to the organizer's booth (Arqo & Sedeto, Hall 6, R687) to collect your prize on site!",
+          "description.2": "After submission, go to the organizer's booth (Arqo & Sedeto, Hall 6, Q762) to collect your prize on site!",
           "title": "How do I claim the prizes?"
         }
       },
@@ -378,10 +379,10 @@
     }
   },
   "rules": "Rules",
-  "rules.1": "A rally is organised by the booth ARQO SEDETO & THE VTUBE RALLY (Hall 6, R687) during the Japan Expo 2025, it is VTuber-themed (Hololive and beyond). There are 16 artists taking part, and all of their booths are marked on the rally map and have signs.",
+  "rules.1": "A rally is organised by the booth ARQO SEDETO & THE VTUBE RALLY (Hall 6, Q762) during the Japan Expo 2025, it is VTuber-themed (Hololive and beyond). There are 13 artists taking part, and all of their booths are marked on the rally map and have signs.",
   "rules.2": "All useful information is present on the rally's web application. This application is also used to digitally stamp all the stands through which the players go through.",
-  "rules.3": "To obtain a stamp on a participating booth, you must spend at least €2. You need a minimum of 10 stamps to get a reward. Obtaining the 16 stamps entitles you to a specific additional draw. The rally can be restarted as many times as desired. It is necessary to have at least a stamp from a booth in Hall 5A, to ensure fairness between the different artist areas.",
-  "rules.4": "To collect your rewards, go to the rally stand (ARQO SEDETO & THE VTUBE RALLY, Hall 6, R687) and the team will draw a reward tier (every draw wins something) that corresponds to a number of cards to choose from a set of reward cards illustrated by the artists participating in the rally. There are 17 cards available, imitating a shikishi signed by the artist! An additional draw obtained using a rally with 16 stamps offers a chance to get a holographic version of the reward cards. The lots will be visible on the stand.",
+  "rules.3": "To obtain a stamp on a participating booth, you must spend at least €2. You need a minimum of 8 stamps to get a reward. Obtaining the 13 stamps entitles you to a specific additional draw. The rally can be restarted as many times as desired. It is necessary to have at least a stamp from a booth in Hall 5A, to ensure fairness between the different artist areas.",
+  "rules.4": "To collect your rewards, go to the rally stand (ARQO SEDETO & THE VTUBE RALLY, Hall 6, Q762) and the team will draw a reward tier (every draw wins something) that corresponds to a number of cards to choose from a set of reward cards illustrated by the artists participating in the rally. There are 15 cards available, imitating a shikishi signed by the artist! An additional draw obtained using a rally with 13 stamps offers a chance to get a holographic version of the reward cards. The lots will be visible on the stand.",
   "rules.5": "The rewards are distributed within the limits of available stocks. To ensure fair access to rewards every day of the show, restocks are organised periodically.",
   "rules.6": "Any validated participation entitles you to participate in a raffle on the rally stand at 4 p.m. every day of the expo. A participant in the raffle will be drawn and will have the opportunity to commission free of charge from Sedeto a small original shikishi of any character! A validated rally can be used to participate in only one of the competitions. A new rally will be necessary to participate in another shikishi contest.",
   "rules.7": "These rules may be slightly modified to ensure fair play throughout the duration of the event. The team will do its best to communicate it through the communication channels at its disposal.",
@@ -403,7 +404,7 @@
     "usernameUpdateFailed": "Failed to update username",
     "usernameUpdated": "Your username has been successfully updated"
   },
-  "showThisQRCodeToSubmit": "Show this QR Code to Sedeto's staff (in Hall 6, R687) to get your reward!",
+  "showThisQRCodeToSubmit": "Show this QR Code to Sedeto's staff (in Hall 6, Q762) to get your reward!",
   "staffSpace": "Staff space",
   "stampDetails": {
     "generatedAt": "Digital stamp generated on {{dateTime}}",

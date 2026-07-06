@@ -3,6 +3,7 @@ import { FC, ReactElement } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import {
+  isMinorHallRequired,
   premiumRewardMinStampsRequirement,
   standardRewardMinStampsRequirement,
 } from "@/lib/consts.ts";
@@ -19,6 +20,10 @@ export const RewardsAvailabilityList: FC = () => {
     useRewardAvailability();
 
   const standardRewards = [
+    <li key="standard-reward">
+      <Sparkles className="inline-block" />{" "}
+      {t("currentRallyBlock.rareHolographicCard")}
+    </li>,
     <li key="standard-reward">
       <Vote className="inline-block" />{" "}
       {t("currentRallyBlock.oneOrMoreClassicCards")}
@@ -81,7 +86,9 @@ export const RewardsAvailabilityList: FC = () => {
         </>
       )}
 
-      <p>{t("currentRallyBlock.minorHallInfo")}</p>
+      {isMinorHallRequired ? (
+        <p>{t("currentRallyBlock.minorHallInfo")}</p>
+      ) : null}
     </>
   );
 };
