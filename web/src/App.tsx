@@ -1,6 +1,4 @@
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +10,6 @@ import { convex } from "@/lib/convexClient.ts";
 import { useBooths } from "@/lib/hooks/useBooths";
 import { useKeyValue } from "@/lib/hooks/useKeyValue";
 import { useRegisterAppSW } from "@/lib/hooks/useRegisterAppSW.tsx";
-import { queryClient } from "@/lib/queryClient.ts";
 import { router } from "@/router.tsx";
 
 const AppWrapped = () => {
@@ -65,12 +62,9 @@ export function App() {
   return (
     <StrictMode>
       <ConvexAuthProvider client={convex}>
-        <QueryClientProvider client={queryClient}>
-          <QRDrawerContextProvider>
-            <AppWrapped />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QRDrawerContextProvider>
-        </QueryClientProvider>
+        <QRDrawerContextProvider>
+          <AppWrapped />
+        </QRDrawerContextProvider>
       </ConvexAuthProvider>
     </StrictMode>
   );
