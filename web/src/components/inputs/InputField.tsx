@@ -32,7 +32,7 @@ const InputField = <T extends FieldValues>({
   const commonProps = {
     placeholder,
     className: clsx(
-      "mb-2 bg-secondary/50 text-primary p-2 rounded-xl border-[1px] border-black",
+      "mb-2 bg-secondary/10 text-black p-2 rounded-xl border-[1px] border-gray-600",
       errors ? "border-2 border-red-500" : "",
       disabled ? "opacity-60" : "",
       className,

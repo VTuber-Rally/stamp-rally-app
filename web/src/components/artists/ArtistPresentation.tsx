@@ -60,7 +60,7 @@ export const ArtistPresentation: FC<{ boothId: ConvexId<"booths"> }> = ({
         </Link>
       )}
 
-      <p className="mx-2 max-w-prose rounded-xl bg-gray-100 p-2 whitespace-pre-line">
+      <p className="mx-2 w-full max-w-prose rounded-md bg-gray-100 p-4 whitespace-pre-line">
         {booth.description}
       </p>
 
@@ -87,8 +87,8 @@ export const ArtistPresentation: FC<{ boothId: ConvexId<"booths"> }> = ({
         )}
       </div>
       {cardDesign.status === "success" && !!cardDesign.data && (
-        <div className="mx-auto flex max-w-lg items-center gap-2 rounded-xl bg-gray-100 p-4 shadow-md">
-          <p className="w-1/2 text-lg">
+        <div className="mx-auto flex max-w-lg items-center gap-2 rounded-md bg-gray-100 p-4 shadow-md">
+          <p className="w-1/2">
             {t("artistPresentation.cardDescription", {
               artistName: cardDesign.data.artist,
               cardName: cardDesign.data.name,
