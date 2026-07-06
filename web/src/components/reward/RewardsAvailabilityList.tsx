@@ -68,15 +68,17 @@ export const RewardsAvailabilityList: FC = () => {
       )}
 
       {!isPremiumRewardObtainable && (
-        <p>
-          <Trans
-            t={t}
-            i18nKey={"currentRallyBlock.premiumCardRewardPresentation"}
-            components={pinkSquareEmphasis}
-            values={{ stamps: premiumRewardMinStampsRequirement }}
-          />
+        <>
+          <p>
+            <Trans
+              t={t}
+              i18nKey={"currentRallyBlock.premiumCardRewardPresentation"}
+              components={pinkSquareEmphasis}
+              values={{ stamps: premiumRewardMinStampsRequirement }}
+            />
+          </p>
           <ul className="mb-2 ml-4 list-disc">{premiumRewards}</ul>
-        </p>
+        </>
       )}
 
       <p>{t("currentRallyBlock.minorHallInfo")}</p>

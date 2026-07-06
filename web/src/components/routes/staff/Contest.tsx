@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react";
 import clsx from "clsx";
 import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -6,24 +5,17 @@ import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
-import { sendNotification } from "@/lib/appwrite.ts";
-import {
-  rallyFinishersEnTopicId,
-  rallyFinishersFrTopicId,
-} from "@/lib/consts.ts";
 import { useContestDrawWinner } from "@/lib/hooks/contest/useContestDrawWinner";
 import { useContestParticipants } from "@/lib/hooks/contest/useContestParticipants";
 import { useContestQRCode } from "@/lib/hooks/contest/useContestQRCode";
 import { useContestSecret } from "@/lib/hooks/contest/useContestSecret";
 import { useContestWinners } from "@/lib/hooks/contest/useContestWinners";
 import { useToast } from "@/lib/hooks/useToast.ts";
+import { sendPushNotification } from "@/lib/pushNotifications.ts";
 
 export default function Contest() {
-  const {
-    data: participants,
-    isLoading: areParticipantsLoading,
-    error,
-  } = useContestParticipants();
+  const { data: participants, isLoading: areParticipantsLoading } =
+    useContestParticipants();
   const {
     drawWinner,
     resetDraw,
@@ -61,26 +53,12 @@ export default function Contest() {
 
   const onSendNotificationClick = async () => {
     setIsSendingNotifications(true);
-    const [englishNotification, frenchNotification] = await Promise.allSettled([
-      sendNotification(
-        tEN("notifications.templates.contest.title"),
-        tEN("notifications.templates.contest.text"),
-        rallyFinishersEnTopicId,
-      ),
-      sendNotification(
-        tFR("notifications.templates.contest.title"),
-        tFR("notifications.templates.contest.text"),
-        rallyFinishersFrTopicId,
-      ),
-    ]);
-    if (englishNotification.status === "rejected") {
-      console.warn("Could not send English notification");
-      captureException(englishNotification.reason);
-    }
-    if (frenchNotification.status === "rejected") {
-      console.warn("Could not send French notification");
-      captureException(frenchNotification.reason);
-    }
+    await sendPushNotification(
+      tFR("notifications.templates.contest.title"),
+      tFR("notifications.templates.contest.text"),
+      tEN("notifications.templates.contest.title"),
+      tEN("notifications.templates.contest.text"),
+    );
     toast({
       title: t("notifications.notificationSentToast.title"),
       description: t("notifications.notificationSentToast.description"),
@@ -99,15 +77,15 @@ export default function Contest() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-lg text-red-600">
-          {t("contest.staff.participants.loadingError")}
-        </div>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex h-screen items-center justify-center">
+  //       <div className="text-lg text-red-600">
+  //         {t("contest.staff.participants.loadingError")}
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -247,7 +225,7 @@ export default function Contest() {
                 <ul className="max-h-96 space-y-0.5 overflow-y-auto">
                   {participants.map((participant) => (
                     <li
-                      key={participant.$id}
+                      key={participant._id}
                       className="rounded text-gray-700 hover:bg-gray-50"
                     >
                       {participant.name}
@@ -289,13 +267,13 @@ export default function Contest() {
               <ul className="space-y-2">
                 {winners.map((winner) => (
                   <li
-                    key={winner.$id}
+                    key={winner._id}
                     className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
                   >
                     <span className="font-medium">{winner.name}</span>
                     <span className="text-sm text-gray-500">
-                      {winner.drawnDate &&
-                        new Date(winner.drawnDate).toLocaleDateString()}
+                      {winner.drawnAt &&
+                        new Date(winner.drawnAt).toLocaleDateString()}
                     </span>
                   </li>
                 ))}

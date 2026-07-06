@@ -1,21 +1,24 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from "convex/react";
 import { useCallback, useState } from "react";
 
-import type { ContestParticipant } from "@vtube-stamp-rally/shared-lib/models/ContestParticipant.ts";
+import { type ConvexDataModel, convexPublicApi } from "@/lib/convex";
 
-import { QUERY_KEYS } from "@/lib/QueryKeys";
-import { databases } from "@/lib/appwrite";
-import { contestParticipantsCollectionId, databaseId } from "@/lib/consts";
-import { queryClient } from "@/lib/queryClient";
+type ContestParticipation =
+  ConvexDataModel["contestParticipations"]["document"];
 
 export function useContestDrawWinner(
-  participants: ContestParticipant[] | undefined,
+  participants: ContestParticipation[] | undefined,
 ) {
-  const [winner, setWinner] = useState<ContestParticipant | null>(null);
+  const [winner, setWinner] = useState<ContestParticipation | null>(null);
   const [isWinnerDrawn, setIsWinnerDrawn] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
   const [countdown, setCountdown] = useState<number | null>(null);
   const [isDrumRoll, setIsDrumRoll] = useState(false);
+
+  const markWinnerMutation = useMutation(convexPublicApi.contest.markWinner);
+  const markAllDrawnMutation = useMutation(
+    convexPublicApi.contest.markAllDrawn,
+  );
 
   const resetDraw = useCallback(() => {
     setWinner(null);
@@ -39,7 +42,7 @@ export function useContestDrawWinner(
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
-    // Sélection du gagnant
+    // Select a random winner
     const randomIndex = Math.floor(Math.random() * participants.length);
     const selectedWinner = participants[randomIndex];
     setWinner(selectedWinner);
@@ -47,62 +50,24 @@ export function useContestDrawWinner(
     setCountdown(null);
     setIsDrumRoll(true);
 
-    // drum roll pour le suspense car je suis un poti rigolo
+    // Drum roll for suspense
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsDrumRoll(false);
     setIsWinnerDrawn(true);
   }, [participants]);
 
-  const { mutateAsync: updateWinner } = useMutation({
-    mutationFn: async () => {
-      if (!winner) {
-        return;
-      }
+  const updateWinner = useCallback(async () => {
+    if (!winner) return;
+    await markWinnerMutation({ participationId: winner._id });
+  }, [markWinnerMutation, winner]);
 
-      await databases.updateDocument(
-        databaseId,
-        contestParticipantsCollectionId,
-        winner.$id,
-        {
-          drawnDate: new Date().toISOString(),
-          isWinner: true,
-        },
-      );
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.CONTEST_WINNERS],
-      });
-    },
-  });
+  const updateDayDrawn = useCallback(async () => {
+    if (!participants) return;
 
-  const { mutateAsync: updateDayDrawn } = useMutation({
-    mutationFn: async () => {
-      if (!participants) {
-        return;
-      }
-
-      const promises = participants
-        .filter((participant) => participant.$id !== winner?.$id)
-        .filter((participant) => participant.drawnDate === null)
-        .map((participant) =>
-          databases.updateDocument(
-            databaseId,
-            contestParticipantsCollectionId,
-            participant.$id,
-            {
-              drawnDate: new Date().toISOString(),
-            },
-          ),
-        );
-      await Promise.all(promises);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.CONTEST_PARTICIPANTS],
-      });
-    },
-  });
+    await markAllDrawnMutation({
+      participationIds: participants.map((participant) => participant._id),
+    });
+  }, [markAllDrawnMutation, participants]);
 
   return {
     drawWinner,

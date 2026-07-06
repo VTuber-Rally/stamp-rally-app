@@ -10,17 +10,20 @@ import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import QRCodeLink from "@/components/controls/QRCodeLink.tsx";
 import { DrawerDescription, DrawerTitle } from "@/components/layout/Drawer.tsx";
 import { Header } from "@/components/layout/Header.tsx";
-import { useCardDesignByStandistId } from "@/lib/hooks/inventory/useCardDesigns";
-import { useStandist } from "@/lib/hooks/useStandist.ts";
+import { ConvexId } from "@/lib/convex.ts";
+import { useCardDesignById } from "@/lib/hooks/inventory/useCardDesigns";
+import { useBooth } from "@/lib/hooks/useBooth.ts";
 
 import { ArtistImage } from "./ArtistImage";
 
-export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
+export const ArtistPresentation: FC<{ boothId: ConvexId<"booths"> }> = ({
+  boothId,
+}) => {
   const { t } = useTranslation();
-  const artist = useStandist(artistId);
-  const cardDesign = useCardDesignByStandistId(artistId);
+  const booth = useBooth(boothId);
+  const cardDesign = useCardDesignById(booth?.cardDesign);
 
-  if (!artist) return null;
+  if (!booth) return null;
 
   return (
     <div
@@ -28,12 +31,12 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
         "mt-2 flex h-[70dvh] flex-col items-center space-y-4 overflow-y-auto p-2 pt-0"
       }
     >
-      <DrawerTitle className="sr-only">{artist.name}</DrawerTitle>
+      <DrawerTitle className="sr-only">{booth.name}</DrawerTitle>
       <DrawerDescription className="sr-only">
-        {artist.description}
+        {booth.description}
       </DrawerDescription>
 
-      <Header className="text-center">{artist.name}</Header>
+      <Header className="text-center">{booth.name}</Header>
 
       <div className={"flex flex-col items-center"}>
         <Suspense
@@ -41,57 +44,59 @@ export const ArtistPresentation: FC<{ artistId: string }> = ({ artistId }) => {
             <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
           }
         >
-          <ArtistImage userId={artist.userId} name={artist.name} />
+          <ArtistImage imageUrl={booth.imageUrl} name={booth.name} />
         </Suspense>
       </div>
 
-      {artist.geometry && (
+      {!!booth.geometry.length && (
         <Link
           to={"/map"}
           search={{
-            center: centroid(polygon(artist.geometry)).geometry.coordinates,
+            center: centroid(polygon(booth.geometry)).geometry.coordinates,
           }}
           className="flex items-center gap-2 rounded-xl bg-secondary p-2 text-2xl"
         >
-          H{artist.hall} {artist.boothNumber} <MapPinned />
+          H{booth.hall} {booth.boothNumber} <MapPinned />
         </Link>
       )}
 
       <p className="mx-2 max-w-prose rounded-xl bg-gray-100 p-2 whitespace-pre-line">
-        {artist.description}
+        {booth.description}
       </p>
 
       <div className={"flex flex-wrap gap-2"}>
-        {artist.twitter && (
-          <ExternalLink href={`https://twitter.com/${artist.twitter}`}>
+        {booth.links.twitter && (
+          <ExternalLink href={`https://twitter.com/${booth.links.twitter}`}>
             Twitter
           </ExternalLink>
         )}
-        {artist.instagram && (
-          <ExternalLink href={`https://instagram.com/${artist.instagram}`}>
+        {booth.links.instagram && (
+          <ExternalLink href={`https://instagram.com/${booth.links.instagram}`}>
             Instagram
           </ExternalLink>
         )}
-        {artist.twitch && (
-          <ExternalLink href={artist.twitch}>Twitch</ExternalLink>
+        {booth.links.twitch && (
+          <ExternalLink href={`https://twitch.tv/${booth.links.twitch}`}>
+            Twitch
+          </ExternalLink>
         )}
-        {artist.website && (
-          <ExternalLink href={artist.website}>
-            {URL.parse(artist.website)?.hostname}
+        {booth.links.website && (
+          <ExternalLink href={booth.links.website}>
+            {URL.parse(booth.links.website)?.hostname}
           </ExternalLink>
         )}
       </div>
-      {cardDesign?.image && cardDesign.image !== null && (
+      {cardDesign.status === "success" && !!cardDesign.data && (
         <div className="mx-auto flex max-w-lg items-center gap-2 rounded-xl bg-gray-100 p-4 shadow-md">
           <p className="w-1/2 text-lg">
             {t("artistPresentation.cardDescription", {
-              artistName: artist.name,
-              cardName: cardDesign.name,
+              artistName: cardDesign.data.artist,
+              cardName: cardDesign.data.name,
             })}
           </p>
           <img
-            src={cardDesign.image}
-            alt={cardDesign.name}
+            src={cardDesign.data.imageUrl}
+            alt={cardDesign.data.name}
             className="w-1/2 rounded"
           />
         </div>

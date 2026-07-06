@@ -4,22 +4,21 @@ import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
 import StandistStaffHomePage from "@/components/routes/standists/StandistStaffHomePage.tsx";
-import { useUser } from "@/lib/hooks/useUser.ts";
+import { useCurrentUser } from "@/lib/auth.ts";
 
 export const Route = createFileRoute("/staff/")({
   component: StandistsHome,
 });
 
 function StandistsHome() {
-  const { user } = useUser();
+  const user = useCurrentUser();
   const { t } = useTranslation();
-  const isStaff = user?.labels.includes("staff");
+  const isStaff = user?.role === "staff";
 
   return (
     <StandistStaffHomePage headerKey={"staffSpace"} loginTo={"/staff/signin"}>
       {isStaff ? (
         <>
-          {" "}
           <ButtonLink size={"small"} href="/staff/code">
             {t("checkSubmit")}
           </ButtonLink>

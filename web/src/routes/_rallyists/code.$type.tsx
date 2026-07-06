@@ -45,7 +45,10 @@ function CodeError({ error }: { error: Error }) {
       </p>
       <details className="overflow-x-auto">
         <summary>{t("QRCodeValidationError.details")}</summary>
-        <pre>{error.stack}</pre>
+        <pre>
+          {error.message}
+          {error.stack}
+        </pre>
       </details>
     </div>
   );

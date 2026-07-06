@@ -315,7 +315,7 @@
     "profileUpdated": "Your profile has been successfully updated!",
     "socialNetworks": {
       "label": "Social networks",
-      "subtext": "You can empty the fields you don't want displayed on your profile."
+      "subtext": "You can empty the fields you don't want displayed on your profile. Put down the usernames and the link will be shown automatically within the app."
     },
     "title": "My profile"
   },

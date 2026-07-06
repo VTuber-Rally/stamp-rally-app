@@ -1,9 +1,9 @@
 import { Trans, useTranslation } from "react-i18next";
 
-import type { Group } from "@vtube-stamp-rally/shared-lib/models/Inventory.ts";
+import { GroupWithCardCount } from "@/lib/convex.ts";
 
 interface GroupInfoProps {
-  group: Group;
+  group: GroupWithCardCount;
   maxClassicCards: number;
   maxHoloCards: number;
 }
@@ -20,7 +20,7 @@ export function GroupInfo({
       <details>
         <summary className="text-lg font-semibold text-gray-800">
           {t("inventory.group", {
-            groupId: group.groupId,
+            groupId: group.indexNumber,
           })}
         </summary>
         <p className="text-sm text-gray-600">
@@ -31,8 +31,8 @@ export function GroupInfo({
         </p>
         <p className="text-xs text-gray-500">
           {t("inventory.groupInfo", {
-            numberOfCards: group.numberOfCardsPerDesign,
-            numberOfHoloCards: group.numberOfHoloCardsPerDesign,
+            numberOfCards: group.classicCardsPerDesign,
+            numberOfHoloCards: group.holographicCardsPerDesign,
             coefficient: group.coefficient.toFixed(2),
           })}
         </p>

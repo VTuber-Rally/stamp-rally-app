@@ -10,8 +10,9 @@ import envelopeClosed from "@/assets/envelope_closed.png";
 import envelopeOpen from "@/assets/envelope_open.png";
 import gestureTapHold from "@/assets/gesture-tap-hold.svg";
 import horizontalCards from "@/assets/horizontal_cards.webp";
+import { Prize } from "@/lib/convex.ts";
 import { useDrawReward } from "@/lib/hooks/useDrawReward.ts";
-import { Prize, RewardDrawType, isRewardDrawType } from "@/lib/rewards.ts";
+import { RewardDrawType, isRewardDrawType } from "@/lib/rewards.ts";
 import { rewardDrawSearchParamsSchema } from "@/searchParams.ts";
 
 export const Route = createFileRoute("/staff/reward/$drawType")({

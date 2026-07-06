@@ -3,8 +3,8 @@ import { Feature, FeatureCollection } from "geojson";
 import { StyleSpecification } from "maplibre-gl";
 
 import { mapTilesURL } from "@/lib/consts.ts";
+import { PublicBooth } from "@/lib/convex.ts";
 import { getCollectedStamps } from "@/lib/hooks/useCollectedStamps.ts";
-import { getStandists } from "@/lib/hooks/useStandists.ts";
 
 const mapColors = {
   forestGreen: "#024f05",
@@ -14,20 +14,19 @@ const mapColors = {
   white: "white",
 } as const;
 
-export async function getStandistsFeatureCollection() {
-  const standists = await getStandists();
-  const stamps = await getCollectedStamps();
-  const stampedStandistsIds = new Set(stamps.map((s) => s.standistId));
+export function getBoothsFeatureCollection(booths: PublicBooth[]) {
+  const stamps = getCollectedStamps();
+  const stampedStandistsIds = new Set(stamps.map((s) => s.boothId));
 
   return {
     type: "FeatureCollection",
-    features: standists.reduce<Feature[]>((polygons, standist) => {
-      if (standist.geometry)
+    features: booths.reduce<Feature[]>((polygons, booth) => {
+      if (booth.geometry)
         polygons.push(
-          polygon(standist.geometry, {
-            name: standist.name,
-            id: standist.userId,
-            stamped: stampedStandistsIds.has(standist.userId),
+          polygon(booth.geometry, {
+            name: booth.name,
+            id: booth._id,
+            stamped: stampedStandistsIds.has(booth._id),
           }),
         );
       return polygons;

@@ -20,6 +20,7 @@ export const webESLintConfig = defineConfig([
       "**/.eslintrc.cjs",
       "src/routeTree.gen.ts",
       "eslint.config.mjs",
+      "convex/_generated",
     ],
   },
   js.configs.recommended,

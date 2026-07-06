@@ -2,7 +2,6 @@ import { useNavigate } from "@tanstack/react-router";
 import {
   CircleAlert,
   Loader2,
-  MessageSquare,
   TicketX,
   TriangleAlert,
   Upload,
@@ -23,8 +22,8 @@ import {
 import { RallyProgressBar } from "@/components/reward/RallyProgressBar.tsx";
 import { RewardsAvailabilityList } from "@/components/reward/RewardsAvailabilityList.tsx";
 import { standardRewardMinStampsRequirement } from "@/lib/consts.ts";
-import { useRallySubmit } from "@/lib/hooks/useRallySubmit.ts";
 import { useRewardAvailability } from "@/lib/hooks/useRewardAvailability.ts";
+import { useSubmitRally } from "@/lib/hooks/useSubmitRally.ts";
 
 interface SubmitDrawerProps {
   open: boolean;
@@ -40,26 +39,17 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
     stampCount,
   } = useRewardAvailability();
   const navigate = useNavigate();
-  const {
-    isPending,
-    isSuccess,
-    isError,
-    error,
-    mutate: submitRally,
-  } = useRallySubmit({
-    onSuccess() {
-      void navigate({ to: "/reward/submissions" });
-    },
-  });
+
+  const { submitRally, error, isLoading } = useSubmitRally();
 
   const handleSubmit = () => {
-    submitRally();
+    void submitRally().then(() => navigate({ to: "/reward/submissions" }));
   };
 
-  const canSubmit = isStandardRewardObtainable && !isSuccess && !isError;
+  const canSubmit = isStandardRewardObtainable && !error;
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} dismissible={!isPending}>
+    <Drawer open={open} onOpenChange={setOpen} dismissible={!isLoading}>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>{t("currentRallyBlock.submitDrawerTitle")}</DrawerTitle>
@@ -76,25 +66,20 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
               <span>{t("currentRallyBlock.resetDisclaimer")}</span>
             </p>
           )}
-          {isError && (
-            <>
-              <p className="flex items-center gap-2 py-2 font-bold text-red-600">
-                <CircleAlert className="inline-block shrink-0" size={24} />
-                <span>{error?.message ?? String(error)}</span>
-              </p>
-              <p className="flex items-center gap-2 py-2 text-red-600">
-                <MessageSquare className="inline-block shrink-0" size={24} />
-              </p>
-            </>
+          {error && (
+            <p className="flex items-center gap-2 py-2 font-bold text-red-600">
+              <CircleAlert className="inline-block shrink-0" size={24} />
+              <span>{error?.message ?? String(error)}</span>
+            </p>
           )}
           {canSubmit && (
             <ButtonLink
               type="button"
               onClick={handleSubmit}
-              disabled={isPending}
+              disabled={isLoading}
               size="medium"
             >
-              {isPending ? (
+              {isLoading ? (
                 <Loader2 className="mr-2 animate-spin" />
               ) : (
                 <Upload className="mr-2" />
@@ -102,7 +87,7 @@ export const SubmitDrawer: FC<SubmitDrawerProps> = ({ open, setOpen }) => {
               {t("currentRallyBlock.submitAction")}
             </ButtonLink>
           )}
-          {!isStandardRewardObtainable && !isSuccess && (
+          {!isStandardRewardObtainable && (
             <p className="flex items-center gap-2 py-2 font-bold text-red-600">
               <TicketX className="inline-block shrink-0" size={24} />
               <span>

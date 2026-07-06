@@ -4,8 +4,6 @@ import { MessageSquareWarning, TicketCheck } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { StampTupleSerializer } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-
 import Intro from "@/components/Intro.tsx";
 import { ArtistImage } from "@/components/artists/ArtistImage";
 import { ButtonLink } from "@/components/controls/ButtonLink.tsx";
@@ -17,9 +15,10 @@ import {
   premiumRewardMinStampsRequirement,
   standardRewardMinStampsRequirement,
 } from "@/lib/consts.ts";
+import { useBooth } from "@/lib/hooks/useBooth.ts";
 import { useRallySubmissions } from "@/lib/hooks/useRallySubmissions.ts";
 import { useRewardAvailability } from "@/lib/hooks/useRewardAvailability.ts";
-import { useStandist } from "@/lib/hooks/useStandist.ts";
+import { StampTupleSerializer } from "@/lib/stampTuple.ts";
 import {
   orangeTriangleEmphasis,
   pinkSquareEmphasis,
@@ -50,7 +49,7 @@ function Stamp() {
 
   const { t } = useTranslation();
 
-  const standist = useStandist(data.standistId);
+  const booth = useBooth(data.boothId);
 
   const { isAnyStampFromMinorHall, stampCount, isStandardRewardObtainable } =
     useRewardAvailability();
@@ -63,7 +62,7 @@ function Stamp() {
       premiumRewardMinStampsRequirement,
     ].includes(stampCount) && isAnyStampFromMinorHall;
 
-  const { data: submissions } = useRallySubmissions();
+  const submissions = useRallySubmissions();
 
   const { createConfetti, canvasProps } = useConfetti({
     count: 200,
@@ -89,11 +88,11 @@ function Stamp() {
   const showIntro =
     stampCount === 1 && (!submissions || submissions.length === 0);
 
-  if (!standist) return <StampError error={new Error("Standist not found")} />;
+  if (!booth) return <StampError error={new Error("Standist not found")} />;
 
   return (
     <>
-      <Header>{t("stand", { name: standist.name })}</Header>
+      <Header>{t("stand", { name: booth.name })}</Header>
       <canvas
         ref={canvasProps.ref as LegacyRef<HTMLCanvasElement> | null}
         className={"pointer-events-none absolute inset-0 block h-full w-full"}
@@ -105,7 +104,7 @@ function Stamp() {
             <div className="h-32 w-32 animate-pulse rounded-full border-8 border-secondary bg-gray-200" />
           }
         >
-          <ArtistImage userId={standist.userId} name={standist.name} />
+          <ArtistImage imageUrl={booth.imageUrl} name={booth.name} />
         </Suspense>
         <div className="flex items-center gap-2 text-xl font-bold text-green-800">
           <TicketCheck size={42} className="-rotate-12" /> {t("stampValidated")}
@@ -167,7 +166,7 @@ function Stamp() {
         </div>
       )}
 
-      <StampDetails stamp={data} standist={standist} />
+      <StampDetails stamp={data} booth={booth} />
     </>
   );
 }

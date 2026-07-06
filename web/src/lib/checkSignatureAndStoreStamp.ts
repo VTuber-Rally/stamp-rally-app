@@ -1,45 +1,34 @@
-import {
-  Stamp,
-  StampTuple,
-} from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-import { verifyData } from "@vtube-stamp-rally/shared-lib/signatures.ts";
-
-import { QUERY_KEYS } from "@/lib/QueryKeys.ts";
-import { db } from "@/lib/db.ts";
+import { ConvexId } from "@/lib/convex.ts";
 import { IntegrityError } from "@/lib/errors.ts";
-import { getStandists } from "@/lib/hooks/useStandists.ts";
-import { queryClient } from "@/lib/queryClient.ts";
-
-function invalidateStamps() {
-  queryClient.invalidateQueries({
-    queryKey: [QUERY_KEYS.STAMPS],
-  });
-}
+import { getBooths } from "@/lib/hooks/useBooths.ts";
+import { verifyData } from "@/lib/jwkSignatures.ts";
+import { Stamp, useStampStore } from "@/lib/stampStore.ts";
+import { StampTuple } from "@/lib/stampTuple.ts";
 
 export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
-  const [standistId, expiryTimestamp, signature] = stamp;
+  const [boothId, expiryTimestamp, signature] = stamp;
 
-  const standist = (await getStandists()).find(
-    (standist) => standist.userId === standistId,
-  );
+  const booth = (await getBooths()).find((booth) => booth._id === boothId);
 
-  if (!standist) throw new Error("Standist not found");
+  if (!booth) throw new Error("Standist not found");
 
-  const isSignatureValid = await verifyData(standist.publicKey, stamp);
+  const isSignatureValid = await verifyData(booth.publicKey, stamp);
   if (!isSignatureValid) throw new IntegrityError("Signature is not valid");
 
   const stampRecord = {
-    standistId,
+    boothId: boothId as ConvexId<"booths">,
     expiryTimestamp,
     signature,
     submitted: false,
     scanTimestamp: Date.now(),
   } satisfies Stamp;
 
-  const alreadyExistingStampRecord = await db.stamps
-    .where({ standistId })
-    .filter((stamp) => !stamp.submitted)
-    .first();
+  const alreadyExistingStampRecord = useStampStore
+    .getState()
+    .stamps.find(
+      (stampRecord) =>
+        stampRecord.boothId === boothId && !stampRecord.submitted,
+    );
 
   if (
     alreadyExistingStampRecord &&
@@ -55,15 +44,10 @@ export async function checkSignatureAndStoreStamp(stamp: StampTuple) {
     }
   }
 
-  if (alreadyExistingStampRecord) {
-    await db.stamps.update(alreadyExistingStampRecord.id, stampRecord);
-  } else {
-    await db.stamps.add(stampRecord);
-  }
-  invalidateStamps();
+  useStampStore.getState().upsertStamp(stampRecord);
   window.plausible("Stamp Scanned", {
     props: {
-      stand: standist.name,
+      stand: booth.name,
     },
   });
 

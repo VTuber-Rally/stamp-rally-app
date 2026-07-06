@@ -315,7 +315,7 @@
     "profileUpdated": "Votre profil a bien été mis à jour !",
     "socialNetworks": {
       "label": "Réseaux sociaux",
-      "subtext": "Vous pouvez vider les champs que vous ne souhaitez pas afficher sur votre profil."
+      "subtext": "Vous pouvez vider les champs que vous ne souhaitez pas afficher sur votre profil. Indiquez les pseudos et le lien sera construit automatiquement."
     },
     "title": "Mon profil"
   },

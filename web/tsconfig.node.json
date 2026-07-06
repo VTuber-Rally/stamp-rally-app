@@ -4,10 +4,22 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "skipLibCheck": true,
     "module": "ESNext",
+    "target": "esnext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+
+    "paths": {
+      "~/*": ["./convex/*"],
+    },
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "vitest.setup.crypto.ts", "vitest.setup.ts"]
+  "include": [
+    "vite.config.ts",
+    "vitest.config.ts",
+    "vitest.setup.crypto.ts",
+    "vitest.setup.ts",
+    "convex/",
+    "scripts/",
+  ],
 }

@@ -1,24 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { Query } from "appwrite";
+import { useQuery } from "convex/react";
 
-import type { ContestParticipant } from "@vtube-stamp-rally/shared-lib/models/ContestParticipant.ts";
-
-import { QUERY_KEYS } from "@/lib/QueryKeys";
-import { databases } from "@/lib/appwrite";
-import { contestParticipantsCollectionId, databaseId } from "@/lib/consts";
-
-async function fetchContestWinners() {
-  const response = await databases.listDocuments<ContestParticipant>(
-    databaseId,
-    contestParticipantsCollectionId,
-    [Query.equal("isWinner", true), Query.orderDesc("drawnDate")],
-  );
-  return response.documents;
-}
+import { convexPublicApi } from "@/lib/convex";
 
 export function useContestWinners() {
-  return useQuery({
-    queryKey: [QUERY_KEYS.CONTEST_WINNERS],
-    queryFn: fetchContestWinners,
-  });
+  const data = useQuery(convexPublicApi.contest.getLastWinners);
+  return {
+    data,
+    isLoading: data === undefined,
+  };
 }

@@ -8,6 +8,7 @@ import { ArtistDrawer } from "@/components/artists/ArtistDrawer.tsx";
 import { ButtonGroupControl } from "@/components/map/ButtonGroupControl.tsx";
 import { MapButton } from "@/components/map/MapButton.tsx";
 import { MapLegend } from "@/components/map/MapLegend.tsx";
+import { ConvexId } from "@/lib/convex.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
 
 export const Route = createLazyFileRoute("/_rallyists/map")({
@@ -16,11 +17,12 @@ export const Route = createLazyFileRoute("/_rallyists/map")({
 
 function StandMap() {
   const [artistDrawerOpen, setArtistDrawerOpen] = useState(false);
-  const [activeStandistId, setActiveStandistId] = useState<string | null>(null);
+  const [activeStandistId, setActiveStandistId] =
+    useState<ConvexId<"booths"> | null>(null);
   const { toast } = useToast();
   const { t } = useTranslation();
 
-  const onStandClick = useCallback((standId: string) => {
+  const onStandClick = useCallback((standId: ConvexId<"booths">) => {
     setArtistDrawerOpen(true);
     setActiveStandistId(standId);
   }, []);

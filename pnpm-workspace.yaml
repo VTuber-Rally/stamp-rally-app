@@ -1,13 +1,7 @@
 packages:
   - web/
-  - functions/modules/**
-  - shared-lib/
-  - scripts/
-  - scripts/utils/**
   - linter-configs/
 
-onlyBuiltDependencies:
-  - msw
 injectWorkspacePackages: true
 
 syncInjectedDepsAfterScripts:

@@ -9,8 +9,8 @@ export const Route = createFileRoute("/_rallyists/")({
 });
 
 function Home() {
-  const { data = [] } = useCollectedStamps();
-  const { data: submissions } = useRallySubmissions();
+  const stamps = useCollectedStamps();
+  const submissions = useRallySubmissions();
 
-  return <RallyistsHomepage stamps={data} submissions={submissions} />;
+  return <RallyistsHomepage stamps={stamps} submissions={submissions} />;
 }

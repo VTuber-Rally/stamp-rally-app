@@ -1,17 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { ConvexId, convexPublicApi, useDLEQuery } from "@/lib/convex.ts";
 
-import { useDatabase } from "@/lib/hooks/useDatabase.ts";
-
-import { QUERY_KEYS } from "../QueryKeys.ts";
-
-export const useRallySubmission = (documentId: string) => {
-  const { getSubmission } = useDatabase();
-
-  const { isLoading, error, data } = useQuery({
-    queryKey: [QUERY_KEYS.SUBMISSION, documentId],
-    queryFn: () => getSubmission(documentId),
-    networkMode: "online",
+export const useRallySubmission = (submissionId: ConvexId<"submissions">) =>
+  useDLEQuery({
+    query: convexPublicApi.submissions.getSubmissionWithStamps,
+    args: {
+      submissionId,
+    },
   });
-
-  return { isLoading, error, data };
-};

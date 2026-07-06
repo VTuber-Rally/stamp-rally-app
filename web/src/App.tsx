@@ -1,3 +1,4 @@
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "@tanstack/react-router";
@@ -6,6 +7,9 @@ import { useTranslation } from "react-i18next";
 
 import { QRDrawerContextProvider } from "@/contexts/QRDrawerContextProvider.tsx";
 import { KEY_VALUES } from "@/lib/KeyValues.ts";
+import { useCurrentUser } from "@/lib/auth.ts";
+import { convex } from "@/lib/convexClient.ts";
+import { useBooths } from "@/lib/hooks/useBooths";
 import { useKeyValue } from "@/lib/hooks/useKeyValue";
 import { useRegisterAppSW } from "@/lib/hooks/useRegisterAppSW.tsx";
 import { queryClient } from "@/lib/queryClient.ts";
@@ -13,7 +17,11 @@ import { router } from "@/router.tsx";
 
 const AppWrapped = () => {
   const { t } = useTranslation();
-  const { value: eventEndDate } = useKeyValue(KEY_VALUES.eventEndDate);
+  const eventEndDate = useKeyValue(KEY_VALUES.eventEndDate);
+
+  // Permanent subscriptions
+  useBooths();
+  useCurrentUser();
 
   useRegisterAppSW();
 
@@ -56,12 +64,14 @@ const AppWrapped = () => {
 export function App() {
   return (
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <QRDrawerContextProvider>
-          <AppWrapped />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QRDrawerContextProvider>
-      </QueryClientProvider>
+      <ConvexAuthProvider client={convex}>
+        <QueryClientProvider client={queryClient}>
+          <QRDrawerContextProvider>
+            <AppWrapped />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QRDrawerContextProvider>
+        </QueryClientProvider>
+      </ConvexAuthProvider>
     </StrictMode>
   );
 }

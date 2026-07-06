@@ -20,11 +20,7 @@ export function InventoryPage({
   maxHoloCards,
 }: InventoryPageProps) {
   const { t } = useTranslation();
-  const {
-    data: { cards: cardDesignWithStock, group } = {},
-    isLoading,
-    error,
-  } = useAvailableCards();
+  const availableCards = useAvailableCards();
 
   const { addToCart, cartCards, setLimits } = useInventoryDrawerContext();
 
@@ -35,7 +31,7 @@ export function InventoryPage({
     });
   }, [setLimits, maxClassicCards, maxHoloCards]);
 
-  if (isLoading) {
+  if (availableCards.status === "pending") {
     return (
       <div className="flex grow flex-col">
         <Header>{t("inventory.title")}</Header>
@@ -47,18 +43,21 @@ export function InventoryPage({
     );
   }
 
-  if (error) {
+  if (availableCards.status === "error") {
     return (
       <div className="flex grow flex-col">
         <Header>{t("inventory.title")}</Header>
         <div className="flex grow items-center justify-center">
           <p className="text-red-500">
-            {t("error")}: {error.message}
+            {t("error")}: {availableCards.error.message}
           </p>
         </div>
       </div>
     );
   }
+
+  const { cards: cardDesignWithStock, activeGroup: group } =
+    availableCards.data;
 
   return (
     <div className="flex grow flex-col pb-12">

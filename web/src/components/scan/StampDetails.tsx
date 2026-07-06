@@ -2,19 +2,19 @@ import { ScanSearch, ShieldCheck, TicketMinus, TicketPlus } from "lucide-react";
 import { FC, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { Stamp } from "@vtube-stamp-rally/shared-lib/models/Stamp.ts";
-import type { Standist } from "@vtube-stamp-rally/shared-lib/models/Standist.ts";
+import { PublicBooth } from "@/lib/convex.ts";
+import { Stamp } from "@/lib/stampStore.ts";
 
 type StampDetailsProps = {
   stamp: Stamp;
-  standist: Standist;
+  booth: PublicBooth;
 };
 
 const StampLine: FC<PropsWithChildren> = ({ children }) => {
   return <li className="flex gap-2">{children}</li>;
 };
 
-export const StampDetails: FC<StampDetailsProps> = ({ stamp, standist }) => {
+export const StampDetails: FC<StampDetailsProps> = ({ stamp, booth }) => {
   const { t } = useTranslation();
 
   return (
@@ -39,7 +39,7 @@ export const StampDetails: FC<StampDetailsProps> = ({ stamp, standist }) => {
         </StampLine>
         <StampLine>
           <ShieldCheck />
-          {t("stampDetails.signedBy", { name: standist.name })}
+          {t("stampDetails.signedBy", { name: booth.name })}
         </StampLine>
       </ul>
     </details>

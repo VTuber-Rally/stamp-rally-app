@@ -1,11 +1,11 @@
-import { useForm } from "react-hook-form";
+import { useAuthActions } from "@convex-dev/auth/react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@/components/inputs/Checkbox.tsx";
+import { RHFCheckbox } from "@/components/inputs/Checkbox.tsx";
 import InputField from "@/components/inputs/InputField.tsx";
-import { APPWRITE_PREFERENCES_KEYS } from "@/lib/appwritePreferencesKeys.ts";
+import { registerWithEmail } from "@/lib/auth.ts";
 import { useToast } from "@/lib/hooks/useToast.ts";
-import { useUser } from "@/lib/hooks/useUser.ts";
 
 type EmailNameFormType = {
   name: string;
@@ -14,33 +14,30 @@ type EmailNameFormType = {
 };
 
 export const CreateAccountForm = () => {
+  const { signIn } = useAuthActions();
   const { t } = useTranslation();
-  const { user, setName, setEmail, setPref, loginAnonymous } = useUser();
   const { toast } = useToast();
 
   const {
     register,
+    control,
     formState: { errors },
     handleSubmit,
-  } = useForm<EmailNameFormType>();
+  } = useForm<EmailNameFormType>({
+    defaultValues: {
+      emailConsent: false,
+    },
+  });
 
-  const onSubmit = async (data: EmailNameFormType) => {
-    if (!user) {
-      // create anonymous user
-      await loginAnonymous();
-    }
+  const onSubmit: SubmitHandler<EmailNameFormType> = async (data) => {
     try {
-      if (data.email) {
-        await setEmail(data.email);
-        if (data.emailConsent) {
-          await setPref(APPWRITE_PREFERENCES_KEYS.EMAIL_CONSENT, true);
-        }
-      }
-
       console.log(data);
-      if (data.name) {
-        await setName(data.name);
-      }
+      await signIn(
+        ...registerWithEmail(data.email, {
+          name: data.name,
+          emailConsent: data.emailConsent,
+        }),
+      );
     } catch {
       toast({
         title: t("error"),
@@ -57,35 +54,35 @@ export const CreateAccountForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           className={"flex flex-col items-center"}
         >
-          {!user?.name && (
-            <InputField
-              type={"text"}
-              name={"name"}
-              placeholder={t("optionalName")}
-              register={register}
-              errors={errors["name"]}
-              required={false}
+          <InputField
+            type={"text"}
+            name={"name"}
+            placeholder={t("optionalName")}
+            register={register}
+            errors={errors["name"]}
+            required={false}
+          />
+
+          <InputField
+            type={"email"}
+            name={"email"}
+            placeholder={t("email")}
+            register={register}
+            errors={errors["email"]}
+          />
+
+          <div className={"flex items-center"}>
+            <Controller
+              control={control}
+              name="emailConsent"
+              render={({ field }) => (
+                <RHFCheckbox {...field} id={"emailConsent"} />
+              )}
             />
-          )}
-
-          {!user?.email && (
-            <>
-              <InputField
-                type={"email"}
-                name={"email"}
-                placeholder={t("email")}
-                register={register}
-                errors={errors["name"]}
-              />
-
-              <div className={"flex items-center"}>
-                <Checkbox {...register("emailConsent")} id={"emailConsent"} />
-                <label className={"ml-2"} htmlFor={"emailConsent"}>
-                  {t("consent.email")}
-                </label>
-              </div>
-            </>
-          )}
+            <label className={"ml-2"} htmlFor={"emailConsent"}>
+              {t("consent.email")}
+            </label>
+          </div>
 
           <button
             className={

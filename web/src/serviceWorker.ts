@@ -11,7 +11,7 @@ import {
 import { NavigationRoute, registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
 
-import { firebaseConfig } from "@/lib/consts.ts";
+import { firebaseConfig, isDev } from "@/lib/consts.ts";
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -38,7 +38,25 @@ registerRoute(
   }),
 );
 
-registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")));
+registerRoute(
+  ({ url }) => /api\/storage/.test(url.pathname),
+  new StaleWhileRevalidate({
+    cacheName: "convex-storage",
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 100,
+        maxAgeSeconds: 60 * 60 * 72,
+      }),
+    ],
+  }),
+);
+
+if (!isDev) {
+  registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")));
+}
 
 if (firebaseConfig.apiKey) {
   const app = initializeApp(firebaseConfig);

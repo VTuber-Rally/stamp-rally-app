@@ -46,7 +46,7 @@ export const RallyProgressBar: FC<RallyProgressBarProps> = ({
   hideMarker = false,
 }) => {
   const { t } = useTranslation();
-  const { data: stamps } = useCollectedStamps();
+  const stamps = useCollectedStamps();
   const collectedStamps = stamps?.length ?? 0;
 
   const steps = Array.from(

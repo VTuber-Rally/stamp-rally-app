@@ -2,8 +2,6 @@ import clsx from "clsx";
 import { Loader2, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { SellCardsFunctionRequest } from "@vtube-stamp-rally/shared-lib/functions/sellCards.ts";
-
 import {
   Drawer,
   DrawerClose,
@@ -15,6 +13,8 @@ import {
 } from "@/components/layout/Drawer.tsx";
 import { CartCard } from "@/contexts/InventoryDrawerContext";
 import { useInventoryDrawerContext } from "@/contexts/useInventoryDrawerContext.ts";
+import { ConvexId } from "@/lib/convex.ts";
+import { useAvailableCards } from "@/lib/hooks/inventory/useAvailableCards.ts";
 import { useSellCards } from "@/lib/hooks/inventory/useSellCards.ts";
 import { useToast } from "@/lib/hooks/useToast";
 
@@ -35,11 +35,27 @@ function CartCardLine({
   const { removeFromCart, addToCart, maxClassicCards, maxHoloCards } =
     useInventoryDrawerContext();
 
+  const availableCards = useAvailableCards();
+  let classicStock = Infinity;
+  let holoStock = Infinity;
+  if (availableCards.status === "success") {
+    const cardEntry = availableCards.data.cards.find(
+      (availableCard) => availableCard._id === card._id,
+    );
+    if (cardEntry) {
+      classicStock = cardEntry.classicStock;
+      holoStock = cardEntry.holoStock;
+    } else {
+      classicStock = 0;
+      holoStock = 0;
+    }
+  }
+
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
       <div className="flex items-start space-x-4">
         <img
-          src={card.image || ""}
+          src={card.imageUrl || ""}
           alt={card.name || "Card design"}
           className="w-16 rounded-lg object-cover"
         />
@@ -49,7 +65,7 @@ function CartCardLine({
           </h3>
           <p className="text-sm text-gray-600">
             {t("cardDesigns.byAuthor", {
-              author: card.author || t("cardDesigns.unknownAuthor"),
+              author: card.artist || t("cardDesigns.unknownAuthor"),
             })}
           </p>
 
@@ -60,7 +76,7 @@ function CartCardLine({
               </span>
               <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => removeFromCart(card.$id, "classic")}
+                  onClick={() => removeFromCart(card._id, "classic")}
                   className="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200"
                 >
                   −
@@ -71,12 +87,12 @@ function CartCardLine({
                 <button
                   onClick={() => addToCart(card, "classic")}
                   disabled={
-                    card.classicQuantity >= card.classicStock ||
+                    card.classicQuantity >= classicStock ||
                     totalClassicInCart >= maxClassicCards
                   }
                   className={clsx(
                     "flex h-6 w-6 items-center justify-center rounded-full",
-                    card.classicQuantity >= card.classicStock ||
+                    card.classicQuantity >= classicStock ||
                       totalClassicInCart >= maxClassicCards
                       ? "cursor-not-allowed bg-gray-100 text-gray-400"
                       : "bg-green-100 text-green-600 hover:bg-green-200",
@@ -95,7 +111,7 @@ function CartCardLine({
               </span>
               <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => removeFromCart(card.$id, "holo")}
+                  onClick={() => removeFromCart(card._id, "holo")}
                   className="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200"
                 >
                   −
@@ -106,12 +122,12 @@ function CartCardLine({
                 <button
                   onClick={() => addToCart(card, "holo")}
                   disabled={
-                    card.holoQuantity >= card.holoStock ||
+                    card.holoQuantity >= holoStock ||
                     totalHoloInCart >= maxHoloCards
                   }
                   className={clsx(
                     "flex h-6 w-6 items-center justify-center rounded-full",
-                    card.holoQuantity >= card.holoStock ||
+                    card.holoQuantity >= holoStock ||
                       totalHoloInCart >= maxHoloCards
                       ? "cursor-not-allowed bg-gray-100 text-gray-400"
                       : "bg-green-100 text-green-600 hover:bg-green-200",
@@ -131,55 +147,40 @@ function CartCardLine({
 export const InventoryDrawer = ({
   submissionId,
 }: {
-  submissionId?: string;
+  submissionId?: ConvexId<"submissions">;
 }) => {
   const { t } = useTranslation();
   const { open, setOpen, cartCards, clearCart } = useInventoryDrawerContext();
 
   const { toast } = useToast();
 
-  const { mutate: orderCards, isPending } = useSellCards();
+  const { mutate: orderCards, isLoading } = useSellCards();
 
   const handleOrderCards = () => {
-    const orderedCards = cartCards.reduce(
-      (acc, card) => {
-        if (card.classicQuantity > 0) {
-          acc.push({
-            type: "classic",
-            cardDesignId: card.$id,
-            quantity: card.classicQuantity,
-          });
-        }
-        if (card.holoQuantity > 0) {
-          acc.push({
-            type: "holo",
-            cardDesignId: card.$id,
-            quantity: card.holoQuantity,
-          });
-        }
-        return acc;
-      },
-      [] as SellCardsFunctionRequest["orderedCards"],
-    );
+    const orderedCards = cartCards.map((cartCard) => ({
+      classic: cartCard.classicQuantity,
+      holo: cartCard.holoQuantity,
+      design: cartCard._id,
+    }));
 
-    orderCards(
-      { orderedCards, submissionId } satisfies SellCardsFunctionRequest,
-      {
-        onSuccess: () => {
-          toast({
-            title: t("inventory.cart.orderSuccess.title"),
-            description: t("inventory.cart.orderSuccess.description"),
-          });
-          clearCart();
-          setOpen(false);
-        },
-        onError: (error) => {
-          console.error("Error ordering cards:", error);
-          toast({
-            title: t("inventory.cart.orderError.title"),
-            description: t("inventory.cart.orderError.description"),
-          });
-        },
+    orderCards({
+      cards: orderedCards,
+      submission: submissionId,
+    }).then(
+      () => {
+        toast({
+          title: t("inventory.cart.orderSuccess.title"),
+          description: t("inventory.cart.orderSuccess.description"),
+        });
+        clearCart();
+        setOpen(false);
+      },
+      (error) => {
+        console.error("Error ordering cards:", error);
+        toast({
+          title: t("inventory.cart.orderError.title"),
+          description: t("inventory.cart.orderError.description"),
+        });
       },
     );
   };
@@ -202,7 +203,7 @@ export const InventoryDrawer = ({
       <button
         className="mt-2 flex cursor-pointer text-center text-sm underline disabled:cursor-not-allowed disabled:opacity-50"
         onClick={clearCart}
-        disabled={cartCards.length === 0 || isPending}
+        disabled={cartCards.length === 0 || isLoading}
         title={t("inventory.cart.clear")}
       >
         <Trash2 className="mr-1" size={18} />
@@ -235,7 +236,7 @@ export const InventoryDrawer = ({
               <div className="space-y-4">
                 {cartCards.map((card) => (
                   <CartCardLine
-                    key={card.$id}
+                    key={card._id}
                     card={card}
                     totalClassicInCart={totalClassicInCart}
                     totalHoloInCart={totalHoloInCart}
@@ -250,11 +251,11 @@ export const InventoryDrawer = ({
               <ButtonLink
                 type={"button"}
                 size={"medium"}
-                disabled={cartCards.length === 0 || isPending}
+                disabled={cartCards.length === 0 || isLoading}
                 onClick={handleOrderCards}
                 className="mt-0"
               >
-                {isPending ? (
+                {isLoading ? (
                   <Loader2 className="mr-2 animate-spin" />
                 ) : (
                   t("validate")
@@ -264,7 +265,7 @@ export const InventoryDrawer = ({
               <DrawerClose asChild>
                 <button
                   className="mt-2 text-center text-sm underline disabled:cursor-not-allowed disabled:opacity-50"
-                  disabled={isPending}
+                  disabled={isLoading}
                 >
                   {t("close")}
                 </button>
