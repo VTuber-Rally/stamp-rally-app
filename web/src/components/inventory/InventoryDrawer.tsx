@@ -205,6 +205,10 @@ export const InventoryDrawer = ({
       card.randomClassicQuantity,
     0,
   );
+  const totalChosenCards = cartCards.reduce(
+    (total, card) => total + card.classicQuantity + card.holoQuantity,
+    0,
+  );
   const totalClassicInCart = cartCards.reduce(
     (sum, card) => sum + card.classicQuantity,
     0,
@@ -267,7 +271,7 @@ export const InventoryDrawer = ({
               <ButtonLink
                 type={"button"}
                 size={"medium"}
-                disabled={cartCards.length === 0 || isLoading}
+                disabled={totalChosenCards === 0 || isLoading}
                 onClick={handleOrderCards}
                 className="mt-0"
               >
