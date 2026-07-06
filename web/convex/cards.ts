@@ -7,6 +7,7 @@ import {
   mutation,
   query,
 } from "./_generated/server.js";
+import { getStaffLoggedInUser } from "./users.js";
 
 /**
  * Internal mutation that redistributes cards from expired groups to future
@@ -161,6 +162,7 @@ export const listCardDesigns = query({
 export const listAvailableCards = query({
   args: {},
   handler: async (ctx) => {
+    await getStaffLoggedInUser(ctx);
     const activeGroup = await ctx.db
       .query("groups")
       .filter((q) =>
@@ -232,6 +234,7 @@ export const sellCards = mutation({
     submission: v.optional(v.id("submissions")),
   },
   handler: async (ctx, args) => {
+    await getStaffLoggedInUser(ctx);
     const activeGroup = await ctx.db
       .query("groups")
       .filter((q) =>

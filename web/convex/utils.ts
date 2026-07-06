@@ -136,3 +136,74 @@ export const importBooths = internalAction({
     return createdBooths;
   },
 });
+
+export const importGroups = internalMutation({
+  args: {
+    groups: v.array(
+      v.object({
+        indexNumber: v.number(),
+        start: v.number(),
+        end: v.number(),
+        coefficient: v.number(),
+        holographicCardsPerDesign: v.number(),
+        classicCardsPerDesign: v.number(),
+      }),
+    ),
+  },
+  handler: async (ctx, args) => {
+    const groups: Record<number, Id<"groups">> = {};
+    for (const group of args.groups) {
+      const createdGroupId = await ctx.db.insert("groups", {
+        ...group,
+        redistributed: false,
+      });
+      groups[group.indexNumber] = createdGroupId;
+    }
+    return groups;
+  },
+});
+
+export const importCards = internalMutation({
+  args: {
+    items: v.array(
+      v.object({
+        designId: v.id("cardDesigns"),
+        groupId: v.id("groups"),
+        classicCards: v.number(),
+        holographicCards: v.number(),
+      }),
+    ),
+  },
+  handler: async (ctx, args) => {
+    for (const item of args.items) {
+      for (let i = 0; i < item.classicCards; i++) {
+        const cardId = await ctx.db.insert("cards", {
+          cardDesign: item.designId,
+          group: item.groupId,
+          isAvailable: true,
+          type: "classic",
+        });
+        await ctx.db.insert("cardHistory", {
+          card: cardId,
+          timestamp: Date.now(),
+          type: "initial",
+          group: item.groupId,
+        });
+      }
+      for (let i = 0; i < item.holographicCards; i++) {
+        const cardId = await ctx.db.insert("cards", {
+          cardDesign: item.designId,
+          group: item.groupId,
+          isAvailable: true,
+          type: "holographic",
+        });
+        await ctx.db.insert("cardHistory", {
+          card: cardId,
+          timestamp: Date.now(),
+          type: "initial",
+          group: item.groupId,
+        });
+      }
+    }
+  },
+});

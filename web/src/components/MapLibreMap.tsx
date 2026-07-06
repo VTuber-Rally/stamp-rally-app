@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react";
 import { useSearch } from "@tanstack/react-router";
 import {
   GeoJSONSource,

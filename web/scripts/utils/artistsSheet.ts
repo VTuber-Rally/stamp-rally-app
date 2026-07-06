@@ -1,4 +1,7 @@
+import { parse } from "date-fns";
 import { google } from "googleapis";
+import { internal } from "~/_generated/api.js";
+import { Id } from "~/_generated/dataModel.js";
 
 import { scriptEnv } from "./env.js";
 
@@ -113,4 +116,62 @@ export async function getArtistsFromSheet() {
   );
 
   return booths;
+}
+
+export async function getSalesGroups() {
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: "Groupes de vente!A2:D",
+  });
+
+  const groups: Pick<
+    (typeof internal.utils.importGroups._args)["groups"][number],
+    "indexNumber" | "start" | "end" | "coefficient"
+  >[] = [];
+
+  for (const line of response.data.values!) {
+    const [index, start, end, weight] = line as string[];
+
+    const indexNumber = Number.parseInt(index);
+    const startDate = parse(start, "dd/MM/yyyy HH:mm:ss", new Date());
+    const endDate = parse(end, "dd/MM/yyyy HH:mm:ss", new Date());
+    const coefficient = Number.parseInt(weight);
+
+    groups.push({
+      indexNumber,
+      start: startDate.getTime(),
+      end: endDate.getTime(),
+      coefficient,
+    });
+  }
+
+  return groups;
+}
+
+export async function getCardStock() {
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: "Stock!A2:D",
+  });
+
+  const cardDesigns: {
+    designId: Id<"cardDesigns">;
+    classic: number;
+    holographic: number;
+  }[] = [];
+
+  for (const line of response.data.values!) {
+    const [designId, , classic, holographic] = line as string[];
+
+    const classicCount = Number.parseInt(classic);
+    const holographicCount = Number.parseInt(holographic);
+
+    cardDesigns.push({
+      designId: designId as Id<"cardDesigns">,
+      classic: classicCount,
+      holographic: holographicCount,
+    });
+  }
+
+  return cardDesigns;
 }
