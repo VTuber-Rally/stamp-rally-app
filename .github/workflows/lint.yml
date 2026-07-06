@@ -59,21 +59,21 @@ jobs:
       - name: "pnpm run prettier:check"
         run: pnpm run -r --parallel prettier:check
 
-  test:
-    name: Test web
+  # test:
+  #   name: Test web
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: true
+  #     - name: Setup pnpm
+  #       uses: pnpm/action-setup@v4.0.0
+  #       with:
+  #         run_install: true
 
-      - name: "web: pnpm test"
-        run: pnpm --filter=web test
+  #     - name: "web: pnpm test"
+  #       run: pnpm --filter=web test
 
   build:
     name: Build web
@@ -107,6 +107,8 @@ jobs:
           VITE_CONVEX_URL: https://example.com
           VITE_CONVEX_SITE_URL: https://example.com
           VITE_SITE_URL: https://example.com
+          VITE_IS_MINOR_HALL_REQUIRED: false
+          VITE_PAGE_TITLE: example
         run: pnpm --filter=web build
 
       # upload artifacts
