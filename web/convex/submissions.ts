@@ -103,6 +103,13 @@ export const submitRally = mutation({
       });
     }
 
+    if (stamps.length < Number.parseInt(process.env.MIN_STAMPS!)) {
+      return {
+        status: "error",
+        message: "Not enough stamps to get rewards",
+      };
+    }
+
     const submissionId = await ctx.db.insert("submissions", {
       redeemed: false,
       submittedAt: Date.now(),
