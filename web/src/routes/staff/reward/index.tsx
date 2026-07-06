@@ -14,12 +14,14 @@ function RewardPage() {
       <ButtonLink href="/staff/reward/standard" bg="success-orange">
         Standard
       </ButtonLink>
-      <p className="pt-2 text-gray-600">Rally à 10 tampons, 1 à 3 cartes</p>
+      <p className="pt-2 text-gray-600">
+        Rally à 10 tampons, 1 à 2 cartes ou 1 carte holo
+      </p>
       <ButtonLink href="/staff/reward/premium" bg="tertiary">
         Premium
       </ButtonLink>
       <p className="pt-2 text-gray-600">
-        Rally à 16 tampons, 0 à 3 cartes ou 1 carte holo
+        Rally à 16 tampons, 0 à 5 cartes ou 1 à 2 cartes holo
       </p>
     </>
   );
