@@ -229,6 +229,7 @@ export const sellCards = mutation({
         design: v.id("cardDesigns"),
         classic: v.number(),
         holo: v.number(),
+        randomClassic: v.number(),
       }),
     ),
     submission: v.optional(v.id("submissions")),
@@ -256,7 +257,10 @@ export const sellCards = mutation({
       )
       .collect();
 
-    const orderedCards: [Id<"cardDesigns">, "classic" | "holographic"][] = [];
+    const orderedCards: [
+      Id<"cardDesigns">,
+      "classic" | "holographic" | "random-classic",
+    ][] = [];
     for (const orderItem of args.cards) {
       for (let i = 0; i < orderItem.classic; i++) {
         orderedCards.push([orderItem.design, "classic"]);
@@ -264,33 +268,50 @@ export const sellCards = mutation({
       for (let i = 0; i < orderItem.holo; i++) {
         orderedCards.push([orderItem.design, "holographic"]);
       }
+      for (let i = 0; i < orderItem.randomClassic; i++) {
+        orderedCards.push([orderItem.design, "random-classic"]);
+      }
     }
 
     const cardsToSell: Id<"cards">[] = [];
+    const randomSoldMarkers: Id<"cards">[] = [];
 
     for (const card of availableCards) {
       if (!orderedCards.length) break;
 
       const foundOrder = orderedCards.findIndex(
         ([cardDesign, type]) =>
-          card.cardDesign === cardDesign && card.type === type,
+          card.cardDesign === cardDesign &&
+          (card.type === "classic"
+            ? type === "classic" || type === "random-classic"
+            : card.type === type),
       );
       if (foundOrder === -1) {
-        break;
+        continue;
       }
 
-      orderedCards.splice(foundOrder, 1);
+      const [, orderType] = orderedCards.splice(foundOrder, 1)[0];
       cardsToSell.push(card._id);
+      // Track whether this card was sold as a random reward so we can
+      // distinguish it from manually-chosen cards in the history.
+      if (orderType === "random-classic") {
+        randomSoldMarkers.push(card._id);
+      }
+    }
+
+    if (orderedCards.length) {
+      console.warn("Cards are missing!");
     }
 
     for (const card of cardsToSell) {
+      const isRandom = randomSoldMarkers.includes(card);
       await Promise.all([
         ctx.db.patch("cards", card, {
           isAvailable: false,
         }),
         ctx.db.insert("cardHistory", {
           card,
-          type: "sold",
+          type: isRandom ? "sold-random" : "sold",
           timestamp: Date.now(),
           submission: args.submission,
         }),

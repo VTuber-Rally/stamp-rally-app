@@ -8,7 +8,11 @@ export const InventoryCartBar = () => {
   const { cartCards, setOpen, clearCart } = useInventoryDrawerContext();
 
   const totalCards = cartCards.reduce(
-    (acc, card) => acc + card.classicQuantity + card.holoQuantity,
+    (acc, card) =>
+      acc +
+      card.classicQuantity +
+      card.holoQuantity +
+      card.randomClassicQuantity,
     0,
   );
 

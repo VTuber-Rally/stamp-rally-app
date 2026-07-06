@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Sparkles, Vote } from "lucide-react";
+import { Dices, Sparkles, Vote } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 
 import type { CartCard } from "@/contexts/InventoryDrawerContext.ts";
@@ -25,6 +25,7 @@ export function InventoryCard({
 
   const hasClassic = !!cartCard && cartCard.classicQuantity > 0;
   const hasHolo = !!cartCard && cartCard.holoQuantity > 0;
+  const hasRandomClassic = !!cartCard && cartCard.randomClassicQuantity > 0;
 
   const boothOfDesign = booths.find((booth) => booth.cardDesign === design._id);
 
@@ -138,6 +139,21 @@ export function InventoryCard({
               </span>
             )}
           </div>
+
+          {hasRandomClassic && (
+            <div className="flex items-center justify-between rounded-md border border-purple-300 bg-purple-50 px-3 py-2 text-sm shadow-md">
+              <span className="text-purple-700">
+                {t("inventory.cart.randomClassic")}
+              </span>
+              <span className="ml-1 text-base text-purple-600">
+                {Array.from({
+                  length: cartCard?.randomClassicQuantity ?? 0,
+                }).map((_, i) => (
+                  <Dices key={i} className="inline-block" />
+                ))}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

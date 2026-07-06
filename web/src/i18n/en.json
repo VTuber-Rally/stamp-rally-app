@@ -165,6 +165,7 @@
     "holographicCard": "A chance to get an exclusive card in its holographic version!",
     "minorHallInfo": "To ensure fairness between halls, one of the stamps must come from a booth located in Hall 5A.",
     "oneOrMoreClassicCards": "One or two exclusive cards",
+    "randomClassicCard": "A random exclusive card",
     "premiumCardRewardPresentation": "By continuing to the <1><icon/>next tier</1> at {{stamps}} stamps, you also unlock the following rewards:",
     "resetDisclaimer": "Once the stamps are submitted, you'll start from scratch to reach the tiers.",
     "standardCardRewardPresentation": "By reaching the <1><icon/>first tier</1> at {{stamps}} stamps, you will be entitled to the following reward:",
@@ -177,11 +178,13 @@
   },
   "description": "Description",
   "draw": {
-    "debug": "Type: {{type}} / Phase: {{phase}}<br/>Classic: {{wonClassicCards}} / Holo: {{wonHolographicCards}}",
+    "debug": "Type: {{type}} / Phase: {{phase}}<br/>Classic: {{wonClassicCards}} / Holo: {{wonHolographicCards}} / Random: {{wonRandomClassicCards}}",
     "classicCards_one": "classic card",
     "classicCards_other": "classic cards",
     "holographicCards_one": "holographic card",
     "holographicCards_other": "holographic cards",
+    "randomClassicCards_one": "random classic card",
+    "randomClassicCards_other": "random classic cards",
     "drawReward": "Reward inside!",
     "goToNextPhase": "Click to continue"
   },
@@ -232,10 +235,11 @@
       },
       "stockLimit": {
         "description": "You cannot add more cards than available in stock.",
-        "maxCards": "Draw: <b>{{classic}} classic</b>, <b>{{holo}} holo</b>",
+        "maxCards": "Draw: <b>{{classic}} classic</b>, <b>{{holo}} holo</b>, <b>{{random}} random</b>",
         "title": "Insufficient stock"
       },
-      "title": "Sales Cart"
+      "title": "Sales Cart",
+      "randomClassic": "Random classic"
     },
     "group": "Group #{{groupId}}",
     "groupDates": "{{start}} - {{end}}",

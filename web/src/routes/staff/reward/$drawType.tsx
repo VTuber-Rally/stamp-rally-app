@@ -2,7 +2,7 @@ import { useConfetti } from "@stevent-team/react-party";
 import { createFileRoute } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
 import clsx from "clsx";
-import { Sparkles, Vote } from "lucide-react";
+import { Dices, Sparkles, Vote } from "lucide-react";
 import { LegacyRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -35,6 +35,7 @@ function RouteComponent() {
   const [animationStep, setAnimationStep] = useState<number>(0);
   const [wonClassicCards, setWonClassicCards] = useState<number>(0);
   const [wonHolographicCards, setWonHolographicCards] = useState<number>(0);
+  const [wonRandomClassicCards, setWonRandomClassicCards] = useState<number>(0);
   const [wonReward, setWonReward] = useState<Prize>();
   const { drawReward, isLoading } = useDrawReward();
 
@@ -67,6 +68,9 @@ function RouteComponent() {
         setWonHolographicCards(
           wonHolographicCards + wonReward.holographicCards,
         );
+        setWonRandomClassicCards(
+          wonRandomClassicCards + wonReward.randomClassicCards,
+        );
       }
       return currentAnimationStep + 1;
     });
@@ -88,6 +92,7 @@ function RouteComponent() {
         search: {
           maxClassicCards: wonClassicCards,
           maxHoloCards: wonHolographicCards,
+          maxRandomClassicCards: wonRandomClassicCards,
           submissionId,
         },
       });
@@ -108,6 +113,7 @@ function RouteComponent() {
             phase,
             wonClassicCards,
             wonHolographicCards,
+            wonRandomClassicCards,
           }}
         />
       </p>
@@ -184,6 +190,23 @@ function RouteComponent() {
                   /{" "}
                   {tEN("draw.holographicCards", {
                     count: wonReward.holographicCards,
+                  })}
+                </div>
+              </>
+            )}
+            {!!wonReward?.randomClassicCards && (
+              <>
+                <div className="text-5xl font-extrabold">
+                  <Dices className="inline-block align-sub" size={64} />{" "}
+                  {wonReward.randomClassicCards}
+                </div>
+                <div className="text-center text-xs text-gray-500">
+                  {tFR("draw.randomClassicCards", {
+                    count: wonReward.randomClassicCards,
+                  })}{" "}
+                  /{" "}
+                  {tEN("draw.randomClassicCards", {
+                    count: wonReward.randomClassicCards,
                   })}
                 </div>
               </>

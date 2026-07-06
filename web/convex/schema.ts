@@ -50,6 +50,7 @@ export default defineSchema({
     draw: v.union(v.literal("standard"), v.literal("premium")),
     classicCards: v.number(),
     holographicCards: v.number(),
+    randomClassicCards: v.number(),
   }),
 
   contestParticipations: defineTable({
@@ -96,6 +97,7 @@ export default defineSchema({
       v.literal("initial"),
       v.literal("redistributed"),
       v.literal("sold"),
+      v.literal("sold-random"),
       v.literal("moved"),
     ),
     timestamp: v.number(),

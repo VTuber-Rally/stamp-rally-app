@@ -1,4 +1,4 @@
-import { Sparkles, Vote } from "lucide-react";
+import { Dices, Sparkles, Vote } from "lucide-react";
 import { FC, ReactElement } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -27,6 +27,10 @@ export const RewardsAvailabilityList: FC = () => {
     <li key="standard-reward-card">
       <Vote className="inline-block" />{" "}
       {t("currentRallyBlock.oneOrMoreClassicCards")}
+    </li>,
+    <li key="standard-reward-random-card">
+      <Dices className="inline-block" />{" "}
+      {t("currentRallyBlock.randomClassicCard")}
     </li>,
   ] as const;
 

@@ -14,12 +14,20 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [cartCards, setCartCards] = useState<CartCard[]>([]);
-  const [limits, setLimits] = useState({ maxClassicCards: 3, maxHoloCards: 3 });
+  const [limits, setLimits] = useState({
+    maxClassicCards: 3,
+    maxHoloCards: 3,
+    maxRandomClassicCards: 0,
+  });
   const { toast } = useToast();
   const { t } = useTranslation();
 
   const setLimitsCallback = useCallback(
-    (newLimits: { maxClassicCards: number; maxHoloCards: number }) => {
+    (newLimits: {
+      maxClassicCards: number;
+      maxHoloCards: number;
+      maxRandomClassicCards: number;
+    }) => {
       setLimits(newLimits);
     },
     [],
@@ -75,6 +83,7 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
             ...card,
             classicQuantity: type === "classic" ? 1 : 0,
             holoQuantity: type === "holo" ? 1 : 0,
+            randomClassicQuantity: 0,
           };
           return [...prev, newCard];
         }
@@ -82,6 +91,34 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
     },
     [cartCards, limits, t, toast],
   );
+
+  const addRandomClassicCards = useCallback((cards: CardDesign[]) => {
+    if (cards.length === 0) return;
+    setCartCards((prev) => {
+      const next = [...prev];
+      for (const card of cards) {
+        const existingCardIndex = next.findIndex(
+          (cartCard) => cartCard._id === card._id,
+        );
+        if (existingCardIndex >= 0) {
+          const existingCard = next[existingCardIndex];
+          next[existingCardIndex] = {
+            ...existingCard,
+            randomClassicQuantity: existingCard.randomClassicQuantity + 1,
+          };
+        } else {
+          const newCard: CartCard = {
+            ...card,
+            classicQuantity: 0,
+            holoQuantity: 0,
+            randomClassicQuantity: 1,
+          };
+          next.push(newCard);
+        }
+      }
+      return next;
+    });
+  }, []);
 
   const removeFromCart = useCallback(
     (cardId: string, type: "classic" | "holo") => {
@@ -107,14 +144,35 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
             }
             return card;
           })
-          .filter((card) => card.classicQuantity > 0 || card.holoQuantity > 0);
+          .filter(
+            (card) =>
+              card.classicQuantity > 0 ||
+              card.holoQuantity > 0 ||
+              card.randomClassicQuantity > 0,
+          );
       });
     },
     [],
   );
 
-  const clearCart = useCallback(() => {
-    setCartCards([]);
+  const clearCart = useCallback((force = false) => {
+    if (force) {
+      setCartCards([]);
+    } else {
+      setCartCards((prev) => {
+        const newArr: CartCard[] = [];
+        for (const cartCard of prev) {
+          if (cartCard.randomClassicQuantity > 0) {
+            newArr.push({
+              ...cartCard,
+              classicQuantity: 0,
+              holoQuantity: 0,
+            });
+          }
+        }
+        return newArr;
+      });
+    }
   }, []);
 
   const contextValue = useMemo<InventoryDrawerContextType>(
@@ -125,9 +183,11 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
       setCartCards,
       addToCart,
       removeFromCart,
+      addRandomClassicCards,
       clearCart,
       maxClassicCards: limits.maxClassicCards,
       maxHoloCards: limits.maxHoloCards,
+      maxRandomClassicCards: limits.maxRandomClassicCards,
       setLimits: setLimitsCallback,
     }),
     [
@@ -135,9 +195,11 @@ export const InventoryDrawerContextProvider: FC<PropsWithChildren> = ({
       cartCards,
       addToCart,
       removeFromCart,
+      addRandomClassicCards,
       clearCart,
       limits.maxClassicCards,
       limits.maxHoloCards,
+      limits.maxRandomClassicCards,
       setLimitsCallback,
     ],
   );

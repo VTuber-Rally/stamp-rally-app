@@ -11,6 +11,7 @@ import { ConvexId } from "@/lib/convex.ts";
 const inventorySearchSchema = z.object({
   maxClassicCards: z.coerce.number().default(3).catch(3),
   maxHoloCards: z.coerce.number().default(3).catch(3),
+  maxRandomClassicCards: z.coerce.number().default(0).catch(0),
   submissionId: z.string().optional(),
 });
 
@@ -20,13 +21,15 @@ export const Route = createFileRoute("/staff/inventory")({
 });
 
 function RouteComponent() {
-  const { maxClassicCards, maxHoloCards, submissionId } = Route.useSearch();
+  const { maxClassicCards, maxHoloCards, maxRandomClassicCards, submissionId } =
+    Route.useSearch();
 
   return (
     <InventoryDrawerContextProvider>
       <InventoryPage
         maxClassicCards={maxClassicCards}
         maxHoloCards={maxHoloCards}
+        maxRandomClassicCards={maxRandomClassicCards}
       />
       <InventoryDrawer submissionId={submissionId as ConvexId<"submissions">} />
     </InventoryDrawerContextProvider>

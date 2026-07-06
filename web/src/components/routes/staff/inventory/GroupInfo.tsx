@@ -6,12 +6,14 @@ interface GroupInfoProps {
   group: GroupWithCardCount;
   maxClassicCards: number;
   maxHoloCards: number;
+  maxRandomClassicCards: number;
 }
 
 export function GroupInfo({
   group,
   maxClassicCards,
   maxHoloCards,
+  maxRandomClassicCards,
 }: GroupInfoProps) {
   const { t } = useTranslation();
 
@@ -45,6 +47,7 @@ export function GroupInfo({
           values={{
             classic: maxClassicCards,
             holo: maxHoloCards,
+            random: maxRandomClassicCards,
           }}
           components={{
             b: <span className="font-bold" />,

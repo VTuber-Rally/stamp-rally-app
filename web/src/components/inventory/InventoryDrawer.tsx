@@ -138,6 +138,17 @@ function CartCardLine({
               </div>
             </div>
           )}
+
+          {card.randomClassicQuantity > 0 && (
+            <div className="mt-2 flex items-center justify-between rounded-md border border-purple-300 bg-purple-50 px-3 py-2">
+              <span className="text-sm text-purple-700">
+                {t("inventory.cart.randomClassic")}
+              </span>
+              <span className="min-w-[2rem] text-center font-semibold text-purple-700">
+                {card.randomClassicQuantity}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -160,6 +171,7 @@ export const InventoryDrawer = ({
     const orderedCards = cartCards.map((cartCard) => ({
       classic: cartCard.classicQuantity,
       holo: cartCard.holoQuantity,
+      randomClassic: cartCard.randomClassicQuantity,
       design: cartCard._id,
     }));
 
@@ -172,7 +184,7 @@ export const InventoryDrawer = ({
           title: t("inventory.cart.orderSuccess.title"),
           description: t("inventory.cart.orderSuccess.description"),
         });
-        clearCart();
+        clearCart(true);
         setOpen(false);
       },
       (error) => {
@@ -186,7 +198,11 @@ export const InventoryDrawer = ({
   };
 
   const totalCards = cartCards.reduce(
-    (total, card) => total + card.classicQuantity + card.holoQuantity,
+    (total, card) =>
+      total +
+      card.classicQuantity +
+      card.holoQuantity +
+      card.randomClassicQuantity,
     0,
   );
   const totalClassicInCart = cartCards.reduce(
@@ -202,7 +218,7 @@ export const InventoryDrawer = ({
     <div className="px-4">
       <button
         className="mt-2 flex cursor-pointer text-center text-sm underline disabled:cursor-not-allowed disabled:opacity-50"
-        onClick={clearCart}
+        onClick={() => clearCart()}
         disabled={cartCards.length === 0 || isLoading}
         title={t("inventory.cart.clear")}
       >
