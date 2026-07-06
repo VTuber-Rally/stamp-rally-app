@@ -1,5 +1,6 @@
 import "@fontsource-variable/comfortaa";
 import * as Sentry from "@sentry/react";
+import "core-js/proposals/array-buffer-base64";
 import { createRoot } from "react-dom/client";
 
 import { App } from "@/App.tsx";
