@@ -146,6 +146,7 @@ async function getCardDesigns(ctx: QueryCtx) {
     cardDesigns.map(async (cardDesign) => {
       return {
         _id: cardDesign._id,
+        _creationTime: cardDesign._creationTime,
         name: cardDesign.name,
         artist: cardDesign.artist,
         imageUrl: (await ctx.storage.getUrl(cardDesign.image))!,
@@ -218,7 +219,17 @@ export const listAvailableCards = query({
       >,
     );
 
-    return { activeGroup, cards: Object.values(cardsReduced) };
+    const cards = Object.values(cardsReduced);
+    cards.sort((a, b) => {
+      // Primary: ascending by creation time
+      const timeDiff =
+        Math.trunc(a._creationTime) - Math.trunc(b._creationTime);
+      if (timeDiff !== 0) return timeDiff;
+      // Secondary: alphabetically by cardDesign name
+      return a.name.localeCompare(b.name);
+    });
+
+    return { activeGroup, cards };
   },
 });
 
