@@ -1,6 +1,7 @@
 import { captureException } from "@sentry/react";
 import { useBlocker, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -20,11 +21,12 @@ export const QRCodeDrawer = () => {
   const [open, setOpen] = useQRDrawerContext();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const codeScanned = useRef(false);
   const [error, setError] = useState<Error | null>(null);
 
   useBlocker({
     shouldBlockFn: () => {
-      if (open) {
+      if (open && !codeScanned.current) {
         setOpen(false);
         return true;
       }
@@ -48,19 +50,24 @@ export const QRCodeDrawer = () => {
             try {
               const { type, hash } = retrieveInfosFromQRCode(result.data);
 
+              codeScanned.current = true;
               setOpen(false);
               navigate({
                 to: "/code/$type",
                 params: { type },
                 hash,
-              }).then(
-                () => {
-                  window.plausible("QR scanned");
-                },
-                (error) => {
-                  captureException(error);
-                },
-              );
+              })
+                .then(
+                  () => {
+                    window.plausible("QR scanned");
+                  },
+                  (error) => {
+                    captureException(error);
+                  },
+                )
+                .finally(() => {
+                  codeScanned.current = false;
+                });
             } catch (e) {
               if (e instanceof Error) setError(e);
             }
