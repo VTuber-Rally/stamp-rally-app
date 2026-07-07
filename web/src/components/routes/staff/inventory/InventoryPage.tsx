@@ -141,7 +141,7 @@ export function InventoryPage({
         )}
       </div>
 
-      <div className="fixed right-0 bottom-16 left-0 z-40 mx-auto flex max-w-lg">
+      <div className="fixed right-0 bottom-[calc(4rem+env(safe-area-inset-bottom,20px))] left-0 z-40 mx-auto flex max-w-lg">
         <InventoryCartBar />
       </div>
     </div>
