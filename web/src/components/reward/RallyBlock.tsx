@@ -24,7 +24,7 @@ export const RallyBlock = () => {
   const openSubmitDrawer = async () => {
     setIsLoading(true);
     if (!isAuthenticated) {
-      await signIn(...getAnonymousAccount({ language: i18n.language }));
+      await signIn(...getAnonymousAccount({ language: i18n.languages[0] }));
     }
     setIsSubmitDrawerOpen(true);
     setIsLoading(false);

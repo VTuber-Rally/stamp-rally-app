@@ -149,6 +149,7 @@ async function getCardDesigns(ctx: QueryCtx) {
         _creationTime: cardDesign._creationTime,
         name: cardDesign.name,
         artist: cardDesign.artist,
+        old: cardDesign.old,
         imageUrl: (await ctx.storage.getUrl(cardDesign.image))!,
       };
     }),
@@ -221,10 +222,8 @@ export const listAvailableCards = query({
 
     const cards = Object.values(cardsReduced);
     cards.sort((a, b) => {
-      // Primary: ascending by creation time
-      const timeDiff =
-        Math.trunc(a._creationTime) - Math.trunc(b._creationTime);
-      if (timeDiff !== 0) return timeDiff;
+      // Primary: non-old (false) first, old (true) second
+      if (a.old !== b.old) return a.old ? 1 : -1;
       // Secondary: alphabetically by cardDesign name
       return a.name.localeCompare(b.name);
     });

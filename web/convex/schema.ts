@@ -70,6 +70,7 @@ export default defineSchema({
     name: v.string(),
     artist: v.string(),
     image: v.id("_storage"),
+    old: v.boolean(),
   }),
 
   groups: defineTable({
