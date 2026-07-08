@@ -49,6 +49,7 @@ export const importCardDesigns = internalMutation({
         talent: v.string(),
         artist: v.string(),
         image: v.id("_storage"),
+        old: v.boolean(),
       }),
     ),
   },
@@ -59,6 +60,7 @@ export const importCardDesigns = internalMutation({
         artist: design.artist,
         image: design.image,
         name: design.talent,
+        old: design.old,
       });
       createdDesigns[design.talent] = createdId;
     }

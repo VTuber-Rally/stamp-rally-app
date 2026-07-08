@@ -38,6 +38,7 @@ const createdDesigns = await client.function(
       artist: artist.artistName,
       talent: artist.talentName,
       image: imagesStorageIds.get(artist.talentName)!,
+      old: false,
     })),
   },
 );
