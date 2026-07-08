@@ -1,4 +1,4 @@
-import { QrCode, TicketCheck } from "lucide-react";
+import { QrCode, Stamp } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { standardRewardMinStampsRequirement } from "@/lib/consts";
@@ -16,7 +16,7 @@ const Intro = () => {
           <span>{t("rally.1")}</span>
         </li>
         <li className={"flex items-center"}>
-          <TicketCheck size={36} className={"mr-2 shrink-0"} />
+          <Stamp size={36} className={"mr-2 shrink-0"} />
           <span>
             <Trans
               t={t}

@@ -1,6 +1,6 @@
 import { useConfetti } from "@stevent-team/react-party";
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageSquareWarning, TicketCheck } from "lucide-react";
+import { MessageSquareWarning, Stamp as StampIcon } from "lucide-react";
 import { LegacyRef, Suspense, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -107,7 +107,7 @@ function Stamp() {
           <ArtistImage imageUrl={booth.imageUrl} name={booth.name} />
         </Suspense>
         <div className="flex items-center gap-2 text-xl font-bold text-green-800">
-          <TicketCheck size={42} className="-rotate-12" /> {t("stampValidated")}
+          <StampIcon size={42} className="-rotate-12" /> {t("stampValidated")}
         </div>
         <RallyProgressBar />
         <p className="text-gray-700">

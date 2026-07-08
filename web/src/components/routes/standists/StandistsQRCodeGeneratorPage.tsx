@@ -1,4 +1,4 @@
-import { RefreshCcw, TicketCheck } from "lucide-react";
+import { RefreshCcw, Stamp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
@@ -61,7 +61,7 @@ const StandistsQRCodeGeneratorPage = () => {
           />
         )}
         <div className={"flex"}>
-          <TicketCheck className="mr-2" />
+          <Stamp className="mr-2" />
           <p>
             {tFR("scanThisQR")}
             <br />
