@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
-import { MapIcon, TicketCheck } from "lucide-react";
+import { MapIcon, Stamp as StampIcon } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -80,8 +80,8 @@ const ArtistsList = ({ stamps }: ArtistsListProps) => {
                       H{booth.hall} {booth.boothNumber}
                     </div>
                     {isStamped && (
-                      <div className="absolute -top-1 -right-1 rotate-12 drop-shadow-sm">
-                        <TicketCheck size={30} />
+                      <div className="absolute -top-6 -right-1 rotate-12 drop-shadow-sm">
+                        <StampIcon strokeWidth={1.5} size={35} />
                       </div>
                     )}
                   </div>

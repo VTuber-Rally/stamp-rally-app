@@ -1,4 +1,4 @@
-import { Gift, ShoppingBag, TicketCheck } from "lucide-react";
+import { Gift, ShoppingBag, Stamp } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 
 export const MapLegend = () => {
@@ -7,7 +7,7 @@ export const MapLegend = () => {
   return (
     <ul className="space-y-2">
       <li className="flex gap-1">
-        <TicketCheck className="inline-block shrink-0 text-green-700" />{" "}
+        <Stamp className="inline-block shrink-0 text-green-700" />{" "}
         <div>
           <Trans
             t={t}
